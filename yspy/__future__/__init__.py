@@ -5,7 +5,7 @@ from yspy.core.utils import *
 from yspy.core.constants import *
 
 
-__title__        = 'youtube-search-python'
+__title__        = 'yspy'
 __version__      = '1.6.2'
 __author__       = 'alexmercerind'
 __license__      = 'MIT'

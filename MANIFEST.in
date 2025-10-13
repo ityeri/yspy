@@ -1,2 +1,2 @@
 include README.md
-recursive-include youtubesearchpython *.py
+recursive-include yspy *.py
