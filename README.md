@@ -18,9 +18,9 @@ pip3 install youtube-search-python
 #### Search for only videos
 
 ```python
-from youtubesearchpython import VideosSearch
+from yspy import VideosSearch
 
-videosSearch = VideosSearch('NoCopyrightSounds', limit = 2)
+videosSearch = VideosSearch('NoCopyrightSounds', limit=2)
 
 print(videosSearch.result())
 ```
@@ -134,9 +134,9 @@ print(videosSearch.result())
 #### Search for only videos
 
 ```python
-from youtubesearchpython.__future__ import VideosSearch
+from yspy.__future__ import VideosSearch
 
-videosSearch = VideosSearch('NoCopyrightSounds', limit = 2)
+videosSearch = VideosSearch('NoCopyrightSounds', limit=2)
 videosResult = await videosSearch.next()
 print(videosResult)
 ```
@@ -149,9 +149,9 @@ Read more about usage & examples of newer asynchronous version of this library [
 #### Search for only channels
 
 ```python
-from youtubesearchpython import ChannelsSearch
+from yspy import ChannelsSearch
 
-channelsSearch = ChannelsSearch('NoCopyrightSounds', limit = 10, region = 'US')
+channelsSearch = ChannelsSearch('NoCopyrightSounds', limit=10, region='US')
 
 print(channelsSearch.result())
 ```
@@ -435,9 +435,9 @@ print(channelsSearch.result())
 #### Search for only playlists
 
 ```python
-from youtubesearchpython import PlaylistsSearch
+from yspy import PlaylistsSearch
 
-playlistsSearch = PlaylistsSearch('NoCopyrightSounds', limit = 1)
+playlistsSearch = PlaylistsSearch('NoCopyrightSounds', limit=1)
 
 print(playlistsSearch.result())
 ```
@@ -491,9 +491,9 @@ print(playlistsSearch.result())
 #### Search with a filter or sort
 
 ```python
-from youtubesearchpython import *
+from yspy import *
 
-customSearch = CustomSearch('NoCopyrightSounds', VideoSortOrder.uploadDate, limit = 1)
+customSearch = CustomSearch('NoCopyrightSounds', VideoSortOrder.uploadDate, limit=1)
 
 print(customSearch.result())
 ```
@@ -564,9 +564,9 @@ print(customSearch.result())
 #### Search for everything
 
 ```python
-from youtubesearchpython import Search
+from yspy import Search
 
-allSearch = Search('NoCopyrightSounds', limit = 1)
+allSearch = Search('NoCopyrightSounds', limit=1)
 
 print(allSearch.result())
 ```
@@ -624,7 +624,7 @@ You may call ```next``` method as follows, to get the results on the next pages.
 Calling ```result``` method after calling ```next``` will give you result on that the next page.
 
 ```python
-from youtubesearchpython import VideosSearch
+from yspy import VideosSearch
 
 search = VideosSearch('NoCopyrightSounds')
 
@@ -1071,8 +1071,9 @@ print(playlistVideos)
 
 #### Get all videos of a channel
 You can use a Playlist class for that, alongside some helpful functions.
+
 ```python
-from youtubesearchpython import *
+from yspy import *
 
 channel_id = "UC_aEa8K-EOJ3D6gOs7HcyNg"
 playlist = Playlist(playlist_from_channel_id(channel_id))
@@ -1127,7 +1128,7 @@ If playlist has more videos, then you can call `getNextVideos` to fetch more vid
 Example below demonstrates a simple way to retrive all videos of a playlist.
 
 ```python
-from youtubesearchpython import *
+from yspy import *
 
 playlist = Playlist('https://www.youtube.com/playlist?list=PLRBp0Fe2GpgmsW46rJyudVFlY6IYjFBIK')
 
@@ -1158,11 +1159,11 @@ Found all the videos.
 #### Getting search suggestions
 
 ```python
-from youtubesearchpython import Suggestions
+from yspy import Suggestions
 
-suggestions = Suggestions(language = 'en', region = 'US')
+suggestions = Suggestions(language='en', region='US')
 
-print(suggestions.get('NoCopyrightSounds', mode = ResultMode.json))
+print(suggestions.get('NoCopyrightSounds', mode=ResultMode.json))
 ```
 
 <details>
@@ -1194,9 +1195,9 @@ print(suggestions.get('NoCopyrightSounds', mode = ResultMode.json))
 #### Getting videos by hashtag
 
 ```python
-from youtubesearchpython import Hashtag
+from yspy import Hashtag
 
-hashtag = Hashtag('ncs', limit = 1)
+hashtag = Hashtag('ncs', limit=1)
 
 print(hashtag.result())
 ```
@@ -1273,10 +1274,10 @@ print(hashtag.result())
 #### Getting videos and playlists in specific channel
 
 ```python
-from youtubesearchpython import ChannelSearch,ResultMode
+from yspy import ChannelSearch, ResultMode
 
 search = ChannelSearch('Watermelon Sugar', "UCZFWPqqPkFlNwIxcpsLOwew")
-print(search.result(mode = ResultMode.json))
+print(search.result(mode=ResultMode.json))
 ```
 
 <details>
@@ -1351,7 +1352,8 @@ For making use of this functionality, you must install [yt-dlp](https://github.c
 StreamURLFetcher makes slight improvements & changes to YouTube class from [yt-dlp](https://github.com/yt-dlp/yt-dlp).
 
 ```py
-from youtubesearchpython import *
+from yspy import *
+
 fetcher = StreamURLFetcher()
 video = Video.get("https://www.youtube.com/watch?v=aqz-KE-bpKQ")
 url = fetcher.get(video, 251)
@@ -1373,8 +1375,9 @@ print(url)
 
 #### Get comments of a video
 You can use a Comments class for that.
+
 ```python
-from youtubesearchpython import *
+from yspy import *
 
 # You can either pass an ID or a URL
 video_id = "_ZdsmLgCVdU"
@@ -1411,8 +1414,9 @@ Getting more comments...
 
 #### Get first 20 comments of a video
 You can use a Comments.get method for that.
+
 ```python
-from youtubesearchpython import *
+from yspy import *
 
 # You can either pass an ID or a URL
 video_id = "_ZdsmLgCVdU"
@@ -2115,21 +2119,23 @@ print(comments)
 
 #### Retrieve video transcript
 YouTube auto-generates transcripts (subtitles) for videos. You can retrieve those transcripts using Transcript class:
+
 ```py
-from youtubesearchpython import Transcript
+from yspy import Transcript
 
 print(Transcript.get("https://www.youtube.com/watch?v=-1xu0IP35FI"))
 ```
 
 In response, you'll get available languages with `params` parameter. If you want to retrieve a different language, you have to pass the function that parameter. Example:
+
 ```py
-from youtubesearchpython import Transcript
+from yspy import Transcript
 
 url = "https://www.youtube.com/watch?v=-1xu0IP35FI"
 
 transcript_en = Transcript.get(url)
 # you actually don't have to pass a valid URL in following Transcript call. You can input an empty string, but I do recommend still inputing a valid URL.
-transcript_2 = Transcript.get(url, transcript_en["languages"][-1]["params"]) # in my case, it'd output Spanish.
+transcript_2 = Transcript.get(url, transcript_en["languages"][-1]["params"])  # in my case, it'd output Spanish.
 print(transcript_2)
 ```
 
@@ -2205,8 +2211,9 @@ print(transcript_2)
 
 
 #### Retrieve channel info
+
 ```py
-from youtubesearchpython import Channel
+from yspy import Channel
 
 print(Channel.get("UC_aEa8K-EOJ3D6gOs7HcyNg"))
 ```
@@ -2309,8 +2316,9 @@ print(Channel.get("UC_aEa8K-EOJ3D6gOs7HcyNg"))
 
 
 #### Retrieve channel playlists
+
 ```py
-from youtubesearchpython import Channel
+from yspy import Channel
 
 channel = Channel("UC_aEa8K-EOJ3D6gOs7HcyNg")
 print(len(channel.result["playlists"]))

@@ -3,9 +3,9 @@ from typing import Union
 import json
 from urllib.parse import urlencode
 
-from youtubesearchpython.core.requests import RequestCore
-from youtubesearchpython.handlers.componenthandler import ComponentHandler
-from youtubesearchpython.core.constants import *
+from yspy.core.requests import RequestCore
+from yspy.handlers.componenthandler import ComponentHandler
+from yspy.core.constants import *
 
 
 class ChannelSearchCore(RequestCore, ComponentHandler):

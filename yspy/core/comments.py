@@ -6,9 +6,9 @@ from typing import Iterable, Mapping, Tuple, TypeVar, Union, List
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
-from youtubesearchpython.core.componenthandler import getVideoId, getValue
-from youtubesearchpython.core.constants import *
-from youtubesearchpython.core.requests import RequestCore
+from yspy.core.componenthandler import getVideoId, getValue
+from yspy.core.constants import *
+from yspy.core.requests import RequestCore
 
 K = TypeVar("K")
 T = TypeVar("T")

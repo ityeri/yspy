@@ -21,7 +21,7 @@ Thankyou!
 For making use of Asynchronous version of this library, import from the ```__future__``` subpackage as follows.
 
 ```py
-from youtubesearchpython.__future__ import *
+from yspy.__future__ import *
 ```
 
 It is non-blocking & substantially faster than sync youtube-search-python.
@@ -39,9 +39,9 @@ pip install youtube-search-python
 #### Search for only videos
 
 ```python
-from youtubesearchpython.__future__ import VideosSearch
+from yspy.__future__ import VideosSearch
 
-videosSearch = VideosSearch('NoCopyrightSounds', limit = 2)
+videosSearch = VideosSearch('NoCopyrightSounds', limit=2)
 videosResult = await videosSearch.next()
 print(videosResult)
 ```
@@ -153,9 +153,9 @@ print(videosResult)
 #### Search for only channels
 
 ```python
-from youtubesearchpython.__future__ import ChannelsSearch
+from yspy.__future__ import ChannelsSearch
 
-channelsSearch = ChannelsSearch('NoCopyrightSounds', limit = 10, region = 'US')
+channelsSearch = ChannelsSearch('NoCopyrightSounds', limit=10, region='US')
 channelsResult = await channelsSearch.next()
 print(channelsResult)
 ```
@@ -439,9 +439,9 @@ print(channelsResult)
 #### Search for only playlists
 
 ```python
-from youtubesearchpython.__future__ import PlaylistsSearch
+from yspy.__future__ import PlaylistsSearch
 
-playlistsSearch = PlaylistsSearch('NoCopyrightSounds', limit = 1)
+playlistsSearch = PlaylistsSearch('NoCopyrightSounds', limit=1)
 playlistsResult = await playlistsSearch.next()
 print(playlistsResult)
 ```
@@ -495,9 +495,9 @@ print(playlistsResult)
 #### Search with a filter or sort
 
 ```python
-from youtubesearchpython.__future__ import *
+from yspy.__future__ import *
 
-customSearch = CustomSearch('NoCopyrightSounds', VideoSortOrder.uploadDate, limit = 1)
+customSearch = CustomSearch('NoCopyrightSounds', VideoSortOrder.uploadDate, limit=1)
 customResult = await customSearch.next()
 print(customResult)
 ```
@@ -568,9 +568,9 @@ print(customResult)
 #### Search for everything
 
 ```python
-from youtubesearchpython.__future__ import Search
+from yspy.__future__ import Search
 
-search = Search('NoCopyrightSounds', limit = 1)
+search = Search('NoCopyrightSounds', limit=1)
 result = await search.next()
 print(result)
 ```
@@ -628,7 +628,7 @@ You may call ```next``` method as follows, to get the results on the next pages.
 Calling ```result``` method after calling ```next``` will give you result on that the next page.
 
 ```python
-from youtubesearchpython.__future__ import VideosSearch
+from yspy.__future__ import VideosSearch
 
 search = VideosSearch('NoCopyrightSounds')
 result = await search.next()
@@ -875,8 +875,9 @@ print(videoFormats)
 
 #### Get all videos of a channel
 You can use a Playlist class for that, alongside some helpful functions.
+
 ```python
-from youtubesearchpython.__future__ import *
+from yspy.__future__ import *
 
 channel_id = "UC_aEa8K-EOJ3D6gOs7HcyNg"
 playlist = Playlist(playlist_from_channel_id(channel_id))
@@ -958,9 +959,9 @@ Found all the videos.
 #### Getting search suggestions
 
 ```python
-from youtubesearchpython.__future__ import Suggestions
+from yspy.__future__ import Suggestions
 
-suggestions = await Suggestions.get('NoCopyrightSounds', language = 'en', region = 'US')
+suggestions = await Suggestions.get('NoCopyrightSounds', language='en', region='US')
 
 print(suggestions)
 ```
@@ -994,9 +995,9 @@ print(suggestions)
 #### Getting videos by hashtag
 
 ```python
-from youtubesearchpython.__future__ import Hashtag
+from yspy.__future__ import Hashtag
 
-hashtag = Hashtag('ncs', limit = 1)
+hashtag = Hashtag('ncs', limit=1)
 result = await hashtag.next()
 
 print(result)
@@ -1079,7 +1080,8 @@ For making use of this functionality, you must install [yt-dlp](https://github.c
 StreamURLFetcher makes slight improvements & changes to YouTube class from [yt-dlp](https://github.com/yt-dlp/yt-dlp).
 
 ```py
-from youtubesearchpython.__future__ import *
+from yspy.__future__ import *
+
 fetcher = StreamURLFetcher()
 ''' It is recommended to call this method only once & avoid reinstantiating this class '''
 await fetcher.getJavaScript()
@@ -1103,8 +1105,9 @@ print(url)
 
 #### Get comments of a video
 You can use a Comments class for that.
+
 ```python
-from youtubesearchpython.__future__ import *
+from yspy.__future__ import *
 
 # You can either pass an ID or a URL
 video_id = "_ZdsmLgCVdU"
@@ -1140,8 +1143,9 @@ Getting more comments...
 
 #### Get first 20 comments of a video
 You can use a Comments.get method for that.
+
 ```python
-from youtubesearchpython.__future__ import *
+from yspy.__future__ import *
 
 # You can either pass an ID or a URL
 video_id = "_ZdsmLgCVdU"
@@ -1844,21 +1848,23 @@ print(comments)
 
 #### Retrieve video transcript
 YouTube auto-generates transcripts (subtitles) for videos. You can retrieve those transcripts using Transcript class:
+
 ```py
-from youtubesearchpython.__future__ import Transcript
+from yspy.__future__ import Transcript
 
 print(await Transcript.get("https://www.youtube.com/watch?v=-1xu0IP35FI"))
 ```
 
 In response, you'll get available languages with `params` parameter. If you want to retrieve a different language, you have to pass the function that parameter. Example:
+
 ```py
-from youtubesearchpython.__future__ import Transcript
+from yspy.__future__ import Transcript
 
 url = "https://www.youtube.com/watch?v=-1xu0IP35FI"
 
 transcript_en = await Transcript.get(url)
 # you actually don't have to pass a valid URL in following Transcript call. You can input an empty string, but I do recommend still inputing a valid URL.
-transcript_2 = await Transcript.get(url, transcript_en["languages"][-1]["params"]) # in my case, it'd output Spanish.
+transcript_2 = await Transcript.get(url, transcript_en["languages"][-1]["params"])  # in my case, it'd output Spanish.
 print(transcript_2)
 ```
 
@@ -1934,8 +1940,9 @@ print(transcript_2)
 
 
 #### Retrieve channel info
+
 ```py
-from youtubesearchpython.__future__ import Channel
+from yspy.__future__ import Channel
 
 print(await Channel.get("UC_aEa8K-EOJ3D6gOs7HcyNg"))
 ```
@@ -2036,8 +2043,9 @@ print(await Channel.get("UC_aEa8K-EOJ3D6gOs7HcyNg"))
 </details>
 
 #### Retrieve channel playlists
+
 ```py
-from youtubesearchpython.__future__ import Channel
+from yspy.__future__ import Channel
 
 channel = Channel("UC_aEa8K-EOJ3D6gOs7HcyNg")
 await channel.init()

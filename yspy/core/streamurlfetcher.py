@@ -4,10 +4,10 @@ import urllib.parse
 
 import re
 
-from youtubesearchpython.core.constants import ResultMode
-from youtubesearchpython.core.video import VideoCore
-from youtubesearchpython.core.componenthandler import getValue
-from youtubesearchpython.core.requests import RequestCore
+from yspy.core.constants import ResultMode
+from yspy.core.video import VideoCore
+from yspy.core.componenthandler import getValue
+from yspy.core.requests import RequestCore
 
 isYtDLPinstalled = False
 

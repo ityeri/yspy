@@ -5,8 +5,8 @@ from urllib.request import Request, urlopen
 
 import httpx
 
-from youtubesearchpython.core.constants import ResultMode, userAgent
-from youtubesearchpython.core.requests import RequestCore
+from yspy.core.constants import ResultMode, userAgent
+from yspy.core.requests import RequestCore
 
 
 class SuggestionsCore(RequestCore):

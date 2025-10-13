@@ -2,8 +2,8 @@ from urllib.request import Request, urlopen
 from urllib.parse import urlencode
 import json
 import copy
-from youtubesearchpython.handlers.componenthandler import ComponentHandler
-from youtubesearchpython.core.constants import *
+from yspy.handlers.componenthandler import ComponentHandler
+from yspy.core.constants import *
 
 
 class RequestHandler(ComponentHandler):

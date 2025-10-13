@@ -1,14 +1,14 @@
 import copy
 from typing import Union
 
-from youtubesearchpython.core import VideoCore
-from youtubesearchpython.core.comments import CommentsCore
-from youtubesearchpython.core.hashtag import HashtagCore
-from youtubesearchpython.core.playlist import PlaylistCore
-from youtubesearchpython.core.suggestions import SuggestionsCore
-from youtubesearchpython.core.transcript import TranscriptCore
-from youtubesearchpython.core.channel import ChannelCore
-from youtubesearchpython.core.constants import *
+from yspy.core import VideoCore
+from yspy.core.comments import CommentsCore
+from yspy.core.hashtag import HashtagCore
+from yspy.core.playlist import PlaylistCore
+from yspy.core.suggestions import SuggestionsCore
+from yspy.core.transcript import TranscriptCore
+from yspy.core.channel import ChannelCore
+from yspy.core.constants import *
 
 
 class Video:

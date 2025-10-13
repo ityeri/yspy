@@ -1,8 +1,8 @@
 from typing import List, Union
 import json
-from youtubesearchpython.handlers.componenthandler import ComponentHandler
-from youtubesearchpython.handlers.requesthandler import RequestHandler
-from youtubesearchpython.core.constants import *
+from yspy.handlers.componenthandler import ComponentHandler
+from yspy.handlers.requesthandler import RequestHandler
+from yspy.core.constants import *
 
 
 def overrides(interface_class):

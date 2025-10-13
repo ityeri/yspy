@@ -2,10 +2,10 @@ import copy
 from typing import Union
 from urllib.parse import urlencode
 
-from youtubesearchpython.core.requests import RequestCore
-from youtubesearchpython.handlers.componenthandler import ComponentHandler
-from youtubesearchpython.handlers.requesthandler import RequestHandler
-from youtubesearchpython.core.constants import *
+from yspy.core.requests import RequestCore
+from yspy.handlers.componenthandler import ComponentHandler
+from yspy.handlers.requesthandler import RequestHandler
+from yspy.core.constants import *
 
 import json
 

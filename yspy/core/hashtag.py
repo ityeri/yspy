@@ -6,8 +6,8 @@ from urllib.request import Request, urlopen
 
 import httpx
 
-from youtubesearchpython.core.constants import *
-from youtubesearchpython.handlers.componenthandler import ComponentHandler
+from yspy.core.constants import *
+from yspy.handlers.componenthandler import ComponentHandler
 
 
 class HashtagCore(ComponentHandler):

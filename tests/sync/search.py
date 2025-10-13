@@ -1,4 +1,4 @@
-from youtubesearchpython import *
+from yspy import *
 
 
 allSearch = Search('NoCopyrightSounds', limit = 1, language = 'en', region = 'US')

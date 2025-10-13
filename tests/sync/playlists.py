@@ -1,4 +1,4 @@
-from youtubesearchpython import *
+from yspy import *
 
 playlist = Playlist.get('https://www.youtube.com/playlist?list=PLRBp0Fe2GpgmsW46rJyudVFlY6IYjFBIK', mode = ResultMode.json)
 print(playlist)
