@@ -12,7 +12,7 @@ setuptools.setup(
     description="Search for YouTube videos, channels & playlists & get video information using link WITHOUT YouTube Data API v3",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/alexmercerind/youtube-search-python",
+    url="https://github.com/ityeri/yspy",
     packages=setuptools.find_packages(),
     include_package_data=True,
     zip_safe=False,
