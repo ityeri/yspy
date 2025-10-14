@@ -4,7 +4,7 @@ import json
 from urllib.parse import urlencode
 
 from yspy.core.requests import RequestCore
-from yspy.handlers.componenthandler import ComponentHandler
+from yspy.handlers.component_handler import ComponentHandler
 from yspy.core.constants import *
 
 

@@ -7,7 +7,7 @@ from urllib.request import Request, urlopen
 import httpx
 
 from yspy.core.constants import *
-from yspy.handlers.componenthandler import ComponentHandler
+from yspy.handlers.component_handler import ComponentHandler
 
 
 class HashtagCore(ComponentHandler):

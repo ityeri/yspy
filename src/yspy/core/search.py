@@ -3,8 +3,8 @@ from typing import Union
 from urllib.parse import urlencode
 
 from yspy.core.requests import RequestCore
-from yspy.handlers.componenthandler import ComponentHandler
-from yspy.handlers.requesthandler import RequestHandler
+from yspy.handlers.component_handler import ComponentHandler
+from yspy.handlers.request_handler import RequestHandler
 from yspy.core.constants import *
 
 import json
