@@ -1,23 +1,23 @@
 from yspy import *
-
+from yspy import constants
 
 allSearch = Search('NoCopyrightSounds', limit = 1, language = 'en', region = 'US')
 print(allSearch.result())
 
 
 videosSearch = VideosSearch('NoCopyrightSounds', limit = 10, language = 'en', region = 'US')
-print(videosSearch.result(mode = ResultMode.json))
+print(videosSearch.result(mode = constants.ResultMode.json))
 
 
 channelsSearch = ChannelsSearch('NoCopyrightSounds', limit = 1, language = 'en', region = 'US')
-print(channelsSearch.result(mode = ResultMode.json))
+print(channelsSearch.result(mode = constants.ResultMode.json))
 
 
 playlistsSearch = PlaylistsSearch('NoCopyrightSounds', limit = 1, language = 'en', region = 'US')
 print(playlistsSearch.result())
 
 
-customSearch = CustomSearch('NoCopyrightSounds', VideoSortOrder.uploadDate, language = 'en', region = 'US')
+customSearch = CustomSearch('NoCopyrightSounds', constants.VideoSortOrder.uploadDate, language = 'en', region = 'US')
 print(customSearch.result())
 
 
@@ -38,10 +38,10 @@ for video in search.result()['result']:
 
 
 channel = ChannelSearch("Watermelon Sugar", "UCZFWPqqPkFlNwIxcpsLOwew")
-print(channel.result(mode=ResultMode.json))
+print(channel.result(mode=constants.ResultMode.json))
 
 channel = ChannelSearch('The Beatles - Topic', 'UC2XdaAVUannpujzv32jcouQ')
-print(channel.result(mode=ResultMode.json))
+print(channel.result(mode=constants.ResultMode.json))
 
 #channel = ChannelPlaylistSearch('PewDiePie', 'UC-lHJZR3Gqxm24_Vd_AJ5Yw')
 #print(channel.result())

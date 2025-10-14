@@ -2,7 +2,7 @@ from urllib.request import Request, urlopen
 from urllib.parse import urlencode
 import json
 import copy
-from yspy.handlers.componenthandler import ComponentHandler
+from yspy.handlers.component_handler import ComponentHandler
 from yspy.core.constants import *
 
 
