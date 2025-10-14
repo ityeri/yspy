@@ -2,6 +2,7 @@ from yspy.search import Search, VideosSearch, ChannelsSearch, PlaylistsSearch, C
 from yspy.extras import Video, Playlist, Suggestions, Hashtag, Comments, Transcript, Channel
 from yspy.streamurlfetcher import StreamURLFetcher
 from yspy.core import constants, utils
+import yspy.handlers
 
 __all__ = [
     'Search', 'VideosSearch', 'ChannelsSearch', 'PlaylistsSearch', 'CustomSearch', 'ChannelSearch',
