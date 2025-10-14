@@ -1,0 +1,31 @@
+[project]
+name = "yspy"
+version = "0.0.1"
+authors = [
+    { name="Hitesh Kumar Saini", email="saini123hitesh@gmail.com" },
+    { name="ityeri", email="ityeri9@gmail.com" }
+]
+description = "Search for YouTube videos, channels & playlists & get video information using link WITHOUT YouTube Data API v3"
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICENSE"]
+dependencies = [
+    "httpx"
+]
+
+[project.optional-dependencies]
+test = []
+
+[project.urls]
+Homepage = "https://github.com/ityeri/yspy"
+Issues = "https://github.com/ityeri/yspy/issues"
+Original = "https://github.com/alexmercerind/youtube-search-python"
+
+[build-system]
+requires = ["setuptools >= 77.0.3"]
+build-backend = "setuptools.build_meta"
