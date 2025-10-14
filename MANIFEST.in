@@ -1,1 +1,1 @@
-exclude ._*
+global-exclude ._*
