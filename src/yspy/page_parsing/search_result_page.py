@@ -18,11 +18,15 @@ class SearchResultPage:
     def parse_components(raw_data: dict[str, dict]) -> list[SearchResultComponent]:
         if 'videoRenderer' in raw_data:
             return [VideoComponent.from_json(raw_data)]
+
         elif 'channelRenderer' in raw_data:
             return [ChannelComponent.from_json(raw_data)]
+
         elif 'shelfRenderer' in raw_data:
             inner_data = get_by_path(raw_data, 'shelfRenderer content verticalListRenderer items')
-            return list(map(SearchResultPage.parse_components, inner_data))
+            nested_components = [SearchResultPage.parse_components(element) for element in inner_data]
+            return [component for components in nested_components for component in components]
+
         else:
             return []
 
