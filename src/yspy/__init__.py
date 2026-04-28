@@ -3,11 +3,15 @@ from yspy.extras import Video, Playlist, Suggestions, Hashtag, Comments, Transcr
 from yspy.streamurlfetcher import StreamURLFetcher
 from yspy.core import constants, core_utils
 import yspy.handlers
+
 from yspy import utils
+from yspy import page_parsing
 
 __all__ = [
     'Search', 'VideosSearch', 'ChannelsSearch', 'PlaylistsSearch', 'CustomSearch', 'ChannelSearch',
     'Video', 'Playlist', 'Suggestions', 'Hashtag', 'Comments', 'Transcript', 'Channel',
     'StreamURLFetcher',
     'constants', 'core_utils',
+
+    'page_parsing',
 ]
