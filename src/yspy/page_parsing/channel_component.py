@@ -1,7 +1,7 @@
 from __future__ import annotations
 from dataclasses import dataclass
 
-from . import SearchResultComponent
+from .search_result_component import SearchResultComponent
 from .thumbnail_component import ThumbnailComponent
 from yspy.utils import get_by_path
 
