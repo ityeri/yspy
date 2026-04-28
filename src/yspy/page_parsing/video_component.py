@@ -2,7 +2,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from .search_result_component import SearchResultComponent
-from .thumbnail_component import ThumbnailComponent
+from .image_component import ImageComponent
 from yspy.utils import get_by_path
 
 
@@ -11,7 +11,7 @@ class VideoComponent(SearchResultComponent):
     id: str
     title: str
     url: str
-    thumbnails: list[ThumbnailComponent]
+    thumbnails: list[ImageComponent]
     is_shorts: bool
     published_time_text: str | None
     length_text: str
@@ -40,7 +40,7 @@ class VideoComponent(SearchResultComponent):
             url='https://youtube.com'
                 + get_by_path(inner_data, 'navigationEndpoint commandMetadata webCommandMetadata url'),
             thumbnails=[
-                ThumbnailComponent(
+                ImageComponent(
                     url='https://' + raw_thumbnail_data['url'].strip('/'),
                     width=int(raw_thumbnail_data['width']),
                     height=int(raw_thumbnail_data['height'])

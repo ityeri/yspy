@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 
 @dataclass(frozen=True)
-class ThumbnailComponent:
+class ImageComponent:
     url: str
     width: int
     height: int
