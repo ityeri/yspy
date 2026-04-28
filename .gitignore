@@ -9,9 +9,6 @@ dist
 
 # testing
 
-test.py
-test2.py
-*.json
 *.html
 
 # Byte-compiled / optimized / DLL files
