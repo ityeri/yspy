@@ -1,12 +1,13 @@
 from __future__ import annotations
 from dataclasses import dataclass
 
+from . import SearchResultComponent
 from .thumbnail_component import ThumbnailComponent
 from yspy.utils import get_by_path
 
 
 @dataclass(frozen=True)
-class VideoComponent:
+class VideoComponent(SearchResultComponent):
     id: str
     title: str
     url: str
