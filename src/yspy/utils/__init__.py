@@ -10,7 +10,7 @@ def get_by_path(data: str | dict | list, *path: str | int) -> str | dict | list:
     if len(path_parts) == 0:
         return data
     else:
-        return get_by_path(data[path_parts[0]], *path_parts[:1])
+        return get_by_path(data[path_parts[0]], *path_parts[1:])
 
 
 __all__ = [
