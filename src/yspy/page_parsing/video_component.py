@@ -28,6 +28,12 @@ class VideoComponent(SearchResultComponent):
         try: published_time_text = get_by_path(inner_data, 'publishedTimeText simpleText')
         except KeyError: published_time_text = None
 
+        try: length_text = get_by_path(inner_data, 'lengthText simpleText')
+        except KeyError: length_text = None
+
+        try: view_count_text = get_by_path(inner_data, 'viewCountText simpleText')
+        except KeyError: view_count_text = None
+
         return VideoComponent(
             id=inner_data['videoId'],
             title=get_by_path(inner_data, 'title runs', 0, 'text'),
@@ -42,8 +48,8 @@ class VideoComponent(SearchResultComponent):
             ],
             is_shorts='reelWatchEndpoint' in inner_data['navigationEndpoint'],
             published_time_text=published_time_text,
-            length_text=get_by_path(inner_data, 'lengthText simpleText'),
-            view_count_text = get_by_path(inner_data, 'viewCountText simpleText'),
+            length_text=length_text,
+            view_count_text = view_count_text,
             channel_url='https://youtube.com' + get_by_path(
                 inner_data,
                 'ownerText runs', 0, 'navigationEndpoint commandMetadata webCommandMetadata url'
