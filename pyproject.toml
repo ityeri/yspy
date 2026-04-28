@@ -7,7 +7,7 @@ authors = [
 ]
 description = "Search for YouTube videos, channels & playlists & get video information using link WITHOUT YouTube Data API v3"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
