@@ -27,10 +27,9 @@ Issues = "https://github.com/ityeri/yspy/issues"
 Original = "https://github.com/alexmercerind/youtube-search-python"
 
 [build-system]
-requires = ["setuptools >= 77.0.3"]
-build-backend = "setuptools.build_meta"
+requires = ["uv_build>=0.11.8,<0.12"]
+build-backend = "uv_build"
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["yspy", "yspy.*"]
 exclude = ["tests*", ".*"]
