@@ -1,21 +1,16 @@
 from __future__ import annotations
 from dataclasses import dataclass
 
+from .thumbnail_component import ThumbnailComponent
 from yspy.utils import get_by_path
 
-
-@dataclass(frozen=True)
-class Thumbnail:
-    url: str
-    width: int
-    height: int
 
 @dataclass(frozen=True)
 class ChannelComponent:
     id: str
     title: str
     url: str
-    thumbnails: list[Thumbnail]
+    thumbnails: list[ThumbnailComponent]
     description_snippet: str
     subscribers_message: str
 
@@ -32,7 +27,7 @@ class ChannelComponent:
             url='https://youtube.com'
                 + get_by_path(inner_data, 'navigationEndpoint commandMetadata webCommandMetadata url'),
             thumbnails=[
-                Thumbnail(
+                ThumbnailComponent(
                     url='https://' + raw_thumbnail_data['url'].strip('/'),
                     width=int(raw_thumbnail_data['width']),
                     height=int(raw_thumbnail_data['height'])
