@@ -7,6 +7,7 @@ from .search_result_component import SearchResultComponent
 from .video_component import VideoComponent
 from .channel_component import ChannelComponent
 from .image_component import ImageComponent
+from .channel_page import ChannelPage
 
 __all__ = [
     'SearchResultPage',
@@ -14,4 +15,5 @@ __all__ = [
     'VideoComponent',
     'ChannelComponent',
     'ImageComponent',
+    'ChannelPage'
 ]
