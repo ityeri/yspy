@@ -17,6 +17,7 @@ class VideoComponent(SearchResultComponent):
     length_text: str
     view_count_text: str
     channel_url: str
+    # TODO owner_text, owner_url
 
     @staticmethod
     def from_json(raw_data: dict[str, dict]) -> VideoComponent:
