@@ -219,3 +219,5 @@ __marimo__/
 .idea
 .venv*
 ._*
+
+temporary_tests/
