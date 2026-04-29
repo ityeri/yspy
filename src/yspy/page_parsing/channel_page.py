@@ -13,7 +13,7 @@ class ChannelPage:
     description: str
     avatar_thumbnails: list[ImageComponent]
     banners: list[ImageComponent]
-    subscribers_text: str
+    subscriber_count_text: str
     video_count_text: str
     is_family_safe: bool
     tags: list[str]
@@ -53,7 +53,7 @@ class ChannelPage:
                     'pageHeaderRenderer content pageHeaderViewModel banner imageBannerViewModel image sources'
                 )
             ],
-            subscribers_text=get_by_path(metadata_view_parts, 1, 'metadataParts', 0, 'text content'),
+            subscriber_count_text=get_by_path(metadata_view_parts, 1, 'metadataParts', 0, 'text content'),
             video_count_text=get_by_path(metadata_view_parts, 1, 'metadataParts', 1, 'text content'),
             is_family_safe=channel_metadata['isFamilySafe'],
             tags=microformat_data['tags']
