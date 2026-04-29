@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 from .search_result_component import SearchResultComponent
 from .image_component import ImageComponent
-from yspy.utils import get_by_path
+from yspy.utils import get_by_path, get_by_path_or
 
 
 @dataclass(frozen=True)
@@ -25,15 +25,6 @@ class VideoComponent(SearchResultComponent):
         except KeyError:
             raise ValueError('Given json data is not a channel renderer data')
 
-        try: published_time_text = get_by_path(inner_data, 'publishedTimeText simpleText')
-        except KeyError: published_time_text = None
-
-        try: length_text = get_by_path(inner_data, 'lengthText simpleText')
-        except KeyError: length_text = None
-
-        try: view_count_text = get_by_path(inner_data, 'viewCountText simpleText')
-        except KeyError: view_count_text = None
-
         return VideoComponent(
             id=inner_data['videoId'],
             title=get_by_path(inner_data, 'title runs', 0, 'text'),
@@ -47,9 +38,9 @@ class VideoComponent(SearchResultComponent):
                 ) for raw_thumbnail_data in get_by_path(inner_data, 'thumbnail thumbnails')
             ],
             is_shorts='reelWatchEndpoint' in inner_data['navigationEndpoint'],
-            published_time_text=published_time_text,
-            length_text=length_text,
-            view_count_text = view_count_text,
+            published_time_text=get_by_path_or(inner_data, 'publishedTimeText simpleText'),
+            length_text=get_by_path_or(inner_data, 'lengthText simpleText'),
+            view_count_text = get_by_path_or(inner_data, 'viewCountText simpleText'),
             channel_url='https://youtube.com' + get_by_path(
                 inner_data,
                 'ownerText runs', 0, 'navigationEndpoint commandMetadata webCommandMetadata url'

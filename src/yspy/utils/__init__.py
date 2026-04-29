@@ -12,7 +12,20 @@ def get_by_path(data: str | dict | list, *path: str | int) -> str | dict | list:
     else:
         return get_by_path(data[path_parts[0]], *path_parts[1:])
 
+def get_by_path_or(
+        data: str | dict | list,
+        *path: str | int,
+        default: str | dict | list | None = None
+) -> str | dict | list | None:
+    try:
+        return get_by_path(data, *path)
+    except KeyError:
+        return default
+    except IndexError:
+        return default
+
 
 __all__ = [
-    'get_by_path'
+    'get_by_path',
+    'get_by_path_or'
 ]
