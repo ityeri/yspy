@@ -31,11 +31,8 @@ class VideoComponent(SearchResultComponent):
             url='https://youtube.com'
                 + get_by_path(inner_data, 'navigationEndpoint commandMetadata webCommandMetadata url'),
             thumbnails=[
-                ImageComponent(
-                    url='https://' + raw_thumbnail_data['url'].strip('/'),
-                    width=int(raw_thumbnail_data['width']),
-                    height=int(raw_thumbnail_data['height'])
-                ) for raw_thumbnail_data in get_by_path(inner_data, 'thumbnail thumbnails')
+                ImageComponent.from_json(raw_thumbnail_data)
+                for raw_thumbnail_data in get_by_path(inner_data, 'thumbnail thumbnails')
             ],
             is_shorts='reelWatchEndpoint' in inner_data['navigationEndpoint'],
             published_time_text=get_by_path_or(inner_data, 'publishedTimeText simpleText'),

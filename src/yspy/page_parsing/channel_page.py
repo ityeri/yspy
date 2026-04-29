@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 from .image_component import ImageComponent
-from ..utils import get_by_path
+from yspy.utils import get_by_path
 
 
 @dataclass
@@ -35,19 +35,11 @@ class ChannelPage:
             url=microformat_data['urlCanonical'],
             description=channel_metadata['description'],
             avatar_thumbnails=[
-                ImageComponent(
-                    url=raw_thumbnail_data['url'],
-                    width=int(raw_thumbnail_data['width']),
-                    height=int(raw_thumbnail_data['height'])
-                )
+                ImageComponent.from_json(raw_thumbnail_data)
                 for raw_thumbnail_data in get_by_path(channel_metadata, 'avatar thumbnails')
             ],
             banners=[
-                ImageComponent(
-                    url=raw_image_data['url'],
-                    width=int(raw_image_data['width']),
-                    height=int(raw_image_data['height'])
-                )
+                ImageComponent.from_json(raw_image_data)
                 for raw_image_data in get_by_path(
                     header_data,
                     'pageHeaderRenderer content pageHeaderViewModel banner imageBannerViewModel image sources'

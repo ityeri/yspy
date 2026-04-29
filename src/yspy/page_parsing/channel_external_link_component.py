@@ -25,11 +25,7 @@ class ChannelExternalLinkComponent:
             content=get_by_path(inner_data, 'link content'),
             endpoint_url=get_by_path(inner_data, 'link commandRuns', 0, 'onTap innertubeCommand urlEndpoint url'),
             favicons=[
-                ImageComponent(
-                    url=raw_image_data['url'],
-                    width=int(raw_image_data['width']),
-                    height=int(raw_image_data['height'])
-                )
+                ImageComponent.from_json(raw_image_data)
                 for raw_image_data in get_by_path(inner_data, 'favicon sources')
             ]
         )

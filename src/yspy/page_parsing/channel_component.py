@@ -1,9 +1,10 @@
 from __future__ import annotations
+
 from dataclasses import dataclass
 
-from .search_result_component import SearchResultComponent
-from .image_component import ImageComponent
 from yspy.utils import get_by_path
+from .image_component import ImageComponent
+from .search_result_component import SearchResultComponent
 
 
 @dataclass(frozen=True)
@@ -28,11 +29,8 @@ class ChannelComponent(SearchResultComponent):
             url='https://youtube.com'
                 + get_by_path(inner_data, 'navigationEndpoint commandMetadata webCommandMetadata url'),
             thumbnails=[
-                ImageComponent(
-                    url='https://' + raw_thumbnail_data['url'].strip('/'),
-                    width=int(raw_thumbnail_data['width']),
-                    height=int(raw_thumbnail_data['height'])
-                ) for raw_thumbnail_data in get_by_path(inner_data, 'thumbnail thumbnails')
+                ImageComponent.from_json(raw_thumbnail_data)
+                for raw_thumbnail_data in get_by_path(inner_data, 'thumbnail thumbnails')
             ],
             description_snippet=get_by_path(inner_data, 'descriptionSnippet runs', 0, 'text'),
             subscribers_message=get_by_path(inner_data, 'videoCountText simpleText')
