@@ -22,7 +22,7 @@ class PlaylistPage:
     def from_json(raw_data: dict[str, dict]) -> PlaylistPage:
         try:
             sidebar_items: list[dict[str, dict]] = \
-                get_by_path(raw_data, 'sidebar, playlistSidebarRenderer items')
+                get_by_path(raw_data, 'sidebar playlistSidebarRenderer items')
             primary_info_renderer = sidebar_items[0]['playlistSidebarPrimaryInfoRenderer']
             secondary_info_renderer = sidebar_items[1]['playlistSidebarSecondaryInfoRenderer']
 
@@ -30,7 +30,7 @@ class PlaylistPage:
                 raw_data,
                 'contents twoColumnBrowseResultsRenderer tabs', 0,
                 'tabRenderer content sectionListRenderer contents', 0,
-                'playlistVideoListRenderer contents'
+                'itemSectionRenderer contents', 0, 'playlistVideoListRenderer contents'
             )
         except KeyError:
             raise ValueError('Given data is not a playlist page data')
