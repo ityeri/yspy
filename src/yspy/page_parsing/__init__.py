@@ -10,6 +10,7 @@ from .playlist_video_component import PlaylistVideoComponent
 from .search_result_component import SearchResultComponent
 from .search_result_page import SearchResultPage
 from .video_component import VideoComponent
+from .playlist_page import PlaylistPage
 
 __all__ = [
     'ImageComponent',
@@ -22,5 +23,6 @@ __all__ = [
     'ChannelPage',
     'ChannelDetailPage',
 
-    'PlaylistVideoComponent'
+    'PlaylistPage',
+    'PlaylistVideoComponent',
 ]
