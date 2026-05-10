@@ -2,10 +2,10 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from .video_component import VideoComponent
+from yspy.utils import get_by_path
 from .channel_component import ChannelComponent
 from .search_result_component import SearchResultComponent
-from yspy.utils import get_by_path
+from .video_component import VideoComponent
 
 
 @dataclass

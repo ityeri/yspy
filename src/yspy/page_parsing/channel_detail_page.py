@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from .channel_external_link_component import ChannelExternalLinkComponent
 from yspy.utils import get_by_path
+from .channel_external_link_component import ChannelExternalLinkComponent
 
 
 @dataclass

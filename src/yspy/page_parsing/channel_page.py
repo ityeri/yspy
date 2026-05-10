@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from .image_component import ImageComponent
 from yspy.utils import get_by_path
+from .image_component import ImageComponent
 
 
 @dataclass

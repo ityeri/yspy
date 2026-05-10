@@ -2,9 +2,9 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from .playlist_video_component import PlaylistVideoComponent
-from .image_component import ImageComponent
 from yspy.utils import get_by_path
+from .image_component import ImageComponent
+from .playlist_video_component import PlaylistVideoComponent
 
 
 @dataclass
