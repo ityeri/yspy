@@ -13,6 +13,7 @@ from .search_result_component import SearchResultComponent
 from .search_result_page import SearchResultPage
 from .video_component import VideoComponent
 from .video_page import VideoPage
+from .continuation_comments_page import ContinuationCommentsPage, CommentComponent
 
 __all__ = [
     'ImageComponent',
@@ -30,5 +31,8 @@ __all__ = [
 
     'VideoPage',
 
-    'ContinuationVideoPage'
+    'ContinuationVideoPage',
+
+    'ContinuationCommentsPage',
+    'CommentComponent'
 ]
