@@ -15,7 +15,8 @@ classifiers = [
 license = "MIT"
 license-files = ["LICENSE"]
 dependencies = [
-    "httpx"
+    "httpx",
+    "yarl>=1.23.0",
 ]
 
 [project.optional-dependencies]
