@@ -11,7 +11,7 @@ move video page test code to tests dir
 * comment page has continuation OK
 * channel page has continuation for playlist loading but not need to implement OK
 * playlist page has continuation OK
-* search page has continuation TODO
+* search page has continuation OK
 
 * split files in page_parsing into sub packages
 * add url converter, constant
