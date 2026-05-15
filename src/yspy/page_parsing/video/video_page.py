@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from datetime import datetime
 
 from yspy.utils import get_by_path
-from .image_component import ImageComponent
+from ..image_component import ImageComponent
 
 
 @dataclass

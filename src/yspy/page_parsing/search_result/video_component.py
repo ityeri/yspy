@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from yspy.utils import get_by_path, get_by_path_or
-from .image_component import ImageComponent
+from ..image_component import ImageComponent
 from .search_result_component import SearchResultComponent
 
 
