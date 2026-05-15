@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from yspy.page_parsing import PlaylistPage
+from yspy.page_parsing.playlist import PlaylistPage
 
 with open(Path(__file__).parent / 'test_datas/playlist_page.json', 'r') as f:
     raw_playlist_page_data = json.load(f)
