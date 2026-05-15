@@ -3,8 +3,10 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from yspy.utils import get_by_path, get_by_path_or
-from ..image_component import ImageComponent
+
 from .search_result_component import SearchResultComponent
+from ..exceptions import PageParsingException
+from ..image_component import ImageComponent
 
 
 @dataclass(frozen=True)
@@ -25,7 +27,7 @@ class VideoComponent(SearchResultComponent):
         try:
             inner_data = raw_data['videoRenderer']
         except KeyError:
-            raise ValueError('Given json data is not a channel renderer data')
+            raise PageParsingException('Given json data is not a channel renderer data')
 
         return VideoComponent(
             id=inner_data['videoId'],

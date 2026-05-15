@@ -2,8 +2,10 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from ..image_component import ImageComponent
 from yspy.utils import get_by_path
+
+from ..exceptions import PageParsingException
+from ..image_component import ImageComponent
 
 
 @dataclass
@@ -18,7 +20,7 @@ class ChannelExternalLinkComponent:
         try:
             inner_data = raw_data['channelExternalLinkViewModel']
         except KeyError:
-            raise ValueError('Given data is not a channel external link view model')
+            raise PageParsingException('Given data is not a channel external link view model')
 
         return ChannelExternalLinkComponent(
             title=get_by_path(inner_data, 'title content'),

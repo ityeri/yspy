@@ -3,8 +3,10 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from yspy.utils import get_by_path, get_by_path_or
-from ..image_component import ImageComponent
+
 from .playlist_video_component import PlaylistVideoComponent
+from ..exceptions import PageParsingException
+from ..image_component import ImageComponent
 
 
 @dataclass
@@ -46,7 +48,7 @@ class PlaylistPage:
                 )
 
         except KeyError:
-            raise ValueError('Given data is not a playlist page data')
+            raise PageParsingException('Given data is not a playlist page data')
 
         video_components: list[PlaylistVideoComponent] = list()
 
@@ -55,7 +57,7 @@ class PlaylistPage:
                 video_components.append(
                     PlaylistVideoComponent.from_json(raw_video_data)
                 )
-            except ValueError:
+            except PageParsingException:
                 pass
 
         first_page_token_path = [

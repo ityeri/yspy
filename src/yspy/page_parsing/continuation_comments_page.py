@@ -4,6 +4,8 @@ from dataclasses import dataclass
 
 from yspy.utils import get_by_path
 
+from .exceptions import PageParsingException
+
 
 @dataclass
 class CommentComponent:
@@ -23,9 +25,9 @@ class CommentComponent:
                 author_display_name=get_by_path(raw_data, 'payload commentEntityPayload author displayName')
             )
         except KeyError:
-            raise ValueError('The given data is not a comment component data')
+            raise PageParsingException('The given data is not a comment component data')
         except IndexError:
-            raise ValueError('The given data is not a comment component data')
+            raise PageParsingException('The given data is not a comment component data')
 
 @dataclass
 class ContinuationCommentsPage:

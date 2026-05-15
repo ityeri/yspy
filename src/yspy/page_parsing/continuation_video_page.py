@@ -4,6 +4,8 @@ from dataclasses import dataclass
 
 from yspy.utils import get_by_path
 
+from .exceptions import PageParsingException
+
 
 @dataclass
 class ContinuationVideoPage:
@@ -22,4 +24,4 @@ class ContinuationVideoPage:
                 )
             )
         except KeyError:
-            raise ValueError('The given data is not a video continuation page')
+            raise PageParsingException('The given data is not a video continuation page')
