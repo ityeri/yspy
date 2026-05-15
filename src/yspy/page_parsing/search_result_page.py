@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from yspy.utils import get_by_path
+from yspy.utils import get_by_path, get_by_path_or
 from .channel_component import ChannelComponent
 from .search_result_component import SearchResultComponent
 from .video_component import VideoComponent
@@ -31,33 +31,30 @@ class SearchResultPage:
             return []
 
     @staticmethod
-    def from_json(raw_data: dict[str, dict], is_continuation_page: bool) -> SearchResultPage:
-        if not is_continuation_page:
-            try:
-                inner_data = get_by_path(
-                    raw_data,
-                    'contents twoColumnSearchResultsRenderer primaryContents sectionListRenderer contents'
-                )
-            except KeyError:
-                raise ValueError('Given json data is a continuation page data or not a search result page data')
-        else:
-            try:
+    def from_json(raw_data: dict[str, dict]) -> SearchResultPage:
+        try:
+            inner_data = get_by_path_or(
+                raw_data,
+                'contents twoColumnSearchResultsRenderer primaryContents sectionListRenderer contents'
+            )
+            if inner_data is None:
                 inner_data = get_by_path(
                     raw_data, 'onResponseReceivedCommands', 0, 'appendContinuationItemsAction continuationItems'
                 )
-            except KeyError:
-                raise ValueError('Given json data is not a continuation page data')
-            except IndexError:
-                raise ValueError('Given json data is not a continuation page data')
+        except KeyError:
+            raise ValueError('The given data is not a search result page data')
+        except IndexError:
+            raise ValueError('The given data is not a search result page data')
 
-        item_section_data = next(filter(lambda c: 'itemSectionRenderer' in c, inner_data))
-        content_data = get_by_path(item_section_data, 'itemSectionRenderer contents')
         continuation_data = next(filter(lambda c: 'continuationItemRenderer' in c, inner_data))
 
-        nested_components = [SearchResultPage.parse_components(element) for element in content_data]
+        item_section_data = next(filter(lambda c: 'itemSectionRenderer' in c, inner_data))
+        raw_components = get_by_path(item_section_data, 'itemSectionRenderer contents')
+        components = [SearchResultPage.parse_components(element) for element in raw_components]
+        components = [component for components in components for component in components]
 
         return SearchResultPage(
-            components=[component for components in nested_components for component in components],
+            components=components,
             continuation_token=get_by_path(
                 continuation_data,
                 'continuationItemRenderer continuationEndpoint continuationCommand token'
