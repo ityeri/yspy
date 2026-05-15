@@ -5,9 +5,16 @@ move video page test code to tests dir
 * channel page OK
 * single video page OK
 * comment OK
-* transcript IS THIS PAGE?
+* transcript is impossible
+
+* video page has no continuation OK
+* comment page has continuation OK
+* channel page has continuation for playlist loading but not need to implement OK
+* playlist page has continuation OK
+* search page has continuation TODO
 
 * split files in page_parsing into sub packages
 * add url converter, constant
 
 * reply comments
+* more detailed channel query (channel playlists, channel pinned video, ...)
