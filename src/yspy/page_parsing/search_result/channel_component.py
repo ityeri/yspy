@@ -16,7 +16,7 @@ class ChannelComponent(SearchResultComponent):
     url: str
     thumbnails: list[ImageComponent]
     description_snippet: str | None
-    subscribers_message: str
+    subscribers_count_text: str
 
     @staticmethod
     def from_json(raw_data: dict[str, dict]) -> ChannelComponent:
@@ -35,5 +35,5 @@ class ChannelComponent(SearchResultComponent):
                 for raw_thumbnail_data in get_by_path(inner_data, 'thumbnail thumbnails')
             ],
             description_snippet=get_by_path_or(inner_data, 'descriptionSnippet runs', 0, 'text'),
-            subscribers_message=get_by_path(inner_data, 'videoCountText simpleText')
+            subscribers_count_text=get_by_path(inner_data, 'subscriberCountText simpleText')
         )
