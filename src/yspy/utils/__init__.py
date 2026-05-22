@@ -1,5 +1,8 @@
 from yarl import URL
 
+from .i18n import Language
+from .i18n import Region
+
 
 YOUTUBE_BASE_URL = URL('https://youtube.com')
 
@@ -42,5 +45,8 @@ def to_youtube_url(url: str | URL) -> str:
 __all__ = [
     'get_by_path',
     'get_by_path_or',
-    'to_youtube_url'
+    'to_youtube_url',
+
+    'Language',
+    'Region',
 ]
