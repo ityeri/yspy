@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from yspy.utils import get_by_path, get_by_path_or
+from yspy.utils import get_by_path, get_by_path_or, to_youtube_url
 
 from .playlist_video_component import PlaylistVideoComponent
 from ..exceptions import PageParsingException
@@ -80,10 +80,10 @@ class PlaylistPage:
                 'title runs', 0, 'navigationEndpoint watchEndpoint playlistId'
             ),
             title=get_by_path(primary_info_renderer, 'title runs', 0, 'text'),
-            url='https://youtube.com' + get_by_path(
+            url=to_youtube_url(get_by_path(
                 primary_info_renderer,
                 'title runs', 0, 'navigationEndpoint commandMetadata webCommandMetadata url'
-            ),
+            )),
             thumbnails=[
                 ImageComponent.from_json(raw_thumbnail_data)
                 for raw_thumbnail_data in get_by_path(
