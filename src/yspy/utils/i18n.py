@@ -1,7 +1,7 @@
-from enum import StrEnum
+from enum import Enum
 
 
-class Language(StrEnum):
+class Language(str, Enum):
     KOREAN = "ko"
     ENGLISH = "en"
     JAPANESE = "ja"
@@ -19,7 +19,7 @@ class Language(StrEnum):
     HINDI = "hi"
     ARABIC = "ar"
 
-class Region(StrEnum):
+class Region(str, Enum):
     SOUTH_KOREA = "KR"
     UNITED_STATES = "US"
     JAPAN = "JP"
