@@ -25,6 +25,7 @@ BASE_HEADERS = {
 }
 
 BROWSE_API_URL = 'https://www.youtube.com/youtubei/v1/browse'
+SEARCH_API_URL = 'https://www.youtube.com/youtubei/v1/search'
 BROWSE_KEY = 'AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8'
 
 
