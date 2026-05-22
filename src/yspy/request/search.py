@@ -38,9 +38,11 @@ async def get_first_page(
 
         return response.json()
 
-async def get_continuation_page( # TODO Is these parameters affects to search also in continuation page request?
+async def get_continuation_page(
         continuation_token: str,
         *,
+        # Is these i18n-related and search_mode parameters affects to search also in continuation page request?
+        # Yes it does.
         search_mode: SearchMode | None = None,
         language: Language | None = None,
         region: Region | None = None,
