@@ -13,19 +13,6 @@ BASE_CLIENT_DATA = {
     'newVisitorCookie': True,
 }
 
-BASE_REQUEST_BODY = {
-    'context': {
-        'client': {
-            'clientName': 'WEB',
-            'clientVersion': '2.20210224.06.00',
-            'newVisitorCookie': True,
-        },
-        'user': {
-            'lockedSafetyMode': False,
-        }
-    }
-}
-
 USER_AGENT = (
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
     'AppleWebKit/537.36 (KHTML, like Gecko) '
