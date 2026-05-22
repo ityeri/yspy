@@ -4,6 +4,7 @@ from urllib.parse import urlencode
 
 import httpx
 from httpx import AsyncClient
+from yarl import URL
 
 from yspy.utils import Language, Region
 
@@ -27,13 +28,11 @@ BROWSE_API_URL = 'https://www.youtube.com/youtubei/v1/browse'
 BROWSE_KEY = 'AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8'
 
 
-def build_request_url(path: str, parameters: dict[str, str] = None) -> str:
-    if parameters is None:
-        parameters = {}
-    return (
-            'https://www.youtube.com/youtubei/v1/' + path
-            + '?' + urlencode({'key': BROWSE_KEY} | parameters)
-    )
+def url_with_query(endpoint: str, parameters: dict[str, Any]) -> str:
+    url_obj = URL(endpoint)
+    final_url = url_obj.with_query(parameters)
+
+    return str(final_url)
 
 def build_request_body(
         parameters: dict[str, Any],
