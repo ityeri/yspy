@@ -1,5 +1,9 @@
 from yarl import URL
 
+
+YOUTUBE_BASE_URL = URL('https://youtube.com')
+
+
 def get_by_path(data: str | dict | list, *path: str | int) -> str | dict | list:
     path_parts = list()
 
@@ -30,7 +34,7 @@ def to_youtube_url(url: str | URL) -> str:
     url = URL(url)
 
     if not url.is_absolute():
-        return str(url.with_scheme('https').with_host('youtube.com'))
+        return str(YOUTUBE_BASE_URL.join(url))
     else:
         return str(url)
 
