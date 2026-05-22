@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from yspy.utils import get_by_path
+from yspy.utils import get_by_path, get_by_path_or
 
 from .search_result_component import SearchResultComponent
 from ..exceptions import PageParsingException
@@ -15,7 +15,7 @@ class ChannelComponent(SearchResultComponent):
     title: str
     url: str
     thumbnails: list[ImageComponent]
-    description_snippet: str
+    description_snippet: str | None
     subscribers_message: str
 
     @staticmethod
@@ -34,6 +34,6 @@ class ChannelComponent(SearchResultComponent):
                 ImageComponent.from_json(raw_thumbnail_data)
                 for raw_thumbnail_data in get_by_path(inner_data, 'thumbnail thumbnails')
             ],
-            description_snippet=get_by_path(inner_data, 'descriptionSnippet runs', 0, 'text'),
+            description_snippet=get_by_path_or(inner_data, 'descriptionSnippet runs', 0, 'text'),
             subscribers_message=get_by_path(inner_data, 'videoCountText simpleText')
         )
