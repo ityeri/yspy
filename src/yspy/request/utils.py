@@ -27,11 +27,11 @@ BROWSE_API_URL = 'https://www.youtube.com/youtubei/v1/browse'
 BROWSE_KEY = 'AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8'
 
 
-def build_browse_url(parameters: dict[str, str] = None) -> str:
+def build_request_url(path: str, parameters: dict[str, str] = None) -> str:
     if parameters is None:
         parameters = {}
     return (
-            'https://www.youtube.com/youtubei/v1/browse'
+            'https://www.youtube.com/youtubei/v1/' + path
             + '?' + urlencode({'key': BROWSE_KEY} | parameters)
     )
 
