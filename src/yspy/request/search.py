@@ -1,9 +1,9 @@
 from enum import Enum
 
-from httpx import AsyncClient
+from httpx import AsyncClient, Response
 
-from .utils import optional_async_client, BASE_HEADERS, build_request_body, url_with_query, SEARCH_API_URL, BROWSE_KEY
 from yspy.utils import Language, Region
+from .utils import optional_async_client, BASE_HEADERS, SEARCH_API_URL, RequestData
 
 
 class SearchMode(str, Enum):
@@ -20,23 +20,20 @@ async def get_first_page(
         language: Language | None = None,
         region: Region | None = None,
         client: AsyncClient | None = None
-) -> dict[str, dict]:
-    other_parameters = {'query': query}
-    if search_mode:
-        other_parameters['params'] = search_mode
-
+) -> Response:
     async with optional_async_client(client) as client:
-        response = await client.post(
-            url=url_with_query(SEARCH_API_URL, {'key': BROWSE_KEY}),
-            json=build_request_body(
-                other_parameters,
-                language=language,
-                region=region
-            ),
-            headers=BASE_HEADERS
-        )
+        payload_params = {'query': query}
+        if search_mode:
+            payload_params['params'] = search_mode
 
-        return response.json()
+        return await RequestData(
+            method='POST',
+            endpoint=SEARCH_API_URL,
+            payload_params=payload_params,
+            client_language=language,
+            client_region=region,
+            headers=BASE_HEADERS
+        ).send_request(client)
 
 async def get_continuation_page(
         continuation_token: str,
@@ -47,20 +44,17 @@ async def get_continuation_page(
         language: Language | None = None,
         region: Region | None = None,
         client: AsyncClient | None = None
-) -> dict[str, dict]:
-    other_parameters = {'continuation': continuation_token}
-    if search_mode:
-        other_parameters['params'] = search_mode
-
+) -> Response:
     async with optional_async_client(client) as client:
-        response = await client.post(
-            url=url_with_query(SEARCH_API_URL, {'key': BROWSE_KEY}),
-            json=build_request_body(
-                other_parameters,
-                language=language,
-                region=region
-            ),
-            headers=BASE_HEADERS
-        )
+        payload_params = {'continuation': continuation_token}
+        if search_mode:
+            payload_params['params'] = search_mode
 
-        return response.json()
+        return await RequestData(
+            method='POST',
+            endpoint=SEARCH_API_URL,
+            payload_params=payload_params,
+            client_language=language,
+            client_region=region,
+            headers=BASE_HEADERS
+        ).send_request(client)
