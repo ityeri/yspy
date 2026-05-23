@@ -8,13 +8,13 @@ from .exceptions import PageParsingException
 
 
 @dataclass
-class ContinuationVideoPage:
+class VideNextPage:
     comment_continuation_token: str
 
     @staticmethod
-    def from_json(raw_data: dict[str, dict]) -> ContinuationVideoPage:
+    def from_json(raw_data: dict[str, dict]) -> VideNextPage:
         try:
-            return ContinuationVideoPage(
+            return VideNextPage(
                 comment_continuation_token=get_by_path(
                     raw_data,
                     'engagementPanels', 0, 'engagementPanelSectionListRenderer content sectionListRenderer',
