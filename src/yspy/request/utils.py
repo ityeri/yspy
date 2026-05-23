@@ -1,9 +1,12 @@
+from collections.abc import Callable
 from contextlib import asynccontextmanager
-from typing import Optional, AsyncIterator, Any
+from dataclasses import dataclass, field
+from functools import wraps
+from typing import Optional, AsyncIterator, Any, Coroutine, TypeVar, ParamSpec
 from urllib.parse import urlencode
 
 import httpx
-from httpx import AsyncClient
+from httpx import AsyncClient, Response
 from yarl import URL
 
 from yspy.utils import Language, Region
@@ -68,3 +71,41 @@ async def optional_async_client(client: AsyncClient | None = None) -> AsyncItera
     finally:
         if not is_injected:
             await inner_client.aclose()
+
+@dataclass
+class RequestData:
+    method: str
+    endpoint: str
+    # Yep. it's duplicated processing but more explicit
+    query_params: dict[str, str] | None = field(default_factory=lambda: {'key': BROWSE_KEY})
+    payload_params: dict[str, str] = field(default_factory=dict)
+    client_language: Language | None = None
+    client_region: Region | None = None
+    headers: dict[str, str] = field(default_factory=lambda: BASE_HEADERS.copy())
+
+    async def send_request(self, client: AsyncClient) -> Response:
+        other_client_data = dict()
+
+        if self.client_language is not None:
+            other_client_data['hl'] = self.client_language
+        if self.client_region is not None:
+            other_client_data['gl'] = self.client_region
+
+        request_payload = {
+            'context': {
+                'client': BASE_CLIENT_DATA | other_client_data,
+                'user': {
+                    'lockedSafetyMode': False,
+                }
+            },
+            **self.payload_params
+        }
+
+        return await client.request(
+            self.method,
+            url=str(URL(self.endpoint)
+                    # Yep. it's duplicated processing but more explicit
+                    .with_query(self.query_params | {'key': BROWSE_KEY})),
+            json=request_payload,
+            headers=self.headers
+        )
