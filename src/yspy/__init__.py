@@ -6,6 +6,7 @@ import yspy.handlers
 
 from yspy import utils
 from yspy import page_parsing
+from yspy import request
 
 __all__ = [
     'Search', 'VideosSearch', 'ChannelsSearch', 'PlaylistsSearch', 'CustomSearch', 'ChannelSearch',
@@ -14,4 +15,5 @@ __all__ = [
     'constants', 'core_utils',
 
     'page_parsing',
+    'request'
 ]
