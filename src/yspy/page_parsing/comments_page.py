@@ -43,7 +43,7 @@ class CommentsPage:
         for raw_component in raw_components:
             try:
                 comment_components.append(CommentComponent.from_json(raw_component))
-            except ValueError:
+            except PageParsingException:
                 pass
 
         first_page_token_path = [
