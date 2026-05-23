@@ -7,7 +7,7 @@ from . import exceptions
 from . import playlist
 from . import search_result
 from . import video
-from .continuation_comments_page import ContinuationCommentsPage, CommentComponent
+from .comments_page import CommentsPage, CommentComponent
 from .video_next_page import VideNextPage
 from .image_component import ImageComponent
 
@@ -21,6 +21,6 @@ __all__ = [
 
     'VideNextPage',
 
-    'ContinuationCommentsPage',
+    'CommentsPage',
     'CommentComponent'
 ]
