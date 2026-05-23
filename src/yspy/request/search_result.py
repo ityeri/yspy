@@ -9,8 +9,8 @@ from .utils import optional_async_client, BASE_HEADERS, SEARCH_API_URL, RequestD
 class SearchMode(str, Enum):
     VIDEO = 'EgIQAQ%3D%3D'
     CHANNEL = 'EgIQAg%3D%3D'
-    PLAYLIST = 'EgIQAw%3D%3D' # TODO at page_parsing
-    LIVESTREAM = 'EgJAAQ%3D%3D' # TODO at page_parsing
+    PLAYLIST = 'EgIQAw%3D%3D' # TODO at data_parsing
+    LIVESTREAM = 'EgJAAQ%3D%3D' # TODO at data_parsing
 
 
 async def get_first_page(

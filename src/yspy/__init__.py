@@ -5,7 +5,7 @@ from yspy.core import constants, core_utils
 import yspy.handlers
 
 from yspy import utils
-from yspy import page_parsing
+from yspy import data_parsing
 from yspy import request
 
 __all__ = [
@@ -14,6 +14,6 @@ __all__ = [
     'StreamURLFetcher',
     'constants', 'core_utils',
 
-    'page_parsing',
+    'data_parsing',
     'request'
 ]
