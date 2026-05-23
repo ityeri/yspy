@@ -8,7 +8,7 @@ from . import playlist
 from . import search_result
 from . import video
 from .comments_page import CommentsPage, CommentComponent
-from .video_next_page import VideNextPage
+from .video_next_page import VideoNextPage
 from .image_component import ImageComponent
 
 __all__ = [
@@ -19,7 +19,7 @@ __all__ = [
     'playlist',
     'exceptions',
 
-    'VideNextPage',
+    'VideoNextPage',
 
     'CommentsPage',
     'CommentComponent'
