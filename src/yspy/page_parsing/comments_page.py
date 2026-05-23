@@ -30,12 +30,12 @@ class CommentComponent:
             raise PageParsingException('The given data is not a comment component data')
 
 @dataclass
-class ContinuationCommentsPage:
+class CommentsPage:
     comments: list[CommentComponent]
     comment_continuation_token: str
 
     @staticmethod
-    def from_json(raw_data: dict[str, dict]) -> ContinuationCommentsPage:
+    def from_json(raw_data: dict[str, dict]) -> CommentsPage:
         raw_components: list[dict] = get_by_path(raw_data, 'frameworkUpdates entityBatchUpdate mutations')
 
         comment_components = list()
@@ -64,7 +64,7 @@ class ContinuationCommentsPage:
         except IndexError:
             continuation_key = get_by_path(raw_data, *next_page_token_path)
 
-        return ContinuationCommentsPage(
+        return CommentsPage(
             comments=comment_components,
             comment_continuation_token=continuation_key
         )
