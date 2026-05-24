@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass
 from typing import Any, TypeVar
 
@@ -52,6 +53,10 @@ class SuggestionElement:
 class SuggestionData:
     query: str
     suggestions: list[SuggestionElement]
+
+    @staticmethod
+    def unwrap_parentheses(raw_text: str) -> list:
+        return json.loads(raw_text[raw_text.index('(') + 1:-1])
 
     @staticmethod
     def from_json(raw_data: list) -> SuggestionData:
