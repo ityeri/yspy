@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any, TypeVar
 
-from .exceptions import PageParsingException
+from .exceptions import DataParsingException
 from .image_component import ImageComponent
 from ..utils import get_by_path_or
 
@@ -42,9 +42,9 @@ class SuggestionElement:
             )
 
         except ValueError:
-            raise PageParsingException('The given data is not a suggestion element data')
+            raise DataParsingException('The given data is not a suggestion element data')
         except KeyError:
-            raise PageParsingException('The given data is not a suggestion element data')
+            raise DataParsingException('The given data is not a suggestion element data')
 
 
 
@@ -63,4 +63,4 @@ class SuggestionData:
                 ]
             )
         except ValueError:
-            raise PageParsingException('The given dat ais not a suggestions data')
+            raise DataParsingException('The given dat ais not a suggestions data')

@@ -5,7 +5,7 @@ from datetime import datetime
 
 from yspy.utils import get_by_path
 
-from ..exceptions import PageParsingException
+from ..exceptions import DataParsingException
 from ..image_component import ImageComponent
 
 
@@ -32,7 +32,7 @@ class VideoPage:
             video_details = raw_data['videoDetails']
             microformat = get_by_path(raw_data, 'microformat playerMicroformatRenderer')
         except KeyError:
-            raise PageParsingException('Given data is not a video page data')
+            raise DataParsingException('Given data is not a video page data')
 
         return VideoPage(
             id=video_details['videoId'],

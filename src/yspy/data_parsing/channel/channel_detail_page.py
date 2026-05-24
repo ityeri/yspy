@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from yspy.utils import get_by_path
 
 from .channel_external_link_component import ChannelExternalLinkComponent
-from ..exceptions import PageParsingException
+from ..exceptions import DataParsingException
 
 
 @dataclass
@@ -27,7 +27,7 @@ class ChannelDetailPage:
                 'appendContinuationItemsAction continuationItems', 0, 'aboutChannelRenderer'
             )
         except KeyError:
-            raise PageParsingException('Given data is not a channel detail page(popup ui) data')
+            raise DataParsingException('Given data is not a channel detail page(popup ui) data')
 
         about_channel_view_data = get_by_path(inner_data, 'metadata aboutChannelViewModel')
 

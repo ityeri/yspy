@@ -4,7 +4,7 @@ from dataclasses import dataclass
 
 from yspy.utils import get_by_path
 
-from ..exceptions import PageParsingException
+from ..exceptions import DataParsingException
 from ..image_component import ImageComponent
 
 
@@ -26,7 +26,7 @@ class PlaylistVideoComponent:
         try:
             inner_data = raw_data['playlistVideoRenderer']
         except KeyError:
-            raise PageParsingException('Given data is not a playlist video renderer data')
+            raise DataParsingException('Given data is not a playlist video renderer data')
 
         return PlaylistVideoComponent(
             id=inner_data['videoId'],
