@@ -31,7 +31,7 @@ BROWSE_API_URL = 'https://www.youtube.com/youtubei/v1/browse'
 SEARCH_API_URL = 'https://www.youtube.com/youtubei/v1/search'
 PLAYER_API_URL = 'https://www.youtube.com/youtubei/v1/player'
 NEXT_API_URL = 'https://www.youtube.com/youtubei/v1/next'
-SUGGESTION_API_URL = 'https://suggestqueries-clients6.youtube.com/complete/search'
+SUGGESTION_API_URL = 'https://clients1.google.com/complete/search'
 
 BROWSE_KEY = 'AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8'
 
@@ -83,11 +83,18 @@ class RequestData:
     # Yep. it's duplicated processing but more explicit
     query_params: dict[str, str] | None = field(default_factory=lambda: {'key': BROWSE_KEY})
     payload_params: dict[str, str] = field(default_factory=dict)
+    no_payload: bool = False
     client_language: Language | None = None
     client_region: Region | None = None
     headers: dict[str, str] = field(default_factory=lambda: BASE_HEADERS.copy())
 
     async def send_request(self, client: AsyncClient) -> Response:
+        url = str(
+            URL(self.endpoint)
+            .with_query(self.query_params | {'key': BROWSE_KEY})
+            # Yep. it's duplicated processing but more explicit
+        )
+
         other_client_data = dict()
 
         if self.client_language is not None:
@@ -95,21 +102,22 @@ class RequestData:
         if self.client_region is not None:
             other_client_data['gl'] = self.client_region
 
-        request_payload = {
-            'context': {
-                'client': BASE_CLIENT_DATA | other_client_data,
-                'user': {
-                    'lockedSafetyMode': False,
-                }
-            },
-            **self.payload_params
-        }
+        if self.no_payload:
+            request_payload = None
+        else:
+            request_payload = {
+                'context': {
+                    'client': BASE_CLIENT_DATA | other_client_data,
+                    'user': {
+                        'lockedSafetyMode': False,
+                    }
+                },
+                **self.payload_params
+            }
 
         return await client.request(
             self.method,
-            url=str(URL(self.endpoint)
-                    # Yep. it's duplicated processing but more explicit
-                    .with_query(self.query_params | {'key': BROWSE_KEY})),
+            url=url,
             json=request_payload,
             headers=self.headers
         )
