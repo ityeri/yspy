@@ -10,6 +10,7 @@ from . import video
 from .comments_page import CommentsPage, CommentComponent
 from .video_next_page import VideoNextPage
 from .image_component import ImageComponent
+from .suggestion_data import SuggestionData, SuggestionElement
 
 __all__ = [
     'ImageComponent',
@@ -22,5 +23,8 @@ __all__ = [
     'VideoNextPage',
 
     'CommentsPage',
-    'CommentComponent'
+    'CommentComponent',
+
+    'SuggestionData',
+    'SuggestionElement'
 ]
