@@ -22,10 +22,13 @@ def get_by_path(data: str | dict | list, *path: str | int) -> str | dict | list:
         return get_by_path(data[path_parts[0]], *path_parts[1:])
 
 def get_by_path_or(
-        data: str | dict | list,
+        data: str | dict | list | None,
         *path: str | int,
         default: str | dict | list | None = None
 ) -> str | dict | list | None:
+    if data is None:
+        return None
+
     try:
         return get_by_path(data, *path)
     except KeyError:

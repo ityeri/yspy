@@ -4,7 +4,7 @@ from dataclasses import dataclass
 
 from yspy.utils import get_by_path
 
-from .exceptions import PageParsingException
+from .exceptions import DataParsingException
 
 
 @dataclass
@@ -25,9 +25,9 @@ class CommentComponent:
                 author_display_name=get_by_path(raw_data, 'payload commentEntityPayload author displayName')
             )
         except KeyError:
-            raise PageParsingException('The given data is not a comment component data')
+            raise DataParsingException('The given data is not a comment component data')
         except IndexError:
-            raise PageParsingException('The given data is not a comment component data')
+            raise DataParsingException('The given data is not a comment component data')
 
 @dataclass
 class CommentsPage:
@@ -43,7 +43,7 @@ class CommentsPage:
         for raw_component in raw_components:
             try:
                 comment_components.append(CommentComponent.from_json(raw_component))
-            except PageParsingException:
+            except DataParsingException:
                 pass
 
         first_page_token_path = [

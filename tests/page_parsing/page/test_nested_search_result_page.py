@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from yspy.page_parsing.search_result import SearchResultPage
+from yspy.data_parsing.search_result import SearchResultPage
 
 with open(Path(__file__).parent / 'test_datas/nested_search_result.json', 'r', encoding='utf-8') as f:
     raw_data = json.load(f)

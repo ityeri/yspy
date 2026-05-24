@@ -7,7 +7,7 @@ from yspy.utils import get_by_path, get_by_path_or
 from .channel_component import ChannelComponent
 from .search_result_component import SearchResultComponent
 from .video_component import VideoComponent
-from ..exceptions import PageParsingException
+from ..exceptions import DataParsingException
 
 
 @dataclass
@@ -47,9 +47,9 @@ class SearchResultPage:
                     raw_data, 'onResponseReceivedCommands', 0, 'appendContinuationItemsAction continuationItems'
                 )
         except KeyError:
-            raise PageParsingException('The given data is not a search result page data')
+            raise DataParsingException('The given data is not a search result page data')
         except IndexError:
-            raise PageParsingException('The given data is not a search result page data')
+            raise DataParsingException('The given data is not a search result page data')
 
         continuation_data = next(filter(lambda c: 'continuationItemRenderer' in c, inner_data))
 

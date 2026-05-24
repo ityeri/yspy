@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from yspy.utils import get_by_path, get_by_path_or
 
 from .search_result_component import SearchResultComponent
-from ..exceptions import PageParsingException
+from ..exceptions import DataParsingException
 from ..image_component import ImageComponent
 
 
@@ -23,7 +23,7 @@ class ChannelComponent(SearchResultComponent):
         try:
             inner_data = raw_data['channelRenderer']
         except KeyError:
-            raise PageParsingException('Given json data is not a channel renderer data')
+            raise DataParsingException('Given json data is not a channel renderer data')
 
         return ChannelComponent(
             id=inner_data['channelId'],

@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from yspy.page_parsing.search_result import VideoComponent
+from yspy.data_parsing.search_result import VideoComponent
 
 
 with open(Path(__file__).parent / 'test_datas/video_renderer.json', 'r', encoding='utf-8') as f:
