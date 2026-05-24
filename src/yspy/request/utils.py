@@ -31,6 +31,8 @@ BROWSE_API_URL = 'https://www.youtube.com/youtubei/v1/browse'
 SEARCH_API_URL = 'https://www.youtube.com/youtubei/v1/search'
 PLAYER_API_URL = 'https://www.youtube.com/youtubei/v1/player'
 NEXT_API_URL = 'https://www.youtube.com/youtubei/v1/next'
+SUGGESTION_API_URL = 'https://suggestqueries-clients6.youtube.com/complete/search'
+
 BROWSE_KEY = 'AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8'
 
 
