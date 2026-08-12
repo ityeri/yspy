@@ -3,7 +3,8 @@ from enum import Enum
 from httpx import AsyncClient, Response
 
 from yspy.utils import Language, Region
-from .utils import optional_async_client, BASE_HEADERS, SEARCH_API_URL, RequestData
+from .constants import SEARCH_API_URL, BASE_HEADERS
+from .utils import optional_async_client, RequestData
 
 
 class SearchMode(str, Enum):

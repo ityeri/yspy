@@ -1,6 +1,7 @@
 from httpx import AsyncClient, Response
 
-from yspy.request.utils import optional_async_client, RequestData, SUGGESTION_API_URL
+from yspy.request.constants import SUGGESTION_API_URL
+from yspy.request.utils import optional_async_client, RequestData
 from yspy.utils import Language, Region
 
 

@@ -1,6 +1,7 @@
 from httpx import AsyncClient, Response
 
-from .utils import optional_async_client, RequestData, PLAYER_API_URL
+from .constants import PLAYER_API_URL
+from .utils import optional_async_client, RequestData
 
 
 class VideoRequest:

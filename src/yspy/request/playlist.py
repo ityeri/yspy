@@ -1,6 +1,7 @@
 from httpx import AsyncClient, Response
 
-from .utils import optional_async_client, BASE_HEADERS, BROWSE_API_URL, RequestData
+from .constants import BROWSE_API_URL, BASE_HEADERS
+from .utils import optional_async_client, RequestData
 
 
 class PlaylistRequest:

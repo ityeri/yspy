@@ -1,4 +1,5 @@
 from . import utils
+from . import constants
 from .channel import ChannelRequest
 from .comments import CommentsRequest
 from .playlist import PlaylistRequest
@@ -7,9 +8,9 @@ from .suggestion import SuggestionRequest
 from .video import VideoRequest
 from .video_next import VideoNextRequest
 
-
 __all__ = [
     'utils',
+    'constants',
 
     'ChannelRequest',
     'CommentsRequest',

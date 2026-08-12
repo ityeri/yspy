@@ -1,6 +1,7 @@
 from httpx import AsyncClient, Response
 
-from .utils import optional_async_client, RequestData, BROWSE_API_URL
+from .utils import optional_async_client, RequestData
+from .constants import BROWSE_API_URL
 
 
 class ChannelRequest:

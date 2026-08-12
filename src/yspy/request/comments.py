@@ -1,6 +1,7 @@
 from httpx import Response, AsyncClient
 
-from .utils import optional_async_client, RequestData, NEXT_API_URL
+from .constants import NEXT_API_URL
+from .utils import optional_async_client, RequestData
 
 
 class CommentsRequest:
