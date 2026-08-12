@@ -1,42 +1,13 @@
 from contextlib import asynccontextmanager, contextmanager
 from dataclasses import dataclass, field
-from typing import AsyncIterator, Any, Iterator
+from typing import AsyncIterator, Iterator
 
 from httpx import AsyncClient, Response, Request, Client
 from yarl import URL
 
-from yspy.utils import Language, Region, Locale
+from yspy.utils import Locale
 from .constants import BASE_CLIENT_DATA, BROWSE_KEY, BASE_HEADERS
 
-
-def url_with_query(endpoint: str, parameters: dict[str, Any]) -> str:
-    url_obj = URL(endpoint)
-    final_url = url_obj.with_query(parameters)
-
-    return str(final_url)
-
-def build_request_body(
-        parameters: dict[str, Any],
-        *,
-        language: Language | None = None,
-        region: Region | None = None
-) -> dict[str, Any]:
-    other_client_data = dict()
-
-    if language is not None:
-        other_client_data['hl'] = language
-    if region is not None:
-        other_client_data['gl'] = region
-
-    return {
-        'context': {
-            'client': BASE_CLIENT_DATA | other_client_data,
-            'user': {
-                'lockedSafetyMode': False,
-            }
-        },
-        **parameters
-    }
 
 @contextmanager
 def optional_sync_client(client: Client | None = None) -> Iterator[Client]:
