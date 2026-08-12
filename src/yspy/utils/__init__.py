@@ -1,7 +1,6 @@
 from yarl import URL
 
-from .i18n import Language
-from .i18n import Region
+from .i18n import Language, Region, Locale
 
 
 YOUTUBE_BASE_URL = URL('https://youtube.com')
@@ -52,4 +51,5 @@ __all__ = [
 
     'Language',
     'Region',
+    'Locale'
 ]
