@@ -1,12 +1,11 @@
-from contextlib import asynccontextmanager
+from contextlib import asynccontextmanager, contextmanager
 from dataclasses import dataclass, field
-from typing import AsyncIterator, Any
+from typing import AsyncIterator, Any, Iterator
 
-import httpx
-from httpx import AsyncClient, Response
+from httpx import AsyncClient, Response, Request, Client
 from yarl import URL
 
-from yspy.utils import Language, Region
+from yspy.utils import Language, Region, Locale
 from .constants import BASE_CLIENT_DATA, BROWSE_KEY, BASE_HEADERS
 
 
@@ -39,10 +38,20 @@ def build_request_body(
         **parameters
     }
 
-@asynccontextmanager
-async def optional_async_client(client: AsyncClient | None = None) -> AsyncIterator[httpx.AsyncClient]:
+@contextmanager
+def optional_sync_client(client: Client | None = None) -> Iterator[Client]:
     is_injected = client is not None
-    inner_client = client if is_injected else httpx.AsyncClient()
+    inner_client = client if is_injected else Client()
+
+    try:
+        yield inner_client
+    finally:
+        if not is_injected:
+            inner_client.close()
+@asynccontextmanager
+async def optional_async_client(client: AsyncClient | None = None) -> AsyncIterator[AsyncClient]:
+    is_injected = client is not None
+    inner_client = client if is_injected else AsyncClient()
 
     try:
         yield inner_client
@@ -58,11 +67,10 @@ class RequestData:
     query_params: dict[str, str] | None = field(default_factory=lambda: {'key': BROWSE_KEY})
     payload_params: dict[str, str] = field(default_factory=dict)
     no_payload: bool = False
-    client_language: Language | None = None
-    client_region: Region | None = None
+    locale: Locale | None = None
     headers: dict[str, str] = field(default_factory=lambda: BASE_HEADERS.copy())
 
-    async def send_request(self, client: AsyncClient) -> Response:
+    def build_request(self) -> Request:
         url = str(
             URL(self.endpoint)
             .with_query(self.query_params | {'key': BROWSE_KEY})
@@ -71,10 +79,11 @@ class RequestData:
 
         other_client_data = dict()
 
-        if self.client_language is not None:
-            other_client_data['hl'] = self.client_language
-        if self.client_region is not None:
-            other_client_data['gl'] = self.client_region
+        if self.locale is not None:
+            if self.locale.language is not None:
+                other_client_data['hl'] = self.locale.language
+            if self.locale.region is not None:
+                other_client_data['gl'] = self.locale.region
 
         if self.no_payload:
             request_payload = None
@@ -89,9 +98,14 @@ class RequestData:
                 **self.payload_params
             }
 
-        return await client.request(
+        return Request(
             self.method,
             url=url,
             json=request_payload,
             headers=self.headers
         )
+
+    def send_sync_request(self, client: Client) -> Response:
+        return client.send(self.build_request())
+    async def send_async_request(self, client: AsyncClient) -> Response:
+        return await client.send(self.build_request())

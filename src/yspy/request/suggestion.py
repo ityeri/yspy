@@ -1,26 +1,38 @@
-from httpx import AsyncClient, Response
+from httpx import AsyncClient, Response, Client
 
 from yspy.request.constants import SUGGESTION_API_URL
-from yspy.request.utils import optional_async_client, RequestData
-from yspy.utils import Language, Region
+from yspy.request.utils import optional_async_client, optional_sync_client, RequestData
+from yspy.utils import Locale
 
 
 class SuggestionRequest:
     @staticmethod
-    async def get_suggestion(
-            query: str, language: Language, region: Region, client: AsyncClient | None = None
-    ) -> Response:
+    def build_request(query: str, locale: Locale | None = None) -> RequestData:
+        query_params: dict = {
+            'q': query,
+            'client': 'youtube',
+            'gs_ri': 'youtube',
+            'ds': 'yt'
+        }
+        if locale is not None:
+            if locale.language is not None:
+                query_params['hl'] = locale.language
+            if locale.region is not None:
+                query_params['gl'] = locale.region
+
+        return RequestData(
+            method='GET',
+            endpoint=SUGGESTION_API_URL,
+            query_params=query_params,
+            no_payload=True
+        )
+
+    @staticmethod
+    def get_suggestion(query: str, locale: Locale | None = None, *, client: Client | None = None) -> Response:
+        with optional_sync_client(client) as client:
+            return SuggestionRequest.build_request(query, locale).send_sync_request(client)
+
+    @staticmethod
+    async def aget_suggestion(query: str, locale: Locale | None = None, *, client: AsyncClient | None = None) -> Response:
         async with optional_async_client(client) as client:
-            return await RequestData(
-                method='GET',
-                endpoint=SUGGESTION_API_URL,
-                query_params={
-                    'q': query,
-                    'hl': language,
-                    'gl': region,
-                    'client': 'youtube',
-                    'gs_ri': 'youtube',
-                    'ds': 'yt'
-                },
-                no_payload=True
-            ).send_request(client)
+            return await SuggestionRequest.build_request(query, locale).send_async_request(client)

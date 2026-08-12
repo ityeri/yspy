@@ -1,26 +1,47 @@
-from httpx import AsyncClient, Response
+from httpx import AsyncClient, Response, Client
 
+from yspy.utils import Locale
 from .constants import BROWSE_API_URL, BASE_HEADERS
-from .utils import optional_async_client, RequestData
+from .utils import optional_async_client, optional_sync_client, RequestData
 
 
 class PlaylistRequest:
     @staticmethod
-    async def get_first_page(playlist_id: str, client: AsyncClient | None = None) -> Response:
-        async with optional_async_client(client) as client:
-            return await RequestData(
-                method='POST',
-                endpoint=BROWSE_API_URL,
-                payload_params={'browseId': 'VL' + playlist_id if not playlist_id.startswith('VL') else playlist_id},
-                headers=BASE_HEADERS
-            ).send_request(client)
+    def build_first_page_request(playlist_id: str, locale: Locale | None = None) -> RequestData:
+        return RequestData(
+            method='POST',
+            endpoint=BROWSE_API_URL,
+            payload_params={'browseId': 'VL' + playlist_id if not playlist_id.startswith('VL') else playlist_id},
+            locale=locale,
+            headers=BASE_HEADERS
+        )
 
     @staticmethod
-    async def get_continuation_page(continuation_token: str, client: AsyncClient | None = None) -> Response:
+    def build_continuation_page_request(continuation_token: str, locale: Locale | None = None) -> RequestData:
+        return RequestData(
+            method='POST',
+            endpoint=BROWSE_API_URL,
+            payload_params={'continuation': continuation_token},
+            locale=locale,
+            headers=BASE_HEADERS
+        )
+
+    @staticmethod
+    def get_first_page(playlist_id: str, locale: Locale | None = None, *, client: Client | None = None) -> Response:
+        with optional_sync_client(client) as client:
+            return PlaylistRequest.build_first_page_request(playlist_id, locale).send_sync_request(client)
+
+    @staticmethod
+    async def aget_first_page(playlist_id: str, locale: Locale | None = None, *, client: AsyncClient | None = None) -> Response:
         async with optional_async_client(client) as client:
-            return await RequestData(
-                method='POST',
-                endpoint=BROWSE_API_URL,
-                payload_params={'continuation': continuation_token},
-                headers=BASE_HEADERS
-            ).send_request(client)
+            return await PlaylistRequest.build_first_page_request(playlist_id, locale).send_async_request(client)
+
+    @staticmethod
+    def get_continuation_page(continuation_token: str, locale: Locale | None = None, *, client: Client | None = None) -> Response:
+        with optional_sync_client(client) as client:
+            return PlaylistRequest.build_continuation_page_request(continuation_token, locale).send_sync_request(client)
+
+    @staticmethod
+    async def aget_continuation_page(continuation_token: str, locale: Locale | None = None, *, client: AsyncClient | None = None) -> Response:
+        async with optional_async_client(client) as client:
+            return await PlaylistRequest.build_continuation_page_request(continuation_token, locale).send_async_request(client)
