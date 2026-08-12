@@ -17,6 +17,7 @@ class ChannelPage:
     video_count_text: str
     is_family_safe: bool
     tags: list[str]
+    continuation_token: str
 
     @staticmethod
     def from_json(raw_data: dict[str, dict]):
@@ -48,5 +49,9 @@ class ChannelPage:
             subscriber_count_text=get_by_path(metadata_view_parts, 1, 'metadataParts', 0, 'text content'),
             video_count_text=get_by_path(metadata_view_parts, 1, 'metadataParts', 1, 'text content'),
             is_family_safe=channel_metadata['isFamilySafe'],
-            tags=microformat_data['tags']
+            tags=microformat_data['tags'],
+            continuation_token=get_by_path(
+                header_data,
+                'pageHeaderRenderer content pageHeaderViewModel description descriptionPreviewViewModel rendererContext commandContext onTap innertubeCommand showEngagementPanelEndpoint engagementPanel engagementPanelSectionListRenderer content sectionListRenderer contents', 0, 'itemSectionRenderer contents', 0, 'continuationItemRenderer continuationEndpoint continuationCommand token'
+            )
         )
