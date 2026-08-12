@@ -16,7 +16,6 @@ class Channel:
     avatar_thumbnails: list[ImageComponent]
     banners: list[ImageComponent]
     subscriber_count_text: str
-    video_count_text: str
     is_family_safe: bool
     tags: list[str]
     country: str
