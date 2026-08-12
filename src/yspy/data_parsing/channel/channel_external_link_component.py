@@ -20,7 +20,7 @@ class ChannelExternalLinkComponent:
         try:
             inner_data = raw_data['channelExternalLinkViewModel']
         except KeyError:
-            raise DataParsingException('Given data is not a channel external link view model')
+            raise DataParsingException('Given data is not a channel external link api model')
 
         return ChannelExternalLinkComponent(
             title=get_by_path(inner_data, 'title content'),
