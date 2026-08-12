@@ -36,7 +36,7 @@ class RequestData:
     endpoint: str
     # Yep. it's duplicated processing but more explicit
     query_params: dict[str, str] | None = field(default_factory=lambda: {'key': BROWSE_KEY})
-    payload_params: dict[str, str] = field(default_factory=dict)
+    payload_params: dict[str, str | bool] = field(default_factory=dict)
     no_payload: bool = False
     locale: Locale | None = None
     headers: dict[str, str] = field(default_factory=lambda: BASE_HEADERS.copy())
