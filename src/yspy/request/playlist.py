@@ -32,16 +32,23 @@ class PlaylistRequest:
             return PlaylistRequest.build_first_page_request(playlist_id, locale).send_sync_request(client)
 
     @staticmethod
-    async def aget_first_page(playlist_id: str, locale: Locale | None = None, *, client: AsyncClient | None = None) -> Response:
+    async def aget_first_page(
+            playlist_id: str, locale: Locale | None = None, *, client: AsyncClient | None = None
+    ) -> Response:
         async with optional_async_client(client) as client:
             return await PlaylistRequest.build_first_page_request(playlist_id, locale).send_async_request(client)
 
     @staticmethod
-    def get_continuation_page(continuation_token: str, locale: Locale | None = None, *, client: Client | None = None) -> Response:
+    def get_continuation_page(
+            continuation_token: str, locale: Locale | None = None, *, client: Client | None = None
+    ) -> Response:
         with optional_sync_client(client) as client:
             return PlaylistRequest.build_continuation_page_request(continuation_token, locale).send_sync_request(client)
 
     @staticmethod
-    async def aget_continuation_page(continuation_token: str, locale: Locale | None = None, *, client: AsyncClient | None = None) -> Response:
+    async def aget_continuation_page(
+            continuation_token: str, locale: Locale | None = None, *, client: AsyncClient | None = None
+    ) -> Response:
         async with optional_async_client(client) as client:
-            return await PlaylistRequest.build_continuation_page_request(continuation_token, locale).send_async_request(client)
+            return await PlaylistRequest.build_continuation_page_request(continuation_token, locale)\
+                .send_async_request(client)
