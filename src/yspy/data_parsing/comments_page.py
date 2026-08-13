@@ -32,7 +32,7 @@ class CommentComponent:
 @dataclass
 class CommentsPage:
     comments: list[CommentComponent]
-    comment_continuation_token: str
+    continuation_token: str
 
     @staticmethod
     def from_json(raw_data: dict[str, dict]) -> CommentsPage:
@@ -66,5 +66,5 @@ class CommentsPage:
 
         return CommentsPage(
             comments=comment_components,
-            comment_continuation_token=continuation_key
+            continuation_token=continuation_key
         )
