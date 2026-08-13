@@ -13,6 +13,23 @@ from yspy.utils import SearchMode, Locale
 @dataclass
 class Search:
     results: list[SearchResult]
+    continuation_token: str
+
+    @staticmethod
+    async def asearch(
+            query: str, search_mode: SearchMode, locale: Locale | None = None, *, client: AsyncClient | None = None
+    ) -> Search:
+        response = await SearchResultRequest.aget_first_page(query, search_mode, locale, client=client)
+        search_result_page = SearchResultPage.from_json(response.json())
+
+        return Search.from_search_result_page(search_result_page, locale)
+
+    @staticmethod
+    def from_search_result_page(search_result_page: SearchResultPage, locale: Locale | None = None):
+        return Search(
+            results=[from_search_result_component(component, locale) for component in search_result_page.components],
+            continuation_token=search_result_page.continuation_token
+        )
 
     @property
     def videos(self) -> list[VideoResult]:
@@ -32,17 +49,12 @@ class Search:
         try: return self.channels[0]
         except IndexError: return default
 
-    @staticmethod
-    async def asearch(
-            query: str, search_mode: SearchMode, locale: Locale | None = None, *, client: AsyncClient | None = None
+    async def amore(
+            self, search_mode: SearchMode, locale: Locale | None = None, *, client: AsyncClient | None = None
     ) -> Search:
-        response = await SearchResultRequest.aget_first_page(query, search_mode, locale, client=client)
+        response = await SearchResultRequest.aget_continuation_page(
+            self.continuation_token, search_mode, locale, client=client
+        )
         search_result_page = SearchResultPage.from_json(response.json())
 
         return Search.from_search_result_page(search_result_page, locale)
-
-    @staticmethod
-    def from_search_result_page(search_result_page: SearchResultPage, locale: Locale | None = None):
-        return Search(
-            results=[from_search_result_component(component, locale) for component in search_result_page.components]
-        )
