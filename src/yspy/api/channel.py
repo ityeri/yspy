@@ -25,12 +25,7 @@ class Channel:
     tags: list[str]
 
     @staticmethod
-    async def aget(channel_id: str, locale: Locale | None = None, *, client: AsyncClient | None = None) -> Channel:
-        response = await ChannelRequest.aget_page(channel_id, locale, client=client)
-        channel_page = ChannelPage.from_json(response.json())
-        response = await ChannelRequest.aget_page(channel_id, Locale.ENGLISH, client=client)
-        channel_page_eng = ChannelPage.from_json(response.json())
-
+    def from_channel_page(channel_page: ChannelPage, channel_page_eng: ChannelPage) -> Channel:
         return Channel(
             id=channel_page.id,
             title=channel_page.title,
@@ -43,6 +38,15 @@ class Channel:
             is_family_safe=channel_page.is_family_safe,
             tags=channel_page.tags,
         )
+
+    @staticmethod
+    async def aget(channel_id: str, locale: Locale | None = None, *, client: AsyncClient | None = None) -> Channel:
+        response = await ChannelRequest.aget_page(channel_id, locale, client=client)
+        channel_page = ChannelPage.from_json(response.json())
+        response = await ChannelRequest.aget_page(channel_id, Locale.ENGLISH, client=client)
+        channel_page_eng = ChannelPage.from_json(response.json())
+
+        return Channel.from_channel_page(channel_page, channel_page_eng)
 
 @dataclass
 class ChannelDetail:
