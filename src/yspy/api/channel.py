@@ -4,9 +4,11 @@ import re
 from dataclasses import dataclass
 from datetime import date
 
+from httpx import AsyncClient
+
 from yspy.data_parsing import ImageComponent
 from yspy.data_parsing.channel import ChannelExternalLinkComponent, ChannelPage, ChannelDetailPage
-from yspy.request import channel as channel_request
+from yspy.request import channel as channel_request, ChannelRequest
 
 
 @dataclass
@@ -37,8 +39,8 @@ class Channel:
     )
 
     @staticmethod
-    async def get(channel_id: str) -> Channel:
-        response = await channel_request.get_page(channel_id)
+    async def aget(channel_id: str, *, client: AsyncClient | None = None) -> Channel:
+        response = await ChannelRequest.aget_page(channel_id, client=client)
         channel_page = ChannelPage.from_json(response.json())
 
         return Channel(
