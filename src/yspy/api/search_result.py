@@ -97,10 +97,10 @@ class ChannelResult(SearchResult):
         except IndexError:
             return None
 
-def from_search_result_component(component: SearchResultComponent) -> SearchResult:
+def from_search_result_component(component: SearchResultComponent, locale: Locale | None = None) -> SearchResult:
     if isinstance(component, VideoComponent):
-        return VideoResult.from_video_component(component)
+        return VideoResult.from_video_component(component, locale)
     elif isinstance(component, ChannelComponent):
-        return ChannelResult.from_channel_component(component)
+        return ChannelResult.from_channel_component(component, locale)
     else:
         raise TypeError('Unknown type SearchResultComponent has passed')

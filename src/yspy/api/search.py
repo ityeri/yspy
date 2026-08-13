@@ -7,7 +7,7 @@ from httpx import AsyncClient
 from .search_result import SearchResult, VideoResult, ChannelResult, from_search_result_component
 from yspy.data_parsing.search_result import SearchResultPage
 from yspy.request import SearchResultRequest
-from yspy.utils import SearchMode
+from yspy.utils import SearchMode, Locale
 
 
 @dataclass
@@ -33,14 +33,16 @@ class Search:
         except IndexError: return default
 
     @staticmethod
-    async def asearch(query: str, search_mode: SearchMode, *, client: AsyncClient | None = None) -> Search:
-        response = await SearchResultRequest.aget_first_page(query, search_mode, client=client)
+    async def asearch(
+            query: str, search_mode: SearchMode, locale: Locale | None = None, *, client: AsyncClient | None = None
+    ) -> Search:
+        response = await SearchResultRequest.aget_first_page(query, search_mode, locale, client=client)
         search_result_page = SearchResultPage.from_json(response.json())
 
-        return Search.from_search_result_page(search_result_page)
+        return Search.from_search_result_page(search_result_page, locale)
 
     @staticmethod
-    def from_search_result_page(search_result_page: SearchResultPage):
+    def from_search_result_page(search_result_page: SearchResultPage, locale: Locale | None = None):
         return Search(
-            results=[from_search_result_component(component) for component in search_result_page.components]
+            results=[from_search_result_component(component, locale) for component in search_result_page.components]
         )
