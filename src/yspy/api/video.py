@@ -1,21 +1,35 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, fields
+from datetime import datetime
 
 from httpx import AsyncClient
 from yarl import URL
 
+from yspy.data_parsing import ImageComponent
 from yspy.data_parsing.video import VideoPage
 from yspy.request import VideoRequest
+from yspy.utils import Locale
 from .channel import Channel
 
 
 @dataclass
-class Video(VideoPage):
+class Video:
+    id: str
+    title: str
+    url: str
+    length_seconds: int
+    view_count: int
+    thumbnails: list[ImageComponent]
+    description: str
+    channel_id: str
+    channel_name: str
+    is_live_content: bool
+    publish_date: datetime
+    upload_date: datetime
+    is_family_safe: bool
+    category: str
     page_data: VideoPage
-
-    async def get_channel(self) -> Channel:
-        ...
 
     @staticmethod
     def from_video_page(video_page: VideoPage) -> Video:
@@ -36,3 +50,6 @@ class Video(VideoPage):
         video_page = VideoPage.from_json(response.json())
 
         return Video.from_video_page(video_page)
+
+    async def aget_channel(self, locale: Locale | None = None, *, client: AsyncClient | None = None) -> Channel:
+        return await Channel.aget(self.channel_id, locale, client=client)
