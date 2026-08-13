@@ -2,7 +2,7 @@ from enum import Enum
 
 from yarl import URL
 
-from .i18n import Language, Region, Locale
+from .i18n import Language, Region, Locale, ENGLISH_LOCALE
 from .value_text_parsing import parse_subscriber_count, parse_view_count, parse_video_count, parse_joined_date
 
 YOUTUBE_BASE_URL = URL('https://youtube.com')
@@ -51,6 +51,12 @@ class SearchMode(str, Enum):
     PLAYLIST = 'EgIQAw%3D%3D' # TODO at data_parsing
     LIVESTREAM = 'EgJAAQ%3D%3D' # TODO at data_parsing
 
+class Unspecified:
+    def __new__(cls, *args, **kwargs):
+        raise TypeError(f'cannot instantiate {cls.__name__}')
+    def __init_subclass__(cls, **kwargs):
+        raise TypeError(f'cannot subclass {cls.__name__}')
+
 
 __all__ = [
     'get_by_path',
@@ -60,6 +66,9 @@ __all__ = [
     'Language',
     'Region',
     'Locale',
+    'ENGLISH_LOCALE',
+
+    'Unspecified',
 
     'SearchMode',
 

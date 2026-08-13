@@ -47,4 +47,4 @@ class Locale:
     language: Language | None = None
     region: Region | None = None
 
-    ENGLISH = Locale(language=Language.ENGLISH)
+ENGLISH_LOCALE = Locale(language=Language.ENGLISH)

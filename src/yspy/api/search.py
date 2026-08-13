@@ -4,16 +4,33 @@ from dataclasses import dataclass
 
 from httpx import AsyncClient
 
-from yspy.data_parsing.search_result import SearchResultPage, SearchResultComponent, VideoComponent, ChannelComponent
+from .search_result import SearchResult, VideoResult, ChannelResult, from_search_result_component
+from yspy.data_parsing.search_result import SearchResultPage
 from yspy.request import SearchResultRequest
 from yspy.utils import SearchMode
 
 
 @dataclass
 class Search:
-    results: list[SearchResultComponent]
-    videos: list[VideoComponent]
-    channels: list[ChannelComponent]
+    results: list[SearchResult]
+
+    @property
+    def videos(self) -> list[VideoResult]:
+        return [result for result in self.results if isinstance(result, VideoResult)]
+    @property
+    def channels(self) -> list[ChannelResult]:
+        return [result for result in self.results if isinstance(result, ChannelResult)]
+
+    def first_or(self, default: SearchResult | None) -> SearchResult | None:
+        try: return self.results[0]
+        except IndexError: return default
+
+    def first_video_or(self, default: VideoResult | None) -> VideoResult | None:
+        try: return self.videos[0]
+        except IndexError: return default
+    def first_channel_or(self, default: ChannelResult | None) -> ChannelResult | None:
+        try: return self.channels[0]
+        except IndexError: return default
 
     @staticmethod
     async def asearch(query: str, search_mode: SearchMode, *, client: AsyncClient | None = None) -> Search:
@@ -25,7 +42,5 @@ class Search:
     @staticmethod
     def from_search_result_page(search_result_page: SearchResultPage):
         return Search(
-            results=search_result_page.components,
-            videos=[video for video in search_result_page.components if isinstance(video, VideoComponent)],
-            channels=[channel for channel in search_result_page.components if isinstance(channel, ChannelComponent)]
+            results=[from_search_result_component(component) for component in search_result_page.components]
         )

@@ -8,7 +8,8 @@ from httpx import AsyncClient
 from yspy.data_parsing import ImageComponent
 from yspy.data_parsing.channel import ChannelPage, ChannelExternalLinkComponent, ChannelDetailPage
 from yspy.request import ChannelRequest
-from yspy.utils import Locale, parse_subscriber_count, parse_view_count, parse_joined_date, parse_video_count
+from yspy.utils import Locale, parse_subscriber_count, parse_view_count, parse_joined_date, parse_video_count, \
+    ENGLISH_LOCALE
 
 
 @dataclass
@@ -43,7 +44,7 @@ class Channel:
     async def aget(channel_id: str, locale: Locale | None = None, *, client: AsyncClient | None = None) -> Channel:
         response = await ChannelRequest.aget_page(channel_id, locale, client=client)
         channel_page = ChannelPage.from_json(response.json())
-        response = await ChannelRequest.aget_page(channel_id, Locale.ENGLISH, client=client)
+        response = await ChannelRequest.aget_page(channel_id, ENGLISH_LOCALE, client=client)
         channel_page_eng = ChannelPage.from_json(response.json())
 
         return Channel.from_channel_page(channel_page, channel_page_eng)
@@ -67,7 +68,7 @@ class ChannelDetail:
     ) -> ChannelDetail:
         response = await ChannelRequest.aget_detail_page(continuation_token, locale, client=client)
         detail_page = ChannelDetailPage.from_json(response.json())
-        response = await ChannelRequest.aget_detail_page(continuation_token, Locale.ENGLISH, client=client)
+        response = await ChannelRequest.aget_detail_page(continuation_token, ENGLISH_LOCALE, client=client)
         detail_page_eng = ChannelDetailPage.from_json(response.json())
 
         return ChannelDetail(
