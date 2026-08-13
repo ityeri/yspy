@@ -2,16 +2,10 @@ from enum import Enum
 
 from httpx import AsyncClient, Response, Client
 
-from yspy.utils import Locale
+from yspy.utils import Locale, SearchMode
 from .constants import SEARCH_API_URL, BASE_HEADERS
 from .utils import optional_async_client, optional_sync_client, RequestData
 
-
-class SearchMode(str, Enum):
-    VIDEO = 'EgIQAQ%3D%3D'
-    CHANNEL = 'EgIQAg%3D%3D'
-    PLAYLIST = 'EgIQAw%3D%3D' # TODO at data_parsing
-    LIVESTREAM = 'EgJAAQ%3D%3D' # TODO at data_parsing
 
 class SearchResultRequest:
     @staticmethod
@@ -53,8 +47,8 @@ class SearchResultRequest:
     @staticmethod
     def get_first_page(
             query: str,
-            *,
             search_mode: SearchMode | None = None,
+            *,
             locale: Locale | None = None,
             client: Client | None = None
     ) -> Response:
@@ -66,8 +60,8 @@ class SearchResultRequest:
     @staticmethod
     async def aget_first_page(
             query: str,
-            *,
             search_mode: SearchMode | None = None,
+            *,
             locale: Locale | None = None,
             client: AsyncClient | None = None
     ) -> Response:
@@ -79,8 +73,8 @@ class SearchResultRequest:
     @staticmethod
     def get_continuation_page(
             continuation_token: str,
-            *,
             search_mode: SearchMode | None = None,
+            *,
             locale: Locale | None = None,
             client: Client | None = None
     ) -> Response:
@@ -92,8 +86,8 @@ class SearchResultRequest:
     @staticmethod
     async def aget_continuation_page(
             continuation_token: str,
-            *,
             search_mode: SearchMode | None = None,
+            *,
             locale: Locale | None = None,
             client: AsyncClient | None = None
     ) -> Response:

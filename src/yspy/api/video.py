@@ -12,6 +12,7 @@ from yspy.request import VideoRequest
 from yspy.utils import Locale
 from .channel import Channel
 from .comments import Comments
+from ..exceptions import VideoIdentifierException
 
 
 @dataclass
@@ -33,13 +34,16 @@ class Video:
     page_data: VideoPage
 
     @staticmethod
-    async def aget(*, video_id: str | None = None, video_url: str | None = None, client: AsyncClient | None) -> Video:
-        if video_id is not None and video_url is not None:
-            raise ValueError('Only one of the parameters, video_id or video_url, should be passed')
-        if video_url is not None:
-            video_id = URL(video_url).query['v']
+    async def aget(video_id_or_url: str, locale: Locale | None = None, client: AsyncClient | None = None) -> Video:
+        if len(video_id_or_url) == 11:
+            video_id = video_id_or_url
+        else:
+            try:
+                video_id = URL(video_id_or_url).query['v']
+            except KeyError:
+                raise VideoIdentifierException('The given video_id_or_url is neither a URL nor a video ID')
 
-        response = await VideoRequest.aget_page(video_id, client=client)
+        response = await VideoRequest.aget_page(video_id, locale, client=client)
         video_page = VideoPage.from_json(response.json())
 
         return Video.from_video_page(video_page)

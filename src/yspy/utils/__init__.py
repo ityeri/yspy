@@ -1,3 +1,5 @@
+from enum import Enum
+
 from yarl import URL
 
 from .i18n import Language, Region, Locale
@@ -43,6 +45,12 @@ def to_youtube_url(url: str | URL) -> str:
     else:
         return str(url)
 
+class SearchMode(str, Enum):
+    VIDEO = 'EgIQAQ%3D%3D'
+    CHANNEL = 'EgIQAg%3D%3D'
+    PLAYLIST = 'EgIQAw%3D%3D' # TODO at data_parsing
+    LIVESTREAM = 'EgJAAQ%3D%3D' # TODO at data_parsing
+
 
 __all__ = [
     'get_by_path',
@@ -52,6 +60,8 @@ __all__ = [
     'Language',
     'Region',
     'Locale',
+
+    'SearchMode',
 
     'parse_subscriber_count',
     'parse_view_count',
