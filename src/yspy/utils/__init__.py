@@ -1,7 +1,7 @@
 from yarl import URL
 
 from .i18n import Language, Region, Locale
-
+from .value_text_parsing import parse_subscriber_count, parse_view_count, parse_video_count, parse_joined_date
 
 YOUTUBE_BASE_URL = URL('https://youtube.com')
 
@@ -51,5 +51,10 @@ __all__ = [
 
     'Language',
     'Region',
-    'Locale'
+    'Locale',
+
+    'parse_subscriber_count',
+    'parse_view_count',
+    'parse_video_count',
+    'parse_joined_date'
 ]

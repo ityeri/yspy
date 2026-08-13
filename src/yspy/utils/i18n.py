@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
 from enum import Enum
 
@@ -44,3 +46,5 @@ class Region(str, Enum):
 class Locale:
     language: Language | None = None
     region: Region | None = None
+
+    ENGLISH = Locale(language=Language.ENGLISH)

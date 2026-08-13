@@ -1,14 +1,14 @@
 from __future__ import annotations
 
-import re
 from dataclasses import dataclass
 from datetime import date
 
 from httpx import AsyncClient
 
 from yspy.data_parsing import ImageComponent
-from yspy.data_parsing.channel import ChannelExternalLinkComponent, ChannelPage, ChannelDetailPage
-from yspy.request import channel as channel_request, ChannelRequest
+from yspy.data_parsing.channel import ChannelPage, ChannelExternalLinkComponent, ChannelDetailPage
+from yspy.request import ChannelRequest
+from yspy.utils import Locale, parse_subscriber_count, parse_view_count, parse_joined_date, parse_video_count
 
 
 @dataclass
@@ -24,24 +24,12 @@ class Channel:
     is_family_safe: bool
     tags: list[str]
 
-    _SUBSCRIBER_COUNT_UNITS = {
-        'k': 1_000,
-        'm': 1_000_000,
-        'b': 1_000_000_000,
-        'thousand': 1_000,
-        'million': 1_000_000,
-        'billion': 1_000_000_000,
-    }
-
-    _SUBSCRIBER_COUNT_PATTERN = re.compile(
-        r'(?P<number>\d+(?:[.,]\d+)?)\s*(?P<unit>[kmb]|thousand|million|billion)?',
-        re.IGNORECASE,
-    )
-
     @staticmethod
-    async def aget(channel_id: str, *, client: AsyncClient | None = None) -> Channel:
-        response = await ChannelRequest.aget_page(channel_id, client=client)
+    async def aget(channel_id: str, locale: Locale | None = None, *, client: AsyncClient | None = None) -> Channel:
+        response = await ChannelRequest.aget_page(channel_id, locale, client=client)
         channel_page = ChannelPage.from_json(response.json())
+        response = await ChannelRequest.aget_page(channel_id, Locale.ENGLISH, client=client)
+        channel_page_eng = ChannelPage.from_json(response.json())
 
         return Channel(
             id=channel_page.id,
@@ -51,54 +39,42 @@ class Channel:
             description=channel_page.description,
             avatar_thumbnails=channel_page.avatar_thumbnails,
             banners=channel_page.banners,
-            approx_subscriber_count=6974,
+            approx_subscriber_count=parse_subscriber_count(channel_page_eng.subscriber_count_text),
             is_family_safe=channel_page.is_family_safe,
             tags=channel_page.tags,
         )
 
+@dataclass
+class ChannelDetail:
+    id: str
+    url: str
+    description: str
+    country: str
+    approx_subscriber_count: int
+    view_count: int
+    joined_date: date
+    video_count: int
+    links: list[ChannelExternalLinkComponent]
+    page_data: ChannelDetailPage
+
     @staticmethod
-    def parse_subscriber_count(text: str | None) -> int | None:
-        """Parse an English subscriber count text (like '573K subscribers') into an int."""
-        if not text:
-            return None
+    async def aget(
+            continuation_token: str, locale: Locale | None = None, *, client: AsyncClient | None = None
+    ) -> ChannelDetail:
+        response = await ChannelRequest.aget_detail_page(continuation_token, locale, client=client)
+        detail_page = ChannelDetailPage.from_json(response.json())
+        response = await ChannelRequest.aget_detail_page(continuation_token, Locale.ENGLISH, client=client)
+        detail_page_eng = ChannelDetailPage.from_json(response.json())
 
-        if re.search(r'\bno\s+subscribers?\b', text, re.IGNORECASE):
-            return 0
-
-        match = Channel._SUBSCRIBER_COUNT_PATTERN.search(text)
-        if match is None:
-            return None
-
-        number = float(match.group('number').replace(',', ''))
-        unit = (match.group('unit') or '').lower()
-        multiplier = Channel._SUBSCRIBER_COUNT_UNITS.get(unit, 1)
-
-        return int(number * multiplier)
-
-# @dataclass
-# class ChannelDetail:
-#     id: str
-#     url: str
-#     description: str
-#     country: str
-#     view_count: int
-#     joined_date: date
-#     video_count: int
-#     links: list[ChannelExternalLinkComponent]
-#     page_data: ChannelPage
-#     detail_page_data: ChannelDetailPage
-#
-#     @staticmethod
-#     async def get(continuation_token: str) -> ChannelDetail:
-#         response = await channel_request.get_detail_page(continuation_token)
-#         detail_page = ChannelDetailPage.from_json(response.json())
-#
-#         response = await channel_request.get_detail_page(continuation_token)
-#
-#         return ChannelDetail(
-#             id=detail_page.id,
-#             url=detail_page.url,
-#             description=detail_page.description,
-#             country=detail_page.country,
-#             view_count=detail_page.view_count_text
-#         )
+        return ChannelDetail(
+            id=detail_page.id,
+            url=detail_page.url,
+            description=detail_page.description,
+            country=detail_page.country,
+            approx_subscriber_count=parse_subscriber_count(detail_page_eng.subscriber_count_text),
+            view_count=parse_view_count(detail_page_eng.view_count_text),
+            joined_date=parse_joined_date(detail_page_eng.joined_date_text),
+            video_count=parse_video_count(detail_page_eng.video_count_text),
+            links=detail_page.links,
+            page_data=detail_page
+        )
