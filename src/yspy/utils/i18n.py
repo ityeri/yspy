@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from enum import Enum
 
 
@@ -38,3 +39,8 @@ class Region(str, Enum):
     INDIA = "IN"
     TAIWAN = "TW"
     HONG_KONG = "HK"
+
+@dataclass
+class Locale:
+    language: Language | None = None
+    region: Region | None = None
