@@ -53,3 +53,9 @@ class Video:
 
     async def aget_channel(self, locale: Locale | None = None, *, client: AsyncClient | None = None) -> Channel:
         return await Channel.aget(self.channel_id, locale, client=client)
+
+    def get_highest_res_thumbnail(self) -> ImageComponent | None:
+        try:
+            return sorted(self.thumbnails, key=lambda t: t.width * t.height, reverse=True)[0]
+        except IndexError:
+            return None
