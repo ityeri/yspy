@@ -30,7 +30,9 @@ class Playlist:
     page_data: PlaylistPage
 
     @staticmethod
-    def from_page(playlist_page: PlaylistPage, playlist_page_eng: PlaylistPage) -> Playlist:
+    def from_page(
+            playlist_page: PlaylistPage, playlist_page_eng: PlaylistPage, page_index: int, index_offset: int
+    ) -> Playlist:
         return Playlist(
             id=playlist_page.id,
             title=playlist_page.title,
@@ -40,10 +42,10 @@ class Playlist:
             owner_url=playlist_page.owner_url,
             owner_id=playlist_page.owner_id,
             view_count=parse_view_count(playlist_page_eng.view_count_text),
-            videos=[PlaylistVideo.from_component(video, 0) for video in playlist_page.videos],
+            videos=[PlaylistVideo.from_component(video, index_offset) for video in playlist_page.videos],
             continuation_token=playlist_page.continuation_token,
-            page_index=0,
-            index_offset=0,
+            page_index=page_index,
+            index_offset=index_offset,
             page_data=playlist_page
         )
 
@@ -75,7 +77,7 @@ class Playlist:
         response_eng = await PlaylistRequest.aget_first_page(playlist_id, ENGLISH_LOCALE, client=client)
         playlist_page_eng = PlaylistPage.from_json(response_eng.json())
 
-        return Playlist.from_page(playlist_page, playlist_page_eng)
+        return Playlist.from_page(playlist_page, playlist_page_eng, 0, 0)
 
     async def anext(self, locale: Locale | None = None, *, client: AsyncClient | None = None) -> Playlist | None:
         if self.continuation_token is None:
@@ -88,7 +90,7 @@ class Playlist:
         )
         next_page_eng = PlaylistPage.from_json(response_eng.json())
 
-        return Playlist.from_page(next_page, next_page_eng)
+        return Playlist.from_page(next_page, next_page_eng, self.page_index + 1, self.index_offset + len(self.videos))
 
 
 @dataclass
