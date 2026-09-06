@@ -8,7 +8,7 @@ from httpx import AsyncClient, Client
 
 from yspy.data_parsing import ImageComponent
 from yspy.data_parsing.search_result import VideoComponent, ChannelComponent, SearchResultComponent
-from yspy.utils import Locale, Unspecified, NONE_LOCALE
+from yspy.utils import Locale, NONE_LOCALE
 from .channel import Channel
 from .utils import parse_subscriber_count
 from .video import Video
@@ -53,23 +53,23 @@ class VideoResultElement(SearchResultElement):
             locale=locale
         )
 
-    def get_video(self, locale: Locale | Unspecified = Unspecified(), *,
+    def get_video(self, locale: Locale | None = None, *,
                   client: Client | None = None):
-        return Video.get(self.id, locale if locale != Unspecified() else self.locale, client=client)
+        return Video.get(self.id, self.locale if locale is None else locale, client=client)
 
-    async def aget_video(self, locale: Locale | Unspecified = Unspecified(), *,
+    async def aget_video(self, locale: Locale | None = None, *,
                          client: AsyncClient | None = None):
-        return await Video.aget(self.id, locale if locale != Unspecified() else self.locale, client=client)
+        return await Video.aget(self.id, self.locale if locale is None else locale, client=client)
 
     def get_channel(
-            self, locale: Locale | Unspecified = Unspecified(), *, client: Client | None = None
+            self, locale: Locale | None = None, *, client: Client | None = None
     ) -> Channel:
-        return Channel.get(self.channel_id, locale if locale != Unspecified() else self.locale, client=client)
+        return Channel.get(self.channel_id, self.locale if locale is None else locale, client=client)
 
     async def aget_channel(
-            self, locale: Locale | Unspecified = Unspecified(), *, client: AsyncClient | None = None
+            self, locale: Locale | None = None, *, client: AsyncClient | None = None
     ) -> Channel:
-        return await Channel.aget(self.channel_id, locale if locale != Unspecified() else self.locale, client=client)
+        return await Channel.aget(self.channel_id, self.locale if locale is None else locale, client=client)
 
     def get_highest_res_thumbnail(self) -> ImageComponent | None:
         try:
@@ -108,14 +108,14 @@ class ChannelResultElement(SearchResultElement):
         )
 
     def get_channel(
-            self, locale: Locale | Unspecified = Unspecified(), *, client: Client | None = None
+            self, locale: Locale | None = None, *, client: Client | None = None
     ) -> Channel:
-        return Channel.get(self.id, locale if locale != Unspecified() else self.locale, client=client)
+        return Channel.get(self.id, self.locale if locale is None else locale, client=client)
 
     async def aget_channel(
-            self, locale: Locale | Unspecified = Unspecified(), *, client: AsyncClient | None = None
+            self, locale: Locale | None = None, *, client: AsyncClient | None = None
     ) -> Channel:
-        return await Channel.aget(self.id, locale if locale != Unspecified() else self.locale, client=client)
+        return await Channel.aget(self.id, self.locale if locale is None else locale, client=client)
 
     def get_highest_res_thumbnail(self) -> ImageComponent | None:
         try:

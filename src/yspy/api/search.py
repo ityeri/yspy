@@ -72,12 +72,12 @@ class Search:
     def more(
             self,
             search_mode: SearchMode | None | Unspecified = Unspecified(),
-            locale: Locale | Unspecified = Unspecified(),
+            locale: Locale | None = None,
             *,
             client: Client | None = None
     ) -> Search:
         actual_search_mode: SearchMode | None = search_mode if search_mode != Unspecified() else self.search_mode
-        actual_locale: Locale = locale if locale != Unspecified() else self.locale
+        actual_locale: Locale = self.locale if locale is None else locale
 
         response = SearchResultRequest.get_continuation_page(
             self.continuation_token, actual_search_mode, actual_locale, client=client
@@ -99,12 +99,12 @@ class Search:
     async def amore(
             self,
             search_mode: SearchMode | None | Unspecified = Unspecified(),
-            locale: Locale | Unspecified = Unspecified(),
+            locale: Locale | None = None,
             *,
             client: AsyncClient | None = None
     ) -> Search:
         actual_search_mode: SearchMode | None = search_mode if search_mode != Unspecified() else self.search_mode
-        actual_locale: Locale = locale if locale != Unspecified() else self.locale
+        actual_locale: Locale = self.locale if locale is None else locale
 
         response = await SearchResultRequest.aget_continuation_page(
             self.continuation_token, actual_search_mode, actual_locale, client=client

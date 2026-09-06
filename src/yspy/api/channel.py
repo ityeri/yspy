@@ -8,7 +8,7 @@ from httpx import AsyncClient, Client
 from yspy.data_parsing import ImageComponent
 from yspy.data_parsing.channel import ChannelPage, ChannelExternalLinkComponent, ChannelDetailPage
 from yspy.request import ChannelRequest
-from yspy.utils import Locale, ENGLISH_LOCALE, Unspecified, Language, NONE_LOCALE
+from yspy.utils import Locale, ENGLISH_LOCALE, Language, NONE_LOCALE
 from .exceptions import ChannelIdentifierException
 from .utils import parse_subscriber_count, parse_view_count, parse_joined_date, parse_video_count
 
@@ -100,16 +100,16 @@ class Channel:
         )
 
     def get_detail(
-            self, locale: Locale | Unspecified = Unspecified(), *, client: Client | None = None
+            self, locale: Locale | None = None, *, client: Client | None = None
     ) -> ChannelDetail:
-        actual_locale = locale if locale != Unspecified() else self.locale
+        actual_locale = self.locale if locale is None else locale
         return ChannelDetail.get(self.continuation_token, actual_locale, client=client)
 
 
     async def aget_detail(
-            self, locale: Locale | Unspecified = Unspecified(), *, client: AsyncClient | None = None
+            self, locale: Locale | None = None, *, client: AsyncClient | None = None
     ) -> ChannelDetail:
-        actual_locale = locale if locale != Unspecified() else self.locale
+        actual_locale = self.locale if locale is None else locale
         return await ChannelDetail.aget(self.continuation_token, actual_locale, client=client)
 
 @dataclass

@@ -9,7 +9,7 @@ from yarl import URL
 from yspy.data_parsing import ImageComponent
 from yspy.data_parsing.video import VideoPage
 from yspy.request import VideoRequest
-from yspy.utils import Locale, Unspecified, NONE_LOCALE
+from yspy.utils import Locale, NONE_LOCALE
 from .channel import Channel
 from .comments import Comments
 from .exceptions import VideoIdentifierException
@@ -61,15 +61,15 @@ class Video:
         )
 
     def get_channel(
-            self, locale: Locale | Unspecified = Unspecified(), *, client: Client | None = None
+            self, locale: Locale | None = None, *, client: Client | None = None
     ) -> Channel:
-        actual_locale = locale if locale != Unspecified() else self.locale
+        actual_locale = self.locale if locale is None else locale
         return Channel.get(self.channel_id, actual_locale, client=client)
 
     async def aget_channel(
-            self, locale: Locale | Unspecified = Unspecified(), *, client: AsyncClient | None = None
+            self, locale: Locale | None = None, *, client: AsyncClient | None = None
     ) -> Channel:
-        actual_locale = locale if locale != Unspecified() else self.locale
+        actual_locale = self.locale if locale is None else locale
         return await Channel.aget(self.channel_id, actual_locale, client=client)
 
     def get_comments(self, *, client: Client | None = None) -> Comments:

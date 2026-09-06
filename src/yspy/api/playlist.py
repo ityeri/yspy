@@ -8,7 +8,7 @@ from yarl import URL
 from yspy.data_parsing import ImageComponent
 from yspy.data_parsing.playlist import PlaylistPage, PlaylistVideoComponent
 from yspy.request import PlaylistRequest, ChannelRequest
-from yspy.utils import Locale, ENGLISH_LOCALE, Unspecified, Language, NONE_LOCALE
+from yspy.utils import Locale, ENGLISH_LOCALE, Language, NONE_LOCALE
 from .channel import Channel
 from .exceptions import PlaylistIdentifierException, ChannelIdentifierException
 from .utils import parse_view_count, parse_length_seconds
@@ -132,24 +132,24 @@ class Playlist:
         return await Playlist.aget('UU' + channel_id[2:], locale, client=client)
 
     def get_channel(
-            self, locale: Locale | Unspecified = Unspecified(), *, client: Client | None = None
+            self, locale: Locale | None = None, *, client: Client | None = None
     ) -> Channel:
-        actual_locale = locale if locale != Unspecified() else self.locale
+        actual_locale = self.locale if locale is None else locale
         return Channel.get(self.owner_id, actual_locale, client=client)
 
     async def aget_channel(
-            self, locale: Locale | Unspecified = Unspecified(), *, client: AsyncClient | None = None
+            self, locale: Locale | None = None, *, client: AsyncClient | None = None
     ) -> Channel:
-        actual_locale = locale if locale != Unspecified() else self.locale
+        actual_locale = self.locale if locale is None else locale
         return await Channel.aget(self.owner_id, actual_locale, client=client)
 
     def next(
-            self, locale: Locale | Unspecified = Unspecified(), *, client: Client | None = None
+            self, locale: Locale | None = None, *, client: Client | None = None
     ) -> Playlist | None:
         if self.continuation_token is None:
             return None
 
-        actual_locale = locale if locale != Unspecified() else self.locale
+        actual_locale = self.locale if locale is None else locale
 
         response = PlaylistRequest.get_continuation_page(self.continuation_token, actual_locale, client=client)
         next_page = PlaylistPage.from_json(response.json())
@@ -168,12 +168,12 @@ class Playlist:
 
 
     async def anext(
-            self, locale: Locale | Unspecified = Unspecified(), *, client: AsyncClient | None = None
+            self, locale: Locale | None = None, *, client: AsyncClient | None = None
     ) -> Playlist | None:
         if self.continuation_token is None:
             return None
 
-        actual_locale = locale if locale != Unspecified() else self.locale
+        actual_locale = self.locale if locale is None else locale
 
         response = await PlaylistRequest.aget_continuation_page(self.continuation_token, actual_locale, client=client)
         next_page = PlaylistPage.from_json(response.json())
@@ -235,13 +235,13 @@ class PlaylistVideo:
         )
 
     def get_video(
-            self, locale: Locale | Unspecified = Unspecified(), *, client: Client | None = None
+            self, locale: Locale | None = None, *, client: Client | None = None
     ) -> Video:
-        actual_locale = locale if locale != Unspecified() else self.locale
+        actual_locale = self.locale if locale is None else locale
         return Video.get(self.id, actual_locale, client=client)
 
     async def aget_video(
-            self, locale: Locale | Unspecified = Unspecified(), *, client: AsyncClient | None = None
+            self, locale: Locale | None = None, *, client: AsyncClient | None = None
     ) -> Video:
-        actual_locale = locale if locale != Unspecified() else self.locale
+        actual_locale = self.locale if locale is None else locale
         return await Video.aget(self.id, actual_locale, client=client)
