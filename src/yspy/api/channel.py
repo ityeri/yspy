@@ -8,7 +8,7 @@ from httpx import AsyncClient
 from yspy.data_parsing import ImageComponent
 from yspy.data_parsing.channel import ChannelPage, ChannelExternalLinkComponent, ChannelDetailPage
 from yspy.request import ChannelRequest
-from yspy.utils import Locale, ENGLISH_LOCALE, Unspecified
+from yspy.utils import Locale, ENGLISH_LOCALE, Unspecified, Language
 from .exceptions import ChannelIdentifierException
 from .utils import parse_subscriber_count, parse_view_count, parse_joined_date, parse_video_count
 
@@ -66,8 +66,12 @@ class Channel:
 
         response = await ChannelRequest.aget_page(channel_id, locale, client=client)
         channel_page = ChannelPage.from_json(response.json())
-        response = await ChannelRequest.aget_page(channel_id, ENGLISH_LOCALE, client=client)
-        channel_page_eng = ChannelPage.from_json(response.json())
+        if locale is None or locale.language != Language.ENGLISH:
+            # english page is required for parsing abbreviated counts (K/M/B)
+            response = await ChannelRequest.aget_page(channel_id, ENGLISH_LOCALE, client=client)
+            channel_page_eng = ChannelPage.from_json(response.json())
+        else:
+            channel_page_eng = channel_page
 
         return Channel.from_channel_page(channel_page, channel_page_eng, locale)
 
@@ -98,8 +102,12 @@ class ChannelDetail:
     ) -> ChannelDetail:
         response = await ChannelRequest.aget_detail_page(continuation_token, locale, client=client)
         detail_page = ChannelDetailPage.from_json(response.json())
-        response = await ChannelRequest.aget_detail_page(continuation_token, ENGLISH_LOCALE, client=client)
-        detail_page_eng = ChannelDetailPage.from_json(response.json())
+        if locale is None or locale.language != Language.ENGLISH:
+            # english page is required for parsing abbreviated counts and joined date
+            response = await ChannelRequest.aget_detail_page(continuation_token, ENGLISH_LOCALE, client=client)
+            detail_page_eng = ChannelDetailPage.from_json(response.json())
+        else:
+            detail_page_eng = detail_page
 
         return ChannelDetail(
             id=detail_page.id,

@@ -8,7 +8,7 @@ from yarl import URL
 from yspy.data_parsing import ImageComponent
 from yspy.data_parsing.playlist import PlaylistPage, PlaylistVideoComponent
 from yspy.request import PlaylistRequest, ChannelRequest
-from yspy.utils import Locale, ENGLISH_LOCALE, Unspecified
+from yspy.utils import Locale, ENGLISH_LOCALE, Unspecified, Language
 from .channel import Channel
 from .exceptions import PlaylistIdentifierException, ChannelIdentifierException
 from .utils import parse_view_count, parse_length_seconds
@@ -82,8 +82,12 @@ class Playlist:
 
         response = await PlaylistRequest.aget_first_page(playlist_id, locale, client=client)
         playlist_page = PlaylistPage.from_json(response.json())
-        response_eng = await PlaylistRequest.aget_first_page(playlist_id, ENGLISH_LOCALE, client=client)
-        playlist_page_eng = PlaylistPage.from_json(response_eng.json())
+        if locale is None or locale.language != Language.ENGLISH:
+            # english page is required for parsing abbreviated view counts
+            response_eng = await PlaylistRequest.aget_first_page(playlist_id, ENGLISH_LOCALE, client=client)
+            playlist_page_eng = PlaylistPage.from_json(response_eng.json())
+        else:
+            playlist_page_eng = playlist_page
 
         return Playlist.from_page(playlist_page, playlist_page_eng, 0, 0, locale)
 
@@ -133,10 +137,14 @@ class Playlist:
 
         response = await PlaylistRequest.aget_continuation_page(self.continuation_token, actual_locale, client=client)
         next_page = PlaylistPage.from_json(response.json())
-        response_eng = await PlaylistRequest.aget_continuation_page(
-            self.continuation_token, ENGLISH_LOCALE, client=client
-        )
-        next_page_eng = PlaylistPage.from_json(response_eng.json())
+        if actual_locale is None or actual_locale.language != Language.ENGLISH:
+            # english page is required for parsing abbreviated view counts
+            response_eng = await PlaylistRequest.aget_continuation_page(
+                self.continuation_token, ENGLISH_LOCALE, client=client
+            )
+            next_page_eng = PlaylistPage.from_json(response_eng.json())
+        else:
+            next_page_eng = next_page
 
         return Playlist.from_page(
             next_page, next_page_eng, self.page_index + 1, self.index_offset + len(self.videos), actual_locale
