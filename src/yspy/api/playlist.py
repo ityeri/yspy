@@ -7,9 +7,10 @@ from yarl import URL
 
 from yspy.data_parsing import ImageComponent
 from yspy.data_parsing.playlist import PlaylistPage, PlaylistVideoComponent
-from yspy.request import PlaylistRequest
+from yspy.request import PlaylistRequest, ChannelRequest
 from yspy.utils import Locale, ENGLISH_LOCALE
-from .exceptions import PlaylistIdentifierException
+from .channel import Channel
+from .exceptions import PlaylistIdentifierException, ChannelIdentifierException
 from .utils import parse_view_count, parse_length_seconds
 from .video import Video
 
@@ -79,6 +80,41 @@ class Playlist:
         playlist_page_eng = PlaylistPage.from_json(response_eng.json())
 
         return Playlist.from_page(playlist_page, playlist_page_eng, 0, 0)
+
+    @staticmethod
+    async def from_channel(
+            channel: Channel | None = None,
+            channel_id_or_url: str | None = None,
+            locale: Locale | None = None,
+            client: AsyncClient | None = None
+    ) -> Playlist:
+        # uploads playlist of the given channel — 'UU' + channel_id[2:]
+        if channel is not None and channel_id_or_url is not None:
+            raise ValueError('Only one of the parameters, channel or channel_id_or_url, should be passed')
+        if channel is not None:
+            channel_id = channel.id
+        elif channel_id_or_url is not None:
+            if channel_id_or_url.startswith('UC'):
+                channel_id = channel_id_or_url
+            else:
+                resolved_channel_id = await ChannelRequest.aget_channel_id(channel_id_or_url, client=client)
+                if resolved_channel_id is None:
+                    raise ChannelIdentifierException(
+                        'The given channel_id_or_url is neither a channel ID nor a channel URL'
+                    )
+                channel_id = resolved_channel_id
+        else:
+            raise ValueError('Either channel or channel_id_or_url should be passed')
+
+        if not channel_id.startswith('UC'):
+            raise ChannelIdentifierException('The given channel data is not a channel')
+
+        return await Playlist.aget('UU' + channel_id[2:], locale, client=client)
+
+    async def aget_channel(
+            self, locale: Locale | None = None, *, client: AsyncClient | None = None
+    ) -> Channel:
+        return await Channel.aget(self.owner_id, locale, client=client)
 
     async def anext(self, locale: Locale | None = None, *, client: AsyncClient | None = None) -> Playlist | None:
         if self.continuation_token is None:
