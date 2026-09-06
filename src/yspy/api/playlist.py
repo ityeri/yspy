@@ -11,6 +11,7 @@ from yspy.request import PlaylistRequest
 from yspy.utils import Locale, ENGLISH_LOCALE
 from .exceptions import PlaylistIdentifierException
 from .utils import parse_view_count, parse_length_seconds
+from .video import Video
 
 
 @dataclass
@@ -116,3 +117,6 @@ class PlaylistVideo:
             owner_text=component.owner_text,
             length_seconds=parse_length_seconds(component.length_text)
         )
+
+    async def aget_video(self, *, client: AsyncClient | None = None) -> Video:
+        return await Video.aget(self.id, client=client)
