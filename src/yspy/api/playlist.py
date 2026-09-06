@@ -67,7 +67,7 @@ class Playlist:
             except KeyError:
                 raise PlaylistIdentifierException(
                     'The given playlist_id_or_url is neither a URL nor a playlist ID'
-                    ' (Did you missed a PL or UU prefix or ID?)'
+                    ' (Did you missed a "PL" or "UU" prefix for ID?)'
                 )
             if not playlist_id.startswith('VL'):
                 playlist_id = 'VL' + playlist_id
