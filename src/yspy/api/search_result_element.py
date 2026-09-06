@@ -8,7 +8,7 @@ from httpx import AsyncClient, Client
 
 from yspy.data_parsing import ImageComponent
 from yspy.data_parsing.search_result import VideoComponent, ChannelComponent, SearchResultComponent
-from yspy.utils import Locale, Unspecified
+from yspy.utils import Locale, Unspecified, NONE_LOCALE
 from .channel import Channel
 from .utils import parse_subscriber_count
 from .video import Video
@@ -20,10 +20,10 @@ class SearchResultType(Enum):
 
 
 class SearchResultElement(ABC):
-    def __init__(self, result_type: SearchResultType, locale: Locale | None = None):
+    def __init__(self, result_type: SearchResultType, locale: Locale = NONE_LOCALE):
         self.result_type: SearchResultType = result_type
         # Locale value is necessary for locale persistence in methods like .get_video
-        self.locale: Locale | None = locale
+        self.locale: Locale = locale
 
 
 @dataclass
@@ -37,10 +37,10 @@ class VideoResultElement(SearchResultElement):
     channel_id: str
     component_data: VideoComponent
     result_type: SearchResultType = SearchResultType.VIDEO
-    locale: Locale | None = None
+    locale: Locale = NONE_LOCALE
 
     @staticmethod
-    def from_video_component(component: VideoComponent, locale: Locale | None = None) -> VideoResultElement:
+    def from_video_component(component: VideoComponent, locale: Locale = NONE_LOCALE) -> VideoResultElement:
         return VideoResultElement(
             id=component.id,
             title=component.title,
@@ -53,21 +53,21 @@ class VideoResultElement(SearchResultElement):
             locale=locale
         )
 
-    def get_video(self, locale: Locale | None | Unspecified = Unspecified(), *,
+    def get_video(self, locale: Locale | Unspecified = Unspecified(), *,
                   client: Client | None = None):
         return Video.get(self.id, locale if locale != Unspecified() else self.locale, client=client)
 
-    async def aget_video(self, locale: Locale | None | Unspecified = Unspecified(), *,
+    async def aget_video(self, locale: Locale | Unspecified = Unspecified(), *,
                          client: AsyncClient | None = None):
         return await Video.aget(self.id, locale if locale != Unspecified() else self.locale, client=client)
 
     def get_channel(
-            self, locale: Locale | None | Unspecified = Unspecified(), *, client: Client | None = None
+            self, locale: Locale | Unspecified = Unspecified(), *, client: Client | None = None
     ) -> Channel:
         return Channel.get(self.channel_id, locale if locale != Unspecified() else self.locale, client=client)
 
     async def aget_channel(
-            self, locale: Locale | None | Unspecified = Unspecified(), *, client: AsyncClient | None = None
+            self, locale: Locale | Unspecified = Unspecified(), *, client: AsyncClient | None = None
     ) -> Channel:
         return await Channel.aget(self.channel_id, locale if locale != Unspecified() else self.locale, client=client)
 
@@ -88,13 +88,13 @@ class ChannelResultElement(SearchResultElement):
     approx_subscriber_count: int | None
     component_data: ChannelComponent
     result_type: SearchResultType = SearchResultType.VIDEO
-    locale: Locale | None = None
+    locale: Locale = NONE_LOCALE
 
     @staticmethod
     def from_channel_component(
             component: ChannelComponent,
             eng_component: ChannelComponent,
-            locale: Locale | None = None,
+            locale: Locale = NONE_LOCALE,
     ) -> ChannelResultElement:
         return ChannelResultElement(
             id=component.id,
@@ -108,12 +108,12 @@ class ChannelResultElement(SearchResultElement):
         )
 
     def get_channel(
-            self, locale: Locale | None | Unspecified = Unspecified(), *, client: Client | None = None
+            self, locale: Locale | Unspecified = Unspecified(), *, client: Client | None = None
     ) -> Channel:
         return Channel.get(self.id, locale if locale != Unspecified() else self.locale, client=client)
 
     async def aget_channel(
-            self, locale: Locale | None | Unspecified = Unspecified(), *, client: AsyncClient | None = None
+            self, locale: Locale | Unspecified = Unspecified(), *, client: AsyncClient | None = None
     ) -> Channel:
         return await Channel.aget(self.id, locale if locale != Unspecified() else self.locale, client=client)
 
@@ -127,7 +127,7 @@ class ChannelResultElement(SearchResultElement):
 def from_search_result_component(
         component: SearchResultComponent,
         eng_component: SearchResultComponent,
-        locale: Locale | None = None
+        locale: Locale = NONE_LOCALE
 ) -> SearchResultElement:
     if isinstance(component, VideoComponent):
         return VideoResultElement.from_video_component(component, locale)

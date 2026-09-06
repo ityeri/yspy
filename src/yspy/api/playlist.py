@@ -8,7 +8,7 @@ from yarl import URL
 from yspy.data_parsing import ImageComponent
 from yspy.data_parsing.playlist import PlaylistPage, PlaylistVideoComponent
 from yspy.request import PlaylistRequest, ChannelRequest
-from yspy.utils import Locale, ENGLISH_LOCALE, Unspecified, Language
+from yspy.utils import Locale, ENGLISH_LOCALE, Unspecified, Language, NONE_LOCALE
 from .channel import Channel
 from .exceptions import PlaylistIdentifierException, ChannelIdentifierException
 from .utils import parse_view_count, parse_length_seconds
@@ -30,12 +30,12 @@ class Playlist:
     page_index: int
     index_offset: int
     page_data: PlaylistPage
-    locale: Locale | None = None
+    locale: Locale = NONE_LOCALE
 
     @staticmethod
     def get(
             playlist_id_or_url: str,
-            locale: Locale | None = None,
+            locale: Locale = NONE_LOCALE,
             *,
             client: Client | None = None
     ) -> Playlist:
@@ -43,7 +43,7 @@ class Playlist:
 
         response = PlaylistRequest.get_first_page(playlist_id, locale, client=client)
         playlist_page = PlaylistPage.from_json(response.json())
-        if locale is None or locale.language != Language.ENGLISH:
+        if locale.language != Language.ENGLISH:
             # english page is required for parsing abbreviated view counts
             eng_response = PlaylistRequest.get_first_page(playlist_id, ENGLISH_LOCALE, client=client)
             eng_playlist_page = PlaylistPage.from_json(eng_response.json())
@@ -55,7 +55,7 @@ class Playlist:
     @staticmethod
     async def aget(
             playlist_id_or_url: str,
-            locale: Locale | None = None,
+            locale: Locale = NONE_LOCALE,
             *,
             client: AsyncClient | None = None
     ) -> Playlist:
@@ -63,7 +63,7 @@ class Playlist:
 
         response = await PlaylistRequest.aget_first_page(playlist_id, locale, client=client)
         playlist_page = PlaylistPage.from_json(response.json())
-        if locale is None or locale.language != Language.ENGLISH:
+        if locale.language != Language.ENGLISH:
             # english page is required for parsing abbreviated view counts
             eng_response = await PlaylistRequest.aget_first_page(playlist_id, ENGLISH_LOCALE, client=client)
             eng_playlist_page = PlaylistPage.from_json(eng_response.json())
@@ -78,7 +78,7 @@ class Playlist:
             eng_playlist_page: PlaylistPage,
             page_index: int,
             index_offset: int,
-            locale: Locale | None = None
+            locale: Locale = NONE_LOCALE
     ) -> Playlist:
         return Playlist(
             id=playlist_page.id,
@@ -101,7 +101,7 @@ class Playlist:
     async def from_channel(
             channel: Channel | None = None,
             channel_id_or_url: str | None = None,
-            locale: Locale | None = None,
+            locale: Locale = NONE_LOCALE,
             *,
             client: AsyncClient | None = None
     ) -> Playlist:
@@ -132,19 +132,19 @@ class Playlist:
         return await Playlist.aget('UU' + channel_id[2:], locale, client=client)
 
     def get_channel(
-            self, locale: Locale | None | Unspecified = Unspecified(), *, client: Client | None = None
+            self, locale: Locale | Unspecified = Unspecified(), *, client: Client | None = None
     ) -> Channel:
         actual_locale = locale if locale != Unspecified() else self.locale
         return Channel.get(self.owner_id, actual_locale, client=client)
 
     async def aget_channel(
-            self, locale: Locale | None | Unspecified = Unspecified(), *, client: AsyncClient | None = None
+            self, locale: Locale | Unspecified = Unspecified(), *, client: AsyncClient | None = None
     ) -> Channel:
         actual_locale = locale if locale != Unspecified() else self.locale
         return await Channel.aget(self.owner_id, actual_locale, client=client)
 
     def next(
-            self, locale: Locale | None | Unspecified = Unspecified(), *, client: Client | None = None
+            self, locale: Locale | Unspecified = Unspecified(), *, client: Client | None = None
     ) -> Playlist | None:
         if self.continuation_token is None:
             return None
@@ -153,7 +153,7 @@ class Playlist:
 
         response = PlaylistRequest.get_continuation_page(self.continuation_token, actual_locale, client=client)
         next_page = PlaylistPage.from_json(response.json())
-        if actual_locale is None or actual_locale.language != Language.ENGLISH:
+        if actual_locale.language != Language.ENGLISH:
             # english page is required for parsing abbreviated view counts
             eng_response = PlaylistRequest.get_continuation_page(
                 self.continuation_token, ENGLISH_LOCALE, client=client
@@ -168,7 +168,7 @@ class Playlist:
 
 
     async def anext(
-            self, locale: Locale | None | Unspecified = Unspecified(), *, client: AsyncClient | None = None
+            self, locale: Locale | Unspecified = Unspecified(), *, client: AsyncClient | None = None
     ) -> Playlist | None:
         if self.continuation_token is None:
             return None
@@ -177,7 +177,7 @@ class Playlist:
 
         response = await PlaylistRequest.aget_continuation_page(self.continuation_token, actual_locale, client=client)
         next_page = PlaylistPage.from_json(response.json())
-        if actual_locale is None or actual_locale.language != Language.ENGLISH:
+        if actual_locale.language != Language.ENGLISH:
             # english page is required for parsing abbreviated view counts
             eng_response = await PlaylistRequest.aget_continuation_page(
                 self.continuation_token, ENGLISH_LOCALE, client=client
@@ -218,10 +218,10 @@ class PlaylistVideo:
     index_offset: int
     owner_text: str
     length_seconds: int
-    locale: Locale | None = None
+    locale: Locale = NONE_LOCALE
 
     @staticmethod
-    def from_component(component: PlaylistVideoComponent, index_offset: int, locale: Locale | None = None) -> PlaylistVideo:
+    def from_component(component: PlaylistVideoComponent, index_offset: int, locale: Locale = NONE_LOCALE) -> PlaylistVideo:
         return PlaylistVideo(
             id=component.id,
             title=component.title,
@@ -235,13 +235,13 @@ class PlaylistVideo:
         )
 
     def get_video(
-            self, locale: Locale | None | Unspecified = Unspecified(), *, client: Client | None = None
+            self, locale: Locale | Unspecified = Unspecified(), *, client: Client | None = None
     ) -> Video:
         actual_locale = locale if locale != Unspecified() else self.locale
         return Video.get(self.id, actual_locale, client=client)
 
     async def aget_video(
-            self, locale: Locale | None | Unspecified = Unspecified(), *, client: AsyncClient | None = None
+            self, locale: Locale | Unspecified = Unspecified(), *, client: AsyncClient | None = None
     ) -> Video:
         actual_locale = locale if locale != Unspecified() else self.locale
         return await Video.aget(self.id, actual_locale, client=client)

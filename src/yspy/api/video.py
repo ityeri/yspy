@@ -9,7 +9,7 @@ from yarl import URL
 from yspy.data_parsing import ImageComponent
 from yspy.data_parsing.video import VideoPage
 from yspy.request import VideoRequest
-from yspy.utils import Locale, Unspecified
+from yspy.utils import Locale, Unspecified, NONE_LOCALE
 from .channel import Channel
 from .comments import Comments
 from .exceptions import VideoIdentifierException
@@ -32,10 +32,10 @@ class Video:
     is_family_safe: bool
     category: str
     page_data: VideoPage
-    locale: Locale | None = None
+    locale: Locale = NONE_LOCALE
 
     @staticmethod
-    def get(video_id_or_url: str, locale: Locale | None = None, client: Client | None = None) -> Video:
+    def get(video_id_or_url: str, locale: Locale = NONE_LOCALE, client: Client | None = None) -> Video:
         video_id = Video._resolve_video_id(video_id_or_url)
 
         response = VideoRequest.get_page(video_id, locale, client=client)
@@ -44,7 +44,7 @@ class Video:
         return Video.from_video_page(video_page, locale)
 
     @staticmethod
-    async def aget(video_id_or_url: str, locale: Locale | None = None, client: AsyncClient | None = None) -> Video:
+    async def aget(video_id_or_url: str, locale: Locale = NONE_LOCALE, client: AsyncClient | None = None) -> Video:
         video_id = Video._resolve_video_id(video_id_or_url)
 
         response = await VideoRequest.aget_page(video_id, locale, client=client)
@@ -53,7 +53,7 @@ class Video:
         return Video.from_video_page(video_page, locale)
 
     @staticmethod
-    def from_video_page(video_page: VideoPage, locale: Locale | None = None) -> Video:
+    def from_video_page(video_page: VideoPage, locale: Locale = NONE_LOCALE) -> Video:
         return Video(
             **{f.name: getattr(video_page, f.name) for f in fields(VideoPage)},
             page_data=video_page,
@@ -61,13 +61,13 @@ class Video:
         )
 
     def get_channel(
-            self, locale: Locale | None | Unspecified = Unspecified(), *, client: Client | None = None
+            self, locale: Locale | Unspecified = Unspecified(), *, client: Client | None = None
     ) -> Channel:
         actual_locale = locale if locale != Unspecified() else self.locale
         return Channel.get(self.channel_id, actual_locale, client=client)
 
     async def aget_channel(
-            self, locale: Locale | None | Unspecified = Unspecified(), *, client: AsyncClient | None = None
+            self, locale: Locale | Unspecified = Unspecified(), *, client: AsyncClient | None = None
     ) -> Channel:
         actual_locale = locale if locale != Unspecified() else self.locale
         return await Channel.aget(self.channel_id, actual_locale, client=client)

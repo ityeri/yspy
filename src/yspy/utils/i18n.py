@@ -44,7 +44,7 @@ class Region(str, Enum):
     HONG_KONG = "HK"
 
 
-@dataclass
+@dataclass(frozen=True)
 class Locale:
     language: Language | None = None
     region: Region | None = None
