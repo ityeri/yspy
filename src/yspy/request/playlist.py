@@ -7,11 +7,12 @@ from .utils import optional_async_client, optional_sync_client, RequestData
 
 class PlaylistRequest:
     @staticmethod
-    def build_first_page_request(playlist_id: str, locale: Locale | None = None) -> RequestData:
+    def build_first_page_request(browse_id: str, locale: Locale | None = None) -> RequestData:
+        # A playlist page browse id is 'VL' + playlist_id — callers build it beforehand
         return RequestData(
             method='POST',
             endpoint=BROWSE_API_URL,
-            payload_params={'browseId': 'VL' + playlist_id if not playlist_id.startswith('VL') else playlist_id},
+            payload_params={'browseId': browse_id},
             locale=locale,
             headers=BASE_HEADERS
         )
@@ -27,16 +28,16 @@ class PlaylistRequest:
         )
 
     @staticmethod
-    def get_first_page(playlist_id: str, locale: Locale | None = None, *, client: Client | None = None) -> Response:
+    def get_first_page(browse_id: str, locale: Locale | None = None, *, client: Client | None = None) -> Response:
         with optional_sync_client(client) as client:
-            return PlaylistRequest.build_first_page_request(playlist_id, locale).send_sync_request(client)
+            return PlaylistRequest.build_first_page_request(browse_id, locale).send_sync_request(client)
 
     @staticmethod
     async def aget_first_page(
-            playlist_id: str, locale: Locale | None = None, *, client: AsyncClient | None = None
+            browse_id: str, locale: Locale | None = None, *, client: AsyncClient | None = None
     ) -> Response:
         async with optional_async_client(client) as client:
-            return await PlaylistRequest.build_first_page_request(playlist_id, locale).send_async_request(client)
+            return await PlaylistRequest.build_first_page_request(browse_id, locale).send_async_request(client)
 
     @staticmethod
     def get_continuation_page(
