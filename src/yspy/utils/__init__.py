@@ -51,8 +51,11 @@ class SearchMode(str, Enum):
     LIVESTREAM = 'EgJAAQ%3D%3D' # TODO at data_parsing
 
 class Unspecified:
-    def __new__(cls, *args, **kwargs):
-        raise TypeError(f'cannot instantiate {cls.__name__}')
+    def __eq__(self, other):
+        if isinstance(other, Unspecified):
+            return True
+        else:
+            return False
     def __init_subclass__(cls, **kwargs):
         raise TypeError(f'cannot subclass {cls.__name__}')
 

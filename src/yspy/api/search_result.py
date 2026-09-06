@@ -51,8 +51,8 @@ class VideoResult(SearchResult):
             locale=locale
         )
 
-    async def get_video(self, locale: Locale | None | Unspecified = Unspecified, *, client: AsyncClient | None = None):
-        return await Video.aget(self.id, locale if locale != Unspecified else self.locale, client=client)
+    async def get_video(self, locale: Locale | None | Unspecified = Unspecified(), *, client: AsyncClient | None = None):
+        return await Video.aget(self.id, locale if locale != Unspecified() else self.locale, client=client)
 
     # TODO In raw youtube video search result component, you can extract a channel id
     # Add a channel_id field at VideoComponent (SearchResultComponent)
@@ -102,9 +102,9 @@ class ChannelResult(SearchResult):
         )
 
     async def aget_channel(
-            self, locale: Locale | None | Unspecified = Unspecified, *, client: AsyncClient | None = None
+            self, locale: Locale | None | Unspecified = Unspecified(), *, client: AsyncClient | None = None
     ) -> Channel:
-        return await Channel.aget(self.id, locale if locale != Unspecified else self.locale, client=client)
+        return await Channel.aget(self.id, locale if locale != Unspecified() else self.locale, client=client)
 
     def get_highest_res_thumbnail(self) -> ImageComponent | None:
         try:
