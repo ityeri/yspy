@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from httpx import AsyncClient
+from httpx import AsyncClient, Client
 
 from yspy.data_parsing.search_result import SearchResultPage
 from yspy.request import SearchResultRequest
@@ -32,6 +32,26 @@ class Search:
             eng_search_result_page = SearchResultPage.from_json(eng_response.json())
         elif locale.language != Language.ENGLISH:
             eng_response = await SearchResultRequest.aget_first_page(query, search_mode, ENGLISH_LOCALE, client=client)
+            eng_search_result_page = SearchResultPage.from_json(eng_response.json())
+        else:
+            eng_search_result_page = search_result_page
+
+        return Search.from_search_result_page(search_result_page, eng_search_result_page, search_mode, locale)
+
+    @staticmethod
+    def search(
+            query: str, search_mode: SearchMode | None = None, locale: Locale | None = None,
+            *,
+            client: Client | None = None
+    ) -> Search:
+        response = SearchResultRequest.get_first_page(query, search_mode, locale, client=client)
+        search_result_page = SearchResultPage.from_json(response.json())
+
+        if locale is None:
+            eng_response = SearchResultRequest.get_first_page(query, search_mode, ENGLISH_LOCALE, client=client)
+            eng_search_result_page = SearchResultPage.from_json(eng_response.json())
+        elif locale.language != Language.ENGLISH:
+            eng_response = SearchResultRequest.get_first_page(query, search_mode, ENGLISH_LOCALE, client=client)
             eng_search_result_page = SearchResultPage.from_json(eng_response.json())
         else:
             eng_search_result_page = search_result_page
@@ -103,7 +123,39 @@ class Search:
             eng_search_result_page = SearchResultPage.from_json(eng_response.json())
         elif actual_locale.language != Language.ENGLISH:
             eng_response = await SearchResultRequest.aget_continuation_page(
-                self.continuation_token, actual_search_mode, actual_locale, client=client
+                self.continuation_token, actual_search_mode, ENGLISH_LOCALE, client=client
+            )
+            eng_search_result_page = SearchResultPage.from_json(eng_response.json())
+        else:
+            eng_search_result_page = search_result_page
+
+        return Search.from_search_result_page(
+            search_result_page, eng_search_result_page, actual_search_mode, actual_locale
+        )
+
+    def more(
+            self,
+            search_mode: SearchMode | None | Unspecified = Unspecified(),
+            locale: Locale | None | Unspecified = Unspecified(),
+            *,
+            client: Client | None = None
+    ) -> Search:
+        actual_search_mode: SearchMode | None = search_mode if search_mode != Unspecified() else self.search_mode
+        actual_locale: Locale | None = locale if locale != Unspecified() else self.locale
+
+        response = SearchResultRequest.get_continuation_page(
+            self.continuation_token, actual_search_mode, actual_locale, client=client
+        )
+        search_result_page = SearchResultPage.from_json(response.json())
+
+        if actual_locale is None:
+            eng_response = SearchResultRequest.get_continuation_page(
+                self.continuation_token, actual_search_mode, ENGLISH_LOCALE, client=client
+            )
+            eng_search_result_page = SearchResultPage.from_json(eng_response.json())
+        elif actual_locale.language != Language.ENGLISH:
+            eng_response = SearchResultRequest.get_continuation_page(
+                self.continuation_token, actual_search_mode, ENGLISH_LOCALE, client=client
             )
             eng_search_result_page = SearchResultPage.from_json(eng_response.json())
         else:
