@@ -16,9 +16,9 @@ class SuggestionRequest:
         }
         if locale is not None:
             if locale.language is not None:
-                query_params['hl'] = locale.language
+                query_params['hl'] = locale.language.value
             if locale.region is not None:
-                query_params['gl'] = locale.region
+                query_params['gl'] = locale.region.value
 
         return RequestData(
             method='GET',
