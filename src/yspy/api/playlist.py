@@ -21,6 +21,7 @@ class Playlist:
     thumbnails: list[ImageComponent]
     owner_text: str
     owner_url: str
+    owner_id: str
     view_count: int
     videos: list[PlaylistVideo]
     continuation_token: str | None
@@ -33,10 +34,11 @@ class Playlist:
         return Playlist(
             id=playlist_page.id,
             title=playlist_page.title,
-            url=playlist_page.title,
+            url=playlist_page.url,
             thumbnails=playlist_page.thumbnails,
             owner_text=playlist_page.owner_text,
             owner_url=playlist_page.owner_url,
+            owner_id=playlist_page.owner_id,
             view_count=parse_view_count(playlist_page_eng.view_count_text),
             videos=[PlaylistVideo.from_component(video, 0) for video in playlist_page.videos],
             continuation_token=playlist_page.continuation_token,
@@ -59,12 +61,14 @@ class Playlist:
             playlist_id = playlist_id_or_url if playlist_id_or_url.startswith('VL') else 'VL' + playlist_id_or_url
         else:
             try:
-                playlist_id = URL(playlist_id_or_url).query('list')
+                playlist_id = URL(playlist_id_or_url).query['list']
             except KeyError:
                 raise PlaylistIdentifierException(
                     'The given playlist_id_or_url is neither a URL nor a playlist ID'
                     ' (Did you missed a PL or UU prefix or ID?)'
                 )
+            if not playlist_id.startswith('VL'):
+                playlist_id = 'VL' + playlist_id
 
         response = await PlaylistRequest.aget_first_page(playlist_id, locale, client=client)
         playlist_page = PlaylistPage.from_json(response.json())
@@ -102,7 +106,7 @@ class PlaylistVideo:
     def from_component(component: PlaylistVideoComponent, index_offset: int) -> PlaylistVideo:
         return PlaylistVideo(
             id=component.id,
-            title=component.id,
+            title=component.title,
             url=component.url,
             thumbnails=component.thumbnails,
             absolute_index=index_offset + component.index,
