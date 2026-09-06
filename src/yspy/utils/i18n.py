@@ -22,6 +22,7 @@ class Language(str, Enum):
     HINDI = "hi"
     ARABIC = "ar"
 
+
 class Region(str, Enum):
     SOUTH_KOREA = "KR"
     UNITED_STATES = "US"
@@ -42,9 +43,12 @@ class Region(str, Enum):
     TAIWAN = "TW"
     HONG_KONG = "HK"
 
+
 @dataclass
 class Locale:
     language: Language | None = None
     region: Region | None = None
 
-ENGLISH_LOCALE = Locale(language=Language.ENGLISH)
+
+NONE_LOCALE: Locale = Locale(None, None)
+ENGLISH_LOCALE: Locale = Locale(language=Language.ENGLISH)

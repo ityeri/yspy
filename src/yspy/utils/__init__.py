@@ -2,7 +2,7 @@ from enum import Enum
 
 from yarl import URL
 
-from .i18n import Language, Region, Locale, ENGLISH_LOCALE
+from .i18n import Language, Region, Locale, ENGLISH_LOCALE, NONE_LOCALE
 
 YOUTUBE_BASE_URL = URL('https://youtube.com')
 
@@ -21,6 +21,7 @@ def get_by_path(data: str | dict | list, *path: str | int) -> str | dict | list:
     else:
         return get_by_path(data[path_parts[0]], *path_parts[1:])
 
+
 def get_by_path_or(
         data: str | dict | list | None,
         *path: str | int,
@@ -36,6 +37,7 @@ def get_by_path_or(
     except IndexError:
         return default
 
+
 def to_youtube_url(url: str | URL) -> str:
     url = URL(url)
 
@@ -44,11 +46,13 @@ def to_youtube_url(url: str | URL) -> str:
     else:
         return str(url)
 
+
 class SearchMode(str, Enum):
     VIDEO = 'EgIQAQ%3D%3D'
     CHANNEL = 'EgIQAg%3D%3D'
-    PLAYLIST = 'EgIQAw%3D%3D' # TODO at data_parsing
-    LIVESTREAM = 'EgJAAQ%3D%3D' # TODO at data_parsing
+    PLAYLIST = 'EgIQAw%3D%3D'  # TODO at data_parsing
+    LIVESTREAM = 'EgJAAQ%3D%3D'  # TODO at data_parsing
+
 
 class Unspecified:
     def __eq__(self, other):
@@ -56,6 +60,7 @@ class Unspecified:
             return True
         else:
             return False
+
     def __init_subclass__(cls, **kwargs):
         raise TypeError(f'cannot subclass {cls.__name__}')
 
@@ -68,6 +73,7 @@ __all__ = [
     'Language',
     'Region',
     'Locale',
+    'NONE_LOCALE',
     'ENGLISH_LOCALE',
 
     'Unspecified',
