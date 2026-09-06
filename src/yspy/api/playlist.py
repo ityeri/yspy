@@ -73,32 +73,41 @@ class Playlist:
         return Playlist.from_page(playlist_page, eng_playlist_page, 0, 0, locale)
 
     @staticmethod
-    def from_page(
-            playlist_page: PlaylistPage,
-            eng_playlist_page: PlaylistPage,
-            page_index: int,
-            index_offset: int,
-            locale: Locale = NONE_LOCALE
+    def get_from_channel(
+            channel: Channel | None = None,
+            channel_id_or_url: str | None = None,
+            locale: Locale = NONE_LOCALE,
+            *,
+            client: Client | None = None
     ) -> Playlist:
-        return Playlist(
-            id=playlist_page.id,
-            title=playlist_page.title,
-            url=playlist_page.url,
-            thumbnails=playlist_page.thumbnails,
-            owner_text=playlist_page.owner_text,
-            owner_url=playlist_page.owner_url,
-            owner_id=playlist_page.owner_id,
-            view_count=parse_view_count(eng_playlist_page.view_count_text),
-            videos=[PlaylistVideo.from_component(video, index_offset, locale) for video in playlist_page.videos],
-            continuation_token=playlist_page.continuation_token,
-            page_index=page_index,
-            index_offset=index_offset,
-            page_data=playlist_page,
-            locale=locale,
-        )
+        # uploads playlist of the given channel — 'UU' + channel_id[2:]
+        if channel is not None and channel_id_or_url is not None:
+            raise ValueError('Only one of the parameters, channel or channel_id_or_url, should be passed')
+
+        if channel is not None:
+            channel_id = channel.id
+
+        elif channel_id_or_url is not None:
+            if channel_id_or_url.startswith('UC'):
+                channel_id = channel_id_or_url
+            else:
+                resolved_channel_id = ChannelRequest.get_channel_id(channel_id_or_url, client=client)
+                if resolved_channel_id is None:
+                    raise ChannelIdentifierException(
+                        'The given channel_id_or_url is neither a channel ID nor a channel URL'
+                    )
+                channel_id = resolved_channel_id
+
+        else:
+            raise ValueError('Either channel or channel_id_or_url should be passed')
+
+        if not channel_id.startswith('UC'):
+            raise ChannelIdentifierException('The given channel data is not a channel')
+
+        return Playlist.get('UU' + channel_id[2:], locale, client=client)
 
     @staticmethod
-    async def from_channel(
+    async def aget_from_channel(
             channel: Channel | None = None,
             channel_id_or_url: str | None = None,
             locale: Locale = NONE_LOCALE,
@@ -130,6 +139,31 @@ class Playlist:
             raise ChannelIdentifierException('The given channel data is not a channel')
 
         return await Playlist.aget('UU' + channel_id[2:], locale, client=client)
+
+    @staticmethod
+    def from_page(
+            playlist_page: PlaylistPage,
+            eng_playlist_page: PlaylistPage,
+            page_index: int,
+            index_offset: int,
+            locale: Locale = NONE_LOCALE
+    ) -> Playlist:
+        return Playlist(
+            id=playlist_page.id,
+            title=playlist_page.title,
+            url=playlist_page.url,
+            thumbnails=playlist_page.thumbnails,
+            owner_text=playlist_page.owner_text,
+            owner_url=playlist_page.owner_url,
+            owner_id=playlist_page.owner_id,
+            view_count=parse_view_count(eng_playlist_page.view_count_text),
+            videos=[PlaylistVideo.from_component(video, index_offset, locale) for video in playlist_page.videos],
+            continuation_token=playlist_page.continuation_token,
+            page_index=page_index,
+            index_offset=index_offset,
+            page_data=playlist_page,
+            locale=locale,
+        )
 
     def get_channel(
             self, locale: Locale | None = None, *, client: Client | None = None

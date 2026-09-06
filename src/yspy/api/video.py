@@ -35,7 +35,7 @@ class Video:
     locale: Locale = NONE_LOCALE
 
     @staticmethod
-    def get(video_id_or_url: str, locale: Locale = NONE_LOCALE, client: Client | None = None) -> Video:
+    def get(video_id_or_url: str, locale: Locale = NONE_LOCALE, *, client: Client | None = None) -> Video:
         video_id = Video._resolve_video_id(video_id_or_url)
 
         response = VideoRequest.get_page(video_id, locale, client=client)
@@ -44,7 +44,7 @@ class Video:
         return Video.from_video_page(video_page, locale)
 
     @staticmethod
-    async def aget(video_id_or_url: str, locale: Locale = NONE_LOCALE, client: AsyncClient | None = None) -> Video:
+    async def aget(video_id_or_url: str, locale: Locale = NONE_LOCALE, *, client: AsyncClient | None = None) -> Video:
         video_id = Video._resolve_video_id(video_id_or_url)
 
         response = await VideoRequest.aget_page(video_id, locale, client=client)

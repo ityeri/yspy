@@ -19,11 +19,10 @@ class SearchResultType(Enum):
     CHANNEL = auto()
 
 
+@dataclass(kw_only=True)
 class SearchResultElement(ABC):
-    def __init__(self, result_type: SearchResultType, locale: Locale = NONE_LOCALE):
-        self.result_type: SearchResultType = result_type
-        # Locale value is necessary for locale persistence in methods like .get_video
-        self.locale: Locale = locale
+    result_type: SearchResultType = SearchResultType.VIDEO
+    locale: Locale = NONE_LOCALE
 
 
 @dataclass
@@ -36,8 +35,6 @@ class VideoResultElement(SearchResultElement):
     channel_url: str
     channel_id: str
     component_data: VideoComponent
-    result_type: SearchResultType = SearchResultType.VIDEO
-    locale: Locale = NONE_LOCALE
 
     @staticmethod
     def from_video_component(component: VideoComponent, locale: Locale = NONE_LOCALE) -> VideoResultElement:
@@ -50,15 +47,16 @@ class VideoResultElement(SearchResultElement):
             channel_url=component.channel_url,
             channel_id=component.channel_id,
             component_data=component,
-            locale=locale
+            result_type=SearchResultType.VIDEO,
+            locale=locale,
         )
 
     def get_video(self, locale: Locale | None = None, *,
-                  client: Client | None = None):
+                  client: Client | None = None) -> Video:
         return Video.get(self.id, self.locale if locale is None else locale, client=client)
 
     async def aget_video(self, locale: Locale | None = None, *,
-                         client: AsyncClient | None = None):
+                         client: AsyncClient | None = None) -> Video:
         return await Video.aget(self.id, self.locale if locale is None else locale, client=client)
 
     def get_channel(
@@ -87,8 +85,6 @@ class ChannelResultElement(SearchResultElement):
     description_snippet: str | None
     approx_subscriber_count: int | None
     component_data: ChannelComponent
-    result_type: SearchResultType = SearchResultType.VIDEO
-    locale: Locale = NONE_LOCALE
 
     @staticmethod
     def from_channel_component(
@@ -104,7 +100,8 @@ class ChannelResultElement(SearchResultElement):
             description_snippet=component.description_snippet,
             approx_subscriber_count=parse_subscriber_count(eng_component.subscribers_count_text),
             component_data=component,
-            locale=locale
+            result_type=SearchResultType.CHANNEL,
+            locale=locale,
         )
 
     def get_channel(
