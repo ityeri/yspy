@@ -9,6 +9,7 @@ from yspy.data_parsing import ImageComponent
 from yspy.data_parsing.channel import ChannelPage, ChannelExternalLinkComponent, ChannelDetailPage
 from yspy.request import ChannelRequest
 from yspy.utils import Locale, ENGLISH_LOCALE
+from .exceptions import ChannelIdentifierException
 from .utils import parse_subscriber_count, parse_view_count, parse_joined_date, parse_video_count
 
 
@@ -41,7 +42,18 @@ class Channel:
         )
 
     @staticmethod
-    async def aget(channel_id: str, locale: Locale | None = None, *, client: AsyncClient | None = None) -> Channel:
+    async def aget(
+            channel_id_or_url: str, locale: Locale | None = None, *, client: AsyncClient | None = None
+    ) -> Channel:
+        if channel_id_or_url.startswith('UC'):
+            channel_id = channel_id_or_url
+        else:
+            channel_id = await ChannelRequest.aget_channel_id(channel_id_or_url, client=client)
+            if channel_id is None:
+                raise ChannelIdentifierException(
+                    'The given channel_id_or_url is neither a channel ID nor a channel URL'
+                )
+
         response = await ChannelRequest.aget_page(channel_id, locale, client=client)
         channel_page = ChannelPage.from_json(response.json())
         response = await ChannelRequest.aget_page(channel_id, ENGLISH_LOCALE, client=client)
