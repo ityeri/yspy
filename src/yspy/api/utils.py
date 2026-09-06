@@ -3,7 +3,6 @@ from __future__ import annotations
 import re
 from datetime import date
 
-
 _COUNT_UNITS = {
     'k': 1_000,
     'm': 1_000_000,
@@ -13,25 +12,18 @@ _COUNT_UNITS = {
     'billion': 1_000_000_000,
 }
 
-# Korean/Japanese/Chinese abbreviated count units that this English-oriented
-# parser cannot handle — returning a wrong raw number is worse than None
-_CJK_MULTIPLIER_CHARS = '만억조万亿兆천千'
-
 _COUNT_PATTERN = re.compile(
     r'(?P<number>\d+(?:[.,]\d+)?)\s*(?P<unit>[kmb]|[a-z]+)?',
     re.IGNORECASE,
 )
 
+
 def _parse_count(text: str | None) -> int | None:
     if not text:
         return None
 
-    text = text.replace(',', '')
-    match = _COUNT_PATTERN.search(text)
+    match = _COUNT_PATTERN.search(text.replace(',', ''))
     if match is None:
-        return None
-
-    if re.match(r'\s*[' + _CJK_MULTIPLIER_CHARS + r']', text[match.end():]):
         return None
 
     number = float(match.group('number'))
@@ -40,12 +32,14 @@ def _parse_count(text: str | None) -> int | None:
 
     return int(number * multiplier)
 
+
 def parse_subscriber_count(text: str | None) -> int | None:
     if not text:
         return None
     if re.search(r'\bno\s+subscribers?\b', text, re.IGNORECASE):
         return 0
     return _parse_count(text)
+
 
 def parse_view_count(text: str | None) -> int | None:
     if not text:
@@ -54,6 +48,7 @@ def parse_view_count(text: str | None) -> int | None:
         return 0
     return _parse_count(text)
 
+
 def parse_video_count(text: str | None) -> int | None:
     if not text:
         return None
@@ -61,10 +56,13 @@ def parse_video_count(text: str | None) -> int | None:
         return 0
     return _parse_count(text)
 
+
 _MONTH_ABBR = {
     'jan': 1, 'feb': 2, 'mar': 3, 'apr': 4, 'may': 5, 'jun': 6,
     'jul': 7, 'aug': 8, 'sep': 9, 'oct': 10, 'nov': 11, 'dec': 12,
 }
+
+
 def parse_joined_date(text: str | None) -> date | None:
     if not text:
         return None
@@ -75,8 +73,14 @@ def parse_joined_date(text: str | None) -> date | None:
 
     return None
 
+
 _LENGTH_PATTERN = re.compile(r'^(?:(\d+):)?(\d+):(\d{2})$')
+
+
 def parse_length_seconds(length_text: str) -> int | None:
+    """
+    This function is locale-independent
+    """
     match = _LENGTH_PATTERN.match(length_text)
     if match is None:
         return None
