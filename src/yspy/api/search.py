@@ -98,7 +98,7 @@ class Search:
 
         if actual_locale is None:
             eng_response = await SearchResultRequest.aget_continuation_page(
-                self.continuation_token, actual_search_mode, actual_locale, client=client
+                self.continuation_token, actual_search_mode, ENGLISH_LOCALE, client=client
             )
             eng_search_result_page = SearchResultPage.from_json(eng_response.json())
         elif actual_locale.language != Language.ENGLISH:
