@@ -22,6 +22,7 @@ class SearchResultType(Enum):
 class SearchResult(ABC):
     def __init__(self, result_type: SearchResultType, locale: Locale | None = None):
         self.result_type: SearchResultType = result_type
+        # Locale value is necessary for locale persistence in methods like .get_video
         self.locale: Locale | None = locale
 
 
