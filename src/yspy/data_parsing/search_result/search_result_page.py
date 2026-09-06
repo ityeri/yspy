@@ -18,21 +18,25 @@ class SearchResultPage:
 
     @staticmethod
     def parse_components(raw_data: dict[str, dict]) -> list[SearchResultComponent]:
-        if 'videoRenderer' in raw_data:
-            return [VideoComponent.from_json(raw_data)]
+        try:
+            if 'videoRenderer' in raw_data:
+                return [VideoComponent.from_json(raw_data)]
 
-        elif 'channelRenderer' in raw_data:
-            return [ChannelComponent.from_json(raw_data)]
+            elif 'channelRenderer' in raw_data:
+                return [ChannelComponent.from_json(raw_data)]
 
-        elif 'shelfRenderer' in raw_data:
-            inner_data = get_by_path_or(raw_data, 'shelfRenderer content verticalListRenderer items')
-            if inner_data is None:
-                inner_data = get_by_path_or(raw_data, 'shelfRenderer content horizontalListRenderer items')
+            elif 'shelfRenderer' in raw_data:
+                inner_data = get_by_path_or(raw_data, 'shelfRenderer content verticalListRenderer items')
+                if inner_data is None:
+                    inner_data = get_by_path_or(raw_data, 'shelfRenderer content horizontalListRenderer items')
 
-            nested_components = [SearchResultPage.parse_components(element) for element in inner_data]
-            return [component for components in nested_components for component in components]
+                nested_components = [SearchResultPage.parse_components(element) for element in inner_data]
+                return [component for components in nested_components for component in components]
 
-        else:
+            else:
+                return []
+        except (KeyError, DataParsingException):
+            # ad rows or half-broken renderers are not search results — drop them silently
             return []
 
     @staticmethod
