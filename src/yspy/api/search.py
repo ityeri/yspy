@@ -4,10 +4,10 @@ from dataclasses import dataclass
 
 from httpx import AsyncClient
 
-from .search_result import SearchResult, VideoResult, ChannelResult, from_search_result_component
-from yspy.data_parsing.search_result import SearchResultPage, ChannelComponent
+from yspy.data_parsing.search_result import SearchResultPage
 from yspy.request import SearchResultRequest
-from yspy.utils import SearchMode, Locale, ENGLISH_LOCALE
+from yspy.utils import SearchMode, Locale, ENGLISH_LOCALE, Language
+from .search_result import SearchResult, VideoResult, ChannelResult, from_search_result_component
 
 
 @dataclass
@@ -22,33 +22,27 @@ class Search:
         response = await SearchResultRequest.aget_first_page(query, search_mode, locale, client=client)
         search_result_page = SearchResultPage.from_json(response.json())
 
-        search_result_page_eng = None
-        if locale != ENGLISH_LOCALE:
-            # numeric fields are parsed from the English page — same pattern as Channel.aget
-            eng_response = await SearchResultRequest.aget_first_page(
-                query, search_mode, ENGLISH_LOCALE, client=client
-            )
-            search_result_page_eng = SearchResultPage.from_json(eng_response.json())
+        if locale is None:
+            eng_response = await SearchResultRequest.aget_first_page(query, search_mode, ENGLISH_LOCALE, client=client)
+            eng_search_result_page = SearchResultPage.from_json(eng_response.json())
+        elif locale.language != Language.ENGLISH:
+            eng_response = await SearchResultRequest.aget_first_page(query, search_mode, ENGLISH_LOCALE, client=client)
+            eng_search_result_page = SearchResultPage.from_json(eng_response.json())
+        else:
+            eng_search_result_page = search_result_page
 
-        return Search.from_search_result_page(search_result_page, search_result_page_eng, locale)
+        return Search.from_search_result_page(search_result_page, eng_search_result_page, locale)
 
     @staticmethod
     def from_search_result_page(
             search_result_page: SearchResultPage,
-            search_result_page_eng: SearchResultPage | None = None,
+            eng_search_result_page: SearchResultPage,
             locale: Locale | None = None
     ) -> Search:
-        eng_components: dict[str, ChannelComponent] | None = None
-        if search_result_page_eng is not None:
-            eng_components = {
-                component.id: component
-                for component in search_result_page_eng.components
-                if isinstance(component, ChannelComponent)
-            }
         return Search(
             results=[
-                from_search_result_component(component, eng_components, locale)
-                for component in search_result_page.components
+                from_search_result_component(component, eng_component, locale)
+                for (component, eng_component) in zip(search_result_page.components, eng_search_result_page.components)
             ],
             continuation_token=search_result_page.continuation_token
         )
@@ -74,16 +68,20 @@ class Search:
     async def amore(
             self, search_mode: SearchMode, locale: Locale | None = None, *, client: AsyncClient | None = None
     ) -> Search:
-        response = await SearchResultRequest.aget_continuation_page(
-            self.continuation_token, search_mode, locale, client=client
-        )
+        response = await SearchResultRequest.aget_continuation_page(self.continuation_token, search_mode, client=client)
         search_result_page = SearchResultPage.from_json(response.json())
 
-        search_result_page_eng = None
-        if locale != ENGLISH_LOCALE:
+        if locale is None:
             eng_response = await SearchResultRequest.aget_continuation_page(
                 self.continuation_token, search_mode, ENGLISH_LOCALE, client=client
             )
-            search_result_page_eng = SearchResultPage.from_json(eng_response.json())
+            eng_search_result_page = SearchResultPage.from_json(eng_response.json())
+        elif locale.language != Language.ENGLISH:
+            eng_response = await SearchResultRequest.aget_continuation_page(
+                self.continuation_token, search_mode, ENGLISH_LOCALE, client=client
+            )
+            eng_search_result_page = SearchResultPage.from_json(eng_response.json())
+        else:
+            eng_search_result_page = search_result_page
 
-        return Search.from_search_result_page(search_result_page, search_result_page_eng, locale)
+        return Search.from_search_result_page(search_result_page, eng_search_result_page, locale)
