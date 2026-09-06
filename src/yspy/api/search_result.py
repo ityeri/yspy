@@ -72,20 +72,30 @@ class ChannelResult(SearchResult):
     url: str
     thumbnails: list[ImageComponent]
     description_snippet: str | None
-    approx_subscriber_count: int
+    approx_subscriber_count: int | None
     component_data: ChannelComponent
     result_type: SearchResultType = SearchResultType.VIDEO
     locale: Locale | None = None
 
     @staticmethod
-    def from_channel_component(component: ChannelComponent, locale: Locale | None = None) -> ChannelResult:
+    def from_channel_component(
+            component: ChannelComponent,
+            locale: Locale | None = None,
+            eng_component: ChannelComponent | None = None
+    ) -> ChannelResult:
+        # subscriber text is parsed from the English component when available —
+        # the count parser only understands English abbreviated units (K/M/B)
+        subscriber_count_text = (
+            eng_component.subscribers_count_text
+            if eng_component is not None else component.subscribers_count_text
+        )
         return ChannelResult(
             id=component.id,
             title=component.title,
             url=component.url,
             thumbnails=component.thumbnails,
             description_snippet=component.description_snippet,
-            approx_subscriber_count=parse_subscriber_count(component.subscribers_count_text),
+            approx_subscriber_count=parse_subscriber_count(subscriber_count_text),
             component_data=component,
             locale=locale
         )
@@ -102,10 +112,17 @@ class ChannelResult(SearchResult):
             return None
 
 
-def from_search_result_component(component: SearchResultComponent, locale: Locale | None = None) -> SearchResult:
+def from_search_result_component(
+        component: SearchResultComponent,
+        eng_components: dict[str, ChannelComponent] | None = None,
+        locale: Locale | None = None
+) -> SearchResult:
     if isinstance(component, VideoComponent):
         return VideoResult.from_video_component(component, locale)
     elif isinstance(component, ChannelComponent):
-        return ChannelResult.from_channel_component(component, locale)
+        eng_component = None
+        if eng_components is not None:
+            eng_component = eng_components.get(component.id)
+        return ChannelResult.from_channel_component(component, locale, eng_component)
     else:
         raise TypeError('Unknown type SearchResultComponent has passed')
