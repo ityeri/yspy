@@ -21,7 +21,7 @@ class Channel:
     description: str
     avatar_thumbnails: list[ImageComponent]
     banners: list[ImageComponent]
-    approx_subscriber_count: int
+    approx_subscriber_count: int | None
     is_family_safe: bool
     tags: list[str]
 
@@ -56,10 +56,10 @@ class ChannelDetail:
     url: str
     description: str
     country: str
-    approx_subscriber_count: int
-    view_count: int
-    joined_date: date
-    video_count: int
+    approx_subscriber_count: int | None
+    view_count: int | None
+    joined_date: date | None
+    video_count: int | None
     links: list[ChannelExternalLinkComponent]
     page_data: ChannelDetailPage
 

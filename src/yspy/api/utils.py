@@ -13,6 +13,10 @@ _COUNT_UNITS = {
     'billion': 1_000_000_000,
 }
 
+# Korean/Japanese/Chinese abbreviated count units that this English-oriented
+# parser cannot handle — returning a wrong raw number is worse than None
+_CJK_MULTIPLIER_CHARS = '만억조万亿兆천千'
+
 _COUNT_PATTERN = re.compile(
     r'(?P<number>\d+(?:[.,]\d+)?)\s*(?P<unit>[kmb]|[a-z]+)?',
     re.IGNORECASE,
@@ -22,8 +26,12 @@ def _parse_count(text: str | None) -> int | None:
     if not text:
         return None
 
-    match = _COUNT_PATTERN.search(text.replace(',', ''))
+    text = text.replace(',', '')
+    match = _COUNT_PATTERN.search(text)
     if match is None:
+        return None
+
+    if re.match(r'\s*[' + _CJK_MULTIPLIER_CHARS + r']', text[match.end():]):
         return None
 
     number = float(match.group('number'))
