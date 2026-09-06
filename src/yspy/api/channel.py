@@ -25,6 +25,8 @@ class Channel:
     approx_subscriber_count: int
     is_family_safe: bool
     tags: list[str]
+    page_data: ChannelPage
+    continuation_token: str
 
     @staticmethod
     def from_channel_page(channel_page: ChannelPage, channel_page_eng: ChannelPage) -> Channel:
@@ -39,6 +41,8 @@ class Channel:
             approx_subscriber_count=parse_subscriber_count(channel_page_eng.subscriber_count_text),
             is_family_safe=channel_page.is_family_safe,
             tags=channel_page.tags,
+            page_data=channel_page,
+            continuation_token=channel_page.continuation_token,
         )
 
     @staticmethod
@@ -60,6 +64,11 @@ class Channel:
         channel_page_eng = ChannelPage.from_json(response.json())
 
         return Channel.from_channel_page(channel_page, channel_page_eng)
+
+    async def aget_detail(
+            self, locale: Locale | None = None, *, client: AsyncClient | None = None
+    ) -> ChannelDetail:
+        return await ChannelDetail.aget(self.continuation_token, locale, client=client)
 
 
 @dataclass
