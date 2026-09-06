@@ -33,6 +33,46 @@ class Playlist:
     locale: Locale | None = None
 
     @staticmethod
+    def get(
+            playlist_id_or_url: str,
+            locale: Locale | None = None,
+            *,
+            client: Client | None = None
+    ) -> Playlist:
+        playlist_id = Playlist._resolve_playlist_id(playlist_id_or_url)
+
+        response = PlaylistRequest.get_first_page(playlist_id, locale, client=client)
+        playlist_page = PlaylistPage.from_json(response.json())
+        if locale is None or locale.language != Language.ENGLISH:
+            # english page is required for parsing abbreviated view counts
+            eng_response = PlaylistRequest.get_first_page(playlist_id, ENGLISH_LOCALE, client=client)
+            eng_playlist_page = PlaylistPage.from_json(eng_response.json())
+        else:
+            eng_playlist_page = playlist_page
+
+        return Playlist.from_page(playlist_page, eng_playlist_page, 0, 0, locale)
+
+    @staticmethod
+    async def aget(
+            playlist_id_or_url: str,
+            locale: Locale | None = None,
+            *,
+            client: AsyncClient | None = None
+    ) -> Playlist:
+        playlist_id = Playlist._resolve_playlist_id(playlist_id_or_url)
+
+        response = await PlaylistRequest.aget_first_page(playlist_id, locale, client=client)
+        playlist_page = PlaylistPage.from_json(response.json())
+        if locale is None or locale.language != Language.ENGLISH:
+            # english page is required for parsing abbreviated view counts
+            eng_response = await PlaylistRequest.aget_first_page(playlist_id, ENGLISH_LOCALE, client=client)
+            eng_playlist_page = PlaylistPage.from_json(eng_response.json())
+        else:
+            eng_playlist_page = playlist_page
+
+        return Playlist.from_page(playlist_page, eng_playlist_page, 0, 0, locale)
+
+    @staticmethod
     def from_page(
             playlist_page: PlaylistPage,
             eng_playlist_page: PlaylistPage,
@@ -56,64 +96,6 @@ class Playlist:
             page_data=playlist_page,
             locale=locale,
         )
-
-    @staticmethod
-    def _resolve_playlist_id(playlist_id_or_url: str) -> str:
-        if (
-                playlist_id_or_url.startswith('PL')
-                or playlist_id_or_url.startswith('UU')
-                or playlist_id_or_url.startswith('VL')
-        ):
-            return playlist_id_or_url if playlist_id_or_url.startswith('VL') else 'VL' + playlist_id_or_url
-
-        try:
-            playlist_id = URL(playlist_id_or_url).query['list']
-        except KeyError:
-            raise PlaylistIdentifierException(
-                'The given playlist_id_or_url is neither a URL nor a playlist ID'
-                ' (Did you missed a "PL" or "UU" prefix for ID?)'
-            )
-        return playlist_id if playlist_id.startswith('VL') else 'VL' + playlist_id
-
-    @staticmethod
-    async def aget(
-            playlist_id_or_url: str,
-            locale: Locale | None = None,
-            *,
-            client: AsyncClient | None = None
-    ) -> Playlist:
-        playlist_id = Playlist._resolve_playlist_id(playlist_id_or_url)
-
-        response = await PlaylistRequest.aget_first_page(playlist_id, locale, client=client)
-        playlist_page = PlaylistPage.from_json(response.json())
-        if locale is None or locale.language != Language.ENGLISH:
-            # english page is required for parsing abbreviated view counts
-            eng_response = await PlaylistRequest.aget_first_page(playlist_id, ENGLISH_LOCALE, client=client)
-            eng_playlist_page = PlaylistPage.from_json(eng_response.json())
-        else:
-            eng_playlist_page = playlist_page
-
-        return Playlist.from_page(playlist_page, eng_playlist_page, 0, 0, locale)
-
-    @staticmethod
-    def get(
-            playlist_id_or_url: str,
-            locale: Locale | None = None,
-            *,
-            client: Client | None = None
-    ) -> Playlist:
-        playlist_id = Playlist._resolve_playlist_id(playlist_id_or_url)
-
-        response = PlaylistRequest.get_first_page(playlist_id, locale, client=client)
-        playlist_page = PlaylistPage.from_json(response.json())
-        if locale is None or locale.language != Language.ENGLISH:
-            # english page is required for parsing abbreviated view counts
-            eng_response = PlaylistRequest.get_first_page(playlist_id, ENGLISH_LOCALE, client=client)
-            eng_playlist_page = PlaylistPage.from_json(eng_response.json())
-        else:
-            eng_playlist_page = playlist_page
-
-        return Playlist.from_page(playlist_page, eng_playlist_page, 0, 0, locale)
 
     @staticmethod
     async def from_channel(
@@ -149,40 +131,17 @@ class Playlist:
 
         return await Playlist.aget('UU' + channel_id[2:], locale, client=client)
 
-    async def aget_channel(
-            self, locale: Locale | None | Unspecified = Unspecified(), *, client: AsyncClient | None = None
-    ) -> Channel:
-        actual_locale = locale if locale != Unspecified() else self.locale
-        return await Channel.aget(self.owner_id, actual_locale, client=client)
-
     def get_channel(
             self, locale: Locale | None | Unspecified = Unspecified(), *, client: Client | None = None
     ) -> Channel:
         actual_locale = locale if locale != Unspecified() else self.locale
         return Channel.get(self.owner_id, actual_locale, client=client)
 
-    async def anext(
+    async def aget_channel(
             self, locale: Locale | None | Unspecified = Unspecified(), *, client: AsyncClient | None = None
-    ) -> Playlist | None:
-        if self.continuation_token is None:
-            return None
-
+    ) -> Channel:
         actual_locale = locale if locale != Unspecified() else self.locale
-
-        response = await PlaylistRequest.aget_continuation_page(self.continuation_token, actual_locale, client=client)
-        next_page = PlaylistPage.from_json(response.json())
-        if actual_locale is None or actual_locale.language != Language.ENGLISH:
-            # english page is required for parsing abbreviated view counts
-            eng_response = await PlaylistRequest.aget_continuation_page(
-                self.continuation_token, ENGLISH_LOCALE, client=client
-            )
-            eng_next_page = PlaylistPage.from_json(eng_response.json())
-        else:
-            eng_next_page = next_page
-
-        return Playlist.from_page(
-            next_page, eng_next_page, self.page_index + 1, self.index_offset + len(self.videos), actual_locale
-        )
+        return await Channel.aget(self.owner_id, actual_locale, client=client)
 
     def next(
             self, locale: Locale | None | Unspecified = Unspecified(), *, client: Client | None = None
@@ -207,6 +166,47 @@ class Playlist:
             next_page, eng_next_page, self.page_index + 1, self.index_offset + len(self.videos), actual_locale
         )
 
+
+    async def anext(
+            self, locale: Locale | None | Unspecified = Unspecified(), *, client: AsyncClient | None = None
+    ) -> Playlist | None:
+        if self.continuation_token is None:
+            return None
+
+        actual_locale = locale if locale != Unspecified() else self.locale
+
+        response = await PlaylistRequest.aget_continuation_page(self.continuation_token, actual_locale, client=client)
+        next_page = PlaylistPage.from_json(response.json())
+        if actual_locale is None or actual_locale.language != Language.ENGLISH:
+            # english page is required for parsing abbreviated view counts
+            eng_response = await PlaylistRequest.aget_continuation_page(
+                self.continuation_token, ENGLISH_LOCALE, client=client
+            )
+            eng_next_page = PlaylistPage.from_json(eng_response.json())
+        else:
+            eng_next_page = next_page
+
+        return Playlist.from_page(
+            next_page, eng_next_page, self.page_index + 1, self.index_offset + len(self.videos), actual_locale
+        )
+
+    @staticmethod
+    def _resolve_playlist_id(playlist_id_or_url: str) -> str:
+        if (
+                playlist_id_or_url.startswith('PL')
+                or playlist_id_or_url.startswith('UU')
+                or playlist_id_or_url.startswith('VL')
+        ):
+            return playlist_id_or_url if playlist_id_or_url.startswith('VL') else 'VL' + playlist_id_or_url
+
+        try:
+            playlist_id = URL(playlist_id_or_url).query['list']
+        except KeyError:
+            raise PlaylistIdentifierException(
+                'The given playlist_id_or_url is neither a URL nor a playlist ID'
+                ' (Did you missed a "PL" or "UU" prefix for ID?)'
+            )
+        return playlist_id if playlist_id.startswith('VL') else 'VL' + playlist_id
 
 @dataclass
 class PlaylistVideo:
@@ -234,14 +234,14 @@ class PlaylistVideo:
             locale=locale,
         )
 
-    async def aget_video(
-            self, locale: Locale | None | Unspecified = Unspecified(), *, client: AsyncClient | None = None
-    ) -> Video:
-        actual_locale = locale if locale != Unspecified() else self.locale
-        return await Video.aget(self.id, actual_locale, client=client)
-
     def get_video(
             self, locale: Locale | None | Unspecified = Unspecified(), *, client: Client | None = None
     ) -> Video:
         actual_locale = locale if locale != Unspecified() else self.locale
         return Video.get(self.id, actual_locale, client=client)
+
+    async def aget_video(
+            self, locale: Locale | None | Unspecified = Unspecified(), *, client: AsyncClient | None = None
+    ) -> Video:
+        actual_locale = locale if locale != Unspecified() else self.locale
+        return await Video.aget(self.id, actual_locale, client=client)

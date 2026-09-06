@@ -53,23 +53,23 @@ class VideoResultElement(SearchResultElement):
             locale=locale
         )
 
-    async def aget_video(self, locale: Locale | None | Unspecified = Unspecified(), *,
-                         client: AsyncClient | None = None):
-        return await Video.aget(self.id, locale if locale != Unspecified() else self.locale, client=client)
-
     def get_video(self, locale: Locale | None | Unspecified = Unspecified(), *,
                   client: Client | None = None):
         return Video.get(self.id, locale if locale != Unspecified() else self.locale, client=client)
 
-    async def aget_channel(
-            self, locale: Locale | None | Unspecified = Unspecified(), *, client: AsyncClient | None = None
-    ) -> Channel:
-        return await Channel.aget(self.channel_id, locale if locale != Unspecified() else self.locale, client=client)
+    async def aget_video(self, locale: Locale | None | Unspecified = Unspecified(), *,
+                         client: AsyncClient | None = None):
+        return await Video.aget(self.id, locale if locale != Unspecified() else self.locale, client=client)
 
     def get_channel(
             self, locale: Locale | None | Unspecified = Unspecified(), *, client: Client | None = None
     ) -> Channel:
         return Channel.get(self.channel_id, locale if locale != Unspecified() else self.locale, client=client)
+
+    async def aget_channel(
+            self, locale: Locale | None | Unspecified = Unspecified(), *, client: AsyncClient | None = None
+    ) -> Channel:
+        return await Channel.aget(self.channel_id, locale if locale != Unspecified() else self.locale, client=client)
 
     def get_highest_res_thumbnail(self) -> ImageComponent | None:
         try:
@@ -107,15 +107,15 @@ class ChannelResultElement(SearchResultElement):
             locale=locale
         )
 
-    async def aget_channel(
-            self, locale: Locale | None | Unspecified = Unspecified(), *, client: AsyncClient | None = None
-    ) -> Channel:
-        return await Channel.aget(self.id, locale if locale != Unspecified() else self.locale, client=client)
-
     def get_channel(
             self, locale: Locale | None | Unspecified = Unspecified(), *, client: Client | None = None
     ) -> Channel:
         return Channel.get(self.id, locale if locale != Unspecified() else self.locale, client=client)
+
+    async def aget_channel(
+            self, locale: Locale | None | Unspecified = Unspecified(), *, client: AsyncClient | None = None
+    ) -> Channel:
+        return await Channel.aget(self.id, locale if locale != Unspecified() else self.locale, client=client)
 
     def get_highest_res_thumbnail(self) -> ImageComponent | None:
         try:
