@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from httpx import AsyncClient
 from yarl import URL
 
+from yspy.api.exceptions import VideoIdentifierException
 from yspy.data_parsing import CommentComponent, VideoNextPage, CommentsPage
 from yspy.request import VideoNextRequest, CommentsRequest
 
@@ -15,13 +16,14 @@ class Comments:
     continuation_token: str
 
     @staticmethod
-    async def aget(
-            *, video_id: str | None = None, video_url: str | None = None, client: AsyncClient | None
-    ) -> Comments:
-        if video_id is not None and video_url is not None:
-            raise ValueError('Only one of the parameters, video_id or video_url, should be passed')
-        if video_url is not None:
-            video_id = URL(video_url).query['v']
+    async def aget(video_id_or_url: str, *, client: AsyncClient | None = None) -> Comments:
+        if len(video_id_or_url) == 11:
+            video_id = video_id_or_url
+        else:
+            try:
+                video_id = URL(video_id_or_url).query['v']
+            except KeyError:
+                raise VideoIdentifierException('The given video_id_or_url is neither a URL nor a video ID')
 
         response = await VideoNextRequest.aget_page(video_id, client=client)
         video_next_page = VideoNextPage.from_json(response.json())

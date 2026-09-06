@@ -64,7 +64,7 @@ class Video:
         return await Channel.aget(self.channel_id, actual_locale, client=client)
 
     async def aget_comments(self, *, client: AsyncClient | None = None) -> Comments:
-        return await Comments.aget(video_id=self.id, client=client)
+        return await Comments.aget(self.id, client=client)
 
     def get_highest_res_thumbnail(self) -> ImageComponent | None:
         try:
