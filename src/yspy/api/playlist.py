@@ -61,6 +61,7 @@ class Playlist:
     async def aget(
             playlist_id_or_url: str,
             locale: Locale | None = None,
+            *,
             client: AsyncClient | None = None
     ) -> Playlist:
         if (
@@ -96,13 +97,16 @@ class Playlist:
             channel: Channel | None = None,
             channel_id_or_url: str | None = None,
             locale: Locale | None = None,
+            *,
             client: AsyncClient | None = None
     ) -> Playlist:
         # uploads playlist of the given channel — 'UU' + channel_id[2:]
         if channel is not None and channel_id_or_url is not None:
             raise ValueError('Only one of the parameters, channel or channel_id_or_url, should be passed')
+
         if channel is not None:
             channel_id = channel.id
+
         elif channel_id_or_url is not None:
             if channel_id_or_url.startswith('UC'):
                 channel_id = channel_id_or_url
@@ -113,6 +117,7 @@ class Playlist:
                         'The given channel_id_or_url is neither a channel ID nor a channel URL'
                     )
                 channel_id = resolved_channel_id
+
         else:
             raise ValueError('Either channel or channel_id_or_url should be passed')
 
