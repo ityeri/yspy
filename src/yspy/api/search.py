@@ -7,12 +7,13 @@ from httpx import AsyncClient
 from yspy.data_parsing.search_result import SearchResultPage
 from yspy.request import SearchResultRequest
 from yspy.utils import SearchMode, Locale, ENGLISH_LOCALE, Language, Unspecified
-from .search_result import SearchResult, VideoResult, ChannelResult, from_search_result_component
+from .search_result_element import SearchResultElement, VideoResultElement, ChannelResultElement, \
+    from_search_result_component
 
 
 @dataclass
 class Search:
-    results: list[SearchResult]
+    results: list[SearchResultElement]
     search_mode: SearchMode | None
     locale: Locale | None
     continuation_token: str
@@ -55,26 +56,26 @@ class Search:
         )
 
     @property
-    def videos(self) -> list[VideoResult]:
-        return [result for result in self.results if isinstance(result, VideoResult)]
+    def videos(self) -> list[VideoResultElement]:
+        return [result for result in self.results if isinstance(result, VideoResultElement)]
 
     @property
-    def channels(self) -> list[ChannelResult]:
-        return [result for result in self.results if isinstance(result, ChannelResult)]
+    def channels(self) -> list[ChannelResultElement]:
+        return [result for result in self.results if isinstance(result, ChannelResultElement)]
 
-    def first_or(self, default: SearchResult | None) -> SearchResult | None:
+    def first_or(self, default: SearchResultElement | None) -> SearchResultElement | None:
         try:
             return self.results[0]
         except IndexError:
             return default
 
-    def first_video_or(self, default: VideoResult | None) -> VideoResult | None:
+    def first_video_or(self, default: VideoResultElement | None) -> VideoResultElement | None:
         try:
             return self.videos[0]
         except IndexError:
             return default
 
-    def first_channel_or(self, default: ChannelResult | None) -> ChannelResult | None:
+    def first_channel_or(self, default: ChannelResultElement | None) -> ChannelResultElement | None:
         try:
             return self.channels[0]
         except IndexError:

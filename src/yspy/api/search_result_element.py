@@ -19,7 +19,7 @@ class SearchResultType(Enum):
     CHANNEL = auto()
 
 
-class SearchResult(ABC):
+class SearchResultElement(ABC):
     def __init__(self, result_type: SearchResultType, locale: Locale | None = None):
         self.result_type: SearchResultType = result_type
         # Locale value is necessary for locale persistence in methods like .get_video
@@ -27,7 +27,7 @@ class SearchResult(ABC):
 
 
 @dataclass
-class VideoResult(SearchResult):
+class VideoResultElement(SearchResultElement):
     id: str
     title: str
     url: str
@@ -39,8 +39,8 @@ class VideoResult(SearchResult):
     locale: Locale | None = None
 
     @staticmethod
-    def from_video_component(component: VideoComponent, locale: Locale | None = None) -> VideoResult:
-        return VideoResult(
+    def from_video_component(component: VideoComponent, locale: Locale | None = None) -> VideoResultElement:
+        return VideoResultElement(
             id=component.id,
             title=component.title,
             url=component.url,
@@ -51,7 +51,8 @@ class VideoResult(SearchResult):
             locale=locale
         )
 
-    async def get_video(self, locale: Locale | None | Unspecified = Unspecified(), *, client: AsyncClient | None = None):
+    async def get_video(self, locale: Locale | None | Unspecified = Unspecified(), *,
+                        client: AsyncClient | None = None):
         return await Video.aget(self.id, locale if locale != Unspecified() else self.locale, client=client)
 
     # TODO In raw youtube video search result component, you can extract a channel id
@@ -67,7 +68,7 @@ class VideoResult(SearchResult):
 
 
 @dataclass
-class ChannelResult(SearchResult):
+class ChannelResultElement(SearchResultElement):
     id: str
     title: str
     url: str
@@ -83,8 +84,8 @@ class ChannelResult(SearchResult):
             component: ChannelComponent,
             eng_component: ChannelComponent,
             locale: Locale | None = None,
-    ) -> ChannelResult:
-        return ChannelResult(
+    ) -> ChannelResultElement:
+        return ChannelResultElement(
             id=component.id,
             title=component.title,
             url=component.url,
@@ -111,10 +112,10 @@ def from_search_result_component(
         component: SearchResultComponent,
         eng_component: SearchResultComponent,
         locale: Locale | None = None
-) -> SearchResult:
+) -> SearchResultElement:
     if isinstance(component, VideoComponent):
-        return VideoResult.from_video_component(component, locale)
+        return VideoResultElement.from_video_component(component, locale)
     elif isinstance(component, ChannelComponent):
-        return ChannelResult.from_channel_component(component, eng_component, locale)
+        return ChannelResultElement.from_channel_component(component, eng_component, locale)
     else:
         raise TypeError('Unknown type SearchResultComponent has passed')
