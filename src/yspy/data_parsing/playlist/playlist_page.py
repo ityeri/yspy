@@ -17,6 +17,7 @@ class PlaylistPage:
     thumbnails: list[ImageComponent]
     owner_text: str
     owner_url: str
+    owner_id: str
     view_count_text: str
     videos: list[PlaylistVideoComponent]
     continuation_token: str | None
@@ -99,6 +100,11 @@ class PlaylistPage:
                 secondary_info_renderer,
                 'videoOwner videoOwnerRenderer title runs', 0,
                 'navigationEndpoint browseEndpoint canonicalBaseUrl'
+            ),
+            owner_id=get_by_path(
+                secondary_info_renderer,
+                'videoOwner videoOwnerRenderer title runs', 0,
+                'navigationEndpoint browseEndpoint browseId'
             ),
             view_count_text=get_by_path(primary_info_renderer, 'stats', 1, 'simpleText'),
             videos=video_components,
