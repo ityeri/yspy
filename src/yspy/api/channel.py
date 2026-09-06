@@ -8,8 +8,8 @@ from httpx import AsyncClient
 from yspy.data_parsing import ImageComponent
 from yspy.data_parsing.channel import ChannelPage, ChannelExternalLinkComponent, ChannelDetailPage
 from yspy.request import ChannelRequest
-from yspy.utils import Locale, parse_subscriber_count, parse_view_count, parse_joined_date, parse_video_count, \
-    ENGLISH_LOCALE
+from yspy.utils import Locale, ENGLISH_LOCALE
+from .utils import parse_subscriber_count, parse_view_count, parse_joined_date, parse_video_count
 
 
 @dataclass
@@ -48,6 +48,7 @@ class Channel:
         channel_page_eng = ChannelPage.from_json(response.json())
 
         return Channel.from_channel_page(channel_page, channel_page_eng)
+
 
 @dataclass
 class ChannelDetail:

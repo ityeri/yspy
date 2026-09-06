@@ -66,3 +66,15 @@ def parse_joined_date(text: str | None) -> date | None:
         return date(int(match.group(3)), _MONTH_ABBR[match.group(1).lower()[:3]], int(match.group(2)))
 
     return None
+
+_LENGTH_PATTERN = re.compile(r'^(?:(\d+):)?(\d+):(\d{2})$')
+def parse_length_seconds(length_text: str) -> int | None:
+    match = _LENGTH_PATTERN.match(length_text)
+    if match is None:
+        return None
+
+    hours = int(match.group(1) or 0)
+    minutes = int(match.group(2))
+    seconds = int(match.group(3))
+
+    return hours * 3600 + minutes * 60 + seconds

@@ -8,8 +8,9 @@ from httpx import AsyncClient
 
 from yspy.data_parsing import ImageComponent
 from yspy.data_parsing.search_result import VideoComponent, ChannelComponent, SearchResultComponent
-from yspy.utils import Locale, parse_subscriber_count, Unspecified
+from yspy.utils import Locale, Unspecified
 from .channel import Channel
+from .utils import parse_subscriber_count
 from .video import Video
 
 
@@ -17,10 +18,12 @@ class SearchResultType(Enum):
     VIDEO = auto()
     CHANNEL = auto()
 
+
 class SearchResult(ABC):
     def __init__(self, result_type: SearchResultType, locale: Locale | None = None):
         self.result_type: SearchResultType = result_type
         self.locale: Locale | None = locale
+
 
 @dataclass
 class VideoResult(SearchResult):
@@ -61,6 +64,7 @@ class VideoResult(SearchResult):
         except IndexError:
             return None
 
+
 @dataclass
 class ChannelResult(SearchResult):
     id: str
@@ -96,6 +100,7 @@ class ChannelResult(SearchResult):
             return sorted(self.thumbnails, key=lambda t: t.width * t.height, reverse=True)[0]
         except IndexError:
             return None
+
 
 def from_search_result_component(component: SearchResultComponent, locale: Locale | None = None) -> SearchResult:
     if isinstance(component, VideoComponent):
