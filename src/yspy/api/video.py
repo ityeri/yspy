@@ -12,7 +12,7 @@ from yspy.request import VideoRequest
 from yspy.utils import Locale
 from .channel import Channel
 from .comments import Comments
-from ..exceptions import VideoIdentifierException
+from .exceptions import VideoIdentifierException
 
 
 @dataclass
