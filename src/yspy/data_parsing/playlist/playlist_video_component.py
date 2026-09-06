@@ -1,28 +1,11 @@
 from __future__ import annotations
 
-import re
 from dataclasses import dataclass
 
 from yspy.utils import get_by_path
 
 from ..exceptions import DataParsingException
 from ..image_component import ImageComponent
-
-
-_LENGTH_PATTERN = re.compile(r'^(?:(\d+):)?(\d+):(\d{2})$')
-
-
-def _parse_length_seconds(length_text: str) -> int | None:
-    match = _LENGTH_PATTERN.match(length_text)
-    if match is None:
-        # 'LIVE'처럼 duration이 아닌 badge 텍스트일 수 있음
-        return None
-
-    hours = int(match.group(1) or 0)
-    minutes = int(match.group(2))
-    seconds = int(match.group(3))
-
-    return hours * 3600 + minutes * 60 + seconds
 
 
 @dataclass
@@ -34,7 +17,6 @@ class PlaylistVideoComponent:
     index: int
     owner_text: str
     length_text: str
-    length_seconds: int | None
 
     @staticmethod
     def from_json(raw_data: dict[str, dict], *, index: int) -> PlaylistVideoComponent:
@@ -68,5 +50,4 @@ class PlaylistVideoComponent:
                 'metadata contentMetadataViewModel metadataRows', 0, 'metadataParts', 0, 'text content'
             ),
             length_text=length_text,
-            length_seconds=_parse_length_seconds(length_text)
         )
