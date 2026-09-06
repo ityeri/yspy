@@ -13,17 +13,19 @@ from yspy.utils import Locale
 class Suggestion:
     query: str
     suggestions: list[SuggestionElement]
+    locale: Locale | None = None
 
     @staticmethod
     async def aget(query: str, locale: Locale | None = None, *, client: AsyncClient | None = None) -> Suggestion:
         response = await SuggestionRequest.aget_suggestion(query, locale, client=client)
         suggestion_data = SuggestionData.from_json(SuggestionData.unwrap_parentheses(response.text))
 
-        return Suggestion.from_suggestion_data(suggestion_data)
+        return Suggestion.from_suggestion_data(suggestion_data, locale)
 
     @staticmethod
-    def from_suggestion_data(suggestion_data: SuggestionData) -> Suggestion:
+    def from_suggestion_data(suggestion_data: SuggestionData, locale: Locale | None = None) -> Suggestion:
         return Suggestion(
             query=suggestion_data.query,
-            suggestions=suggestion_data.suggestions
+            suggestions=suggestion_data.suggestions,
+            locale=locale,
         )

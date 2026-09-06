@@ -8,7 +8,7 @@ from httpx import AsyncClient
 from yspy.data_parsing import ImageComponent
 from yspy.data_parsing.channel import ChannelPage, ChannelExternalLinkComponent, ChannelDetailPage
 from yspy.request import ChannelRequest
-from yspy.utils import Locale, ENGLISH_LOCALE
+from yspy.utils import Locale, ENGLISH_LOCALE, Unspecified
 from .exceptions import ChannelIdentifierException
 from .utils import parse_subscriber_count, parse_view_count, parse_joined_date, parse_video_count
 
@@ -27,9 +27,14 @@ class Channel:
     tags: list[str]
     page_data: ChannelPage
     continuation_token: str
+    locale: Locale | None = None
 
     @staticmethod
-    def from_channel_page(channel_page: ChannelPage, channel_page_eng: ChannelPage) -> Channel:
+    def from_channel_page(
+            channel_page: ChannelPage,
+            channel_page_eng: ChannelPage,
+            locale: Locale | None = None
+    ) -> Channel:
         return Channel(
             id=channel_page.id,
             title=channel_page.title,
@@ -43,6 +48,7 @@ class Channel:
             tags=channel_page.tags,
             page_data=channel_page,
             continuation_token=channel_page.continuation_token,
+            locale=locale,
         )
 
     @staticmethod
@@ -63,12 +69,13 @@ class Channel:
         response = await ChannelRequest.aget_page(channel_id, ENGLISH_LOCALE, client=client)
         channel_page_eng = ChannelPage.from_json(response.json())
 
-        return Channel.from_channel_page(channel_page, channel_page_eng)
+        return Channel.from_channel_page(channel_page, channel_page_eng, locale)
 
     async def aget_detail(
-            self, locale: Locale | None = None, *, client: AsyncClient | None = None
+            self, locale: Locale | None | Unspecified = Unspecified(), *, client: AsyncClient | None = None
     ) -> ChannelDetail:
-        return await ChannelDetail.aget(self.continuation_token, locale, client=client)
+        actual_locale = locale if locale != Unspecified() else self.locale
+        return await ChannelDetail.aget(self.continuation_token, actual_locale, client=client)
 
 
 @dataclass
@@ -83,6 +90,7 @@ class ChannelDetail:
     video_count: int
     links: list[ChannelExternalLinkComponent]
     page_data: ChannelDetailPage
+    locale: Locale | None = None
 
     @staticmethod
     async def aget(
@@ -103,5 +111,6 @@ class ChannelDetail:
             joined_date=parse_joined_date(detail_page_eng.joined_date_text),
             video_count=parse_video_count(detail_page_eng.video_count_text),
             links=detail_page.links,
-            page_data=detail_page
+            page_data=detail_page,
+            locale=locale,
         )
