@@ -22,7 +22,7 @@ RESOLVE_URL = 'https://www.youtube.com/youtubei/v1/navigation/resolve_url'
 SUGGESTION_API_URL = 'https://clients1.google.com/complete/search'
 WATCH_URL = 'https://www.youtube.com/watch'
 
-BROWSE_KEY = 'AIzaSy...qcW8'
+BROWSE_KEY = 'AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8'
 
 # Pot-free innertube clients that still answer the player endpoint with a
 # truthful playability status anonymously (live-verified 2026-09, mirror of
