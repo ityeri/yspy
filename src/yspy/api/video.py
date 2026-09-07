@@ -8,7 +8,7 @@ from yarl import URL
 
 from yspy.data_parsing import ImageComponent
 from yspy.data_parsing.video import VideoPage
-from yspy.request import VideoRequest
+from yspy.request import PlayerRequest
 from yspy.utils import Locale, NONE_LOCALE
 from .channel import Channel
 from .comments import Comments
@@ -38,7 +38,7 @@ class Video:
     def get(video_id_or_url: str, locale: Locale = NONE_LOCALE, *, client: Client | None = None) -> Video:
         video_id = Video._resolve_video_id(video_id_or_url)
 
-        response = VideoRequest.get_page(video_id, locale, client=client)
+        response = PlayerRequest.get_page(video_id, locale, client=client)
         video_page = VideoPage.from_json(response.json())
 
         return Video.from_video_page(video_page, locale)
@@ -47,7 +47,7 @@ class Video:
     async def aget(video_id_or_url: str, locale: Locale = NONE_LOCALE, *, client: AsyncClient | None = None) -> Video:
         video_id = Video._resolve_video_id(video_id_or_url)
 
-        response = await VideoRequest.aget_page(video_id, locale, client=client)
+        response = await PlayerRequest.aget_page(video_id, locale, client=client)
         video_page = VideoPage.from_json(response.json())
 
         return Video.from_video_page(video_page, locale)
