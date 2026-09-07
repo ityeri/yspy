@@ -55,24 +55,21 @@ class Search:
     @staticmethod
     def from_search_result_page(
             search_result_page: SearchResultPage,
-            eng_search_result_page: SearchResultPage | None = None,
+            eng_search_result_page: SearchResultPage,
             search_mode: SearchMode | None = None,
             locale: Locale = NONE_LOCALE
     ) -> Search:
         # position of components differ between locale and english pages (ad drops, ranking)
         # so components are paired by their own id (videoId / channel browseId)
-        if eng_search_result_page is None:
-            eng_by_id: dict[str, SearchResultComponent] = {}
-        else:
-            eng_by_id = {
-                Search._component_key(component): component
-                for component in eng_search_result_page.components
-            }
+        eng_by_id = {
+            Search._component_key(component): component
+            for component in eng_search_result_page.components
+        }
 
         return Search(
             results=[
                 from_search_result_component(
-                    component, eng_by_id.get(Search._component_key(component), component), locale
+                    component, eng_by_id.get(Search._component_key(component), None), locale
                 )
                 for component in search_result_page.components
             ],

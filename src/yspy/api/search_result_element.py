@@ -89,16 +89,21 @@ class ChannelResultElement(SearchResultElement):
     @staticmethod
     def from_channel_component(
             component: ChannelComponent,
-            eng_component: ChannelComponent,
+            eng_component: ChannelComponent | None,
             locale: Locale = NONE_LOCALE,
     ) -> ChannelResultElement:
+        if eng_component is not None:
+            approx_subscriber_count = parse_subscriber_count(eng_component.subscribers_count_text)
+        else:
+            approx_subscriber_count = None
+
         return ChannelResultElement(
             id=component.id,
             title=component.title,
             url=component.url,
             thumbnails=component.thumbnails,
             description_snippet=component.description_snippet,
-            approx_subscriber_count=parse_subscriber_count(eng_component.subscribers_count_text),
+            approx_subscriber_count=approx_subscriber_count,
             component_data=component,
             result_type=SearchResultType.CHANNEL,
             locale=locale,
@@ -123,10 +128,10 @@ class ChannelResultElement(SearchResultElement):
 
 def from_search_result_component(
         component: SearchResultComponent,
-        eng_component: SearchResultComponent,
+        eng_component: SearchResultComponent | None,
         locale: Locale = NONE_LOCALE
 ) -> SearchResultElement:
-    if isinstance(component, VideoComponent):
+    if isinstance(component, VideoComponent) and eng_component is None:
         return VideoResultElement.from_video_component(component, locale)
     elif isinstance(component, ChannelComponent):
         return ChannelResultElement.from_channel_component(component, eng_component, locale)
