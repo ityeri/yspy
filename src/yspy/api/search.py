@@ -16,7 +16,7 @@ class Search:
     results: list[SearchResultElement]
     search_mode: SearchMode | None
     locale: Locale
-    continuation_token: str
+    continuation_token: str | None
 
     @staticmethod
     def search(
@@ -84,7 +84,10 @@ class Search:
             locale: Locale | None = None,
             *,
             client: Client | None = None
-    ) -> Search:
+    ) -> Search | None:
+        if self.continuation_token is None:
+            return None
+
         actual_search_mode: SearchMode | None = search_mode if search_mode != Unspecified() else self.search_mode
         actual_locale: Locale = self.locale if locale is None else locale
 
@@ -111,7 +114,10 @@ class Search:
             locale: Locale | None = None,
             *,
             client: AsyncClient | None = None
-    ) -> Search:
+    ) -> Search | None:
+        if self.continuation_token is None:
+            return None
+
         actual_search_mode: SearchMode | None = search_mode if search_mode != Unspecified() else self.search_mode
         actual_locale: Locale = self.locale if locale is None else locale
 

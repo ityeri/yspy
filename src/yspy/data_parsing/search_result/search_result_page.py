@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from yspy.utils import get_by_path, get_by_path_or
+from yspy.utils import get_by_path_or
 
 from .channel_component import ChannelComponent
 from .search_result_component import SearchResultComponent
@@ -13,8 +13,7 @@ from ..exceptions import DataParsingException
 @dataclass
 class SearchResultPage:
     components: list[SearchResultComponent]
-    continuation_token: str
-
+    continuation_token: str | None
 
     @staticmethod
     def parse_components(raw_data: dict[str, dict]) -> list[SearchResultComponent]:
@@ -41,31 +40,33 @@ class SearchResultPage:
 
     @staticmethod
     def from_json(raw_data: dict[str, dict]) -> SearchResultPage:
-        try:
-            inner_data = get_by_path_or(
-                raw_data,
-                'contents twoColumnSearchResultsRenderer primaryContents sectionListRenderer contents'
-            )
-            if inner_data is None:
-                inner_data = get_by_path(
-                    raw_data, 'onResponseReceivedCommands', 0, 'appendContinuationItemsAction continuationItems'
-                )
-        except KeyError:
-            raise DataParsingException('The given data is not a search result page data')
-        except IndexError:
-            raise DataParsingException('The given data is not a search result page data')
-
-        continuation_data = next(filter(lambda c: 'continuationItemRenderer' in c, inner_data))
-
-        item_section_data = next(filter(lambda c: 'itemSectionRenderer' in c, inner_data))
-        raw_components = get_by_path(item_section_data, 'itemSectionRenderer contents')
-        components = [SearchResultPage.parse_components(element) for element in raw_components]
-        components = [component for components in components for component in components]
-
-        return SearchResultPage(
-            components=components,
-            continuation_token=get_by_path(
-                continuation_data,
-                'continuationItemRenderer continuationEndpoint continuationCommand token'
-            )
+        inner_data = get_by_path_or(
+            raw_data,
+            'contents twoColumnSearchResultsRenderer primaryContents sectionListRenderer contents'
         )
+        if inner_data is None:
+            inner_data = get_by_path_or(
+                raw_data, 'onResponseReceivedCommands', 0, 'appendContinuationItemsAction continuationItems'
+            )
+
+        if inner_data is None:
+            # not a search result page (e.g. the last continuation page) — treat it as an empty page
+            return SearchResultPage(components=[], continuation_token=None)
+
+        continuation_token = None
+        components = []
+
+        for element in inner_data:
+            if 'continuationItemRenderer' in element:
+                continuation_token = get_by_path_or(
+                    element, 'continuationItemRenderer continuationEndpoint continuationCommand token'
+                )
+            elif 'itemSectionRenderer' in element:
+                raw_components = get_by_path_or(element, 'itemSectionRenderer contents')
+                if raw_components is None:
+                    continue
+
+                nested_components = [SearchResultPage.parse_components(element) for element in raw_components]
+                components.extend(component for components in nested_components for component in components)
+
+        return SearchResultPage(components=components, continuation_token=continuation_token)
