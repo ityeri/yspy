@@ -28,7 +28,7 @@ class VideoComponent(SearchResultComponent):
         try:
             inner_data = raw_data['videoRenderer']
         except KeyError:
-            raise DataParsingException('Given json data is not a channel renderer data')
+            raise DataParsingException('Given json data is not a video renderer data')
 
         return VideoComponent(
             id=inner_data['videoId'],

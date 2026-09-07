@@ -68,4 +68,4 @@ class SuggestionData:
                 ]
             )
         except ValueError:
-            raise DataParsingException('The given dat ais not a suggestions data')
+            raise DataParsingException('The given data is not a suggestions data')
