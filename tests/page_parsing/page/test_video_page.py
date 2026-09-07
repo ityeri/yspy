@@ -1,11 +1,32 @@
 import json
 from pathlib import Path
 
+import pytest
+
+TEST_DATAS = Path(__file__).parent / 'test_datas'
+
+
+def load_fixture(name):
+    with open(TEST_DATAS / name, encoding='utf-8') as f:
+        return json.load(f)
+
+
+
 from yspy.data_parsing.video import VideoPage
 
-with open(Path(__file__).parent / 'test_datas/video_page.json', 'r') as f:
-    raw_data = json.load(f)
 
-video_page_data = VideoPage.from_json(raw_data)
+def test_parse_video_page():
+    page = VideoPage.from_json(load_fixture('video_page.json'))
 
-breakpoint()
+    assert page.id == 'z0GKGpObgPY'
+    assert page.title == 'Harry Styles - Sign of the Times (Audio)'
+    assert page.url == 'https://www.youtube.com/watch?v=z0GKGpObgPY'
+    assert page.length_seconds == 342
+    assert page.view_count == 177836495
+    assert page.description.startswith('Official audio for')
+    assert page.channel_id == 'UCbOCbp5gXL8jigIBZLqMPrw'
+    assert page.channel_name == 'HarryStylesVEVO'
+    assert page.is_live_content is False
+    assert page.is_family_safe is True
+    assert page.category == 'Music'
+    assert len(page.thumbnails) == 5
