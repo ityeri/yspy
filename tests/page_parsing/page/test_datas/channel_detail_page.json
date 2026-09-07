@@ -1,119 +1,4 @@
 {
-  "responseContext": {
-    "serviceTrackingParams": [
-      {
-        "service": "GFEEDBACK",
-        "params": [
-          {
-            "key": "route",
-            "value": "channel.featured"
-          },
-          {
-            "key": "is_owner",
-            "value": "false"
-          },
-          {
-            "key": "is_alc_surface",
-            "value": "false"
-          },
-          {
-            "key": "browse_id",
-            "value": "UCg7rkxrTnIhiHEpXY1ec9NA"
-          },
-          {
-            "key": "browse_id_prefix",
-            "value": ""
-          },
-          {
-            "key": "logged_in",
-            "value": "0"
-          },
-          {
-            "key": "visitor_data",
-            "value": "CgtqNlYzQk44cEsyMCjHlsbPBjIKCgJLUhIEGgAgJA%3D%3D"
-          }
-        ]
-      },
-      {
-        "service": "GOOGLE_HELP",
-        "params": [
-          {
-            "key": "browse_id",
-            "value": "UCg7rkxrTnIhiHEpXY1ec9NA"
-          },
-          {
-            "key": "browse_id_prefix",
-            "value": ""
-          }
-        ]
-      },
-      {
-        "service": "CSI",
-        "params": [
-          {
-            "key": "c",
-            "value": "WEB"
-          },
-          {
-            "key": "cver",
-            "value": "2.20260428.00.00"
-          },
-          {
-            "key": "yt_li",
-            "value": "0"
-          },
-          {
-            "key": "GetChannelPage_rid",
-            "value": "0x066b3b71a77b23cc"
-          }
-        ]
-      },
-      {
-        "service": "GUIDED_HELP",
-        "params": [
-          {
-            "key": "logged_in",
-            "value": "0"
-          }
-        ]
-      },
-      {
-        "service": "ECATCHER",
-        "params": [
-          {
-            "key": "client.version",
-            "value": "2.20260428"
-          },
-          {
-            "key": "client.name",
-            "value": "WEB"
-          }
-        ]
-      }
-    ],
-    "maxAgeSeconds": 300,
-    "mainAppWebResponseContext": {
-      "loggedOut": true,
-      "trackingParam": "k5_fmPxhoXZReCGeyUkDQWMAsYGb5EuE_SkcQzYIqRjYlrx4RkrQim10nwRMkusEmIBwOcCw59TLtslLKPQGSS"
-    },
-    "responseId": "IhMI15_QkaySlAMVIE0PAh1cTQeE",
-    "webResponseContextExtensionData": {
-      "webResponseContextPreloadData": {
-        "preloadMessageNames": [
-          "aboutChannelRenderer",
-          "aboutChannelViewModel",
-          "channelExternalLinkViewModel",
-          "buttonRenderer",
-          "menuPopupRenderer",
-          "menuServiceItemRenderer",
-          "unifiedSharePanelRenderer",
-          "notificationActionRenderer"
-        ]
-      },
-      "hasDecorated": true
-    }
-  },
-  "trackingParams": "CAAQhGciEwjXn9CRrJKUAxUgTQ8CHVxNB4SCARwIJRC7LxgAIhMIu5-z4J6SlAMVqk71BR2pNR5_ygEESwe-pw==",
   "onResponseReceivedEndpoints": [
     {
       "clickTrackingParams": "CAAQhGciEwjXn9CRrJKUAxUgTQ8CHVxNB4TKAQRLB76n",
@@ -123,9 +8,9 @@
             "aboutChannelRenderer": {
               "metadata": {
                 "aboutChannelViewModel": {
-                  "description": "\ub9c8\uc778\ud06c\ub798\ud504\ud2b8\ub97c \ube44\ub86f\ud55c \ub2e4\uc591\ud55c \uac8c\uc784\ub4e4\uc744\n\uc7ac\ubc0c\ub294 \ucf58\ud150\uce20\ub85c \ub9cc\ub4e4\uace0 \uc788\uc2b5\ub2c8\ub2e4\ud83d\ude04\n\n[\ube44\uc988\ub2c8\uc2a4 \ubb38\uc758] : contact@asmbl.kr\n[\uae30\ud0c0 \ubb38\uc758] : skhh1221@gmail.com\n\n\uad6c\ub3c5\ud558\uae30 \ubc84\ud2bc\uacfc \uc54c\ub9bc \ubc84\ud2bc\uc744 \ub204\ub974\uc2dc\uba74 \ub9e4\uc77c \uc7ac\ubc0c\ub294 \uc601\uc0c1\uc744\n*\uc81c\uc77c \uba3c\uc800* \ub9cc\ub098\ubcf4\uc2e4 \uc218 \uc788\uc2b5\ub2c8\ub2e4!\n\uc6b0\ub9ac \uafc8\ub730\uc774\ubd84\ub4e4, \uc2dc\uccad\uc790\ubd84\ub4e4 \ud56d\uc0c1 \uac10\uc0ac\ub4dc\ub824\uc694\n\n#\ub9c8\uc778\ud06c\ub798\ud504\ud2b8 #\uac8c\uc784 \n",
+                  "description": "마인크래프트를 비롯한 다양한 게임들을\n재밌는 콘텐츠로 만들고 있습니다😄\n\n[비즈니스 문의] : contact@asmbl.kr\n[기타 문의] : skhh1221@gmail.com\n\n구독하기 버튼과 알림 버튼을 누르시면 매일 재밌는 영상을\n*제일 먼저* 만나보실 수 있습니다!\n우리 꿈뜰이분들, 시청자분들 항상 감사드려요\n\n#마인크래프트 #게임 \n",
                   "descriptionLabel": {
-                    "content": "\uc124\uba85",
+                    "content": "설명",
                     "styleRuns": [
                       {
                         "startIndex": 0,
@@ -133,9 +18,9 @@
                       }
                     ]
                   },
-                  "country": "\ub300\ud55c\ubbfc\uad6d",
+                  "country": "대한민국",
                   "customLinksLabel": {
-                    "content": "\ub9c1\ud06c",
+                    "content": "링크",
                     "styleRuns": [
                       {
                         "startIndex": 0,
@@ -143,10 +28,10 @@
                       }
                     ]
                   },
-                  "subscriberCountText": "\uad6c\ub3c5\uc790 238\ub9cc\uba85",
-                  "viewCountText": "\uc870\ud68c\uc218 4,372,270,606\ud68c",
+                  "subscriberCountText": "구독자 238만명",
+                  "viewCountText": "조회수 4,372,270,606회",
                   "joinedDateText": {
-                    "content": "\uac00\uc785\uc77c: 2014. 5. 23.",
+                    "content": "가입일: 2014. 5. 23.",
                     "styleRuns": [
                       {
                         "startIndex": 0,
@@ -157,7 +42,7 @@
                   "canonicalChannelUrl": "http://www.youtube.com/@sleepground",
                   "channelId": "UCg7rkxrTnIhiHEpXY1ec9NA",
                   "additionalInfoLabel": {
-                    "content": "\ucd94\uac00 \uc815\ubcf4",
+                    "content": "추가 정보",
                     "styleRuns": [
                       {
                         "startIndex": 0,
@@ -179,9 +64,9 @@
                       }
                     }
                   },
-                  "videoCountText": "\ub3d9\uc601\uc0c1 4,514\uac1c",
+                  "videoCountText": "동영상 4,514개",
                   "signInForBusinessEmail": {
-                    "content": "\uc774\uba54\uc77c \uc8fc\uc18c\ub97c \ubcf4\ub824\uba74 \ub85c\uadf8\uc778\ud558\uc138\uc694.",
+                    "content": "이메일 주소를 보려면 로그인하세요.",
                     "commandRuns": [
                       {
                         "startIndex": 12,
@@ -229,7 +114,7 @@
                     {
                       "channelExternalLinkViewModel": {
                         "title": {
-                          "content": "\uad6c\ub3c5\ud558\uae30!"
+                          "content": "구독하기!"
                         },
                         "link": {
                           "content": "youtube.com/subscription_center?add_user=sleepground",
@@ -402,7 +287,7 @@
                     {
                       "channelExternalLinkViewModel": {
                         "title": {
-                          "content": "\uce58\uc9c0\uc9c1"
+                          "content": "치지직"
                         },
                         "link": {
                           "content": "chzzk.naver.com/2a6dc61c4f1706e73f31dea7779bb547",
@@ -507,7 +392,7 @@
                   "text": {
                     "runs": [
                       {
-                        "text": "\ucc44\ub110 \uacf5\uc720"
+                        "text": "채널 공유"
                       }
                     ]
                   },
@@ -517,7 +402,7 @@
                   "trackingParams": "CAEQ8FsiEwjXn9CRrJKUAxUgTQ8CHVxNB4Q=",
                   "accessibilityData": {
                     "accessibilityData": {
-                      "label": "\ucc44\ub110 \uacf5\uc720"
+                      "label": "채널 공유"
                     }
                   },
                   "command": {
@@ -541,7 +426,7 @@
                                       "text": {
                                         "runs": [
                                           {
-                                            "text": "\ucc44\ub110 \uacf5\uc720"
+                                            "text": "채널 공유"
                                           }
                                         ]
                                       },
@@ -580,7 +465,7 @@
                                       "text": {
                                         "runs": [
                                           {
-                                            "text": "\ucc44\ub110 ID \ubcf5\uc0ac"
+                                            "text": "채널 ID 복사"
                                           }
                                         ]
                                       },
@@ -608,7 +493,7 @@
                                                           "responseText": {
                                                             "runs": [
                                                               {
-                                                                "text": "\ucc44\ub110 ID\uac00 \ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub418\uc5c8\uc2b5\ub2c8\ub2e4."
+                                                                "text": "채널 ID가 클립보드에 복사되었습니다."
                                                               }
                                                             ]
                                                           },

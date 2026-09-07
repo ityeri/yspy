@@ -1,1957 +1,4 @@
 {
-  "responseContext": {
-    "visitorData": "CgtXSkJENGVDSTAyNCiUtcDPBjIKCgJLUhIEGgAgLw%3D%3D",
-    "serviceTrackingParams": [
-      {
-        "service": "GUIDED_HELP",
-        "params": [
-          {
-            "key": "context",
-            "value": "yt_web_search"
-          },
-          {
-            "key": "logged_in",
-            "value": "0"
-          }
-        ]
-      },
-      {
-        "service": "GFEEDBACK",
-        "params": [
-          {
-            "key": "has_unlimited_entitlement",
-            "value": "False"
-          },
-          {
-            "key": "has_premium_lite_entitlement",
-            "value": "False"
-          },
-          {
-            "key": "logged_in",
-            "value": "0"
-          },
-          {
-            "key": "visitor_data",
-            "value": "CgtXSkJENGVDSTAyNCiTtcDPBjIKCgJLUhIEGgAgLw%3D%3D"
-          }
-        ]
-      },
-      {
-        "service": "CSI",
-        "params": [
-          {
-            "key": "yt_ad",
-            "value": "1"
-          },
-          {
-            "key": "c",
-            "value": "WEB"
-          },
-          {
-            "key": "cver",
-            "value": "2.20210224.06.00"
-          },
-          {
-            "key": "yt_li",
-            "value": "0"
-          },
-          {
-            "key": "GetSearch_rid",
-            "value": "0x39f2a95d0a420bf7"
-          }
-        ]
-      },
-      {
-        "service": "ECATCHER",
-        "params": [
-          {
-            "key": "client.version",
-            "value": "2.20250331"
-          },
-          {
-            "key": "client.name",
-            "value": "WEB"
-          }
-        ]
-      }
-    ],
-    "mainAppWebResponseContext": {
-      "loggedOut": true,
-      "trackingParam": "k5_fmPxhoXZRyIUn0MwrvZj42PA6lIvkwESjN0zL2gXIPgcjolGY03ucrzRMkuMESLBwOcCw59TLtslLKPQGSS"
-    },
-    "responseId": "IhMIkf6XjL-PlAMVWET1BR1oVx99",
-    "webResponseContextExtensionData": {
-      "webResponseContextPreloadData": {
-        "preloadMessageNames": [
-          "searchHeaderRenderer",
-          "chipCloudRenderer",
-          "chipCloudChipRenderer",
-          "buttonRenderer",
-          "searchFilterOptionsDialogRenderer",
-          "searchFilterGroupRenderer",
-          "searchFilterRenderer",
-          "desktopTopbarRenderer",
-          "topbarLogoRenderer",
-          "fusionSearchboxRenderer",
-          "dialogViewModel",
-          "dialogHeaderViewModel",
-          "panelFooterViewModel",
-          "buttonViewModel",
-          "basicContentViewModel",
-          "topbarMenuButtonRenderer",
-          "multiPageMenuRenderer",
-          "hotkeyDialogRenderer",
-          "hotkeyDialogSectionRenderer",
-          "hotkeyDialogSectionOptionRenderer",
-          "voiceSearchDialogRenderer",
-          "itemSectionRenderer",
-          "videoRenderer",
-          "channelThumbnailWithLinkRenderer",
-          "decoratedAvatarViewModel",
-          "avatarViewModel",
-          "metadataBadgeRenderer",
-          "menuRenderer",
-          "menuServiceItemRenderer",
-          "unifiedSharePanelRenderer",
-          "thumbnailOverlayTimeStatusRenderer",
-          "thumbnailOverlayToggleButtonRenderer",
-          "thumbnailOverlayNowPlayingRenderer",
-          "thumbnailOverlayLoadingPreviewRenderer",
-          "movingThumbnailRenderer",
-          "expandableMetadataRenderer",
-          "horizontalCardListRenderer",
-          "macroMarkersListItemRenderer",
-          "gridShelfViewModel",
-          "shortsLockupViewModel",
-          "thumbnailViewModel",
-          "reelPlayerOverlayRenderer",
-          "reelWatchAccessibilityRenderer",
-          "sheetViewModel",
-          "listViewModel",
-          "listItemViewModel",
-          "sectionHeaderViewModel",
-          "badgeViewModel",
-          "lockupViewModel",
-          "collectionThumbnailViewModel",
-          "thumbnailOverlayBadgeViewModel",
-          "thumbnailBadgeViewModel",
-          "thumbnailHoverOverlayViewModel",
-          "lockupMetadataViewModel",
-          "contentMetadataViewModel",
-          "continuationItemRenderer"
-        ]
-      },
-      "hasDecorated": true
-    }
-  },
-  "estimatedResults": "10020318",
-  "trackingParams": "CAAQvGkiEwiR_peMv4-UAxVYRPUFHWhXH33KAQTcy6n8",
-  "header": {
-    "searchHeaderRenderer": {
-      "chipBar": {
-        "chipCloudRenderer": {
-          "chips": [
-            {
-              "chipCloudChipRenderer": {
-                "style": {
-                  "styleType": "STYLE_HOME_FILTER"
-                },
-                "text": {
-                  "simpleText": "All"
-                },
-                "trackingParams": "CJADEP1dGAAiEwiR_peMv4-UAxVYRPUFHWhXH30=",
-                "isSelected": true,
-                "location": "CHIP_LOCATION_SEARCH_RESULTS"
-              }
-            },
-            {
-              "chipCloudChipRenderer": {
-                "style": {
-                  "styleType": "STYLE_HOME_FILTER"
-                },
-                "text": {
-                  "simpleText": "Shorts"
-                },
-                "navigationEndpoint": {
-                  "clickTrackingParams": "CI8DEOzmBRgBIhMIkf6XjL-PlAMVWET1BR1oVx99ygEE3Mup_A==",
-                  "commandMetadata": {
-                    "webCommandMetadata": {
-                      "sendPost": true,
-                      "apiUrl": "/youtubei/v1/search"
-                    }
-                  },
-                  "continuationCommand": {
-                    "token": "Eo0GEhFOb0NvcHlyaWdodFNvdW5kcxr0BUVxMEVrZ0dwQkRxWEFSS1FBU2hoSUhsdmRYUjFZbVZmYzJodmNuUnpYMlJsWm1sdWFYUnBiMjRnT25SNWNHVTZjaUFvYmlCNWIzVjBkV0psWDJac1lXZGZhR0Z6WDNCeVpXMXBaWEpsWDNacFpHVnZYMjFsZEdGa1lYUmhQVEVnT25SNWNHVTZjaWtnS0c0Z2VXOTFkSFZpWlY5bWJHRm5YMmhoYzE5c2FYWmxYM04wY21WaGJWOXRaWFJoWkdGMFlUMHhJRHAwZVhCbE9uSXBLVGdCWUJwS2pBTUtJUW9SVG05RGIzQjVjbWxuYUhSVGIzVnVaSFB5QVFVS0EwRnNiTmdDQWJnRFlRcWxBZklCQ0FvR1UyaHZjblJ6d2dLUUFTaGhJSGx2ZFhSMVltVmZjMmh2Y25SelgyUmxabWx1YVhScGIyNGdPblI1Y0dVNmNpQW9iaUI1YjNWMGRXSmxYMlpzWVdkZmFHRnpYM0J5WlcxcFpYSmxYM1pwWkdWdlgyMWxkR0ZrWVhSaFBURWdPblI1Y0dVNmNpa2dLRzRnZVc5MWRIVmlaVjltYkdGblgyaGhjMTlzYVhabFgzTjBjbVZoYlY5dFpYUmhaR0YwWVQweElEcDBlWEJsT25JcEtmZ0NBYmdER2dvVzhnRUxDZ2xWYm5kaGRHTm9aV1RLQWdJWUFiZ0RIQW9VOGdFSkNnZFhZWFJqYUdWa3lnSUNHQUs0QTBvS092SUJDQW9HVm1sa1pXOXp3Z0lhZVc5MWRIVmlaVjkyYVdSbGIxOXdZV2RsSURwMGVYQmxPbkxvQWdHb0F3RzRBMGpBQXdISUF3SFFBd0VLRzJBSDhnRVRDaEZTWldObGJuUnNlU0IxY0d4dllXUmxaTGdEQndvMjhnRUdDZ1JNYVhabHdnSW5lVzkxZEhWaVpWOXNhWFpsWDJKeWIyRmtZMkZ6ZEY5emRHRjBkWE05TUNBNmRIbHdaVHB5dUFNRUdBdDRBQSUzRCUzRJABARiB4OgYIgtzZWFyY2gtcGFnZQ%3D%3D",
-                    "request": "CONTINUATION_REQUEST_TYPE_SEARCH",
-                    "command": {
-                      "clickTrackingParams": "CI8DEOzmBRgBIhMIkf6XjL-PlAMVWET1BR1oVx99ygEE3Mup_A==",
-                      "showReloadUiCommand": {
-                        "targetId": "search-page"
-                      }
-                    }
-                  }
-                },
-                "trackingParams": "CI8DEOzmBRgBIhMIkf6XjL-PlAMVWET1BR1oVx99",
-                "isSelected": false,
-                "location": "CHIP_LOCATION_SEARCH_RESULTS"
-              }
-            },
-            {
-              "chipCloudChipRenderer": {
-                "style": {
-                  "styleType": "STYLE_HOME_FILTER"
-                },
-                "text": {
-                  "simpleText": "Unwatched"
-                },
-                "navigationEndpoint": {
-                  "clickTrackingParams": "CI4DEOzmBRgCIhMIkf6XjL-PlAMVWET1BR1oVx99ygEE3Mup_A==",
-                  "commandMetadata": {
-                    "webCommandMetadata": {
-                      "sendPost": true,
-                      "apiUrl": "/youtubei/v1/search"
-                    }
-                  },
-                  "continuationCommand": {
-                    "token": "EscEEhFOb0NvcHlyaWdodFNvdW5kcxquBEVwc0RrZ0dYQXpvR0dnSVlBV0FjU293RENpRUtFVTV2UTI5d2VYSnBaMmgwVTI5MWJtUno4Z0VGQ2dOQmJHellBZ0c0QTJFS3BRSHlBUWdLQmxOb2IzSjBjOElDa0FFb1lTQjViM1YwZFdKbFgzTm9iM0owYzE5a1pXWnBibWwwYVc5dUlEcDBlWEJsT25JZ0tHNGdlVzkxZEhWaVpWOW1iR0ZuWDJoaGMxOXdjbVZ0YVdWeVpWOTJhV1JsYjE5dFpYUmhaR0YwWVQweElEcDBlWEJsT25JcElDaHVJSGx2ZFhSMVltVmZabXhoWjE5b1lYTmZiR2wyWlY5emRISmxZVzFmYldWMFlXUmhkR0U5TVNBNmRIbHdaVHB5S1NuNEFnRzRBeG9LRnZJQkN3b0pWVzUzWVhSamFHVmt5Z0lDR0FHNEF4d0tGUElCQ1FvSFYyRjBZMmhsWk1vQ0FoZ0N1QU5LQ2pyeUFRZ0tCbFpwWkdWdmM4SUNHbmx2ZFhSMVltVmZkbWxrWlc5ZmNHRm5aU0E2ZEhsd1pUcHk2QUlCcUFNQnVBTkl3QU1CeUFNQjBBTUJDaHRnQl9JQkV3b1JVbVZqWlc1MGJIa2dkWEJzYjJGa1pXUzRBd2NLTnZJQkJnb0VUR2wyWmNJQ0ozbHZkWFIxWW1WZmJHbDJaVjlpY205aFpHTmhjM1JmYzNSaGRIVnpQVEFnT25SNWNHVTZjcmdEQkJnTGVBQSUzRJABARiB4OgYIgtzZWFyY2gtcGFnZQ%3D%3D",
-                    "request": "CONTINUATION_REQUEST_TYPE_SEARCH",
-                    "command": {
-                      "clickTrackingParams": "CI4DEOzmBRgCIhMIkf6XjL-PlAMVWET1BR1oVx99ygEE3Mup_A==",
-                      "showReloadUiCommand": {
-                        "targetId": "search-page"
-                      }
-                    }
-                  }
-                },
-                "trackingParams": "CI4DEOzmBRgCIhMIkf6XjL-PlAMVWET1BR1oVx99",
-                "isSelected": false,
-                "location": "CHIP_LOCATION_SEARCH_RESULTS"
-              }
-            },
-            {
-              "chipCloudChipRenderer": {
-                "style": {
-                  "styleType": "STYLE_HOME_FILTER"
-                },
-                "text": {
-                  "simpleText": "Watched"
-                },
-                "navigationEndpoint": {
-                  "clickTrackingParams": "CI0DEOzmBRgDIhMIkf6XjL-PlAMVWET1BR1oVx99ygEE3Mup_A==",
-                  "commandMetadata": {
-                    "webCommandMetadata": {
-                      "sendPost": true,
-                      "apiUrl": "/youtubei/v1/search"
-                    }
-                  },
-                  "continuationCommand": {
-                    "token": "EscEEhFOb0NvcHlyaWdodFNvdW5kcxquBEVwc0RrZ0dYQXpvR0dnSVlBbUJLU293RENpRUtFVTV2UTI5d2VYSnBaMmgwVTI5MWJtUno4Z0VGQ2dOQmJHellBZ0c0QTJFS3BRSHlBUWdLQmxOb2IzSjBjOElDa0FFb1lTQjViM1YwZFdKbFgzTm9iM0owYzE5a1pXWnBibWwwYVc5dUlEcDBlWEJsT25JZ0tHNGdlVzkxZEhWaVpWOW1iR0ZuWDJoaGMxOXdjbVZ0YVdWeVpWOTJhV1JsYjE5dFpYUmhaR0YwWVQweElEcDBlWEJsT25JcElDaHVJSGx2ZFhSMVltVmZabXhoWjE5b1lYTmZiR2wyWlY5emRISmxZVzFmYldWMFlXUmhkR0U5TVNBNmRIbHdaVHB5S1NuNEFnRzRBeG9LRnZJQkN3b0pWVzUzWVhSamFHVmt5Z0lDR0FHNEF4d0tGUElCQ1FvSFYyRjBZMmhsWk1vQ0FoZ0N1QU5LQ2pyeUFRZ0tCbFpwWkdWdmM4SUNHbmx2ZFhSMVltVmZkbWxrWlc5ZmNHRm5aU0E2ZEhsd1pUcHk2QUlCcUFNQnVBTkl3QU1CeUFNQjBBTUJDaHRnQl9JQkV3b1JVbVZqWlc1MGJIa2dkWEJzYjJGa1pXUzRBd2NLTnZJQkJnb0VUR2wyWmNJQ0ozbHZkWFIxWW1WZmJHbDJaVjlpY205aFpHTmhjM1JmYzNSaGRIVnpQVEFnT25SNWNHVTZjcmdEQkJnTGVBQSUzRJABARiB4OgYIgtzZWFyY2gtcGFnZQ%3D%3D",
-                    "request": "CONTINUATION_REQUEST_TYPE_SEARCH",
-                    "command": {
-                      "clickTrackingParams": "CI0DEOzmBRgDIhMIkf6XjL-PlAMVWET1BR1oVx99ygEE3Mup_A==",
-                      "showReloadUiCommand": {
-                        "targetId": "search-page"
-                      }
-                    }
-                  }
-                },
-                "trackingParams": "CI0DEOzmBRgDIhMIkf6XjL-PlAMVWET1BR1oVx99",
-                "isSelected": false,
-                "location": "CHIP_LOCATION_SEARCH_RESULTS"
-              }
-            },
-            {
-              "chipCloudChipRenderer": {
-                "style": {
-                  "styleType": "STYLE_HOME_FILTER"
-                },
-                "text": {
-                  "simpleText": "Videos"
-                },
-                "navigationEndpoint": {
-                  "clickTrackingParams": "CIwDEOzmBRgEIhMIkf6XjL-PlAMVWET1BR1oVx99ygEE3Mup_A==",
-                  "commandMetadata": {
-                    "webCommandMetadata": {
-                      "sendPost": true,
-                      "apiUrl": "/youtubei/v1/search"
-                    }
-                  },
-                  "continuationCommand": {
-                    "token": "EvEEEhFOb0NvcHlyaWdodFNvdW5kcxrYBEVyMERrZ0c1QXpvb0VocDViM1YwZFdKbFgzWnBaR1Z2WDNCaFoyVWdPblI1Y0dVNmNpZ0JVQUZnU0dnQmNBRjRBVXFNQXdvaENoRk9iME52Y0hseWFXZG9kRk52ZFc1a2NfSUJCUW9EUVd4czJBSUJ1QU5oQ3FVQjhnRUlDZ1pUYUc5eWRIUENBcEFCS0dFZ2VXOTFkSFZpWlY5emFHOXlkSE5mWkdWbWFXNXBkR2x2YmlBNmRIbHdaVHB5SUNodUlIbHZkWFIxWW1WZlpteGhaMTlvWVhOZmNISmxiV2xsY21WZmRtbGtaVzlmYldWMFlXUmhkR0U5TVNBNmRIbHdaVHB5S1NBb2JpQjViM1YwZFdKbFgyWnNZV2RmYUdGelgyeHBkbVZmYzNSeVpXRnRYMjFsZEdGa1lYUmhQVEVnT25SNWNHVTZjaWtwLUFJQnVBTWFDaGJ5QVFzS0NWVnVkMkYwWTJobFpNb0NBaGdCdUFNY0NoVHlBUWtLQjFkaGRHTm9aV1RLQWdJWUFyZ0RTZ282OGdFSUNnWldhV1JsYjNQQ0FocDViM1YwZFdKbFgzWnBaR1Z2WDNCaFoyVWdPblI1Y0dVNmN1Z0NBYWdEQWJnRFNNQURBY2dEQWRBREFRb2JZQWZ5QVJNS0VWSmxZMlZ1ZEd4NUlIVndiRzloWkdWa3VBTUhDamJ5QVFZS0JFeHBkbVhDQWlkNWIzVjBkV0psWDJ4cGRtVmZZbkp2WVdSallYTjBYM04wWVhSMWN6MHdJRHAwZVhCbE9uSzRBd1FZQzNnQZABARiB4OgYIgtzZWFyY2gtcGFnZQ%3D%3D",
-                    "request": "CONTINUATION_REQUEST_TYPE_SEARCH",
-                    "command": {
-                      "clickTrackingParams": "CIwDEOzmBRgEIhMIkf6XjL-PlAMVWET1BR1oVx99ygEE3Mup_A==",
-                      "showReloadUiCommand": {
-                        "targetId": "search-page"
-                      }
-                    }
-                  }
-                },
-                "trackingParams": "CIwDEOzmBRgEIhMIkf6XjL-PlAMVWET1BR1oVx99",
-                "isSelected": false,
-                "location": "CHIP_LOCATION_SEARCH_RESULTS"
-              }
-            },
-            {
-              "chipCloudChipRenderer": {
-                "style": {
-                  "styleType": "STYLE_HOME_FILTER"
-                },
-                "text": {
-                  "simpleText": "Recently uploaded"
-                },
-                "navigationEndpoint": {
-                  "clickTrackingParams": "CIsDEOzmBRgFIhMIkf6XjL-PlAMVWET1BR1oVx99ygEE3Mup_A==",
-                  "commandMetadata": {
-                    "webCommandMetadata": {
-                      "sendPost": true,
-                      "apiUrl": "/youtubei/v1/search"
-                    }
-                  },
-                  "continuationCommand": {
-                    "token": "EsEEEhFOb0NvcHlyaWdodFNvdW5kcxqoBEVwa0RrZ0dWQXpvRUlBZGdCMHFNQXdvaENoRk9iME52Y0hseWFXZG9kRk52ZFc1a2NfSUJCUW9EUVd4czJBSUJ1QU5oQ3FVQjhnRUlDZ1pUYUc5eWRIUENBcEFCS0dFZ2VXOTFkSFZpWlY5emFHOXlkSE5mWkdWbWFXNXBkR2x2YmlBNmRIbHdaVHB5SUNodUlIbHZkWFIxWW1WZlpteGhaMTlvWVhOZmNISmxiV2xsY21WZmRtbGtaVzlmYldWMFlXUmhkR0U5TVNBNmRIbHdaVHB5S1NBb2JpQjViM1YwZFdKbFgyWnNZV2RmYUdGelgyeHBkbVZmYzNSeVpXRnRYMjFsZEdGa1lYUmhQVEVnT25SNWNHVTZjaWtwLUFJQnVBTWFDaGJ5QVFzS0NWVnVkMkYwWTJobFpNb0NBaGdCdUFNY0NoVHlBUWtLQjFkaGRHTm9aV1RLQWdJWUFyZ0RTZ282OGdFSUNnWldhV1JsYjNQQ0FocDViM1YwZFdKbFgzWnBaR1Z2WDNCaFoyVWdPblI1Y0dVNmN1Z0NBYWdEQWJnRFNNQURBY2dEQWRBREFRb2JZQWZ5QVJNS0VWSmxZMlZ1ZEd4NUlIVndiRzloWkdWa3VBTUhDamJ5QVFZS0JFeHBkbVhDQWlkNWIzVjBkV0psWDJ4cGRtVmZZbkp2WVdSallYTjBYM04wWVhSMWN6MHdJRHAwZVhCbE9uSzRBd1FZQzNnQZABARiB4OgYIgtzZWFyY2gtcGFnZQ%3D%3D",
-                    "request": "CONTINUATION_REQUEST_TYPE_SEARCH",
-                    "command": {
-                      "clickTrackingParams": "CIsDEOzmBRgFIhMIkf6XjL-PlAMVWET1BR1oVx99ygEE3Mup_A==",
-                      "showReloadUiCommand": {
-                        "targetId": "search-page"
-                      }
-                    }
-                  }
-                },
-                "trackingParams": "CIsDEOzmBRgFIhMIkf6XjL-PlAMVWET1BR1oVx99",
-                "isSelected": false,
-                "location": "CHIP_LOCATION_SEARCH_RESULTS"
-              }
-            },
-            {
-              "chipCloudChipRenderer": {
-                "style": {
-                  "styleType": "STYLE_HOME_FILTER"
-                },
-                "text": {
-                  "simpleText": "Live"
-                },
-                "navigationEndpoint": {
-                  "clickTrackingParams": "CIoDEOzmBRgGIhMIkf6XjL-PlAMVWET1BR1oVx99ygEE3Mup_A==",
-                  "commandMetadata": {
-                    "webCommandMetadata": {
-                      "sendPost": true,
-                      "apiUrl": "/youtubei/v1/search"
-                    }
-                  },
-                  "continuationCommand": {
-                    "token": "EvUEEhFOb0NvcHlyaWdodFNvdW5kcxrcBEVzQURrZ0c4QXpvckVpZDViM1YwZFdKbFgyeHBkbVZmWW5KdllXUmpZWE4wWDNOMFlYUjFjejB3SURwMGVYQmxPbkpnQkVxTUF3b2hDaEZPYjBOdmNIbHlhV2RvZEZOdmRXNWtjX0lCQlFvRFFXeHMyQUlCdUFOaENxVUI4Z0VJQ2daVGFHOXlkSFBDQXBBQktHRWdlVzkxZEhWaVpWOXphRzl5ZEhOZlpHVm1hVzVwZEdsdmJpQTZkSGx3WlRweUlDaHVJSGx2ZFhSMVltVmZabXhoWjE5b1lYTmZjSEpsYldsbGNtVmZkbWxrWlc5ZmJXVjBZV1JoZEdFOU1TQTZkSGx3WlRweUtTQW9iaUI1YjNWMGRXSmxYMlpzWVdkZmFHRnpYMnhwZG1WZmMzUnlaV0Z0WDIxbGRHRmtZWFJoUFRFZ09uUjVjR1U2Y2lrcC1BSUJ1QU1hQ2hieUFRc0tDVlZ1ZDJGMFkyaGxaTW9DQWhnQnVBTWNDaFR5QVFrS0IxZGhkR05vWldUS0FnSVlBcmdEU2dvNjhnRUlDZ1pXYVdSbGIzUENBaHA1YjNWMGRXSmxYM1pwWkdWdlgzQmhaMlVnT25SNWNHVTZjdWdDQWFnREFiZ0RTTUFEQWNnREFkQURBUW9iWUFmeUFSTUtFVkpsWTJWdWRHeDVJSFZ3Ykc5aFpHVmt1QU1IQ2pieUFRWUtCRXhwZG1YQ0FpZDViM1YwZFdKbFgyeHBkbVZmWW5KdllXUmpZWE4wWDNOMFlYUjFjejB3SURwMGVYQmxPbks0QXdRWUMzZ0GQAQEYgeDoGCILc2VhcmNoLXBhZ2U%3D",
-                    "request": "CONTINUATION_REQUEST_TYPE_SEARCH",
-                    "command": {
-                      "clickTrackingParams": "CIoDEOzmBRgGIhMIkf6XjL-PlAMVWET1BR1oVx99ygEE3Mup_A==",
-                      "showReloadUiCommand": {
-                        "targetId": "search-page"
-                      }
-                    }
-                  }
-                },
-                "trackingParams": "CIoDEOzmBRgGIhMIkf6XjL-PlAMVWET1BR1oVx99",
-                "isSelected": false,
-                "location": "CHIP_LOCATION_SEARCH_RESULTS"
-              }
-            }
-          ],
-          "trackingParams": "CIcDEJFaIhMIkf6XjL-PlAMVWET1BR1oVx99",
-          "nextButton": {
-            "buttonRenderer": {
-              "style": "STYLE_DEFAULT",
-              "size": "SIZE_DEFAULT",
-              "isDisabled": false,
-              "icon": {
-                "iconType": "CHEVRON_RIGHT"
-              },
-              "accessibility": {
-                "label": "Next"
-              },
-              "trackingParams": "CIkDEPBbIhMIkf6XjL-PlAMVWET1BR1oVx99"
-            }
-          },
-          "previousButton": {
-            "buttonRenderer": {
-              "style": "STYLE_DEFAULT",
-              "size": "SIZE_DEFAULT",
-              "isDisabled": false,
-              "icon": {
-                "iconType": "CHEVRON_LEFT"
-              },
-              "accessibility": {
-                "label": "Previous"
-              },
-              "trackingParams": "CIgDEPBbIhMIkf6XjL-PlAMVWET1BR1oVx99"
-            }
-          }
-        }
-      },
-      "searchFilterButton": {
-        "buttonRenderer": {
-          "style": "STYLE_TEXT",
-          "size": "SIZE_DEFAULT",
-          "isDisabled": false,
-          "text": {
-            "runs": [
-              {
-                "text": "Filters"
-              }
-            ]
-          },
-          "icon": {
-            "iconType": "TUNE"
-          },
-          "tooltip": "Search filters",
-          "trackingParams": "COgCEPBbIhMIkf6XjL-PlAMVWET1BR1oVx99",
-          "accessibilityData": {
-            "accessibilityData": {
-              "label": "Search filters"
-            }
-          },
-          "command": {
-            "clickTrackingParams": "COgCEPBbIhMIkf6XjL-PlAMVWET1BR1oVx99ygEE3Mup_A==",
-            "openPopupAction": {
-              "popup": {
-                "searchFilterOptionsDialogRenderer": {
-                  "title": {
-                    "runs": [
-                      {
-                        "text": "Search filters"
-                      }
-                    ]
-                  },
-                  "groups": [
-                    {
-                      "searchFilterGroupRenderer": {
-                        "title": {
-                          "simpleText": "Type"
-                        },
-                        "filters": [
-                          {
-                            "searchFilterRenderer": {
-                              "label": {
-                                "simpleText": "Videos"
-                              },
-                              "navigationEndpoint": {
-                                "clickTrackingParams": "CIYDEJN1GAAiEwiR_peMv4-UAxVYRPUFHWhXH33KAQTcy6n8",
-                                "commandMetadata": {
-                                  "webCommandMetadata": {
-                                    "url": "/results?search_query=NoCopyrightSounds&sp=EgIQAQ%253D%253D",
-                                    "webPageType": "WEB_PAGE_TYPE_SEARCH",
-                                    "rootVe": 4724
-                                  }
-                                },
-                                "searchEndpoint": {
-                                  "query": "NoCopyrightSounds",
-                                  "params": "EgIQAQ%3D%3D"
-                                }
-                              },
-                              "tooltip": "Search for Videos",
-                              "trackingParams": "CIYDEJN1GAAiEwiR_peMv4-UAxVYRPUFHWhXH30="
-                            }
-                          },
-                          {
-                            "searchFilterRenderer": {
-                              "label": {
-                                "simpleText": "Shorts"
-                              },
-                              "navigationEndpoint": {
-                                "clickTrackingParams": "CIUDEJN1GAEiEwiR_peMv4-UAxVYRPUFHWhXH33KAQTcy6n8",
-                                "commandMetadata": {
-                                  "webCommandMetadata": {
-                                    "url": "/results?search_query=NoCopyrightSounds&sp=EgIQCQ%253D%253D",
-                                    "webPageType": "WEB_PAGE_TYPE_SEARCH",
-                                    "rootVe": 4724
-                                  }
-                                },
-                                "searchEndpoint": {
-                                  "query": "NoCopyrightSounds",
-                                  "params": "EgIQCQ%3D%3D"
-                                }
-                              },
-                              "tooltip": "Search for Shorts",
-                              "trackingParams": "CIUDEJN1GAEiEwiR_peMv4-UAxVYRPUFHWhXH30="
-                            }
-                          },
-                          {
-                            "searchFilterRenderer": {
-                              "label": {
-                                "simpleText": "Channels"
-                              },
-                              "navigationEndpoint": {
-                                "clickTrackingParams": "CIQDEJN1GAIiEwiR_peMv4-UAxVYRPUFHWhXH33KAQTcy6n8",
-                                "commandMetadata": {
-                                  "webCommandMetadata": {
-                                    "url": "/results?search_query=NoCopyrightSounds&sp=EgIQAg%253D%253D",
-                                    "webPageType": "WEB_PAGE_TYPE_SEARCH",
-                                    "rootVe": 4724
-                                  }
-                                },
-                                "searchEndpoint": {
-                                  "query": "NoCopyrightSounds",
-                                  "params": "EgIQAg%3D%3D"
-                                }
-                              },
-                              "tooltip": "Search for Channels",
-                              "trackingParams": "CIQDEJN1GAIiEwiR_peMv4-UAxVYRPUFHWhXH30="
-                            }
-                          },
-                          {
-                            "searchFilterRenderer": {
-                              "label": {
-                                "simpleText": "Playlists"
-                              },
-                              "navigationEndpoint": {
-                                "clickTrackingParams": "CIMDEJN1GAMiEwiR_peMv4-UAxVYRPUFHWhXH33KAQTcy6n8",
-                                "commandMetadata": {
-                                  "webCommandMetadata": {
-                                    "url": "/results?search_query=NoCopyrightSounds&sp=EgIQAw%253D%253D",
-                                    "webPageType": "WEB_PAGE_TYPE_SEARCH",
-                                    "rootVe": 4724
-                                  }
-                                },
-                                "searchEndpoint": {
-                                  "query": "NoCopyrightSounds",
-                                  "params": "EgIQAw%3D%3D"
-                                }
-                              },
-                              "tooltip": "Search for Playlists",
-                              "trackingParams": "CIMDEJN1GAMiEwiR_peMv4-UAxVYRPUFHWhXH30="
-                            }
-                          },
-                          {
-                            "searchFilterRenderer": {
-                              "label": {
-                                "simpleText": "Movies"
-                              },
-                              "navigationEndpoint": {
-                                "clickTrackingParams": "CIIDEJN1GAQiEwiR_peMv4-UAxVYRPUFHWhXH33KAQTcy6n8",
-                                "commandMetadata": {
-                                  "webCommandMetadata": {
-                                    "url": "/results?search_query=NoCopyrightSounds&sp=EgIQBA%253D%253D",
-                                    "webPageType": "WEB_PAGE_TYPE_SEARCH",
-                                    "rootVe": 4724
-                                  }
-                                },
-                                "searchEndpoint": {
-                                  "query": "NoCopyrightSounds",
-                                  "params": "EgIQBA%3D%3D"
-                                }
-                              },
-                              "tooltip": "Search for Movies",
-                              "trackingParams": "CIIDEJN1GAQiEwiR_peMv4-UAxVYRPUFHWhXH30="
-                            }
-                          }
-                        ],
-                        "trackingParams": "CIEDEJJ1GAAiEwiR_peMv4-UAxVYRPUFHWhXH30="
-                      }
-                    },
-                    {
-                      "searchFilterGroupRenderer": {
-                        "title": {
-                          "simpleText": "Duration"
-                        },
-                        "filters": [
-                          {
-                            "searchFilterRenderer": {
-                              "label": {
-                                "simpleText": "Under 3 minutes"
-                              },
-                              "navigationEndpoint": {
-                                "clickTrackingParams": "CIADEJN1GAAiEwiR_peMv4-UAxVYRPUFHWhXH33KAQTcy6n8",
-                                "commandMetadata": {
-                                  "webCommandMetadata": {
-                                    "url": "/results?search_query=NoCopyrightSounds&sp=EgIYBA%253D%253D",
-                                    "webPageType": "WEB_PAGE_TYPE_SEARCH",
-                                    "rootVe": 4724
-                                  }
-                                },
-                                "searchEndpoint": {
-                                  "query": "NoCopyrightSounds",
-                                  "params": "EgIYBA%3D%3D"
-                                }
-                              },
-                              "tooltip": "Search for Under 3 minutes",
-                              "trackingParams": "CIADEJN1GAAiEwiR_peMv4-UAxVYRPUFHWhXH30="
-                            }
-                          },
-                          {
-                            "searchFilterRenderer": {
-                              "label": {
-                                "simpleText": "3 - 20 minutes"
-                              },
-                              "navigationEndpoint": {
-                                "clickTrackingParams": "CP8CEJN1GAEiEwiR_peMv4-UAxVYRPUFHWhXH33KAQTcy6n8",
-                                "commandMetadata": {
-                                  "webCommandMetadata": {
-                                    "url": "/results?search_query=NoCopyrightSounds&sp=EgIYBQ%253D%253D",
-                                    "webPageType": "WEB_PAGE_TYPE_SEARCH",
-                                    "rootVe": 4724
-                                  }
-                                },
-                                "searchEndpoint": {
-                                  "query": "NoCopyrightSounds",
-                                  "params": "EgIYBQ%3D%3D"
-                                }
-                              },
-                              "tooltip": "Search for 3 - 20 minutes",
-                              "trackingParams": "CP8CEJN1GAEiEwiR_peMv4-UAxVYRPUFHWhXH30="
-                            }
-                          },
-                          {
-                            "searchFilterRenderer": {
-                              "label": {
-                                "simpleText": "Over 20 minutes"
-                              },
-                              "navigationEndpoint": {
-                                "clickTrackingParams": "CP4CEJN1GAIiEwiR_peMv4-UAxVYRPUFHWhXH33KAQTcy6n8",
-                                "commandMetadata": {
-                                  "webCommandMetadata": {
-                                    "url": "/results?search_query=NoCopyrightSounds&sp=EgIYAg%253D%253D",
-                                    "webPageType": "WEB_PAGE_TYPE_SEARCH",
-                                    "rootVe": 4724
-                                  }
-                                },
-                                "searchEndpoint": {
-                                  "query": "NoCopyrightSounds",
-                                  "params": "EgIYAg%3D%3D"
-                                }
-                              },
-                              "tooltip": "Search for Over 20 minutes",
-                              "trackingParams": "CP4CEJN1GAIiEwiR_peMv4-UAxVYRPUFHWhXH30="
-                            }
-                          }
-                        ],
-                        "trackingParams": "CP0CEJJ1GAEiEwiR_peMv4-UAxVYRPUFHWhXH30="
-                      }
-                    },
-                    {
-                      "searchFilterGroupRenderer": {
-                        "title": {
-                          "simpleText": "Upload date"
-                        },
-                        "filters": [
-                          {
-                            "searchFilterRenderer": {
-                              "label": {
-                                "simpleText": "Today"
-                              },
-                              "navigationEndpoint": {
-                                "clickTrackingParams": "CPwCEJN1GAAiEwiR_peMv4-UAxVYRPUFHWhXH33KAQTcy6n8",
-                                "commandMetadata": {
-                                  "webCommandMetadata": {
-                                    "url": "/results?search_query=NoCopyrightSounds&sp=EgIIAg%253D%253D",
-                                    "webPageType": "WEB_PAGE_TYPE_SEARCH",
-                                    "rootVe": 4724
-                                  }
-                                },
-                                "searchEndpoint": {
-                                  "query": "NoCopyrightSounds",
-                                  "params": "EgIIAg%3D%3D"
-                                }
-                              },
-                              "tooltip": "Search for Today",
-                              "trackingParams": "CPwCEJN1GAAiEwiR_peMv4-UAxVYRPUFHWhXH30="
-                            }
-                          },
-                          {
-                            "searchFilterRenderer": {
-                              "label": {
-                                "simpleText": "This week"
-                              },
-                              "navigationEndpoint": {
-                                "clickTrackingParams": "CPsCEJN1GAEiEwiR_peMv4-UAxVYRPUFHWhXH33KAQTcy6n8",
-                                "commandMetadata": {
-                                  "webCommandMetadata": {
-                                    "url": "/results?search_query=NoCopyrightSounds&sp=EgIIAw%253D%253D",
-                                    "webPageType": "WEB_PAGE_TYPE_SEARCH",
-                                    "rootVe": 4724
-                                  }
-                                },
-                                "searchEndpoint": {
-                                  "query": "NoCopyrightSounds",
-                                  "params": "EgIIAw%3D%3D"
-                                }
-                              },
-                              "tooltip": "Search for This week",
-                              "trackingParams": "CPsCEJN1GAEiEwiR_peMv4-UAxVYRPUFHWhXH30="
-                            }
-                          },
-                          {
-                            "searchFilterRenderer": {
-                              "label": {
-                                "simpleText": "This month"
-                              },
-                              "navigationEndpoint": {
-                                "clickTrackingParams": "CPoCEJN1GAIiEwiR_peMv4-UAxVYRPUFHWhXH33KAQTcy6n8",
-                                "commandMetadata": {
-                                  "webCommandMetadata": {
-                                    "url": "/results?search_query=NoCopyrightSounds&sp=EgIIBA%253D%253D",
-                                    "webPageType": "WEB_PAGE_TYPE_SEARCH",
-                                    "rootVe": 4724
-                                  }
-                                },
-                                "searchEndpoint": {
-                                  "query": "NoCopyrightSounds",
-                                  "params": "EgIIBA%3D%3D"
-                                }
-                              },
-                              "tooltip": "Search for This month",
-                              "trackingParams": "CPoCEJN1GAIiEwiR_peMv4-UAxVYRPUFHWhXH30="
-                            }
-                          },
-                          {
-                            "searchFilterRenderer": {
-                              "label": {
-                                "simpleText": "This year"
-                              },
-                              "navigationEndpoint": {
-                                "clickTrackingParams": "CPkCEJN1GAMiEwiR_peMv4-UAxVYRPUFHWhXH33KAQTcy6n8",
-                                "commandMetadata": {
-                                  "webCommandMetadata": {
-                                    "url": "/results?search_query=NoCopyrightSounds&sp=EgIIBQ%253D%253D",
-                                    "webPageType": "WEB_PAGE_TYPE_SEARCH",
-                                    "rootVe": 4724
-                                  }
-                                },
-                                "searchEndpoint": {
-                                  "query": "NoCopyrightSounds",
-                                  "params": "EgIIBQ%3D%3D"
-                                }
-                              },
-                              "tooltip": "Search for This year",
-                              "trackingParams": "CPkCEJN1GAMiEwiR_peMv4-UAxVYRPUFHWhXH30="
-                            }
-                          }
-                        ],
-                        "trackingParams": "CPgCEJJ1GAIiEwiR_peMv4-UAxVYRPUFHWhXH30="
-                      }
-                    },
-                    {
-                      "searchFilterGroupRenderer": {
-                        "title": {
-                          "simpleText": "Features"
-                        },
-                        "filters": [
-                          {
-                            "searchFilterRenderer": {
-                              "label": {
-                                "simpleText": "Live"
-                              },
-                              "navigationEndpoint": {
-                                "clickTrackingParams": "CPcCEJN1GAAiEwiR_peMv4-UAxVYRPUFHWhXH33KAQTcy6n8",
-                                "commandMetadata": {
-                                  "webCommandMetadata": {
-                                    "url": "/results?search_query=NoCopyrightSounds&sp=EgJAAQ%253D%253D",
-                                    "webPageType": "WEB_PAGE_TYPE_SEARCH",
-                                    "rootVe": 4724
-                                  }
-                                },
-                                "searchEndpoint": {
-                                  "query": "NoCopyrightSounds",
-                                  "params": "EgJAAQ%3D%3D"
-                                }
-                              },
-                              "tooltip": "Search for Live",
-                              "trackingParams": "CPcCEJN1GAAiEwiR_peMv4-UAxVYRPUFHWhXH30="
-                            }
-                          },
-                          {
-                            "searchFilterRenderer": {
-                              "label": {
-                                "simpleText": "4K"
-                              },
-                              "navigationEndpoint": {
-                                "clickTrackingParams": "CPYCEJN1GAEiEwiR_peMv4-UAxVYRPUFHWhXH33KAQTcy6n8",
-                                "commandMetadata": {
-                                  "webCommandMetadata": {
-                                    "url": "/results?search_query=NoCopyrightSounds&sp=EgJwAQ%253D%253D",
-                                    "webPageType": "WEB_PAGE_TYPE_SEARCH",
-                                    "rootVe": 4724
-                                  }
-                                },
-                                "searchEndpoint": {
-                                  "query": "NoCopyrightSounds",
-                                  "params": "EgJwAQ%3D%3D"
-                                }
-                              },
-                              "tooltip": "Search for 4K",
-                              "trackingParams": "CPYCEJN1GAEiEwiR_peMv4-UAxVYRPUFHWhXH30="
-                            }
-                          },
-                          {
-                            "searchFilterRenderer": {
-                              "label": {
-                                "simpleText": "HD"
-                              },
-                              "navigationEndpoint": {
-                                "clickTrackingParams": "CPUCEJN1GAIiEwiR_peMv4-UAxVYRPUFHWhXH33KAQTcy6n8",
-                                "commandMetadata": {
-                                  "webCommandMetadata": {
-                                    "url": "/results?search_query=NoCopyrightSounds&sp=EgIgAQ%253D%253D",
-                                    "webPageType": "WEB_PAGE_TYPE_SEARCH",
-                                    "rootVe": 4724
-                                  }
-                                },
-                                "searchEndpoint": {
-                                  "query": "NoCopyrightSounds",
-                                  "params": "EgIgAQ%3D%3D"
-                                }
-                              },
-                              "tooltip": "Search for HD",
-                              "trackingParams": "CPUCEJN1GAIiEwiR_peMv4-UAxVYRPUFHWhXH30="
-                            }
-                          },
-                          {
-                            "searchFilterRenderer": {
-                              "label": {
-                                "simpleText": "Subtitles/CC"
-                              },
-                              "navigationEndpoint": {
-                                "clickTrackingParams": "CPQCEJN1GAMiEwiR_peMv4-UAxVYRPUFHWhXH33KAQTcy6n8",
-                                "commandMetadata": {
-                                  "webCommandMetadata": {
-                                    "url": "/results?search_query=NoCopyrightSounds&sp=EgIoAQ%253D%253D",
-                                    "webPageType": "WEB_PAGE_TYPE_SEARCH",
-                                    "rootVe": 4724
-                                  }
-                                },
-                                "searchEndpoint": {
-                                  "query": "NoCopyrightSounds",
-                                  "params": "EgIoAQ%3D%3D"
-                                }
-                              },
-                              "tooltip": "Search for Subtitles/CC",
-                              "trackingParams": "CPQCEJN1GAMiEwiR_peMv4-UAxVYRPUFHWhXH30="
-                            }
-                          },
-                          {
-                            "searchFilterRenderer": {
-                              "label": {
-                                "simpleText": "Creative Commons"
-                              },
-                              "navigationEndpoint": {
-                                "clickTrackingParams": "CPMCEJN1GAQiEwiR_peMv4-UAxVYRPUFHWhXH33KAQTcy6n8",
-                                "commandMetadata": {
-                                  "webCommandMetadata": {
-                                    "url": "/results?search_query=NoCopyrightSounds&sp=EgIwAQ%253D%253D",
-                                    "webPageType": "WEB_PAGE_TYPE_SEARCH",
-                                    "rootVe": 4724
-                                  }
-                                },
-                                "searchEndpoint": {
-                                  "query": "NoCopyrightSounds",
-                                  "params": "EgIwAQ%3D%3D"
-                                }
-                              },
-                              "tooltip": "Search for Creative Commons",
-                              "trackingParams": "CPMCEJN1GAQiEwiR_peMv4-UAxVYRPUFHWhXH30="
-                            }
-                          },
-                          {
-                            "searchFilterRenderer": {
-                              "label": {
-                                "simpleText": "360\u00b0"
-                              },
-                              "navigationEndpoint": {
-                                "clickTrackingParams": "CPICEJN1GAUiEwiR_peMv4-UAxVYRPUFHWhXH33KAQTcy6n8",
-                                "commandMetadata": {
-                                  "webCommandMetadata": {
-                                    "url": "/results?search_query=NoCopyrightSounds&sp=EgJ4AQ%253D%253D",
-                                    "webPageType": "WEB_PAGE_TYPE_SEARCH",
-                                    "rootVe": 4724
-                                  }
-                                },
-                                "searchEndpoint": {
-                                  "query": "NoCopyrightSounds",
-                                  "params": "EgJ4AQ%3D%3D"
-                                }
-                              },
-                              "tooltip": "Search for 360\u00b0",
-                              "trackingParams": "CPICEJN1GAUiEwiR_peMv4-UAxVYRPUFHWhXH30="
-                            }
-                          },
-                          {
-                            "searchFilterRenderer": {
-                              "label": {
-                                "simpleText": "VR180"
-                              },
-                              "navigationEndpoint": {
-                                "clickTrackingParams": "CPECEJN1GAYiEwiR_peMv4-UAxVYRPUFHWhXH33KAQTcy6n8",
-                                "commandMetadata": {
-                                  "webCommandMetadata": {
-                                    "url": "/results?search_query=NoCopyrightSounds&sp=EgPQAQE%253D",
-                                    "webPageType": "WEB_PAGE_TYPE_SEARCH",
-                                    "rootVe": 4724
-                                  }
-                                },
-                                "searchEndpoint": {
-                                  "query": "NoCopyrightSounds",
-                                  "params": "EgPQAQE%3D"
-                                }
-                              },
-                              "tooltip": "Search for VR180",
-                              "trackingParams": "CPECEJN1GAYiEwiR_peMv4-UAxVYRPUFHWhXH30="
-                            }
-                          },
-                          {
-                            "searchFilterRenderer": {
-                              "label": {
-                                "simpleText": "3D"
-                              },
-                              "navigationEndpoint": {
-                                "clickTrackingParams": "CPACEJN1GAciEwiR_peMv4-UAxVYRPUFHWhXH33KAQTcy6n8",
-                                "commandMetadata": {
-                                  "webCommandMetadata": {
-                                    "url": "/results?search_query=NoCopyrightSounds&sp=EgI4AQ%253D%253D",
-                                    "webPageType": "WEB_PAGE_TYPE_SEARCH",
-                                    "rootVe": 4724
-                                  }
-                                },
-                                "searchEndpoint": {
-                                  "query": "NoCopyrightSounds",
-                                  "params": "EgI4AQ%3D%3D"
-                                }
-                              },
-                              "tooltip": "Search for 3D",
-                              "trackingParams": "CPACEJN1GAciEwiR_peMv4-UAxVYRPUFHWhXH30="
-                            }
-                          },
-                          {
-                            "searchFilterRenderer": {
-                              "label": {
-                                "simpleText": "HDR"
-                              },
-                              "navigationEndpoint": {
-                                "clickTrackingParams": "CO8CEJN1GAgiEwiR_peMv4-UAxVYRPUFHWhXH33KAQTcy6n8",
-                                "commandMetadata": {
-                                  "webCommandMetadata": {
-                                    "url": "/results?search_query=NoCopyrightSounds&sp=EgPIAQE%253D",
-                                    "webPageType": "WEB_PAGE_TYPE_SEARCH",
-                                    "rootVe": 4724
-                                  }
-                                },
-                                "searchEndpoint": {
-                                  "query": "NoCopyrightSounds",
-                                  "params": "EgPIAQE%3D"
-                                }
-                              },
-                              "tooltip": "Search for HDR",
-                              "trackingParams": "CO8CEJN1GAgiEwiR_peMv4-UAxVYRPUFHWhXH30="
-                            }
-                          },
-                          {
-                            "searchFilterRenderer": {
-                              "label": {
-                                "simpleText": "Location"
-                              },
-                              "navigationEndpoint": {
-                                "clickTrackingParams": "CO4CEJN1GAkiEwiR_peMv4-UAxVYRPUFHWhXH33KAQTcy6n8",
-                                "commandMetadata": {
-                                  "webCommandMetadata": {
-                                    "url": "/results?search_query=NoCopyrightSounds&sp=EgO4AQE%253D",
-                                    "webPageType": "WEB_PAGE_TYPE_SEARCH",
-                                    "rootVe": 4724
-                                  }
-                                },
-                                "searchEndpoint": {
-                                  "query": "NoCopyrightSounds",
-                                  "params": "EgO4AQE%3D"
-                                }
-                              },
-                              "tooltip": "Search for Location",
-                              "trackingParams": "CO4CEJN1GAkiEwiR_peMv4-UAxVYRPUFHWhXH30="
-                            }
-                          },
-                          {
-                            "searchFilterRenderer": {
-                              "label": {
-                                "simpleText": "Purchased"
-                              },
-                              "navigationEndpoint": {
-                                "clickTrackingParams": "CO0CEJN1GAoiEwiR_peMv4-UAxVYRPUFHWhXH33KAQTcy6n8",
-                                "commandMetadata": {
-                                  "webCommandMetadata": {
-                                    "url": "/results?search_query=NoCopyrightSounds&sp=EgJIAQ%253D%253D",
-                                    "webPageType": "WEB_PAGE_TYPE_SEARCH",
-                                    "rootVe": 4724
-                                  }
-                                },
-                                "searchEndpoint": {
-                                  "query": "NoCopyrightSounds",
-                                  "params": "EgJIAQ%3D%3D"
-                                }
-                              },
-                              "tooltip": "Search for Purchased",
-                              "trackingParams": "CO0CEJN1GAoiEwiR_peMv4-UAxVYRPUFHWhXH30="
-                            }
-                          }
-                        ],
-                        "trackingParams": "COwCEJJ1GAMiEwiR_peMv4-UAxVYRPUFHWhXH30="
-                      }
-                    },
-                    {
-                      "searchFilterGroupRenderer": {
-                        "title": {
-                          "simpleText": "Prioritize"
-                        },
-                        "filters": [
-                          {
-                            "searchFilterRenderer": {
-                              "label": {
-                                "simpleText": "Relevance"
-                              },
-                              "status": "FILTER_STATUS_SELECTED",
-                              "tooltip": "Prioritize by relevance",
-                              "trackingParams": "COsCEJN1GAAiEwiR_peMv4-UAxVYRPUFHWhXH30="
-                            }
-                          },
-                          {
-                            "searchFilterRenderer": {
-                              "label": {
-                                "simpleText": "Popularity"
-                              },
-                              "navigationEndpoint": {
-                                "clickTrackingParams": "COoCEJN1GAEiEwiR_peMv4-UAxVYRPUFHWhXH33KAQTcy6n8",
-                                "commandMetadata": {
-                                  "webCommandMetadata": {
-                                    "url": "/results?search_query=NoCopyrightSounds&sp=CAM%253D",
-                                    "webPageType": "WEB_PAGE_TYPE_SEARCH",
-                                    "rootVe": 4724
-                                  }
-                                },
-                                "searchEndpoint": {
-                                  "query": "NoCopyrightSounds",
-                                  "params": "CAM%3D"
-                                }
-                              },
-                              "tooltip": "Prioritize by popularity",
-                              "trackingParams": "COoCEJN1GAEiEwiR_peMv4-UAxVYRPUFHWhXH30="
-                            }
-                          }
-                        ],
-                        "trackingParams": "COkCEJJ1GAQiEwiR_peMv4-UAxVYRPUFHWhXH30="
-                      }
-                    }
-                  ]
-                }
-              },
-              "popupType": "DIALOG"
-            }
-          },
-          "iconPosition": "BUTTON_ICON_POSITION_TYPE_RIGHT_OF_TEXT"
-        }
-      },
-      "trackingParams": "COcCEIjqCiITCJH-l4y_j5QDFVhE9QUdaFcffQ=="
-    }
-  },
-  "topbar": {
-    "desktopTopbarRenderer": {
-      "logo": {
-        "topbarLogoRenderer": {
-          "iconImage": {
-            "iconType": "YOUTUBE_LOGO"
-          },
-          "tooltipText": {
-            "runs": [
-              {
-                "text": "YouTube Home"
-              }
-            ]
-          },
-          "endpoint": {
-            "clickTrackingParams": "COYCELFeIhMIkf6XjL-PlAMVWET1BR1oVx99ygEE3Mup_A==",
-            "commandMetadata": {
-              "webCommandMetadata": {
-                "url": "/",
-                "webPageType": "WEB_PAGE_TYPE_BROWSE",
-                "rootVe": 3854,
-                "apiUrl": "/youtubei/v1/browse"
-              }
-            },
-            "browseEndpoint": {
-              "browseId": "FEwhat_to_watch"
-            }
-          },
-          "trackingParams": "COYCELFeIhMIkf6XjL-PlAMVWET1BR1oVx99",
-          "overrideEntityKey": "EgZ0b3BiYXIg9QEoAQ%3D%3D"
-        }
-      },
-      "searchbox": {
-        "fusionSearchboxRenderer": {
-          "icon": {
-            "iconType": "SEARCH"
-          },
-          "placeholderText": {
-            "runs": [
-              {
-                "text": "Search"
-              }
-            ]
-          },
-          "config": {
-            "webSearchboxConfig": {
-              "requestLanguage": "en",
-              "requestDomain": "kr",
-              "hasOnscreenKeyboard": false,
-              "focusSearchbox": true
-            }
-          },
-          "trackingParams": "COICEO1QIhMIkf6XjL-PlAMVWET1BR1oVx99",
-          "searchEndpoint": {
-            "clickTrackingParams": "COICEO1QIhMIkf6XjL-PlAMVWET1BR1oVx99ygEE3Mup_A==",
-            "commandMetadata": {
-              "webCommandMetadata": {
-                "url": "/results?search_query=",
-                "webPageType": "WEB_PAGE_TYPE_SEARCH",
-                "rootVe": 4724
-              }
-            },
-            "searchEndpoint": {
-              "query": ""
-            }
-          },
-          "clearButton": {
-            "buttonRenderer": {
-              "style": "STYLE_DEFAULT",
-              "size": "SIZE_DEFAULT",
-              "isDisabled": false,
-              "icon": {
-                "iconType": "CLOSE"
-              },
-              "trackingParams": "COUCEPBbIhMIkf6XjL-PlAMVWET1BR1oVx99",
-              "accessibilityData": {
-                "accessibilityData": {
-                  "label": "Clear search query"
-                }
-              }
-            }
-          },
-          "showImageSourceDialog": {
-            "clickTrackingParams": "COICEO1QIhMIkf6XjL-PlAMVWET1BR1oVx99ygEE3Mup_A==",
-            "showDialogCommand": {
-              "panelLoadingStrategy": {
-                "inlineContent": {
-                  "dialogViewModel": {
-                    "header": {
-                      "dialogHeaderViewModel": {
-                        "headline": {
-                          "content": "Image source"
-                        }
-                      }
-                    },
-                    "footer": {
-                      "panelFooterViewModel": {
-                        "primaryButton": {
-                          "buttonViewModel": {
-                            "title": "Visit source",
-                            "style": "BUTTON_VIEW_MODEL_STYLE_MONO",
-                            "trackingParams": "COQCEPBbIhMIkf6XjL-PlAMVWET1BR1oVx99",
-                            "isFullWidth": true,
-                            "type": "BUTTON_VIEW_MODEL_TYPE_FILLED"
-                          }
-                        },
-                        "secondaryButton": {
-                          "buttonViewModel": {
-                            "title": "Cancel",
-                            "style": "BUTTON_VIEW_MODEL_STYLE_MONO",
-                            "trackingParams": "COMCEPBbIhMIkf6XjL-PlAMVWET1BR1oVx99",
-                            "isFullWidth": true,
-                            "type": "BUTTON_VIEW_MODEL_TYPE_TONAL"
-                          }
-                        },
-                        "shouldHideDivider": true
-                      }
-                    },
-                    "content": {
-                      "basicContentViewModel": {
-                        "paragraphs": [
-                          {
-                            "text": {
-                              "content": "Visit image source website?"
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "trackingParams": "CNYCEKusASITCJH-l4y_j5QDFVhE9QUdaFcffQ==",
-      "countryCode": "KR",
-      "topbarButtons": [
-        {
-          "topbarMenuButtonRenderer": {
-            "icon": {
-              "iconType": "MORE_VERT"
-            },
-            "menuRequest": {
-              "clickTrackingParams": "COACEP6rARgAIhMIkf6XjL-PlAMVWET1BR1oVx99ygEE3Mup_A==",
-              "commandMetadata": {
-                "webCommandMetadata": {
-                  "sendPost": true,
-                  "apiUrl": "/youtubei/v1/account/account_menu"
-                }
-              },
-              "signalServiceEndpoint": {
-                "signal": "GET_ACCOUNT_MENU",
-                "actions": [
-                  {
-                    "clickTrackingParams": "COACEP6rARgAIhMIkf6XjL-PlAMVWET1BR1oVx99ygEE3Mup_A==",
-                    "openPopupAction": {
-                      "popup": {
-                        "multiPageMenuRenderer": {
-                          "trackingParams": "COECEP-rASITCJH-l4y_j5QDFVhE9QUdaFcffQ==",
-                          "style": "MULTI_PAGE_MENU_STYLE_TYPE_SYSTEM",
-                          "showLoadingSpinner": true
-                        }
-                      },
-                      "popupType": "DROPDOWN",
-                      "beReused": true
-                    }
-                  }
-                ]
-              }
-            },
-            "trackingParams": "COACEP6rARgAIhMIkf6XjL-PlAMVWET1BR1oVx99",
-            "accessibility": {
-              "accessibilityData": {
-                "label": "Settings"
-              }
-            },
-            "tooltip": "Settings",
-            "style": "STYLE_DEFAULT"
-          }
-        },
-        {
-          "buttonRenderer": {
-            "style": "STYLE_SUGGESTIVE",
-            "size": "SIZE_SMALL",
-            "text": {
-              "runs": [
-                {
-                  "text": "Sign in"
-                }
-              ]
-            },
-            "icon": {
-              "iconType": "AVATAR_LOGGED_OUT"
-            },
-            "navigationEndpoint": {
-              "clickTrackingParams": "CN8CENSABBgBIhMIkf6XjL-PlAMVWET1BR1oVx99ygEE3Mup_A==",
-              "commandMetadata": {
-                "webCommandMetadata": {
-                  "url": "https://accounts.google.com/ServiceLogin?service=youtube&uilel=3&passive=true&continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26hl%3Den%26next%3Dhttps%253A%252F%252Fwww.youtube.com%252Fyoutubei%252Fv1%252Fsearch%253Fkey%253DAIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8&hl=en&ec=65620",
-                  "webPageType": "WEB_PAGE_TYPE_UNKNOWN",
-                  "rootVe": 83769
-                }
-              },
-              "signInEndpoint": {
-                "idamTag": "65620"
-              }
-            },
-            "trackingParams": "CN8CENSABBgBIhMIkf6XjL-PlAMVWET1BR1oVx99",
-            "targetId": "topbar-signin"
-          }
-        }
-      ],
-      "hotkeyDialog": {
-        "hotkeyDialogRenderer": {
-          "title": {
-            "runs": [
-              {
-                "text": "Keyboard shortcuts"
-              }
-            ]
-          },
-          "sections": [
-            {
-              "hotkeyDialogSectionRenderer": {
-                "title": {
-                  "runs": [
-                    {
-                      "text": "Playback"
-                    }
-                  ]
-                },
-                "options": [
-                  {
-                    "hotkeyDialogSectionOptionRenderer": {
-                      "label": {
-                        "runs": [
-                          {
-                            "text": "Toggle play/pause"
-                          }
-                        ]
-                      },
-                      "hotkey": "k"
-                    }
-                  },
-                  {
-                    "hotkeyDialogSectionOptionRenderer": {
-                      "label": {
-                        "runs": [
-                          {
-                            "text": "Rewind 10 seconds"
-                          }
-                        ]
-                      },
-                      "hotkey": "j"
-                    }
-                  },
-                  {
-                    "hotkeyDialogSectionOptionRenderer": {
-                      "label": {
-                        "runs": [
-                          {
-                            "text": "Fast forward 10 seconds"
-                          }
-                        ]
-                      },
-                      "hotkey": "l"
-                    }
-                  },
-                  {
-                    "hotkeyDialogSectionOptionRenderer": {
-                      "label": {
-                        "runs": [
-                          {
-                            "text": "Previous video"
-                          }
-                        ]
-                      },
-                      "hotkey": "P (SHIFT+p)"
-                    }
-                  },
-                  {
-                    "hotkeyDialogSectionOptionRenderer": {
-                      "label": {
-                        "runs": [
-                          {
-                            "text": "Next video"
-                          }
-                        ]
-                      },
-                      "hotkey": "N (SHIFT+n)"
-                    }
-                  },
-                  {
-                    "hotkeyDialogSectionOptionRenderer": {
-                      "label": {
-                        "runs": [
-                          {
-                            "text": "Previous frame (while paused)"
-                          }
-                        ]
-                      },
-                      "hotkey": ",",
-                      "hotkeyAccessibilityLabel": {
-                        "accessibilityData": {
-                          "label": "Comma"
-                        }
-                      }
-                    }
-                  },
-                  {
-                    "hotkeyDialogSectionOptionRenderer": {
-                      "label": {
-                        "runs": [
-                          {
-                            "text": "Next frame (while paused)"
-                          }
-                        ]
-                      },
-                      "hotkey": ".",
-                      "hotkeyAccessibilityLabel": {
-                        "accessibilityData": {
-                          "label": "Period"
-                        }
-                      }
-                    }
-                  },
-                  {
-                    "hotkeyDialogSectionOptionRenderer": {
-                      "label": {
-                        "runs": [
-                          {
-                            "text": "Decrease playback rate"
-                          }
-                        ]
-                      },
-                      "hotkey": "< (SHIFT+,)",
-                      "hotkeyAccessibilityLabel": {
-                        "accessibilityData": {
-                          "label": "Less than or SHIFT + comma"
-                        }
-                      }
-                    }
-                  },
-                  {
-                    "hotkeyDialogSectionOptionRenderer": {
-                      "label": {
-                        "runs": [
-                          {
-                            "text": "Increase playback rate"
-                          }
-                        ]
-                      },
-                      "hotkey": "> (SHIFT+.)",
-                      "hotkeyAccessibilityLabel": {
-                        "accessibilityData": {
-                          "label": "Greater than or SHIFT + period"
-                        }
-                      }
-                    }
-                  },
-                  {
-                    "hotkeyDialogSectionOptionRenderer": {
-                      "label": {
-                        "runs": [
-                          {
-                            "text": "Seek to specific point in the video (7 advances to 70% of duration)"
-                          }
-                        ]
-                      },
-                      "hotkey": "0..9"
-                    }
-                  },
-                  {
-                    "hotkeyDialogSectionOptionRenderer": {
-                      "label": {
-                        "runs": [
-                          {
-                            "text": "Seek to previous chapter"
-                          }
-                        ]
-                      },
-                      "hotkey": "CONTROL + \u2190"
-                    }
-                  },
-                  {
-                    "hotkeyDialogSectionOptionRenderer": {
-                      "label": {
-                        "runs": [
-                          {
-                            "text": "Seek to next chapter"
-                          }
-                        ]
-                      },
-                      "hotkey": "CONTROL + \u2192"
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "hotkeyDialogSectionRenderer": {
-                "title": {
-                  "runs": [
-                    {
-                      "text": "General"
-                    }
-                  ]
-                },
-                "options": [
-                  {
-                    "hotkeyDialogSectionOptionRenderer": {
-                      "label": {
-                        "runs": [
-                          {
-                            "text": "Toggle full screen"
-                          }
-                        ]
-                      },
-                      "hotkey": "f"
-                    }
-                  },
-                  {
-                    "hotkeyDialogSectionOptionRenderer": {
-                      "label": {
-                        "runs": [
-                          {
-                            "text": "Toggle theater mode"
-                          }
-                        ]
-                      },
-                      "hotkey": "t"
-                    }
-                  },
-                  {
-                    "hotkeyDialogSectionOptionRenderer": {
-                      "label": {
-                        "runs": [
-                          {
-                            "text": "Toggle miniplayer"
-                          }
-                        ]
-                      },
-                      "hotkey": "i"
-                    }
-                  },
-                  {
-                    "hotkeyDialogSectionOptionRenderer": {
-                      "label": {
-                        "runs": [
-                          {
-                            "text": "Close miniplayer or current dialog"
-                          }
-                        ]
-                      },
-                      "hotkey": "ESCAPE"
-                    }
-                  },
-                  {
-                    "hotkeyDialogSectionOptionRenderer": {
-                      "label": {
-                        "runs": [
-                          {
-                            "text": "Toggle mute"
-                          }
-                        ]
-                      },
-                      "hotkey": "m"
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "hotkeyDialogSectionRenderer": {
-                "title": {
-                  "runs": [
-                    {
-                      "text": "Subtitles and closed captions"
-                    }
-                  ]
-                },
-                "options": [
-                  {
-                    "hotkeyDialogSectionOptionRenderer": {
-                      "label": {
-                        "runs": [
-                          {
-                            "text": "If the video supports captions, toggle captions ON/OFF"
-                          }
-                        ]
-                      },
-                      "hotkey": "c"
-                    }
-                  },
-                  {
-                    "hotkeyDialogSectionOptionRenderer": {
-                      "label": {
-                        "runs": [
-                          {
-                            "text": "Rotate through different text opacity levels"
-                          }
-                        ]
-                      },
-                      "hotkey": "o"
-                    }
-                  },
-                  {
-                    "hotkeyDialogSectionOptionRenderer": {
-                      "label": {
-                        "runs": [
-                          {
-                            "text": "Rotate through different window opacity levels"
-                          }
-                        ]
-                      },
-                      "hotkey": "w"
-                    }
-                  },
-                  {
-                    "hotkeyDialogSectionOptionRenderer": {
-                      "label": {
-                        "runs": [
-                          {
-                            "text": "Rotate through font sizes (increasing)"
-                          }
-                        ]
-                      },
-                      "hotkey": "+"
-                    }
-                  },
-                  {
-                    "hotkeyDialogSectionOptionRenderer": {
-                      "label": {
-                        "runs": [
-                          {
-                            "text": "Rotate through font sizes (decreasing)"
-                          }
-                        ]
-                      },
-                      "hotkey": "-",
-                      "hotkeyAccessibilityLabel": {
-                        "accessibilityData": {
-                          "label": "Minus"
-                        }
-                      }
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "hotkeyDialogSectionRenderer": {
-                "title": {
-                  "runs": [
-                    {
-                      "text": "Spherical Videos"
-                    }
-                  ]
-                },
-                "options": [
-                  {
-                    "hotkeyDialogSectionOptionRenderer": {
-                      "label": {
-                        "runs": [
-                          {
-                            "text": "Pan up"
-                          }
-                        ]
-                      },
-                      "hotkey": "w"
-                    }
-                  },
-                  {
-                    "hotkeyDialogSectionOptionRenderer": {
-                      "label": {
-                        "runs": [
-                          {
-                            "text": "Pan left"
-                          }
-                        ]
-                      },
-                      "hotkey": "a"
-                    }
-                  },
-                  {
-                    "hotkeyDialogSectionOptionRenderer": {
-                      "label": {
-                        "runs": [
-                          {
-                            "text": "Pan down"
-                          }
-                        ]
-                      },
-                      "hotkey": "s"
-                    }
-                  },
-                  {
-                    "hotkeyDialogSectionOptionRenderer": {
-                      "label": {
-                        "runs": [
-                          {
-                            "text": "Pan right"
-                          }
-                        ]
-                      },
-                      "hotkey": "d"
-                    }
-                  },
-                  {
-                    "hotkeyDialogSectionOptionRenderer": {
-                      "label": {
-                        "runs": [
-                          {
-                            "text": "Zoom in"
-                          }
-                        ]
-                      },
-                      "hotkey": "+ on numpad or ]",
-                      "hotkeyAccessibilityLabel": {
-                        "accessibilityData": {
-                          "label": "Plus on number pad or right bracket"
-                        }
-                      }
-                    }
-                  },
-                  {
-                    "hotkeyDialogSectionOptionRenderer": {
-                      "label": {
-                        "runs": [
-                          {
-                            "text": "Zoom out"
-                          }
-                        ]
-                      },
-                      "hotkey": "- on numpad or [",
-                      "hotkeyAccessibilityLabel": {
-                        "accessibilityData": {
-                          "label": "Minus on number pad or left bracket"
-                        }
-                      }
-                    }
-                  }
-                ]
-              }
-            }
-          ],
-          "dismissButton": {
-            "buttonRenderer": {
-              "style": "STYLE_BLUE_TEXT",
-              "size": "SIZE_DEFAULT",
-              "isDisabled": false,
-              "text": {
-                "runs": [
-                  {
-                    "text": "Dismiss"
-                  }
-                ]
-              },
-              "trackingParams": "CN4CEPBbIhMIkf6XjL-PlAMVWET1BR1oVx99"
-            }
-          },
-          "trackingParams": "CN0CELXmAyITCJH-l4y_j5QDFVhE9QUdaFcffQ=="
-        }
-      },
-      "backButton": {
-        "buttonRenderer": {
-          "trackingParams": "CNwCELyGAyITCJH-l4y_j5QDFVhE9QUdaFcffQ==",
-          "command": {
-            "clickTrackingParams": "CNwCELyGAyITCJH-l4y_j5QDFVhE9QUdaFcffcoBBNzLqfw=",
-            "commandMetadata": {
-              "webCommandMetadata": {
-                "sendPost": true
-              }
-            },
-            "signalServiceEndpoint": {
-              "signal": "CLIENT_SIGNAL",
-              "actions": [
-                {
-                  "clickTrackingParams": "CNwCELyGAyITCJH-l4y_j5QDFVhE9QUdaFcffcoBBNzLqfw=",
-                  "signalAction": {
-                    "signal": "HISTORY_BACK"
-                  }
-                }
-              ]
-            }
-          }
-        }
-      },
-      "forwardButton": {
-        "buttonRenderer": {
-          "trackingParams": "CNsCEL2GAyITCJH-l4y_j5QDFVhE9QUdaFcffQ==",
-          "command": {
-            "clickTrackingParams": "CNsCEL2GAyITCJH-l4y_j5QDFVhE9QUdaFcffcoBBNzLqfw=",
-            "commandMetadata": {
-              "webCommandMetadata": {
-                "sendPost": true
-              }
-            },
-            "signalServiceEndpoint": {
-              "signal": "CLIENT_SIGNAL",
-              "actions": [
-                {
-                  "clickTrackingParams": "CNsCEL2GAyITCJH-l4y_j5QDFVhE9QUdaFcffcoBBNzLqfw=",
-                  "signalAction": {
-                    "signal": "HISTORY_FORWARD"
-                  }
-                }
-              ]
-            }
-          }
-        }
-      },
-      "a11ySkipNavigationButton": {
-        "buttonRenderer": {
-          "style": "STYLE_DEFAULT",
-          "size": "SIZE_DEFAULT",
-          "isDisabled": false,
-          "text": {
-            "runs": [
-              {
-                "text": "Skip navigation"
-              }
-            ]
-          },
-          "trackingParams": "CNoCEPBbIhMIkf6XjL-PlAMVWET1BR1oVx99",
-          "command": {
-            "clickTrackingParams": "CNoCEPBbIhMIkf6XjL-PlAMVWET1BR1oVx99ygEE3Mup_A==",
-            "commandMetadata": {
-              "webCommandMetadata": {
-                "sendPost": true
-              }
-            },
-            "signalServiceEndpoint": {
-              "signal": "CLIENT_SIGNAL",
-              "actions": [
-                {
-                  "clickTrackingParams": "CNoCEPBbIhMIkf6XjL-PlAMVWET1BR1oVx99ygEE3Mup_A==",
-                  "signalAction": {
-                    "signal": "SKIP_NAVIGATION"
-                  }
-                }
-              ]
-            }
-          }
-        }
-      },
-      "voiceSearchButton": {
-        "buttonRenderer": {
-          "style": "STYLE_DEFAULT",
-          "size": "SIZE_DEFAULT",
-          "isDisabled": false,
-          "serviceEndpoint": {
-            "clickTrackingParams": "CNcCEO2vBSITCJH-l4y_j5QDFVhE9QUdaFcffcoBBNzLqfw=",
-            "commandMetadata": {
-              "webCommandMetadata": {
-                "sendPost": true
-              }
-            },
-            "signalServiceEndpoint": {
-              "signal": "CLIENT_SIGNAL",
-              "actions": [
-                {
-                  "clickTrackingParams": "CNcCEO2vBSITCJH-l4y_j5QDFVhE9QUdaFcffcoBBNzLqfw=",
-                  "openPopupAction": {
-                    "popup": {
-                      "voiceSearchDialogRenderer": {
-                        "placeholderHeader": {
-                          "runs": [
-                            {
-                              "text": "Listening..."
-                            }
-                          ]
-                        },
-                        "promptHeader": {
-                          "runs": [
-                            {
-                              "text": "Didn't hear that. Try again."
-                            }
-                          ]
-                        },
-                        "exampleQuery1": {
-                          "runs": [
-                            {
-                              "text": "\"Play Dua Lipa\""
-                            }
-                          ]
-                        },
-                        "exampleQuery2": {
-                          "runs": [
-                            {
-                              "text": "\"Show me my subscriptions\""
-                            }
-                          ]
-                        },
-                        "promptMicrophoneLabel": {
-                          "runs": [
-                            {
-                              "text": "Tap microphone to try again"
-                            }
-                          ]
-                        },
-                        "loadingHeader": {
-                          "runs": [
-                            {
-                              "text": "Working..."
-                            }
-                          ]
-                        },
-                        "connectionErrorHeader": {
-                          "runs": [
-                            {
-                              "text": "No connection"
-                            }
-                          ]
-                        },
-                        "connectionErrorMicrophoneLabel": {
-                          "runs": [
-                            {
-                              "text": "Check your connection and try again"
-                            }
-                          ]
-                        },
-                        "permissionsHeader": {
-                          "runs": [
-                            {
-                              "text": "Waiting for permission"
-                            }
-                          ]
-                        },
-                        "permissionsSubtext": {
-                          "runs": [
-                            {
-                              "text": "Allow microphone access to search with voice"
-                            }
-                          ]
-                        },
-                        "disabledHeader": {
-                          "runs": [
-                            {
-                              "text": "Search with your voice"
-                            }
-                          ]
-                        },
-                        "disabledSubtext": {
-                          "runs": [
-                            {
-                              "text": "To search by voice, go to your browser settings and allow access to microphone"
-                            }
-                          ]
-                        },
-                        "microphoneButtonAriaLabel": {
-                          "runs": [
-                            {
-                              "text": "Cancel"
-                            }
-                          ]
-                        },
-                        "exitButton": {
-                          "buttonRenderer": {
-                            "style": "STYLE_DEFAULT",
-                            "size": "SIZE_DEFAULT",
-                            "isDisabled": false,
-                            "icon": {
-                              "iconType": "CLOSE"
-                            },
-                            "trackingParams": "CNkCENCxBSITCJH-l4y_j5QDFVhE9QUdaFcffQ==",
-                            "accessibilityData": {
-                              "accessibilityData": {
-                                "label": "Cancel"
-                              }
-                            }
-                          }
-                        },
-                        "trackingParams": "CNgCEO6vBSITCJH-l4y_j5QDFVhE9QUdaFcffQ==",
-                        "microphoneOffPromptHeader": {
-                          "runs": [
-                            {
-                              "text": "Microphone off. Try again."
-                            }
-                          ]
-                        }
-                      }
-                    },
-                    "popupType": "TOP_ALIGNED_DIALOG"
-                  }
-                }
-              ]
-            }
-          },
-          "icon": {
-            "iconType": "MICROPHONE_ON"
-          },
-          "tooltip": "Search with your voice",
-          "trackingParams": "CNcCEO2vBSITCJH-l4y_j5QDFVhE9QUdaFcffQ==",
-          "accessibilityData": {
-            "accessibilityData": {
-              "label": "Search with your voice"
-            }
-          }
-        }
-      }
-    }
-  },
   "onResponseReceivedCommands": [
     {
       "clickTrackingParams": "CAAQvGkiEwiR_peMv4-UAxVYRPUFHWhXH33KAQTcy6n8",
@@ -2487,7 +534,7 @@
                               "bold": true
                             },
                             {
-                              "text": " (NCS): Copyright free music for creators. Download & use this track for free in your next video\u00a0..."
+                              "text": " (NCS): Copyright free music for creators. Download & use this track for free in your next video ..."
                             }
                           ]
                         },
@@ -2592,12 +639,12 @@
                     "title": {
                       "runs": [
                         {
-                          "text": "EDM - 1 Hour MIX \ud83d\udd25 | NCS - Copyright Free Music"
+                          "text": "EDM - 1 Hour MIX 🔥 | NCS - Copyright Free Music"
                         }
                       ],
                       "accessibility": {
                         "accessibilityData": {
-                          "label": "EDM - 1 Hour MIX \ud83d\udd25 | NCS - Copyright Free Music 1 hour"
+                          "label": "EDM - 1 Hour MIX 🔥 | NCS - Copyright Free Music 1 hour"
                         }
                       }
                     },
@@ -3087,7 +1134,7 @@
                               "bold": true
                             },
                             {
-                              "text": " http://ncs.lnk.to/SubscribeYouTube 2019 Best of NCS '20 Million Subscriber' Mix! Thank you\u00a0..."
+                              "text": " http://ncs.lnk.to/SubscribeYouTube 2019 Best of NCS '20 Million Subscriber' Mix! Thank you ..."
                             }
                           ]
                         },
@@ -3135,7 +1182,7 @@
                           "collapsedTitle": {
                             "runs": [
                               {
-                                "text": "Lemon Fight - Stronger (ft. Jessica Reynoso) [Champion Remix] | ID | Prismo - Stronger (ID Remix) | Culture Code - Make Me Move (feat. Karra) (ID Remix) | Cartoon, J\u00e9ja - On & On (feat. Daniel Levi) | Unknown Brain - Perfect 10 (ft. Heather Sommer) | Diamond Eyes - Everything | ID | Last Heroes - Dimensions | Lost Sky - Fearless | Unknown Brain - Superhero (feat. Chris Linton) | Heuse, Zeus x Crona - Pill (feat. Emma Sameth) | JPB & MYRNE - Feels Right (ft. Yung Fusion) | Rob Gasser - Ricochet | Desembra - Hit Em | IZECOLD - Close (feat. Molly Ann) [Brooks Remix] | RMCM & James Roche - Diamonds (feat. Micah Martin) | WATEVA - Ber Zer Ker | Raven & Kreyn - So Happy | Tobu - Return To The Wild | Jim Yosef - Imagine | Elektronomia - Energy | Different Heaven - Safe And Sound | Kovan & Electro-Light - Skyline | Janji - Heroes Tonight (feat. Johnning) | Syn Cole - Feel Good | RetroVision - Puzzle | K-391 - Earth | ID | Sub Urban - Cradles | Jo Cohen - Glowing At Night (feat. BQ) | Razihel - Love U | Mendum - Stay With Me (Krys Talk Remix) | Krys Talk & Cole Sipe - Way Back Home | ID | ID | Warriyo - Mortals (feat. Laura Brehm)"
+                                "text": "Lemon Fight - Stronger (ft. Jessica Reynoso) [Champion Remix] | ID | Prismo - Stronger (ID Remix) | Culture Code - Make Me Move (feat. Karra) (ID Remix) | Cartoon, Jéja - On & On (feat. Daniel Levi) | Unknown Brain - Perfect 10 (ft. Heather Sommer) | Diamond Eyes - Everything | ID | Last Heroes - Dimensions | Lost Sky - Fearless | Unknown Brain - Superhero (feat. Chris Linton) | Heuse, Zeus x Crona - Pill (feat. Emma Sameth) | JPB & MYRNE - Feels Right (ft. Yung Fusion) | Rob Gasser - Ricochet | Desembra - Hit Em | IZECOLD - Close (feat. Molly Ann) [Brooks Remix] | RMCM & James Roche - Diamonds (feat. Micah Martin) | WATEVA - Ber Zer Ker | Raven & Kreyn - So Happy | Tobu - Return To The Wild | Jim Yosef - Imagine | Elektronomia - Energy | Different Heaven - Safe And Sound | Kovan & Electro-Light - Skyline | Janji - Heroes Tonight (feat. Johnning) | Syn Cole - Feel Good | RetroVision - Puzzle | K-391 - Earth | ID | Sub Urban - Cradles | Jo Cohen - Glowing At Night (feat. BQ) | Razihel - Love U | Mendum - Stay With Me (Krys Talk Remix) | Krys Talk & Cole Sipe - Way Back Home | ID | ID | Warriyo - Mortals (feat. Laura Brehm)"
                               }
                             ]
                           },
@@ -3381,7 +1428,7 @@
                                   "title": {
                                     "runs": [
                                       {
-                                        "text": "Cartoon, J\u00e9ja - On & On (feat. Daniel Levi)"
+                                        "text": "Cartoon, Jéja - On & On (feat. Daniel Levi)"
                                       }
                                     ]
                                   },
@@ -5283,7 +3330,7 @@
                       {
                         "shortsLockupViewModel": {
                           "entityId": "shorts-shelf-item-i4P1rJcQ0Ks",
-                          "accessibilityText": "Testing how well Netrum & Halvorsen know their own tracks \ud83c\udfb5 #nocopyrightsounds #music #ncs, 68 thousand views - play Short",
+                          "accessibilityText": "Testing how well Netrum & Halvorsen know their own tracks 🎵 #nocopyrightsounds #music #ncs, 68 thousand views - play Short",
                           "onTap": {
                             "innertubeCommand": {
                               "clickTrackingParams": "CJ0CEIf2BBgAIhMIkf6XjL-PlAMVWET1BR1oVx99UhFOb0NvcHlyaWdodFNvdW5kc5oBBQgyEPQkygEE3Mup_A==",
@@ -5531,7 +3578,7 @@
                           "menuOnTapA11yLabel": "More actions",
                           "overlayMetadata": {
                             "primaryText": {
-                              "content": "Testing how well Netrum & Halvorsen know their own tracks \ud83c\udfb5 #nocopyrightsounds #music #ncs"
+                              "content": "Testing how well Netrum & Halvorsen know their own tracks 🎵 #nocopyrightsounds #music #ncs"
                             },
                             "secondaryText": {
                               "content": "68K views"
@@ -5568,7 +3615,7 @@
                       {
                         "shortsLockupViewModel": {
                           "entityId": "shorts-shelf-item-aVyI3EQb9Ww",
-                          "accessibilityText": "Name the track and you win the cookie he dropped \ud83c\udf6a #nocopyrightsounds #ncs, 1.8 million views - play Short",
+                          "accessibilityText": "Name the track and you win the cookie he dropped 🍪 #nocopyrightsounds #ncs, 1.8 million views - play Short",
                           "onTap": {
                             "innertubeCommand": {
                               "clickTrackingParams": "CJkCEIf2BBgBIhMIkf6XjL-PlAMVWET1BR1oVx99UhFOb0NvcHlyaWdodFNvdW5kc5oBBQgyEPQkygEE3Mup_A==",
@@ -5816,7 +3863,7 @@
                           "menuOnTapA11yLabel": "More actions",
                           "overlayMetadata": {
                             "primaryText": {
-                              "content": "Name the track and you win the cookie he dropped \ud83c\udf6a #nocopyrightsounds #ncs"
+                              "content": "Name the track and you win the cookie he dropped 🍪 #nocopyrightsounds #ncs"
                             },
                             "secondaryText": {
                               "content": "1.8M views"
@@ -5853,7 +3900,7 @@
                       {
                         "shortsLockupViewModel": {
                           "entityId": "shorts-shelf-item-XK-WcoqdAl0",
-                          "accessibilityText": "\ud83c\uddfa\ud83c\uddf8\ud83c\udf99\ud83e\udd20\ud83d\ude97 #nocopyrightsounds #ncsroadtrip #music #hiphop, 43 thousand views - play Short",
+                          "accessibilityText": "🇺🇸🎙🤠🚗 #nocopyrightsounds #ncsroadtrip #music #hiphop, 43 thousand views - play Short",
                           "onTap": {
                             "innertubeCommand": {
                               "clickTrackingParams": "CJUCEIf2BBgCIhMIkf6XjL-PlAMVWET1BR1oVx99UhFOb0NvcHlyaWdodFNvdW5kc5oBBQgyEPQkygEE3Mup_A==",
@@ -6101,7 +4148,7 @@
                           "menuOnTapA11yLabel": "More actions",
                           "overlayMetadata": {
                             "primaryText": {
-                              "content": "\ud83c\uddfa\ud83c\uddf8\ud83c\udf99\ud83e\udd20\ud83d\ude97 #nocopyrightsounds #ncsroadtrip #music #hiphop"
+                              "content": "🇺🇸🎙🤠🚗 #nocopyrightsounds #ncsroadtrip #music #hiphop"
                             },
                             "secondaryText": {
                               "content": "43K views"
@@ -6138,7 +4185,7 @@
                       {
                         "shortsLockupViewModel": {
                           "entityId": "shorts-shelf-item-YasQqikA9T4",
-                          "accessibilityText": "\ud83c\uddec\ud83c\udde7\ud83c\udf1e\ud83c\udf6c\ud83d\ude97 #nocopyrightsounds #ncsroadtrip #music, 35 thousand views - play Short",
+                          "accessibilityText": "🇬🇧🌞🍬🚗 #nocopyrightsounds #ncsroadtrip #music, 35 thousand views - play Short",
                           "onTap": {
                             "innertubeCommand": {
                               "clickTrackingParams": "CJECEIf2BBgDIhMIkf6XjL-PlAMVWET1BR1oVx99UhFOb0NvcHlyaWdodFNvdW5kc5oBBQgyEPQkygEE3Mup_A==",
@@ -6386,7 +4433,7 @@
                           "menuOnTapA11yLabel": "More actions",
                           "overlayMetadata": {
                             "primaryText": {
-                              "content": "\ud83c\uddec\ud83c\udde7\ud83c\udf1e\ud83c\udf6c\ud83d\ude97 #nocopyrightsounds #ncsroadtrip #music"
+                              "content": "🇬🇧🌞🍬🚗 #nocopyrightsounds #ncsroadtrip #music"
                             },
                             "secondaryText": {
                               "content": "35K views"
@@ -6423,7 +4470,7 @@
                       {
                         "shortsLockupViewModel": {
                           "entityId": "shorts-shelf-item-eyGW0gMZs_I",
-                          "accessibilityText": "All YouTube kids should know these \ud83e\udd14 #nocopyrightsounds #ncs #nostalgia, 1.4 million views - play Short",
+                          "accessibilityText": "All YouTube kids should know these 🤔 #nocopyrightsounds #ncs #nostalgia, 1.4 million views - play Short",
                           "onTap": {
                             "innertubeCommand": {
                               "clickTrackingParams": "CI0CEIf2BBgEIhMIkf6XjL-PlAMVWET1BR1oVx99UhFOb0NvcHlyaWdodFNvdW5kc5oBBQgyEPQkygEE3Mup_A==",
@@ -6671,7 +4718,7 @@
                           "menuOnTapA11yLabel": "More actions",
                           "overlayMetadata": {
                             "primaryText": {
-                              "content": "All YouTube kids should know these \ud83e\udd14 #nocopyrightsounds #ncs #nostalgia"
+                              "content": "All YouTube kids should know these 🤔 #nocopyrightsounds #ncs #nostalgia"
                             },
                             "secondaryText": {
                               "content": "1.4M views"
@@ -6708,7 +4755,7 @@
                       {
                         "shortsLockupViewModel": {
                           "entityId": "shorts-shelf-item-1z9_S-tKVXE",
-                          "accessibilityText": "This era \u2764\ufe0f #nocopyrightsounds #ncs #symbolism #turiipipip #2015 #nostalgia #minecraft, 66 thousand views - play Short",
+                          "accessibilityText": "This era ❤️ #nocopyrightsounds #ncs #symbolism #turiipipip #2015 #nostalgia #minecraft, 66 thousand views - play Short",
                           "onTap": {
                             "innertubeCommand": {
                               "clickTrackingParams": "CIkCEIf2BBgFIhMIkf6XjL-PlAMVWET1BR1oVx99UhFOb0NvcHlyaWdodFNvdW5kc5oBBQgyEPQkygEE3Mup_A==",
@@ -6957,7 +5004,7 @@
                           "menuOnTapA11yLabel": "More actions",
                           "overlayMetadata": {
                             "primaryText": {
-                              "content": "This era \u2764\ufe0f #nocopyrightsounds #ncs #symbolism #turiipipip #2015 #nostalgia #minecraft"
+                              "content": "This era ❤️ #nocopyrightsounds #ncs #symbolism #turiipipip #2015 #nostalgia #minecraft"
                             },
                             "secondaryText": {
                               "content": "66K views"
@@ -6994,7 +5041,7 @@
                       {
                         "shortsLockupViewModel": {
                           "entityId": "shorts-shelf-item-tnuU9GJiNEc",
-                          "accessibilityText": "Who is heading to ADE this year? \ud83d\udc9b #nocopyrightsounds #amsterdamdanceevent, 35 thousand views - play Short",
+                          "accessibilityText": "Who is heading to ADE this year? 💛 #nocopyrightsounds #amsterdamdanceevent, 35 thousand views - play Short",
                           "onTap": {
                             "innertubeCommand": {
                               "clickTrackingParams": "CIUCEIf2BBgGIhMIkf6XjL-PlAMVWET1BR1oVx99UhFOb0NvcHlyaWdodFNvdW5kc5oBBQgyEPQkygEE3Mup_A==",
@@ -7242,7 +5289,7 @@
                           "menuOnTapA11yLabel": "More actions",
                           "overlayMetadata": {
                             "primaryText": {
-                              "content": "Who is heading to ADE this year? \ud83d\udc9b #nocopyrightsounds #amsterdamdanceevent"
+                              "content": "Who is heading to ADE this year? 💛 #nocopyrightsounds #amsterdamdanceevent"
                             },
                             "secondaryText": {
                               "content": "35K views"
@@ -7274,7 +5321,7 @@
                       {
                         "shortsLockupViewModel": {
                           "entityId": "shorts-shelf-item-LlbKZVbEcNE",
-                          "accessibilityText": "\ud83c\uddff\ud83c\uddf2\ud83d\udcfc\ud83d\udc9e\ud83d\ude97 #nocopyrightsounds #ncsroadtrip #music #afrobeats, 63 thousand views - play Short",
+                          "accessibilityText": "🇿🇲📼💞🚗 #nocopyrightsounds #ncsroadtrip #music #afrobeats, 63 thousand views - play Short",
                           "onTap": {
                             "innertubeCommand": {
                               "clickTrackingParams": "CIECEIf2BBgHIhMIkf6XjL-PlAMVWET1BR1oVx99UhFOb0NvcHlyaWdodFNvdW5kc5oBBQgyEPQkygEE3Mup_A==",
@@ -7522,7 +5569,7 @@
                           "menuOnTapA11yLabel": "More actions",
                           "overlayMetadata": {
                             "primaryText": {
-                              "content": "\ud83c\uddff\ud83c\uddf2\ud83d\udcfc\ud83d\udc9e\ud83d\ude97 #nocopyrightsounds #ncsroadtrip #music #afrobeats"
+                              "content": "🇿🇲📼💞🚗 #nocopyrightsounds #ncsroadtrip #music #afrobeats"
                             },
                             "secondaryText": {
                               "content": "63K views"
@@ -7559,7 +5606,7 @@
                       {
                         "shortsLockupViewModel": {
                           "entityId": "shorts-shelf-item-GYoSfSur3Wc",
-                          "accessibilityText": "\ud83e\udd7a\ud83e\udd7a\ud83e\udd7a #ncs #nocopyrightsounds #youtube #nostalgia #invisible, 132 thousand views - play Short",
+                          "accessibilityText": "🥺🥺🥺 #ncs #nocopyrightsounds #youtube #nostalgia #invisible, 132 thousand views - play Short",
                           "onTap": {
                             "innertubeCommand": {
                               "clickTrackingParams": "CP0BEIf2BBgIIhMIkf6XjL-PlAMVWET1BR1oVx99UhFOb0NvcHlyaWdodFNvdW5kc5oBBQgyEPQkygEE3Mup_A==",
@@ -7807,7 +5854,7 @@
                           "menuOnTapA11yLabel": "More actions",
                           "overlayMetadata": {
                             "primaryText": {
-                              "content": "\ud83e\udd7a\ud83e\udd7a\ud83e\udd7a #ncs #nocopyrightsounds #youtube #nostalgia #invisible"
+                              "content": "🥺🥺🥺 #ncs #nocopyrightsounds #youtube #nostalgia #invisible"
                             },
                             "secondaryText": {
                               "content": "132K views"
@@ -8694,7 +6741,7 @@
                               "bold": true
                             },
                             {
-                              "text": " http://ncs.lnk.to/SubscribeYouTube NCS: Music Without Limitations NCS Spotify:\u00a0..."
+                              "text": " http://ncs.lnk.to/SubscribeYouTube NCS: Music Without Limitations NCS Spotify: ..."
                             }
                           ]
                         },
@@ -9300,7 +7347,7 @@
                               "bold": true
                             },
                             {
-                              "text": "): Empowering Creators\u00a0..."
+                              "text": "): Empowering Creators ..."
                             }
                           ]
                         },
@@ -9391,7 +7438,7 @@
                       {
                         "shortsLockupViewModel": {
                           "entityId": "shorts-shelf-item-1z9_S-tKVXE",
-                          "accessibilityText": "This era \u2764\ufe0f #nocopyrightsounds #ncs #symbolism #turiipipip #2015 #nostalgia #minecraft, 66 thousand views - play Short",
+                          "accessibilityText": "This era ❤️ #nocopyrightsounds #ncs #symbolism #turiipipip #2015 #nostalgia #minecraft, 66 thousand views - play Short",
                           "onTap": {
                             "innertubeCommand": {
                               "clickTrackingParams": "COgBEIf2BBgAIhMIkf6XjL-PlAMVWET1BR1oVx99UhFOb0NvcHlyaWdodFNvdW5kc5oBBQgyEPQkygEE3Mup_A==",
@@ -9639,7 +7686,7 @@
                           "menuOnTapA11yLabel": "More actions",
                           "overlayMetadata": {
                             "primaryText": {
-                              "content": "This era \u2764\ufe0f #nocopyrightsounds #ncs #symbolism #turiipipip #2015 #nostalgia #minecraft"
+                              "content": "This era ❤️ #nocopyrightsounds #ncs #symbolism #turiipipip #2015 #nostalgia #minecraft"
                             },
                             "secondaryText": {
                               "content": "66K views"
@@ -9676,7 +7723,7 @@
                       {
                         "shortsLockupViewModel": {
                           "entityId": "shorts-shelf-item-tnuU9GJiNEc",
-                          "accessibilityText": "Who is heading to ADE this year? \ud83d\udc9b #nocopyrightsounds #amsterdamdanceevent, 35 thousand views - play Short",
+                          "accessibilityText": "Who is heading to ADE this year? 💛 #nocopyrightsounds #amsterdamdanceevent, 35 thousand views - play Short",
                           "onTap": {
                             "innertubeCommand": {
                               "clickTrackingParams": "COQBEIf2BBgBIhMIkf6XjL-PlAMVWET1BR1oVx99UhFOb0NvcHlyaWdodFNvdW5kc5oBBQgyEPQkygEE3Mup_A==",
@@ -9924,7 +7971,7 @@
                           "menuOnTapA11yLabel": "More actions",
                           "overlayMetadata": {
                             "primaryText": {
-                              "content": "Who is heading to ADE this year? \ud83d\udc9b #nocopyrightsounds #amsterdamdanceevent"
+                              "content": "Who is heading to ADE this year? 💛 #nocopyrightsounds #amsterdamdanceevent"
                             },
                             "secondaryText": {
                               "content": "35K views"
@@ -9956,7 +8003,7 @@
                       {
                         "shortsLockupViewModel": {
                           "entityId": "shorts-shelf-item-LlbKZVbEcNE",
-                          "accessibilityText": "\ud83c\uddff\ud83c\uddf2\ud83d\udcfc\ud83d\udc9e\ud83d\ude97 #nocopyrightsounds #ncsroadtrip #music #afrobeats, 63 thousand views - play Short",
+                          "accessibilityText": "🇿🇲📼💞🚗 #nocopyrightsounds #ncsroadtrip #music #afrobeats, 63 thousand views - play Short",
                           "onTap": {
                             "innertubeCommand": {
                               "clickTrackingParams": "COABEIf2BBgCIhMIkf6XjL-PlAMVWET1BR1oVx99UhFOb0NvcHlyaWdodFNvdW5kc5oBBQgyEPQkygEE3Mup_A==",
@@ -10204,7 +8251,7 @@
                           "menuOnTapA11yLabel": "More actions",
                           "overlayMetadata": {
                             "primaryText": {
-                              "content": "\ud83c\uddff\ud83c\uddf2\ud83d\udcfc\ud83d\udc9e\ud83d\ude97 #nocopyrightsounds #ncsroadtrip #music #afrobeats"
+                              "content": "🇿🇲📼💞🚗 #nocopyrightsounds #ncsroadtrip #music #afrobeats"
                             },
                             "secondaryText": {
                               "content": "63K views"
@@ -10241,7 +8288,7 @@
                       {
                         "shortsLockupViewModel": {
                           "entityId": "shorts-shelf-item-GYoSfSur3Wc",
-                          "accessibilityText": "\ud83e\udd7a\ud83e\udd7a\ud83e\udd7a #ncs #nocopyrightsounds #youtube #nostalgia #invisible, 132 thousand views - play Short",
+                          "accessibilityText": "🥺🥺🥺 #ncs #nocopyrightsounds #youtube #nostalgia #invisible, 132 thousand views - play Short",
                           "onTap": {
                             "innertubeCommand": {
                               "clickTrackingParams": "CNwBEIf2BBgDIhMIkf6XjL-PlAMVWET1BR1oVx99UhFOb0NvcHlyaWdodFNvdW5kc5oBBQgyEPQkygEE3Mup_A==",
@@ -10489,7 +8536,7 @@
                           "menuOnTapA11yLabel": "More actions",
                           "overlayMetadata": {
                             "primaryText": {
-                              "content": "\ud83e\udd7a\ud83e\udd7a\ud83e\udd7a #ncs #nocopyrightsounds #youtube #nostalgia #invisible"
+                              "content": "🥺🥺🥺 #ncs #nocopyrightsounds #youtube #nostalgia #invisible"
                             },
                             "secondaryText": {
                               "content": "132K views"
@@ -11096,7 +9143,7 @@
                       {
                         "shortsLockupViewModel": {
                           "entityId": "shorts-shelf-item-Du1slBjy-iA",
-                          "accessibilityText": "Cradles has my heart \u2764\ufe0f #nocopyrightsounds #ncs #cradles, 925 thousand views - play Short",
+                          "accessibilityText": "Cradles has my heart ❤️ #nocopyrightsounds #ncs #cradles, 925 thousand views - play Short",
                           "onTap": {
                             "innertubeCommand": {
                               "clickTrackingParams": "CNABEIf2BBgGIhMIkf6XjL-PlAMVWET1BR1oVx99UhFOb0NvcHlyaWdodFNvdW5kc5oBBQgyEPQkygEE3Mup_A==",
@@ -11344,7 +9391,7 @@
                           "menuOnTapA11yLabel": "More actions",
                           "overlayMetadata": {
                             "primaryText": {
-                              "content": "Cradles has my heart \u2764\ufe0f #nocopyrightsounds #ncs #cradles"
+                              "content": "Cradles has my heart ❤️ #nocopyrightsounds #ncs #cradles"
                             },
                             "secondaryText": {
                               "content": "925K views"
@@ -11680,7 +9727,7 @@
                       {
                         "shortsLockupViewModel": {
                           "entityId": "shorts-shelf-item-Rm_MToEylR4",
-                          "accessibilityText": "Where my 100%s at?? \ud83d\ude4c #nocopyrightsounds #music #ncsrelease #ncs, 198 thousand views - play Short",
+                          "accessibilityText": "Where my 100%s at?? 🙌 #nocopyrightsounds #music #ncsrelease #ncs, 198 thousand views - play Short",
                           "onTap": {
                             "innertubeCommand": {
                               "clickTrackingParams": "CMcBEIf2BBgIIhMIkf6XjL-PlAMVWET1BR1oVx99UhFOb0NvcHlyaWdodFNvdW5kc5oBBQgyEPQkygEE3Mup_A==",
@@ -11928,7 +9975,7 @@
                           "menuOnTapA11yLabel": "More actions",
                           "overlayMetadata": {
                             "primaryText": {
-                              "content": "Where my 100%s at?? \ud83d\ude4c #nocopyrightsounds #music #ncsrelease #ncs"
+                              "content": "Where my 100%s at?? 🙌 #nocopyrightsounds #music #ncsrelease #ncs"
                             },
                             "secondaryText": {
                               "content": "198K views"
@@ -12817,7 +10864,7 @@
                               "bold": true
                             },
                             {
-                              "text": ": Empowering Creators through\u00a0..."
+                              "text": ": Empowering Creators through ..."
                             }
                           ]
                         },
@@ -13425,7 +11472,7 @@
                               "bold": true
                             },
                             {
-                              "text": ": Empowering Creators through No Copyright & Royalty Free Music Follow on Spotify:\u00a0..."
+                              "text": ": Empowering Creators through No Copyright & Royalty Free Music Follow on Spotify: ..."
                             }
                           ]
                         },
@@ -14022,7 +12069,7 @@
                               "bold": true
                             },
                             {
-                              "text": " (NCS): Copyright free music for creators. Download other NCS music for free to use in your next video\u00a0..."
+                              "text": " (NCS): Copyright free music for creators. Download other NCS music for free to use in your next video ..."
                             }
                           ]
                         },
@@ -14070,7 +12117,7 @@
                           "collapsedTitle": {
                             "runs": [
                               {
-                                "text": "Warriyo - Mortals (feat. Laura Brehm) | Unknown Brain - Why Do I? (feat. Bri Tolani) | Slippy & Josh Rubin - Crash | Netrum - Always Be | Rob Gasser - Supersonic | Unknown Brain - Wonder (feat. Rarin & Bri Tolani) | LXNGVX - Follow Back | Julius Dreisig & Zeus X Crona - Invisible | Sync, Roby Fayer & Eytan Peled - Why So Serious | Shine (Always Mirin Remix) | Unknown Brain - Hollywood Perfect (feat. NotEvenTanner) | Jo Cohen & Sex Whales - We Are | Ship Wrek, Zookeepers & Trauzers - Vessel | JPB & Aleesia - High | RIOT x Sippy - Pump Up the Bassline | Unknown Brain - Superhero (feat. Chris Linton) | Guy Arthur - Ain\u2019t Miss a Call | Lost Sky - Where We Started (feat. Jex) | ROY KNOX - Waterfall | Heuse & Zeus X Crona - Pill (feat. Emma Sameth) | Disfigure - Blank | Prismo - Stronger | Chime - Win & Lose | Jo Cohen & BQ - Glowing at Night | Kozah - Heavens | Jim Yosef - Arrow | Elektronomia - Collide | Lost Sky - Need You | Elektronomia - Energy | Tobu - Faster | NIVIRO - The Guardian of Angels | Electro-Light & Kovan - Skyline | Jay Eskar, ESCARGOT & SNAILS - Earthquake (feat. Justin J. Moore) | Diviners & Azertion - Feelings | Unlike Pluto - Time is Eating | DJ FKU - Executioner | Culture Code - Make Me Move (feat. Karra) (Tobu Remix) | JJD - Adventure | Koven - Never Have I Felt This"
+                                "text": "Warriyo - Mortals (feat. Laura Brehm) | Unknown Brain - Why Do I? (feat. Bri Tolani) | Slippy & Josh Rubin - Crash | Netrum - Always Be | Rob Gasser - Supersonic | Unknown Brain - Wonder (feat. Rarin & Bri Tolani) | LXNGVX - Follow Back | Julius Dreisig & Zeus X Crona - Invisible | Sync, Roby Fayer & Eytan Peled - Why So Serious | Shine (Always Mirin Remix) | Unknown Brain - Hollywood Perfect (feat. NotEvenTanner) | Jo Cohen & Sex Whales - We Are | Ship Wrek, Zookeepers & Trauzers - Vessel | JPB & Aleesia - High | RIOT x Sippy - Pump Up the Bassline | Unknown Brain - Superhero (feat. Chris Linton) | Guy Arthur - Ain’t Miss a Call | Lost Sky - Where We Started (feat. Jex) | ROY KNOX - Waterfall | Heuse & Zeus X Crona - Pill (feat. Emma Sameth) | Disfigure - Blank | Prismo - Stronger | Chime - Win & Lose | Jo Cohen & BQ - Glowing at Night | Kozah - Heavens | Jim Yosef - Arrow | Elektronomia - Collide | Lost Sky - Need You | Elektronomia - Energy | Tobu - Faster | NIVIRO - The Guardian of Angels | Electro-Light & Kovan - Skyline | Jay Eskar, ESCARGOT & SNAILS - Earthquake (feat. Justin J. Moore) | Diviners & Azertion - Feelings | Unlike Pluto - Time is Eating | DJ FKU - Executioner | Culture Code - Make Me Move (feat. Karra) (Tobu Remix) | JJD - Adventure | Koven - Never Have I Felt This"
                               }
                             ]
                           },
@@ -14928,7 +12975,7 @@
                                   "title": {
                                     "runs": [
                                       {
-                                        "text": "Guy Arthur - Ain\u2019t Miss a Call"
+                                        "text": "Guy Arthur - Ain’t Miss a Call"
                                       }
                                     ]
                                   },
@@ -16842,7 +14889,7 @@
                               "bold": true
                             },
                             {
-                              "text": ": Empowering Creators through\u00a0..."
+                              "text": ": Empowering Creators through ..."
                             }
                           ]
                         },
@@ -16890,7 +14937,7 @@
                           "collapsedTitle": {
                             "runs": [
                               {
-                                "text": "Lensko - Let\u2019s Go! | Dirty Palm - No Stopping Love | Jim Yosef - Arrow | Alex Skrindo - Jumbo | The Same Persons - Versace | Clarx - HAY | Clarx & Harddope - Castle | Diviners ft. Contacreast - Tropic Love | Diviners - Stockholm Lights | Dirty Palm - To The Back (ft. Purple Velvet Curtains) | Raptures & Sam Ourt - Taking Control (ft. Halvorsen) | Everen Maxwell - A Day at Sea | RetroVision - Puzzle VIP | Jim Yosef - Firefly | Sam Day - BABY | Syn Cole - Reflect | Waysons - Daydream | Joxion - RPM | Kage - Cereb | Malarkey & JJL - Everything U Promised | Culture Code - Make Me Move (feat. Karra) (Tobu Remix) | Robin Hustin & Tobimorrow - Light It Up | Elektronomia - Sky High | Syn Cole - Feel Good | Sam Day - Everytime I See You Face"
+                                "text": "Lensko - Let’s Go! | Dirty Palm - No Stopping Love | Jim Yosef - Arrow | Alex Skrindo - Jumbo | The Same Persons - Versace | Clarx - HAY | Clarx & Harddope - Castle | Diviners ft. Contacreast - Tropic Love | Diviners - Stockholm Lights | Dirty Palm - To The Back (ft. Purple Velvet Curtains) | Raptures & Sam Ourt - Taking Control (ft. Halvorsen) | Everen Maxwell - A Day at Sea | RetroVision - Puzzle VIP | Jim Yosef - Firefly | Sam Day - BABY | Syn Cole - Reflect | Waysons - Daydream | Joxion - RPM | Kage - Cereb | Malarkey & JJL - Everything U Promised | Culture Code - Make Me Move (feat. Karra) (Tobu Remix) | Robin Hustin & Tobimorrow - Light It Up | Elektronomia - Sky High | Syn Cole - Feel Good | Sam Day - Everytime I See You Face"
                               }
                             ]
                           },
@@ -16933,7 +14980,7 @@
                                   "title": {
                                     "runs": [
                                       {
-                                        "text": "Lensko - Let\u2019s Go!"
+                                        "text": "Lensko - Let’s Go!"
                                       }
                                     ]
                                   },
@@ -18926,7 +16973,7 @@
                               "bold": true
                             },
                             {
-                              "text": " http://ncs.lnk.to/SubscribeYouTube NCS: Music Without Limitations NCS Spotify:\u00a0..."
+                              "text": " http://ncs.lnk.to/SubscribeYouTube NCS: Music Without Limitations NCS Spotify: ..."
                             }
                           ]
                         },
@@ -19520,7 +17567,7 @@
                               "bold": true
                             },
                             {
-                              "text": " http://ncs.lnk.to/SubscribeYouTube NCS: Music Without Limitations. Our Spotify Playlist\u00a0..."
+                              "text": " http://ncs.lnk.to/SubscribeYouTube NCS: Music Without Limitations. Our Spotify Playlist ..."
                             }
                           ]
                         },
@@ -19625,12 +17672,12 @@
                     "title": {
                       "runs": [
                         {
-                          "text": "who can relate? \ud83c\udfb5\ud83c\udfa7 #nocopyrightsounds #ncs"
+                          "text": "who can relate? 🎵🎧 #nocopyrightsounds #ncs"
                         }
                       ],
                       "accessibility": {
                         "accessibilityData": {
-                          "label": "who can relate? \ud83c\udfb5\ud83c\udfa7 #nocopyrightsounds #ncs by NoCopyrightSounds 1,322,189 views 3 years ago 18 seconds - play Short"
+                          "label": "who can relate? 🎵🎧 #nocopyrightsounds #ncs by NoCopyrightSounds 1,322,189 views 3 years ago 18 seconds - play Short"
                         }
                       }
                     },
@@ -20718,7 +18765,7 @@
                               "bold": true
                             },
                             {
-                              "text": " http://ncs.lnk.to/SubscribeYouTube NCS: Music Without Limitations NCS Spotify:\u00a0..."
+                              "text": " http://ncs.lnk.to/SubscribeYouTube NCS: Music Without Limitations NCS Spotify: ..."
                             }
                           ]
                         },
@@ -21314,7 +19361,7 @@
                               "bold": true
                             },
                             {
-                              "text": " (NCS): Copyright free music for creators. Download other NCS music for free to use in your next video\u00a0..."
+                              "text": " (NCS): Copyright free music for creators. Download other NCS music for free to use in your next video ..."
                             }
                           ]
                         },
@@ -21362,7 +19409,7 @@
                           "collapsedTitle": {
                             "runs": [
                               {
-                                "text": "Zachz, Frozy, Joyful - Boogie | Zachz Winner - blu | Laszlo - Fall To Light | Razihel - Love U | Netrum - Any Closer | Zushi & Vanko - Underrated (feat. Sunny Lukas) | LXNGVX - Follow Back | springs! - Magnetic | JJD - Halcyon | Alex Skrindo - Entropy | RetroVision - Puzzle | Raven & Kreyn - Bubble | Lensko - Cetus | LFZ - Popsicle | Itro - Panda | Elektronomia & JJD - Free | Elektronomia - Energy | Different Heaven - OMG | Different Heaven - Nekozilla | Kovan & Electro-Light - Skyline | Kovan & Electro-Light - Skyline Pt.ll | Laszlo - Imaginary Friends | Raven & Kreyn - So Happy | RetroVision - Campfire | Jim Yosef - Eclipse | Jensation - Donuts | DJ Nansuya - Gang | Halvorsen - Wouldn\u2019t Change It | waera - harinezumi"
+                                "text": "Zachz, Frozy, Joyful - Boogie | Zachz Winner - blu | Laszlo - Fall To Light | Razihel - Love U | Netrum - Any Closer | Zushi & Vanko - Underrated (feat. Sunny Lukas) | LXNGVX - Follow Back | springs! - Magnetic | JJD - Halcyon | Alex Skrindo - Entropy | RetroVision - Puzzle | Raven & Kreyn - Bubble | Lensko - Cetus | LFZ - Popsicle | Itro - Panda | Elektronomia & JJD - Free | Elektronomia - Energy | Different Heaven - OMG | Different Heaven - Nekozilla | Kovan & Electro-Light - Skyline | Kovan & Electro-Light - Skyline Pt.ll | Laszlo - Imaginary Friends | Raven & Kreyn - So Happy | RetroVision - Campfire | Jim Yosef - Eclipse | Jensation - Donuts | DJ Nansuya - Gang | Halvorsen - Wouldn’t Change It | waera - harinezumi"
                               }
                             ]
                           },
@@ -22785,7 +20832,7 @@
                                   "title": {
                                     "runs": [
                                       {
-                                        "text": "Halvorsen - Wouldn\u2019t Change It"
+                                        "text": "Halvorsen - Wouldn’t Change It"
                                       }
                                     ]
                                   },
@@ -23618,7 +21665,7 @@
                               "bold": true
                             },
                             {
-                              "text": "): Empowering Creators\u00a0..."
+                              "text": "): Empowering Creators ..."
                             }
                           ]
                         },
@@ -23723,12 +21770,12 @@
                     "title": {
                       "runs": [
                         {
-                          "text": "NCS 24/7 Live \ud83d\udd34 - No Copyright Songs \ud83c\udfa7 Gaming Music | Live Radio | Copyright Free Music - NCM"
+                          "text": "NCS 24/7 Live 🔴 - No Copyright Songs 🎧 Gaming Music | Live Radio | Copyright Free Music - NCM"
                         }
                       ],
                       "accessibility": {
                         "accessibilityData": {
-                          "label": "NCS 24/7 Live \ud83d\udd34 - No Copyright Songs \ud83c\udfa7 Gaming Music | Live Radio | Copyright Free Music - NCM"
+                          "label": "NCS 24/7 Live 🔴 - No Copyright Songs 🎧 Gaming Music | Live Radio | Copyright Free Music - NCM"
                         }
                       }
                     },
@@ -24172,7 +22219,7 @@
                         "snippetText": {
                           "runs": [
                             {
-                              "text": "Tune in to NCS 24/7 Live for non-stop gaming music and copyright free songs! Enjoy the best live radio music stream for your\u00a0..."
+                              "text": "Tune in to NCS 24/7 Live for non-stop gaming music and copyright free songs! Enjoy the best live radio music stream for your ..."
                             }
                           ]
                         },
@@ -24771,7 +22818,7 @@
                               "bold": true
                             },
                             {
-                              "text": " http://ncs.lnk.to/SubscribeYouTube 11 Years of NCS. Seeing all of your reactions to our\u00a0..."
+                              "text": " http://ncs.lnk.to/SubscribeYouTube 11 Years of NCS. Seeing all of your reactions to our ..."
                             }
                           ]
                         },
@@ -25370,7 +23417,7 @@
                               "bold": true
                             },
                             {
-                              "text": "): Empowering Creators through Copyright / Royalty Free Music Follow us on Spotify:\u00a0..."
+                              "text": "): Empowering Creators through Copyright / Royalty Free Music Follow us on Spotify: ..."
                             }
                           ]
                         },
@@ -25536,7 +23583,7 @@
                     "metadata": {
                       "lockupMetadataViewModel": {
                         "title": {
-                          "content": "NCS : The Best Of House \ud83d\udfe1"
+                          "content": "NCS : The Best Of House 🟡"
                         },
                         "metadata": {
                           "contentMetadataViewModel": {
@@ -25681,7 +23728,7 @@
                                 "metadataParts": [
                                   {
                                     "text": {
-                                      "content": "Janji - Heroes Tonight (feat. Johnning) | Progressive House | NCS - Copyright Free Music \u00b7 3:29",
+                                      "content": "Janji - Heroes Tonight (feat. Johnning) | Progressive House | NCS - Copyright Free Music · 3:29",
                                       "commandRuns": [
                                         {
                                           "startIndex": 0,
@@ -25724,7 +23771,7 @@
                                 "metadataParts": [
                                   {
                                     "text": {
-                                      "content": "Elektronomia - Sky High | Progressive House | NCS - Copyright Free Music \u00b7 3:58",
+                                      "content": "Elektronomia - Sky High | Progressive House | NCS - Copyright Free Music · 3:58",
                                       "commandRuns": [
                                         {
                                           "startIndex": 0,
@@ -25805,7 +23852,7 @@
                                 ]
                               }
                             ],
-                            "delimiter": " \u2022 "
+                            "delimiter": " • "
                           }
                         }
                       }
@@ -26431,7 +24478,7 @@
                               "bold": true
                             },
                             {
-                              "text": " http://ncs.lnk.to/SubscribeYouTube NCS: Music Without Limitations NCS Spotify:\u00a0..."
+                              "text": " http://ncs.lnk.to/SubscribeYouTube NCS: Music Without Limitations NCS Spotify: ..."
                             }
                           ]
                         },
@@ -27030,7 +25077,7 @@
                               "bold": true
                             },
                             {
-                              "text": " http://ncs.lnk.to/SubscribeYouTube NCS: Music Without Limitations NCS Spotify:\u00a0..."
+                              "text": " http://ncs.lnk.to/SubscribeYouTube NCS: Music Without Limitations NCS Spotify: ..."
                             }
                           ]
                         },

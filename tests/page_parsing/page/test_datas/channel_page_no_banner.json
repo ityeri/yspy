@@ -533,59 +533,6 @@
               }
             }
           },
-          "banner": {
-            "imageBannerViewModel": {
-              "image": {
-                "sources": [
-                  {
-                    "url": "https://yt3.googleusercontent.com/MurTjIW81AHClG2iPKk9CyZzTpxYP5mfY-I1HBWXk4Og86Fyrohlf28RXpoLSbIVXymyigalIQ=w1060-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
-                    "width": 1060,
-                    "height": 175
-                  },
-                  {
-                    "url": "https://yt3.googleusercontent.com/MurTjIW81AHClG2iPKk9CyZzTpxYP5mfY-I1HBWXk4Og86Fyrohlf28RXpoLSbIVXymyigalIQ=w1138-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
-                    "width": 1138,
-                    "height": 188
-                  },
-                  {
-                    "url": "https://yt3.googleusercontent.com/MurTjIW81AHClG2iPKk9CyZzTpxYP5mfY-I1HBWXk4Og86Fyrohlf28RXpoLSbIVXymyigalIQ=w1707-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
-                    "width": 1707,
-                    "height": 283
-                  },
-                  {
-                    "url": "https://yt3.googleusercontent.com/MurTjIW81AHClG2iPKk9CyZzTpxYP5mfY-I1HBWXk4Og86Fyrohlf28RXpoLSbIVXymyigalIQ=w2120-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
-                    "width": 2120,
-                    "height": 351
-                  },
-                  {
-                    "url": "https://yt3.googleusercontent.com/MurTjIW81AHClG2iPKk9CyZzTpxYP5mfY-I1HBWXk4Og86Fyrohlf28RXpoLSbIVXymyigalIQ=w2276-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
-                    "width": 2276,
-                    "height": 377
-                  },
-                  {
-                    "url": "https://yt3.googleusercontent.com/MurTjIW81AHClG2iPKk9CyZzTpxYP5mfY-I1HBWXk4Og86Fyrohlf28RXpoLSbIVXymyigalIQ=w2560-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
-                    "width": 2560,
-                    "height": 424
-                  }
-                ]
-              },
-              "style": "IMAGE_BANNER_STYLE_INSET",
-              "rendererContext": {
-                "loggingContext": {
-                  "loggingDirectives": {
-                    "trackingParams": "CBMQnfILIhMIjoXchbaQlAMV_WEPAh2aKjjd",
-                    "visibility": {
-                      "types": "12"
-                    },
-                    "clientVeSpec": {
-                      "uiType": 194845,
-                      "veCounter": 932810011
-                    }
-                  }
-                }
-              }
-            }
-          },
           "rendererContext": {
             "loggingContext": {
               "loggingDirectives": {
