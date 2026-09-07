@@ -1,7 +1,7 @@
 from httpx import AsyncClient, Response, Client
 
 from yspy.utils import Locale
-from .constants import PLAYER_API_URL, BASE_HEADERS
+from .utils import PLAYER_API_URL, BASE_HEADERS
 from .utils import optional_async_client, optional_sync_client, RequestData
 
 

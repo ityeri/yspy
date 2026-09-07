@@ -1,7 +1,7 @@
 from httpx import AsyncClient, Response, Client
 
 from yspy.utils import Locale
-from .constants import NEXT_API_URL
+from .utils import NEXT_API_URL
 from .utils import optional_async_client, optional_sync_client, RequestData
 
 

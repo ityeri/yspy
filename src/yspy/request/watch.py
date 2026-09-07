@@ -1,6 +1,6 @@
 from httpx import AsyncClient, Response, Client
 
-from .constants import WATCH_URL, BASE_HEADERS
+from .utils import WATCH_URL, BASE_HEADERS
 from .utils import optional_async_client, optional_sync_client
 
 

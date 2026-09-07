@@ -3,7 +3,7 @@ from enum import Enum
 from httpx import AsyncClient, Response, Client
 
 from yspy.utils import Locale, SearchMode
-from .constants import SEARCH_API_URL, BASE_HEADERS
+from .utils import SEARCH_API_URL, BASE_HEADERS
 from .utils import optional_async_client, optional_sync_client, RequestData
 
 
