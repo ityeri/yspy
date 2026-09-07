@@ -1,0 +1,41 @@
+from __future__ import annotations
+
+from dataclasses import dataclass
+
+from yspy.utils import get_by_path, get_by_path_or
+
+from .search_result_component import SearchResultComponent
+from ..exceptions import DataParsingException
+from ..image_component import ImageComponent
+
+
+@dataclass(frozen=True)
+class ChannelComponent(SearchResultComponent):
+    id: str
+    title: str
+    url: str
+    thumbnails: list[ImageComponent]
+    description_snippet: str | None
+    subscribers_count_text: str
+
+    @staticmethod
+    def from_json(raw_data: dict[str, dict]) -> ChannelComponent:
+        try:
+            inner_data = raw_data['channelRenderer']
+        except KeyError:
+            raise DataParsingException('Given json data is not a channel renderer data')
+
+        # youtube puts the @handle in subscriberCountText and the real subscriber
+        # count text in videoCountText — field names no longer match their content
+        return ChannelComponent(
+            id=inner_data['channelId'],
+            title=get_by_path(inner_data, 'title simpleText'),
+            url='https://youtube.com'
+                + get_by_path(inner_data, 'navigationEndpoint commandMetadata webCommandMetadata url'),
+            thumbnails=[
+                ImageComponent.from_json(raw_thumbnail_data)
+                for raw_thumbnail_data in get_by_path(inner_data, 'thumbnail thumbnails')
+            ],
+            description_snippet=get_by_path_or(inner_data, 'descriptionSnippet runs', 0, 'text'),
+            subscribers_count_text=get_by_path(inner_data, 'videoCountText simpleText')
+        )

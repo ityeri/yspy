@@ -1,0 +1,54 @@
+from __future__ import annotations
+
+from dataclasses import dataclass
+from enum import Enum
+
+
+class Language(str, Enum):
+    KOREAN = "ko"
+    ENGLISH = "en"
+    JAPANESE = "ja"
+    CHINESE_SIMPLIFIED = "zh-Hans"
+    CHINESE_TRADITIONAL = "zh-Hant"
+    SPANISH = "es"
+    FRENCH = "fr"
+    GERMAN = "de"
+    ITALIAN = "it"
+    PORTUGUESE = "pt"
+    RUSSIAN = "ru"
+    VIETNAMESE = "vi"
+    THAI = "th"
+    INDONESIAN = "id"
+    HINDI = "hi"
+    ARABIC = "ar"
+
+
+class Region(str, Enum):
+    SOUTH_KOREA = "KR"
+    UNITED_STATES = "US"
+    JAPAN = "JP"
+    UNITED_KINGDOM = "GB"
+    CANADA = "CA"
+    FRANCE = "FR"
+    GERMANY = "DE"
+    ITALY = "IT"
+    SPAIN = "ES"
+    BRAZIL = "BR"
+    MEXICO = "MX"
+    AUSTRALIA = "AU"
+    VIETNAM = "VN"
+    THAILAND = "TH"
+    INDONESIA = "ID"
+    INDIA = "IN"
+    TAIWAN = "TW"
+    HONG_KONG = "HK"
+
+
+@dataclass(frozen=True)
+class Locale:
+    language: Language | None = None
+    region: Region | None = None
+
+
+NONE_LOCALE: Locale = Locale(None, None)
+ENGLISH_LOCALE: Locale = Locale(language=Language.ENGLISH)
