@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from yspy.utils import get_by_path
+from yspy.utils import get_by_path, get_by_path_or
 from ..image_component import ImageComponent
 
 
@@ -41,9 +41,10 @@ class ChannelPage:
             ],
             banners=[
                 ImageComponent.from_json(raw_image_data)
-                for raw_image_data in get_by_path(
+                for raw_image_data in get_by_path_or(
                     header_data,
-                    'pageHeaderRenderer content pageHeaderViewModel banner imageBannerViewModel image sources'
+                    'pageHeaderRenderer content pageHeaderViewModel banner imageBannerViewModel image sources',
+                    default=[]
                 )
             ],
             subscriber_count_text=get_by_path(metadata_view_parts, 1, 'metadataParts', 0, 'text content'),
