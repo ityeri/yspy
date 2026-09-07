@@ -10,7 +10,7 @@ from yspy.data_parsing.playlist import PlaylistPage, PlaylistVideoComponent
 from yspy.request import PlaylistRequest, ChannelRequest
 from yspy.utils import Locale, ENGLISH_LOCALE, Language, NONE_LOCALE
 from .channel import Channel
-from .exceptions import PlaylistIdentifierException, ChannelIdentifierException
+from .exceptions import PlaylistIdentifierException, ChannelIdentifierException, PlaylistUnavailableException
 from .utils import parse_view_count, parse_length_seconds
 from .video import Video
 
@@ -43,6 +43,9 @@ class Playlist:
 
         response = PlaylistRequest.get_first_page(playlist_id, locale, client=client)
         playlist_page = PlaylistPage.from_json(response.json())
+        if playlist_page is None:
+            raise PlaylistUnavailableException('The given playlist does not exist')
+
         if locale.language != Language.ENGLISH:
             # english page is required for parsing abbreviated view counts
             eng_response = PlaylistRequest.get_first_page(playlist_id, ENGLISH_LOCALE, client=client)
@@ -63,6 +66,9 @@ class Playlist:
 
         response = await PlaylistRequest.aget_first_page(playlist_id, locale, client=client)
         playlist_page = PlaylistPage.from_json(response.json())
+        if playlist_page is None:
+            raise PlaylistUnavailableException('The given playlist does not exist')
+
         if locale.language != Language.ENGLISH:
             # english page is required for parsing abbreviated view counts
             eng_response = await PlaylistRequest.aget_first_page(playlist_id, ENGLISH_LOCALE, client=client)
@@ -187,6 +193,9 @@ class Playlist:
 
         response = PlaylistRequest.get_continuation_page(self.continuation_token, actual_locale, client=client)
         next_page = PlaylistPage.from_json(response.json())
+        if next_page is None:
+            return None
+
         if actual_locale.language != Language.ENGLISH:
             # english page is required for parsing abbreviated view counts
             eng_response = PlaylistRequest.get_continuation_page(
@@ -211,6 +220,9 @@ class Playlist:
 
         response = await PlaylistRequest.aget_continuation_page(self.continuation_token, actual_locale, client=client)
         next_page = PlaylistPage.from_json(response.json())
+        if next_page is None:
+            return None
+
         if actual_locale.language != Language.ENGLISH:
             # english page is required for parsing abbreviated view counts
             eng_response = await PlaylistRequest.aget_continuation_page(
