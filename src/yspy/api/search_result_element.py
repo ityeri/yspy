@@ -80,8 +80,6 @@ class VideoResultElement(SearchResultElement):
 
 
 @dataclass
-
-@dataclass
 class PlaylistResultElement(SearchResultElement):
     id: str
     title: str
