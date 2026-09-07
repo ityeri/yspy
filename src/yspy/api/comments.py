@@ -13,7 +13,7 @@ from yspy.request import VideoNextRequest, CommentsRequest
 @dataclass
 class Comments:
     comments: list[CommentComponent]
-    continuation_token: str
+    continuation_token: str | None
 
     @staticmethod
     def get(video_id_or_url: str, *, client: Client | None = None) -> Comments:
@@ -46,13 +46,19 @@ class Comments:
             continuation_token=comments_page.continuation_token
         )
 
-    def more(self, *, client: Client | None = None) -> Comments:
+    def more(self, *, client: Client | None = None) -> Comments | None:
+        if self.continuation_token is None:
+            return None
+
         response = CommentsRequest.get_page(self.continuation_token, client=client)
         comments_page = CommentsPage.from_json(response.json())
 
         return Comments.from_comments_page(comments_page)
 
-    async def amore(self, *, client: AsyncClient | None = None) -> Comments:
+    async def amore(self, *, client: AsyncClient | None = None) -> Comments | None:
+        if self.continuation_token is None:
+            return None
+
         response = await CommentsRequest.aget_page(self.continuation_token, client=client)
         comments_page = CommentsPage.from_json(response.json())
 

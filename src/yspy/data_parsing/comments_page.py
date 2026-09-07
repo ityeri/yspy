@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from yspy.utils import get_by_path
+from yspy.utils import get_by_path, get_by_path_or
 
 from .exceptions import DataParsingException
 
@@ -32,39 +32,41 @@ class CommentComponent:
 @dataclass
 class CommentsPage:
     comments: list[CommentComponent]
-    continuation_token: str
+    continuation_token: str | None
 
     @staticmethod
     def from_json(raw_data: dict[str, dict]) -> CommentsPage:
-        raw_components: list[dict] = get_by_path(raw_data, 'frameworkUpdates entityBatchUpdate mutations')
-
         comment_components = list()
 
-        for raw_component in raw_components:
-            try:
-                comment_components.append(CommentComponent.from_json(raw_component))
-            except DataParsingException:
-                pass
+        raw_components = get_by_path_or(raw_data, 'frameworkUpdates entityBatchUpdate mutations')
+        if raw_components is not None:
+            for raw_component in raw_components:
+                try:
+                    comment_components.append(CommentComponent.from_json(raw_component))
+                except DataParsingException:
+                    pass
 
-        first_page_token_path = [
-            'onResponseReceivedEndpoints', -1, 'reloadContinuationItemsCommand',
-            'continuationItems', -1, 'continuationItemRenderer',
-            'continuationEndpoint continuationCommand token'
-        ]
-        next_page_token_path = [
-            'onResponseReceivedEndpoints', -1, 'appendContinuationItemAction',
-            'continuationItems', -1, 'continuationItemRenderer',
-            'continuationEndpoint continuationCommand token'
+        token_paths = [
+            [
+                'onResponseReceivedEndpoints', -1, 'reloadContinuationItemsCommand',
+                'continuationItems', -1, 'continuationItemRenderer',
+                'continuationEndpoint continuationCommand token'
+            ],
+            [
+                'onResponseReceivedEndpoints', -1, 'appendContinuationItemAction',
+                'continuationItems', -1, 'continuationItemRenderer',
+                'continuationEndpoint continuationCommand token'
+            ]
         ]
 
-        try:
-            continuation_key = get_by_path(raw_data, *first_page_token_path)
-        except KeyError:
-            continuation_key = get_by_path(raw_data, *next_page_token_path)
-        except IndexError:
-            continuation_key = get_by_path(raw_data, *next_page_token_path)
+        continuation_token = None
+        for token_path in token_paths:
+            token = get_by_path_or(raw_data, *token_path)
+            if token is not None:
+                continuation_token = token
+                break
 
         return CommentsPage(
             comments=comment_components,
-            continuation_token=continuation_key
+            continuation_token=continuation_token
         )
