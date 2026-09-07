@@ -5,7 +5,7 @@ from .utils import PLAYER_API_URL, BASE_HEADERS
 from .utils import optional_async_client, optional_sync_client, RequestData
 
 
-class VideoRequest:
+class PlayerRequest:
     @staticmethod
     def build_request(
             video_id: str,
@@ -42,7 +42,7 @@ class VideoRequest:
             client: Client | None = None
     ) -> Response:
         with optional_sync_client(client) as client:
-            return VideoRequest.build_request(
+            return PlayerRequest.build_request(
                 video_id, locale, client_data=client_data, visitor_data=visitor_data, headers=headers
             ).send_sync_request(client)
 
@@ -57,6 +57,6 @@ class VideoRequest:
             client: AsyncClient | None = None
     ) -> Response:
         async with optional_async_client(client) as client:
-            return await VideoRequest.build_request(
+            return await PlayerRequest.build_request(
                 video_id, locale, client_data=client_data, visitor_data=visitor_data, headers=headers
             ).send_async_request(client)
