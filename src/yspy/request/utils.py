@@ -40,6 +40,8 @@ class RequestData:
     no_payload: bool = False
     locale: Locale | None = None
     headers: dict[str, str] = field(default_factory=lambda: BASE_HEADERS.copy())
+    client_data: dict[str, str | bool] | None = None
+    visitor_data: str | None = None
 
     def build_request(self) -> Request:
         url = str(
@@ -56,12 +58,16 @@ class RequestData:
             if self.locale.region is not None:
                 other_client_data['gl'] = self.locale.region
 
+        client_data = dict(self.client_data) if self.client_data is not None else dict(BASE_CLIENT_DATA)
+        if self.visitor_data is not None:
+            client_data['visitorData'] = self.visitor_data
+
         if self.no_payload:
             request_payload = None
         else:
             request_payload = {
                 'context': {
-                    'client': BASE_CLIENT_DATA | other_client_data,
+                    'client': client_data | other_client_data,
                     'user': {
                         'lockedSafetyMode': False,
                     }

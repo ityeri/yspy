@@ -6,6 +6,7 @@ from .playlist import PlaylistRequest
 from .search_result import SearchResultRequest
 from .suggestion import SuggestionRequest
 from .video import VideoRequest
+from .watch import WatchRequest
 from .video_next import VideoNextRequest
 
 __all__ = [
@@ -18,5 +19,6 @@ __all__ = [
     'SearchResultRequest',
     'SuggestionRequest',
     'VideoRequest',
-    'VideoNextRequest'
+    'VideoNextRequest',
+    'WatchRequest'
 ]
