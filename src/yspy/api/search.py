@@ -4,10 +4,10 @@ from dataclasses import dataclass
 
 from httpx import AsyncClient, Client
 
-from yspy.data_parsing.search_result import SearchResultPage, SearchResultComponent, VideoComponent, ChannelComponent
+from yspy.data_parsing.search_result import SearchResultPage, SearchResultComponent, VideoComponent, ChannelComponent, PlaylistComponent
 from yspy.request import SearchResultRequest
 from yspy.utils import SearchMode, Locale, ENGLISH_LOCALE, Language, Unspecified, NONE_LOCALE
-from .search_result_element import SearchResultElement, VideoResultElement, ChannelResultElement, \
+from .search_result_element import SearchResultElement, VideoResultElement, ChannelResultElement, PlaylistResultElement, \
     from_search_result_component
 
 
@@ -146,6 +146,10 @@ class Search:
     def channels(self) -> list[ChannelResultElement]:
         return [result for result in self.results if isinstance(result, ChannelResultElement)]
 
+    @property
+    def playlists(self) -> list[PlaylistResultElement]:
+        return [result for result in self.results if isinstance(result, PlaylistResultElement)]
+
     def first_or(self, default: SearchResultElement | None) -> SearchResultElement | None:
         try:
             return self.results[0]
@@ -170,5 +174,7 @@ class Search:
             return f'video:{component.id}'
         elif isinstance(component, ChannelComponent):
             return f'channel:{component.id}'
+        elif isinstance(component, PlaylistComponent):
+            return f'playlist:{component.id}'
         else:
             raise TypeError('Unknown type SearchResultComponent has passed')

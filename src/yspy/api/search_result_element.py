@@ -7,9 +7,11 @@ from enum import auto, Enum
 from httpx import AsyncClient, Client
 
 from yspy.data_parsing import ImageComponent
-from yspy.data_parsing.search_result import VideoComponent, ChannelComponent, SearchResultComponent
+from yspy.data_parsing.search_result import VideoComponent, ChannelComponent, PlaylistComponent, SearchResultComponent
 from yspy.utils import Locale, NONE_LOCALE
 from .channel import Channel
+from .exceptions import ChannelIdentifierException
+from .playlist import Playlist
 from .utils import parse_subscriber_count
 from .video import Video
 
@@ -17,6 +19,7 @@ from .video import Video
 class SearchResultType(Enum):
     VIDEO = auto()
     CHANNEL = auto()
+    PLAYLIST = auto()
 
 
 @dataclass(kw_only=True)
@@ -67,6 +70,67 @@ class VideoResultElement(SearchResultElement):
     async def aget_channel(
             self, locale: Locale | None = None, *, client: AsyncClient | None = None
     ) -> Channel:
+        return await Channel.aget(self.channel_id, self.locale if locale is None else locale, client=client)
+
+    def get_highest_res_thumbnail(self) -> ImageComponent | None:
+        try:
+            return sorted(self.thumbnails, key=lambda t: t.width * t.height, reverse=True)[0]
+        except IndexError:
+            return None
+
+
+@dataclass
+
+@dataclass
+class PlaylistResultElement(SearchResultElement):
+    id: str
+    title: str
+    url: str
+    thumbnails: list[ImageComponent]
+    channel_id: str | None
+    channel_name: str | None
+    component_data: PlaylistComponent
+
+    @staticmethod
+    def from_playlist_component(
+            component: PlaylistComponent, locale: Locale = NONE_LOCALE
+    ) -> PlaylistResultElement:
+        return PlaylistResultElement(
+            id=component.id,
+            title=component.title,
+            url=component.url,
+            thumbnails=component.thumbnails,
+            channel_id=component.channel_id,
+            channel_name=component.channel_name,
+            component_data=component,
+            result_type=SearchResultType.PLAYLIST,
+            locale=locale
+        )
+
+    def get_playlist(
+            self, locale: Locale | None = None, *, client: Client | None = None
+    ) -> Playlist:
+        return Playlist.get(self.id, self.locale if locale is None else locale, client=client)
+
+    async def aget_playlist(
+            self, locale: Locale | None = None, *, client: AsyncClient | None = None
+    ) -> Playlist:
+        return await Playlist.aget(self.id, self.locale if locale is None else locale, client=client)
+
+    def get_channel(
+            self, locale: Locale | None = None, *, client: Client | None = None
+    ) -> Channel:
+        if self.channel_id is None:
+            raise ChannelIdentifierException('The playlist element has no channel data')
+
+        return Channel.get(self.channel_id, self.locale if locale is None else locale, client=client)
+
+    async def aget_channel(
+            self, locale: Locale | None = None, *, client: AsyncClient | None = None
+    ) -> Channel:
+        if self.channel_id is None:
+            raise ChannelIdentifierException('The playlist element has no channel data')
+
         return await Channel.aget(self.channel_id, self.locale if locale is None else locale, client=client)
 
     def get_highest_res_thumbnail(self) -> ImageComponent | None:
@@ -136,5 +200,7 @@ def from_search_result_component(
         return VideoResultElement.from_video_component(component, locale)
     elif isinstance(component, ChannelComponent):
         return ChannelResultElement.from_channel_component(component, eng_component, locale)
+    elif isinstance(component, PlaylistComponent):
+        return PlaylistResultElement.from_playlist_component(component, locale)
     else:
         raise TypeError('Unknown type SearchResultComponent has passed')
