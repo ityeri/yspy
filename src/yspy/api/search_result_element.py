@@ -131,7 +131,8 @@ def from_search_result_component(
         eng_component: SearchResultComponent | None,
         locale: Locale = NONE_LOCALE
 ) -> SearchResultElement:
-    if isinstance(component, VideoComponent) and eng_component is None:
+    if isinstance(component, VideoComponent):
+        # video results do not need the english component
         return VideoResultElement.from_video_component(component, locale)
     elif isinstance(component, ChannelComponent):
         return ChannelResultElement.from_channel_component(component, eng_component, locale)
