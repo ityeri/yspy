@@ -7,7 +7,7 @@ from yarl import URL
 
 from yspy.api.exceptions import VideoIdentifierException
 from yspy.data_parsing import CommentComponent, VideoNextPage, CommentsPage
-from yspy.request import VideoNextRequest, CommentsRequest
+from yspy.request import PlayerNextRequest, CommentsRequest
 
 
 @dataclass
@@ -19,7 +19,7 @@ class Comments:
     def get(video_id_or_url: str, *, client: Client | None = None) -> Comments:
         video_id = Comments._resolve_video_id(video_id_or_url)
 
-        response = VideoNextRequest.get_page(video_id, client=client)
+        response = PlayerNextRequest.get_page(video_id, client=client)
         video_next_page = VideoNextPage.from_json(response.json())
 
         response = CommentsRequest.get_page(video_next_page.comment_continuation_token, client=client)
@@ -31,7 +31,7 @@ class Comments:
     async def aget(video_id_or_url: str, *, client: AsyncClient | None = None) -> Comments:
         video_id = Comments._resolve_video_id(video_id_or_url)
 
-        response = await VideoNextRequest.aget_page(video_id, client=client)
+        response = await PlayerNextRequest.aget_page(video_id, client=client)
         video_next_page = VideoNextPage.from_json(response.json())
 
         response = await CommentsRequest.aget_page(video_next_page.comment_continuation_token, client=client)
