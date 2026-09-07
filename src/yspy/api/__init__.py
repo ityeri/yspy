@@ -1,21 +1,15 @@
-from yspy.api import (
-    Channel,
-    ChannelDetail,
+from yspy.api.channel import Channel, ChannelDetail
+from yspy.api.comments import Comments
+from yspy.api.playlist import Playlist, PlaylistVideo
+from yspy.api.search import Search
+from yspy.api.search_result_element import (
     ChannelResultElement,
-    Comments,
-    Playlist,
-    PlaylistVideo,
-    Search,
     SearchResultElement,
     SearchResultType,
-    Suggestion,
-    Video,
     VideoResultElement,
 )
-
-from yspy import utils
-from yspy import data_parsing
-from yspy import request
+from yspy.api.suggestion import Suggestion
+from yspy.api.video import Video
 
 __all__ = [
     'Channel',
@@ -30,8 +24,4 @@ __all__ = [
     'Suggestion',
     'Video',
     'VideoResultElement',
-
-    'utils',
-    'data_parsing',
-    'request',
 ]

@@ -17,6 +17,7 @@ class PlaylistPage:
     thumbnails: list[ImageComponent]
     owner_text: str
     owner_url: str
+    owner_id: str
     view_count_text: str
     videos: list[PlaylistVideoComponent]
     continuation_token: str | None
@@ -29,10 +30,11 @@ class PlaylistPage:
             primary_info_renderer = sidebar_items[0]['playlistSidebarPrimaryInfoRenderer']
             secondary_info_renderer = sidebar_items[1]['playlistSidebarSecondaryInfoRenderer']
 
+            # 영상 항목들이 playlistVideoRenderer 대신 lockupViewModel로 내려옴
             first_page_items_path = [
                 'contents twoColumnBrowseResultsRenderer tabs', 0,
                 'tabRenderer content sectionListRenderer contents', 0,
-                'itemSectionRenderer contents', 0, 'playlistVideoListRenderer contents'
+                'itemSectionRenderer contents'
             ]
             continuation_page_items_path = [
                 'onResponseReceivedActions', 0, 'appendContinuationItemsAction continuationItems'
@@ -52,19 +54,18 @@ class PlaylistPage:
 
         video_components: list[PlaylistVideoComponent] = list()
 
-        for raw_video_data in video_items:
+        for index, raw_video_data in enumerate(video_items):
             try:
                 video_components.append(
-                    PlaylistVideoComponent.from_json(raw_video_data)
+                    PlaylistVideoComponent.from_json(raw_video_data, index=index)
                 )
             except DataParsingException:
                 pass
 
         first_page_token_path = [
             'contents twoColumnBrowseResultsRenderer tabs', 0, 'tabRenderer content sectionListRenderer contents',
-            0, 'itemSectionRenderer contents', 0, 'playlistVideoListRenderer contents', -1,
-            'continuationItemRenderer continuationEndpoint commandExecutorCommand commands', -1,
-            'continuationCommand token'
+            0, 'itemSectionRenderer contents', -1,
+            'continuationItemRenderer continuationEndpoint continuationCommand token'
         ]
         continuation_page_token_path = [
             'onResponseReceivedActions', 0, 'appendContinuationItemsAction continuationItems',
@@ -99,6 +100,11 @@ class PlaylistPage:
                 secondary_info_renderer,
                 'videoOwner videoOwnerRenderer title runs', 0,
                 'navigationEndpoint browseEndpoint canonicalBaseUrl'
+            ),
+            owner_id=get_by_path(
+                secondary_info_renderer,
+                'videoOwner videoOwnerRenderer title runs', 0,
+                'navigationEndpoint browseEndpoint browseId'
             ),
             view_count_text=get_by_path(primary_info_renderer, 'stats', 1, 'simpleText'),
             videos=video_components,

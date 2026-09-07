@@ -1,3 +1,6 @@
+from __future__ import annotations
+
+from dataclasses import dataclass
 from enum import Enum
 
 
@@ -19,6 +22,7 @@ class Language(str, Enum):
     HINDI = "hi"
     ARABIC = "ar"
 
+
 class Region(str, Enum):
     SOUTH_KOREA = "KR"
     UNITED_STATES = "US"
@@ -38,3 +42,13 @@ class Region(str, Enum):
     INDIA = "IN"
     TAIWAN = "TW"
     HONG_KONG = "HK"
+
+
+@dataclass(frozen=True)
+class Locale:
+    language: Language | None = None
+    region: Region | None = None
+
+
+NONE_LOCALE: Locale = Locale(None, None)
+ENGLISH_LOCALE: Locale = Locale(language=Language.ENGLISH)

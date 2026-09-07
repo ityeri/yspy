@@ -20,6 +20,7 @@ class VideoComponent(SearchResultComponent):
     length_text: str
     view_count_text: str
     channel_url: str
+    channel_id: str
     # TODO owner_text, owner_url
 
     @staticmethod
@@ -45,5 +46,9 @@ class VideoComponent(SearchResultComponent):
             channel_url='https://youtube.com' + get_by_path(
                 inner_data,
                 'ownerText runs', 0, 'navigationEndpoint commandMetadata webCommandMetadata url'
+            ),
+            channel_id=get_by_path(
+                inner_data,
+                'ownerText runs', 0, 'navigationEndpoint browseEndpoint browseId'
             )
         )

@@ -25,6 +25,8 @@ class ChannelComponent(SearchResultComponent):
         except KeyError:
             raise DataParsingException('Given json data is not a channel renderer data')
 
+        # youtube puts the @handle in subscriberCountText and the real subscriber
+        # count text in videoCountText — field names no longer match their content
         return ChannelComponent(
             id=inner_data['channelId'],
             title=get_by_path(inner_data, 'title simpleText'),
@@ -35,5 +37,5 @@ class ChannelComponent(SearchResultComponent):
                 for raw_thumbnail_data in get_by_path(inner_data, 'thumbnail thumbnails')
             ],
             description_snippet=get_by_path_or(inner_data, 'descriptionSnippet runs', 0, 'text'),
-            subscribers_count_text=get_by_path(inner_data, 'subscriberCountText simpleText')
+            subscribers_count_text=get_by_path(inner_data, 'videoCountText simpleText')
         )
