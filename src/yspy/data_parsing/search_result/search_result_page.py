@@ -7,6 +7,7 @@ from yspy.utils import get_by_path_or
 from .channel_component import ChannelComponent
 from .search_result_component import SearchResultComponent
 from .video_component import VideoComponent
+from .playlist_component import PlaylistComponent
 from ..exceptions import DataParsingException
 
 
@@ -23,6 +24,9 @@ class SearchResultPage:
 
             elif 'channelRenderer' in raw_data:
                 return [ChannelComponent.from_json(raw_data)]
+
+            elif 'lockupViewModel' in raw_data:
+                return [PlaylistComponent.from_json(raw_data)]
 
             elif 'shelfRenderer' in raw_data:
                 inner_data = get_by_path_or(raw_data, 'shelfRenderer content verticalListRenderer items')

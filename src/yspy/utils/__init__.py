@@ -50,8 +50,8 @@ def to_youtube_url(url: str | URL) -> str:
 class SearchMode(str, Enum):
     VIDEO = 'EgIQAQ%3D%3D'
     CHANNEL = 'EgIQAg%3D%3D'
-    PLAYLIST = 'EgIQAw%3D%3D'  # TODO at data_parsing
-    LIVESTREAM = 'EgJAAQ%3D%3D'  # TODO at data_parsing
+    PLAYLIST = 'EgIQAw%3D%3D'
+    LIVESTREAM = 'EgJAAQ%3D%3D'
 
 
 class Unspecified:

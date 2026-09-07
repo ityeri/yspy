@@ -4,6 +4,7 @@ from yspy.api.playlist import Playlist, PlaylistVideo
 from yspy.api.search import Search
 from yspy.api.search_result_element import (
     ChannelResultElement,
+    PlaylistResultElement,
     SearchResultElement,
     SearchResultType,
     VideoResultElement,
@@ -17,6 +18,7 @@ __all__ = [
     'ChannelResultElement',
     'Comments',
     'Playlist',
+    'PlaylistResultElement',
     'PlaylistVideo',
     'Search',
     'SearchResultElement',
