@@ -1,9 +1,9 @@
 [project]
 name = "yspy"
-version = "0.0.1"
+version = "0.1.0"
 authors = [
-    { name="Hitesh Kumar Saini", email="saini123hitesh@gmail.com" },
-    { name="ityeri", email="ityeri9@gmail.com" }
+    { name = "Hitesh Kumar Saini", email = "saini123hitesh@gmail.com" },
+    { name = "ityeri", email = "ityeri9@gmail.com" }
 ]
 description = "Search for YouTube videos, channels & playlists & get video information using link WITHOUT YouTube Data API v3"
 readme = "README.md"
