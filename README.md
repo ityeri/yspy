@@ -1,21 +1,49 @@
-# yspy
+<h1 align="center">yspy</h1>
+
+<div align="center">
+  <b><code>Youtube.</code></b><br>
+  <b><code>Search..</code></b><br>
+  <b><code>PYthon..</code></b><br>
+</div>
+
+<br>
+
+<p align="center">
+  Scrape YouTube search results, videos, channels, playlists and comments
+  <strong>without the YouTube Data API v3</strong>. No API key required.
+</p>
+
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+  <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python: 3.10+">
+  <img src="https://img.shields.io/pypi/v/yspy" alt="PyPI version">
+</p>
+
+---
 
 A refactored fork of [youtube-search-python](https://github.com/alexmercerind/youtube-search-python)
 rebuilt around a clean-room code.
-Scrape YouTube search results, videos, channels, playlists and comments
-**without the YouTube Data API v3**. No API key required.
 
-- Python 3.10+
+- python >= 3.10
 - Sync (`get_*`, `search`, `more`, `next`) and async (`aget_*`, `asearch`, `amore`, `anext`) twins everywhere
     - Async is not just a wrapper for a sync API. Both have separate request paths.
 - Minimized unexpected network calls, behaviors
 
 ## Install
 
+Using uv & pip
+
 ```bash
-pip install git+https://github.com/ityeri/yspy.git
-# or from a checkout
-uv sync   # dev environment (pytest included)
+pip install yspy # or: uv add yspy
+```
+
+Using pyproject.toml
+
+```toml
+[project]
+dependencies = [
+    "yspy"
+]
 ```
 
 ## Quick start (root / api layer)
@@ -37,7 +65,7 @@ for playlist in search.playlists:  # list[PlaylistResultElement]
     print(playlist.title, playlist.channel_name)
 ```
 
-`SearchMode` variants: `VIDEO` (default), `CHANNEL`, `PLAYLIST`, `LIVESTREAM`, or `None` for mixed results.
+`SearchMode` variants: `VIDEO` (default), `CHANNEL`, `PLAYLIST`, `LIVESTREAM`, or `None`(default) for mixed results.
 
 Continuation pages follow the same rule everywhere: **when there is no next page the call returns `None`**
 instead of raising.
