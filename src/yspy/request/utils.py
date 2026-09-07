@@ -35,7 +35,7 @@ BROWSE_KEY = 'AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8'
 
 
 @dataclass(frozen=True)
-class FallbackClient:
+class InnertubeClientData:
     # Pot-free innertube client definition for the player endpoint. The WEB
     # client is not included — it requires a po_token to reach an OK status.
     client_data: dict[str, str | bool]
@@ -44,8 +44,8 @@ class FallbackClient:
 
 # Live-verified 2026-09 (mirror of the ydpy client table): these clients still
 # answer the player endpoint with a truthful playability status anonymously.
-PLAYER_FALLBACK_CLIENTS: tuple[FallbackClient, ...] = (
-    FallbackClient(
+PLAYER_FALLBACK_CLIENTS: tuple[InnertubeClientData, ...] = (
+    InnertubeClientData(
         client_data={
             'clientName': 'VISIONOS',
             'clientVersion': '1.02',
@@ -67,7 +67,7 @@ PLAYER_FALLBACK_CLIENTS: tuple[FallbackClient, ...] = (
             'X-YouTube-Client-Version': '1.02',
         },
     ),
-    FallbackClient(
+    InnertubeClientData(
         client_data={
             'clientName': 'TVHTML5',
             'clientVersion': '5.20260707',
@@ -79,7 +79,7 @@ PLAYER_FALLBACK_CLIENTS: tuple[FallbackClient, ...] = (
             'X-YouTube-Client-Version': '5.20260707',
         },
     ),
-    FallbackClient(
+    InnertubeClientData(
         client_data={
             'clientName': 'MWEB',
             'clientVersion': '2.20260708.05.00',
@@ -97,7 +97,7 @@ PLAYER_FALLBACK_CLIENTS: tuple[FallbackClient, ...] = (
             'X-YouTube-Client-Version': '2.20260708.05.00',
         },
     ),
-    FallbackClient(
+    InnertubeClientData(
         client_data={
             'clientName': 'ANDROID_VR',
             'clientVersion': '1.65.10',
