@@ -10,8 +10,7 @@ from ..image_component import ImageComponent
 
 
 class PlayerState(str, Enum):
-    # states mirror the playabilityStatus.status tokens of the player response;
-    # .with_reason() yields a per-response state instance carrying the reason
+    # states mirror the playabilityStatus.status tokens of the player response
     OK = 'OK'
     UNPLAYABLE = 'UNPLAYABLE'
     LOGIN_REQUIRED = 'LOGIN_REQUIRED'
@@ -21,26 +20,13 @@ class PlayerState(str, Enum):
     ERROR = 'ERROR'
     UNKNOWN = 'UNKNOWN'
 
-    def __new__(cls, value):
-        obj = str.__new__(cls, value)
-        obj._value_ = value
-        obj.reason = None
-        return obj
 
-    @classmethod
-    def with_reason(cls, status: str | None, reason: str | None) -> PlayerState:
-        # a fresh instance (outside the member registry) so the response
-        # specific reason never pollutes the shared enum members
-        try:
-            member = cls(status) if status else cls.UNKNOWN
-        except ValueError:
-            member = cls.UNKNOWN
-
-        fresh = str.__new__(cls, member.value)
-        fresh._value_ = member.value
-        fresh._name_ = member.name
-        fresh.reason = reason
-        return fresh
+@dataclass(frozen=True)
+class PlayerAvailability:
+    # the availability verdict of a player response: the state plus the reason
+    # the player gave (e.g. 'Join this channel ... members-only content')
+    state: PlayerState
+    reason: str | None = None
 
 
 @dataclass
@@ -61,34 +47,40 @@ class PlayerPage:
     category: str
 
     @staticmethod
-    def _parse_state(raw_data: dict[str, dict]) -> PlayerState:
+    def _parse_availability(raw_data: dict[str, dict]) -> PlayerAvailability:
         playability = get_by_path_or(raw_data, 'playabilityStatus')
         if playability is None:
-            return PlayerState.UNKNOWN
+            return PlayerAvailability(PlayerState.UNKNOWN)
 
         status = playability.get('status')
+        try:
+            state = PlayerState(status) if status else PlayerState.UNKNOWN
+        except ValueError:
+            # a status token that is not in the enum yet
+            state = PlayerState.UNKNOWN
+
         reason = playability.get('reason')
         if not reason:
             messages = playability.get('messages')
             reason = messages[0] if messages else None
 
-        return PlayerState.with_reason(status, reason)
+        return PlayerAvailability(state, reason)
 
     @staticmethod
-    def from_json(raw_data: dict[str, dict]) -> tuple[PlayerPage | None, PlayerState]:
-        # The state is decided from the playabilityStatus only, so an
+    def from_json(raw_data: dict[str, dict]) -> tuple[PlayerPage | None, PlayerAvailability]:
+        # The availability is decided from the playabilityStatus only, so an
         # unavailable video (no videoDetails / microformat) still reports the
         # reason of its failure instead of raising.
-        state = PlayerPage._parse_state(raw_data)
+        availability = PlayerPage._parse_availability(raw_data)
 
         try:
             video_details = raw_data['videoDetails']
             microformat = get_by_path(raw_data, 'microformat playerMicroformatRenderer')
         except KeyError:
-            if state == PlayerState.UNKNOWN:
+            if availability.state == PlayerState.UNKNOWN:
                 raise DataParsingException('Given data is not a player page data')
 
-            return None, state
+            return None, availability
 
         try:
             return PlayerPage(
@@ -109,8 +101,8 @@ class PlayerPage:
                 upload_date=datetime.fromisoformat(microformat['publishDate']),
                 is_family_safe=microformat['isFamilySafe'],
                 category=microformat['category']
-            ), state
+            ), availability
         except KeyError:
             # partial videoDetails (e.g. members-only videos omit view_count)
-            # — the availability state still carries the reason
-            return None, state
+            # — the availability verdict still carries the reason
+            return None, availability
