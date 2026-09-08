@@ -10,7 +10,7 @@ from yspy.data_parsing import ImageComponent
 from yspy.data_parsing.search_result import VideoComponent, ChannelComponent, PlaylistComponent, SearchResultComponent
 from yspy.utils import Locale, NONE_LOCALE
 from .channel import Channel
-from .exceptions import ChannelIdentifierException
+from .exceptions import ChannelIdentifierException, VideoUnavailableException
 from .playlist import Playlist
 from .utils import parse_subscriber_count
 from .video import Video
@@ -56,11 +56,19 @@ class VideoResultElement(SearchResultElement):
 
     def get_video(self, locale: Locale | None = None, *,
                   client: Client | None = None) -> Video:
-        return Video.get(self.id, self.locale if locale is None else locale, client=client)
+        video, _ = Video.get(self.id, self.locale if locale is None else locale, client=client)
+        if video is None:
+            raise VideoUnavailableException('The given video is not available')
+
+        return video
 
     async def aget_video(self, locale: Locale | None = None, *,
                          client: AsyncClient | None = None) -> Video:
-        return await Video.aget(self.id, self.locale if locale is None else locale, client=client)
+        video, _ = await Video.aget(self.id, self.locale if locale is None else locale, client=client)
+        if video is None:
+            raise VideoUnavailableException('The given video is not available')
+
+        return video
 
     def get_channel(
             self, locale: Locale | None = None, *, client: Client | None = None

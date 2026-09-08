@@ -12,6 +12,7 @@ from yspy.api import (
     Suggestion,
     Video,
     VideoResultElement,
+    VideoState,
 )
 
 from yspy import utils
