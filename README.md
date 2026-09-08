@@ -1,9 +1,9 @@
 <h1 align="center">yspy</h1>
 
 <div align="center">
-  <b><code>Youtube.</code></b><br>
-  <b><code>Search..</code></b><br>
-  <b><code>PYthon..</code></b><br>
+  <b><code>Youtube</code></b><br>
+  <b><code>Search.</code></b><br>
+  <b><code>PYthon.</code></b><br>
 </div>
 
 <br>
@@ -16,7 +16,7 @@
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
   <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python: 3.10+">
-  <img src="https://img.shields.io/pypi/v/yspy" alt="PyPI version">
+  <a href="https://pypi.org/project/yspy"><img src="https://img.shields.io/pypi/v/yspy" alt="PyPI version"></a>
 </p>
 
 ---
