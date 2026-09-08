@@ -4,7 +4,7 @@ from dataclasses import dataclass, fields
 from datetime import datetime
 from enum import Enum
 
-from httpx import AsyncClient, Response, Client
+from httpx import AsyncClient, Client
 
 from yarl import URL
 
@@ -68,9 +68,24 @@ class Video:
         if video is not None:
             return video, VideoState.OK
 
-        # the page was unavailable — fetch once more for a truthful verdict.
-        # the pot-free fallback clients answer in English by default
-        availability = Video._probe_availability(video_id, client)
+        # the page was unavailable — probe the pot-free fallback clients for a
+        # truthful verdict (they answer in English by default)
+        availability: PlayerAvailability | None = None
+        for fallback_client in PLAYER_FALLBACK_CLIENTS:
+            response = PlayerRequest.get_page(
+                video_id,
+                client_data=fallback_client.client_data,
+                headers=fallback_client.headers,
+                client=client
+            )
+            _, availability = PlayerPage.from_json(response.json())
+            if availability.state != PlayerState.UNKNOWN and availability.reason != 'The page needs to be reloaded.':
+                return None, Video._get_video_state(availability)
+
+        # every fallback client answered with a gate — keep the last verdict
+        if availability is None:
+            return None, VideoState.UNAVAILABLE
+
         return None, Video._get_video_state(availability)
 
     @staticmethod
@@ -85,9 +100,24 @@ class Video:
         if video is not None:
             return video, VideoState.OK
 
-        # the page was unavailable — fetch once more for a truthful verdict.
-        # the pot-free fallback clients answer in English by default
-        availability = await Video._aprobe_availability(video_id, client)
+        # the page was unavailable — probe the pot-free fallback clients for a
+        # truthful verdict (they answer in English by default)
+        availability: PlayerAvailability | None = None
+        for fallback_client in PLAYER_FALLBACK_CLIENTS:
+            response = await PlayerRequest.aget_page(
+                video_id,
+                client_data=fallback_client.client_data,
+                headers=fallback_client.headers,
+                client=client
+            )
+            _, availability = PlayerPage.from_json(response.json())
+            if availability.state != PlayerState.UNKNOWN and availability.reason != 'The page needs to be reloaded.':
+                return None, Video._get_video_state(availability)
+
+        # every fallback client answered with a gate — keep the last verdict
+        if availability is None:
+            return None, VideoState.UNAVAILABLE
+
         return None, Video._get_video_state(availability)
 
     @staticmethod
@@ -136,40 +166,6 @@ class Video:
             return URL(video_id_or_url).query['v']
         except KeyError:
             raise VideoIdentifierException('The given video_id_or_url is neither a URL nor a video ID')
-
-    @staticmethod
-    def _probe_availability(video_id: str, client: Client | None) -> PlayerAvailability:
-        response: Response | None = None
-        for fallback_client in PLAYER_FALLBACK_CLIENTS:
-            response = PlayerRequest.get_page(
-                video_id,
-                client_data=fallback_client.client_data,
-                headers=fallback_client.headers,
-                client=client
-            )
-            _, availability = PlayerPage.from_json(response.json())
-            if availability.state != PlayerState.UNKNOWN and availability.reason != 'The page needs to be reloaded.':
-                return availability
-
-        _, availability = PlayerPage.from_json(response.json())
-        return availability
-
-    @staticmethod
-    async def _aprobe_availability(video_id: str, client: AsyncClient | None) -> PlayerAvailability:
-        response: Response | None = None
-        for fallback_client in PLAYER_FALLBACK_CLIENTS:
-            response = await PlayerRequest.aget_page(
-                video_id,
-                client_data=fallback_client.client_data,
-                headers=fallback_client.headers,
-                client=client
-            )
-            _, availability = PlayerPage.from_json(response.json())
-            if availability.state != PlayerState.UNKNOWN and availability.reason != 'The page needs to be reloaded.':
-                return availability
-
-        _, availability = PlayerPage.from_json(response.json())
-        return availability
 
     @staticmethod
     def _get_video_state(availability: PlayerAvailability) -> VideoState:
