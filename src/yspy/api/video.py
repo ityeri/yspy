@@ -7,7 +7,7 @@ from httpx import AsyncClient, Client
 from yarl import URL
 
 from yspy.data_parsing import ImageComponent
-from yspy.data_parsing.video import VideoPage
+from yspy.data_parsing.player import PlayerPage
 from yspy.request import PlayerRequest
 from yspy.utils import Locale, NONE_LOCALE
 from .channel import Channel
@@ -31,7 +31,7 @@ class Video:
     upload_date: datetime
     is_family_safe: bool
     category: str
-    page_data: VideoPage
+    page_data: PlayerPage
     locale: Locale = NONE_LOCALE
 
     @staticmethod
@@ -39,7 +39,7 @@ class Video:
         video_id = Video._resolve_video_id(video_id_or_url)
 
         response = PlayerRequest.get_page(video_id, locale, client=client)
-        video_page = VideoPage.from_json(response.json())
+        video_page = PlayerPage.from_json(response.json())
 
         return Video.from_video_page(video_page, locale)
 
@@ -48,14 +48,14 @@ class Video:
         video_id = Video._resolve_video_id(video_id_or_url)
 
         response = await PlayerRequest.aget_page(video_id, locale, client=client)
-        video_page = VideoPage.from_json(response.json())
+        video_page = PlayerPage.from_json(response.json())
 
         return Video.from_video_page(video_page, locale)
 
     @staticmethod
-    def from_video_page(video_page: VideoPage, locale: Locale = NONE_LOCALE) -> Video:
+    def from_video_page(video_page: PlayerPage, locale: Locale = NONE_LOCALE) -> Video:
         return Video(
-            **{f.name: getattr(video_page, f.name) for f in fields(VideoPage)},
+            **{f.name: getattr(video_page, f.name) for f in fields(PlayerPage)},
             page_data=video_page,
             locale=locale
         )

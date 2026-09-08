@@ -1,7 +1,8 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
 
 from yspy.utils import get_by_path, get_by_path_or
-
 from ..exceptions import DataParsingException
 from ..image_component import ImageComponent
 
@@ -69,7 +70,9 @@ class ChannelPage:
                 tags=microformat_data['tags'],
                 continuation_token=get_by_path(
                     header_data,
-                    'pageHeaderRenderer content pageHeaderViewModel description descriptionPreviewViewModel rendererContext commandContext onTap innertubeCommand showEngagementPanelEndpoint engagementPanel engagementPanelSectionListRenderer content sectionListRenderer contents', 0, 'itemSectionRenderer contents', 0, 'continuationItemRenderer continuationEndpoint continuationCommand token'
+                    'pageHeaderRenderer content pageHeaderViewModel description descriptionPreviewViewModel rendererContext commandContext onTap innertubeCommand showEngagementPanelEndpoint engagementPanel engagementPanelSectionListRenderer content sectionListRenderer contents',
+                    0, 'itemSectionRenderer contents', 0,
+                    'continuationItemRenderer continuationEndpoint continuationCommand token'
                 )
             )
         except KeyError:

@@ -1,8 +1,6 @@
 import json
 from pathlib import Path
 
-import pytest
-
 TEST_DATAS = Path(__file__).parent / 'test_datas'
 
 
@@ -11,11 +9,10 @@ def load_fixture(name):
         return json.load(f)
 
 
-
-from yspy.data_parsing import VideoNextPage
+from yspy.data_parsing.player import PlayerNextPage
 
 
 def test_parse_video_next_page():
-    page = VideoNextPage.from_json(load_fixture('continuation_video_page.json'))
+    page = PlayerNextPage.from_json(load_fixture('continuation_video_page.json'))
 
     assert isinstance(page.comment_continuation_token, str) and len(page.comment_continuation_token) > 50

@@ -6,7 +6,8 @@ from httpx import AsyncClient, Client
 from yarl import URL
 
 from yspy.api.exceptions import VideoIdentifierException
-from yspy.data_parsing import CommentComponent, VideoNextPage, CommentsPage
+from yspy.data_parsing import CommentComponent, CommentsPage
+from yspy.data_parsing.player import PlayerNextPage
 from yspy.request import PlayerNextRequest, CommentsRequest
 
 
@@ -20,7 +21,7 @@ class Comments:
         video_id = Comments._resolve_video_id(video_id_or_url)
 
         response = PlayerNextRequest.get_page(video_id, client=client)
-        video_next_page = VideoNextPage.from_json(response.json())
+        video_next_page = PlayerNextPage.from_json(response.json())
 
         response = CommentsRequest.get_page(video_next_page.comment_continuation_token, client=client)
         comments_page = CommentsPage.from_json(response.json())
@@ -32,7 +33,7 @@ class Comments:
         video_id = Comments._resolve_video_id(video_id_or_url)
 
         response = await PlayerNextRequest.aget_page(video_id, client=client)
-        video_next_page = VideoNextPage.from_json(response.json())
+        video_next_page = PlayerNextPage.from_json(response.json())
 
         response = await CommentsRequest.aget_page(video_next_page.comment_continuation_token, client=client)
         comments_page = CommentsPage.from_json(response.json())

@@ -1,8 +1,6 @@
 import json
 from pathlib import Path
 
-import pytest
-
 TEST_DATAS = Path(__file__).parent / 'test_datas'
 
 
@@ -11,12 +9,11 @@ def load_fixture(name):
         return json.load(f)
 
 
-
-from yspy.data_parsing.video import VideoPage
+from yspy.data_parsing.player import PlayerPage
 
 
 def test_parse_video_page():
-    page = VideoPage.from_json(load_fixture('video_page.json'))
+    page = PlayerPage.from_json(load_fixture('video_page.json'))
 
     assert page.id == 'z0GKGpObgPY'
     assert page.title == 'Harry Styles - Sign of the Times (Audio)'

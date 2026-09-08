@@ -4,13 +4,12 @@ from dataclasses import dataclass
 from datetime import datetime
 
 from yspy.utils import get_by_path
-
 from ..exceptions import DataParsingException
 from ..image_component import ImageComponent
 
 
 @dataclass
-class VideoPage:
+class PlayerPage:
     id: str
     title: str
     url: str
@@ -27,14 +26,14 @@ class VideoPage:
     category: str
 
     @staticmethod
-    def from_json(raw_data: dict[str, dict]) -> VideoPage:
+    def from_json(raw_data: dict[str, dict]) -> PlayerPage:
         try:
             video_details = raw_data['videoDetails']
             microformat = get_by_path(raw_data, 'microformat playerMicroformatRenderer')
         except KeyError:
             raise DataParsingException('Given data is not a video page data')
 
-        return VideoPage(
+        return PlayerPage(
             id=video_details['videoId'],
             title=video_details['title'],
             url=microformat['canonicalUrl'],
