@@ -5,7 +5,6 @@ from datetime import datetime
 from enum import Enum
 
 from httpx import AsyncClient, Client
-
 from yarl import URL
 
 from yspy.data_parsing import ImageComponent
@@ -15,7 +14,7 @@ from yspy.request.utils import PLAYER_FALLBACK_CLIENTS
 from yspy.utils import ENGLISH_LOCALE, Locale, NONE_LOCALE
 from .channel import Channel
 from .comments import Comments
-from .exceptions import VideoIdentifierException, VideoUnavailableException
+from .exceptions import VideoIdentifierException
 
 
 class VideoState(str, Enum):
