@@ -12,8 +12,8 @@ def load_fixture(name):
 from yspy.data_parsing.player import PlayerPage
 
 
-def test_parse_video_page():
-    page = PlayerPage.from_json(load_fixture('video_page.json'))
+def test_parse_player_page():
+    page = PlayerPage.from_json(load_fixture('player_page.json'))
 
     assert page.id == 'z0GKGpObgPY'
     assert page.title == 'Harry Styles - Sign of the Times (Audio)'

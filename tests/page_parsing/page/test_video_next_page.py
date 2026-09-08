@@ -12,7 +12,7 @@ def load_fixture(name):
 from yspy.data_parsing.player import PlayerNextPage
 
 
-def test_parse_video_next_page():
-    page = PlayerNextPage.from_json(load_fixture('continuation_video_page.json'))
+def test_parse_player_next_page():
+    page = PlayerNextPage.from_json(load_fixture('player_next_page.json'))
 
     assert isinstance(page.comment_continuation_token, str) and len(page.comment_continuation_token) > 50
