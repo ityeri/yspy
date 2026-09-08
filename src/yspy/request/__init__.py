@@ -1,22 +1,22 @@
 from . import utils
-from . import constants
 from .channel import ChannelRequest
 from .comments import CommentsRequest
+from .player import PlayerRequest
+from .player_next import PlayerNextRequest
 from .playlist import PlaylistRequest
 from .search_result import SearchResultRequest
 from .suggestion import SuggestionRequest
-from .video import VideoRequest
-from .video_next import VideoNextRequest
+from .watch import WatchRequest
 
 __all__ = [
     'utils',
-    'constants',
 
     'ChannelRequest',
     'CommentsRequest',
     'PlaylistRequest',
     'SearchResultRequest',
     'SuggestionRequest',
-    'VideoRequest',
-    'VideoNextRequest'
+    'PlayerRequest',
+    'PlayerNextRequest',
+    'WatchRequest'
 ]

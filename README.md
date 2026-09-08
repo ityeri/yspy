@@ -1,9 +1,9 @@
 <h1 align="center">yspy</h1>
 
 <div align="center">
-  <b><code>Youtube.</code></b><br>
-  <b><code>Search..</code></b><br>
-  <b><code>PYthon..</code></b><br>
+  <b><code>Youtube</code></b><br>
+  <b><code>Search.</code></b><br>
+  <b><code>PYthon.</code></b><br>
 </div>
 
 <br>
@@ -16,7 +16,7 @@
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
   <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python: 3.10+">
-  <img src="https://img.shields.io/pypi/v/yspy" alt="PyPI version">
+  <a href="https://pypi.org/project/yspy"><img src="https://img.shields.io/pypi/v/yspy" alt="PyPI version"></a>
 </p>
 
 ---
@@ -84,15 +84,42 @@ Search results expose `.videos`, `.channels`, `.playlists` plus `first_or` / `fi
 ### Video
 
 ```python
-from yspy import Video
+from yspy import Video, VideoState
 
-video = Video.get('https://www.youtube.com/watch?v=6sFi_F3DJX4')  # id or URL
-print(video.title, video.channel_name, video.view_count)
+video, state = Video.get('https://www.youtube.com/watch?v=6sFi_F3DJX4')  # id or URL
+if state is VideoState.OK:
+    print(video.title, video.channel_name, video.view_count)
 
 # async
-video = await Video.aget('6sFi_F3DJX4')
+video, state = await Video.aget('6sFi_F3DJX4')
+```
 
-# navigation
+`Video.get` / `Video.aget` return `(Video | None, VideoState)` instead of raising.
+`VideoState.OK` means the video is available; otherwise `video` is `None` and the state tells why:
+
+* `MEMBERS_ONLY`
+* `RECORDING_UNAVAILABLE`
+* `AGE_RESTRICTED`
+* `BOT_DETECTION`
+* `LOGIN_REQUIRED`
+* `REGION_BLOCKED`
+* `COPYRIGHT_BLOCKED`
+* `PRIVATE`
+* `REMOVED_BY_UPLOADER`
+* `ACCOUNT_TERMINATED`
+* `REMOVED_FOR_TOS`
+* `UNAVAILABLE`
+
+The verdict is classified from the playability reason, so when a
+page comes back unavailable the library re-probes once with pot-free innertube clients (in English locale page).
+
+```python
+video, state = await Video.aget('https://www.youtube.com/watch?v=C0Rs8MDpHsM')  # members-only
+print(state)  # VideoState.MEMBERS_ONLY, video is None
+```
+
+```python
+# navigation (on a fetched Video — i.e. when state is OK)
 channel = await video.aget_channel()  # Video -> Channel
 comments = await video.aget_comments()  # Video -> Comments
 ```

@@ -1,7 +1,7 @@
 from httpx import AsyncClient, Response, Client
 
 from yspy.utils import Locale, get_by_path_or
-from .constants import BROWSE_API_URL, RESOLVE_URL
+from .utils import BROWSE_API_URL, RESOLVE_URL
 from .utils import optional_async_client, RequestData, optional_sync_client
 
 

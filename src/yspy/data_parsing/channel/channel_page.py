@@ -1,6 +1,9 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
 
 from yspy.utils import get_by_path, get_by_path_or
+from ..exceptions import DataParsingException
 from ..image_component import ImageComponent
 
 
@@ -20,39 +23,65 @@ class ChannelPage:
     continuation_token: str
 
     @staticmethod
-    def from_json(raw_data: dict[str, dict]):
-        header_data = raw_data['header']
-        metadata_view_parts = get_by_path(
-            header_data,
-            'pageHeaderRenderer content pageHeaderViewModel metadata contentMetadataViewModel metadataRows'
-        )
-        channel_metadata = get_by_path(raw_data, 'metadata channelMetadataRenderer')
-        microformat_data = get_by_path(raw_data, 'microformat microformatDataRenderer') # TODO, try wrap
+    def _has_error_alert(raw_data: dict[str, dict]) -> bool:
+        alerts = get_by_path_or(raw_data, 'alerts')
+        if alerts is None:
+            return False
 
-        return ChannelPage(
-            id=channel_metadata['externalId'],
-            title=channel_metadata['title'],
-            handle_name=get_by_path(metadata_view_parts, 0, 'metadataParts', 0, 'text content'),
-            url=microformat_data['urlCanonical'],
-            description=channel_metadata['description'],
-            avatar_thumbnails=[
-                ImageComponent.from_json(raw_thumbnail_data)
-                for raw_thumbnail_data in get_by_path(channel_metadata, 'avatar thumbnails')
-            ],
-            banners=[
-                ImageComponent.from_json(raw_image_data)
-                for raw_image_data in get_by_path_or(
-                    header_data,
-                    'pageHeaderRenderer content pageHeaderViewModel banner imageBannerViewModel image sources',
-                    default=[]
-                )
-            ],
-            subscriber_count_text=get_by_path(metadata_view_parts, 1, 'metadataParts', 0, 'text content'),
-            video_count_text=get_by_path(metadata_view_parts, 1, 'metadataParts', 1, 'text content'),
-            is_family_safe=channel_metadata['isFamilySafe'],
-            tags=microformat_data['tags'],
-            continuation_token=get_by_path(
-                header_data,
-                'pageHeaderRenderer content pageHeaderViewModel description descriptionPreviewViewModel rendererContext commandContext onTap innertubeCommand showEngagementPanelEndpoint engagementPanel engagementPanelSectionListRenderer content sectionListRenderer contents', 0, 'itemSectionRenderer contents', 0, 'continuationItemRenderer continuationEndpoint continuationCommand token'
-            )
+        return any(
+            alert.get('alertRenderer', {}).get('type') == 'ERROR'
+            for alert in alerts
         )
+
+    @staticmethod
+    def from_json(raw_data: dict[str, dict]) -> ChannelPage | None:
+        # a channel that is unavailable (e.g. does not exist) comes back with
+        # an error alert instead of channel metadata — return None for that case
+        try:
+            header_data = raw_data['header']
+            metadata_view_parts = get_by_path(
+                header_data,
+                'pageHeaderRenderer content pageHeaderViewModel metadata contentMetadataViewModel metadataRows'
+            )
+            channel_metadata = get_by_path(raw_data, 'metadata channelMetadataRenderer')
+            microformat_data = get_by_path(raw_data, 'microformat microformatDataRenderer')  # TODO, try wrap
+
+            return ChannelPage(
+                id=channel_metadata['externalId'],
+                title=channel_metadata['title'],
+                handle_name=get_by_path(metadata_view_parts, 0, 'metadataParts', 0, 'text content'),
+                url=microformat_data['urlCanonical'],
+                description=channel_metadata['description'],
+                avatar_thumbnails=[
+                    ImageComponent.from_json(raw_thumbnail_data)
+                    for raw_thumbnail_data in get_by_path(channel_metadata, 'avatar thumbnails')
+                ],
+                banners=[
+                    ImageComponent.from_json(raw_image_data)
+                    for raw_image_data in get_by_path_or(
+                        header_data,
+                        'pageHeaderRenderer content pageHeaderViewModel banner imageBannerViewModel image sources',
+                        default=[]
+                    )
+                ],
+                subscriber_count_text=get_by_path(metadata_view_parts, 1, 'metadataParts', 0, 'text content'),
+                video_count_text=get_by_path(metadata_view_parts, 1, 'metadataParts', 1, 'text content'),
+                is_family_safe=channel_metadata['isFamilySafe'],
+                tags=microformat_data['tags'],
+                continuation_token=get_by_path(
+                    header_data,
+                    'pageHeaderRenderer content pageHeaderViewModel description descriptionPreviewViewModel rendererContext commandContext onTap innertubeCommand showEngagementPanelEndpoint engagementPanel engagementPanelSectionListRenderer content sectionListRenderer contents',
+                    0, 'itemSectionRenderer contents', 0,
+                    'continuationItemRenderer continuationEndpoint continuationCommand token'
+                )
+            )
+        except KeyError:
+            if ChannelPage._has_error_alert(raw_data):
+                return None
+
+            raise DataParsingException('Given data is not a channel page data')
+        except IndexError:
+            if ChannelPage._has_error_alert(raw_data):
+                return None
+
+            raise DataParsingException('Given data is not a channel page data')

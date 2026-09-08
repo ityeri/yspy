@@ -23,7 +23,19 @@ class PlaylistPage:
     continuation_token: str | None
 
     @staticmethod
-    def from_json(raw_data: dict[str, dict]) -> PlaylistPage:
+    def _has_error_alert(raw_data: dict[str, dict]) -> bool:
+        alerts = get_by_path_or(raw_data, 'alerts')
+        if alerts is None:
+            return False
+
+        return any(
+            alert.get('alertRenderer', {}).get('type') == 'ERROR'
+            for alert in alerts
+        )
+
+    @staticmethod
+    def from_json(raw_data: dict[str, dict]) -> PlaylistPage | None:
+        # a playlist that does not exist comes back with an error alert instead of sidebar data
         try:
             sidebar_items: list[dict[str, dict]] = \
                 get_by_path(raw_data, 'sidebar playlistSidebarRenderer items')
@@ -50,6 +62,9 @@ class PlaylistPage:
                 )
 
         except KeyError:
+            if PlaylistPage._has_error_alert(raw_data):
+                return None
+
             raise DataParsingException('Given data is not a playlist page data')
 
         video_components: list[PlaylistVideoComponent] = list()

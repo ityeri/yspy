@@ -9,7 +9,7 @@ from yspy.data_parsing import ImageComponent
 from yspy.data_parsing.channel import ChannelPage, ChannelExternalLinkComponent, ChannelDetailPage
 from yspy.request import ChannelRequest
 from yspy.utils import Locale, ENGLISH_LOCALE, Language, NONE_LOCALE
-from .exceptions import ChannelIdentifierException
+from .exceptions import ChannelIdentifierException, ChannelUnavailableException
 from .utils import parse_subscriber_count, parse_view_count, parse_joined_date, parse_video_count
 
 
@@ -44,6 +44,9 @@ class Channel:
 
         response = ChannelRequest.get_page(channel_id, locale, client=client)
         channel_page = ChannelPage.from_json(response.json())
+        if channel_page is None:
+            raise ChannelUnavailableException('The given channel does not exist')
+
         if locale.language != Language.ENGLISH:
             # english page is required for parsing abbreviated counts (K/M/B)
             response = ChannelRequest.get_page(channel_id, ENGLISH_LOCALE, client=client)
@@ -68,6 +71,9 @@ class Channel:
 
         response = await ChannelRequest.aget_page(channel_id, locale, client=client)
         channel_page = ChannelPage.from_json(response.json())
+        if channel_page is None:
+            raise ChannelUnavailableException('The given channel does not exist')
+
         if locale.language != Language.ENGLISH:
             # english page is required for parsing abbreviated counts (K/M/B)
             response = await ChannelRequest.aget_page(channel_id, ENGLISH_LOCALE, client=client)
