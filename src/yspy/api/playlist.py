@@ -10,7 +10,12 @@ from yspy.data_parsing.playlist import PlaylistPage, PlaylistVideoComponent
 from yspy.request import PlaylistRequest, ChannelRequest
 from yspy.utils import Locale, ENGLISH_LOCALE, Language, NONE_LOCALE
 from .channel import Channel
-from .exceptions import PlaylistIdentifierException, ChannelIdentifierException, PlaylistUnavailableException
+from .exceptions import (
+    PlaylistIdentifierException,
+    ChannelIdentifierException,
+    PlaylistUnavailableException,
+    VideoUnavailableException
+)
 from .utils import parse_view_count, parse_length_seconds
 from .video import Video
 
@@ -284,10 +289,18 @@ class PlaylistVideo:
             self, locale: Locale | None = None, *, client: Client | None = None
     ) -> Video:
         actual_locale = self.locale if locale is None else locale
-        return Video.get(self.id, actual_locale, client=client)
+        video, _ = Video.get(self.id, actual_locale, client=client)
+        if video is None:
+            raise VideoUnavailableException('The given video is not available')
+
+        return video
 
     async def aget_video(
             self, locale: Locale | None = None, *, client: AsyncClient | None = None
     ) -> Video:
         actual_locale = self.locale if locale is None else locale
-        return await Video.aget(self.id, actual_locale, client=client)
+        video, _ = await Video.aget(self.id, actual_locale, client=client)
+        if video is None:
+            raise VideoUnavailableException('The given video is not available')
+
+        return video

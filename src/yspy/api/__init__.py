@@ -10,7 +10,7 @@ from yspy.api.search_result_element import (
     VideoResultElement,
 )
 from yspy.api.suggestion import Suggestion
-from yspy.api.video import Video, VideoUnavailableState
+from yspy.api.video import Video, VideoState
 
 __all__ = [
     'Channel',
@@ -26,5 +26,5 @@ __all__ = [
     'Suggestion',
     'Video',
     'VideoResultElement',
-    'VideoUnavailableState',
+    'VideoState',
 ]

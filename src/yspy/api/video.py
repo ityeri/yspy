@@ -18,10 +18,11 @@ from .comments import Comments
 from .exceptions import VideoIdentifierException, VideoUnavailableException
 
 
-class VideoUnavailableState(str, Enum):
-    # fine-grained unavailability states of a video, classified from the
-    # playability reason (the api layer may fetch with an English locale, so
-    # the reason text is stable enough to compare against)
+class VideoState(str, Enum):
+    # availability states of a video. the fine-grained unavailability states
+    # are classified from the playability reason (the api layer may fetch with
+    # an English locale, so the reason text is stable enough to compare)
+    OK = 'OK'
     MEMBERS_ONLY = 'MEMBERS_ONLY'
     RECORDING_UNAVAILABLE = 'RECORDING_UNAVAILABLE'
     AGE_RESTRICTED = 'AGE_RESTRICTED'
@@ -56,29 +57,45 @@ class Video:
     locale: Locale = NONE_LOCALE
 
     @staticmethod
-    def get(video_id_or_url: str, locale: Locale = NONE_LOCALE, *, client: Client | None = None) -> Video:
+    def get(
+            video_id_or_url: str, locale: Locale = NONE_LOCALE, *, client: Client | None = None
+    ) -> tuple[Video | None, VideoState]:
         video_id = Video._resolve_video_id(video_id_or_url)
 
-        video_page, availability = Video._fetch_page(video_id, locale, client)
+        response = PlayerRequest.get_page(video_id, locale, client=client)
+        video_page, _ = PlayerPage.from_json(response.json())
+        video = Video.from_video_page(video_page, locale)
+        if video is not None:
+            return video, VideoState.OK
 
-        return Video.from_video_page(video_page, availability, locale)
+        # the page was unavailable — fetch once more for a truthful verdict.
+        # the pot-free fallback clients answer in English by default
+        availability = Video._probe_availability(video_id, client)
+        return None, Video._get_video_state(availability)
 
     @staticmethod
-    async def aget(video_id_or_url: str, locale: Locale = NONE_LOCALE, *, client: AsyncClient | None = None) -> Video:
+    async def aget(
+            video_id_or_url: str, locale: Locale = NONE_LOCALE, *, client: AsyncClient | None = None
+    ) -> tuple[Video | None, VideoState]:
         video_id = Video._resolve_video_id(video_id_or_url)
 
-        video_page, availability = await Video._afetch_page(video_id, locale, client)
+        response = await PlayerRequest.aget_page(video_id, locale, client=client)
+        video_page, _ = PlayerPage.from_json(response.json())
+        video = Video.from_video_page(video_page, locale)
+        if video is not None:
+            return video, VideoState.OK
 
-        return Video.from_video_page(video_page, availability, locale)
+        # the page was unavailable — fetch once more for a truthful verdict.
+        # the pot-free fallback clients answer in English by default
+        availability = await Video._aprobe_availability(video_id, client)
+        return None, Video._get_video_state(availability)
 
     @staticmethod
-    def from_video_page(
-            video_page: PlayerPage,
-            availability: PlayerAvailability,
-            locale: Locale = NONE_LOCALE
-    ) -> Video:
-        if Video._is_unavailable(availability):
-            Video._raise_unavailable(availability)
+    def from_video_page(video_page: PlayerPage | None, locale: Locale = NONE_LOCALE) -> Video | None:
+        # an unavailable page produces no Video — the caller probes the
+        # availability state separately
+        if video_page is None:
+            return None
 
         return Video(
             **{f.name: getattr(video_page, f.name) for f in fields(PlayerPage)},
@@ -121,58 +138,6 @@ class Video:
             raise VideoIdentifierException('The given video_id_or_url is neither a URL nor a video ID')
 
     @staticmethod
-    def _fetch_page(video_id: str, locale: Locale, client: Client | None) -> tuple[PlayerPage, PlayerAvailability]:
-        response = PlayerRequest.get_page(video_id, locale, client=client)
-        video_page, availability = PlayerPage.from_json(response.json())
-
-        if video_page is not None and not Video._is_unavailable(availability):
-            return video_page, availability
-
-        # the default (web) response is gated or the video is unavailable —
-        # probe the pot-free fallback clients for a truthful verdict
-        availability = Video._probe_availability(video_id, client)
-
-        if Video._is_unavailable(availability):
-            Video._raise_unavailable(availability)
-
-        if video_page is None:
-            # available per the probe but the default response carried no page
-            response = PlayerRequest.get_page(video_id, locale, client=client)
-            video_page, _ = PlayerPage.from_json(response.json())
-
-        if video_page is None:
-            raise VideoUnavailableException('The given video is not available')
-
-        return video_page, availability
-
-    @staticmethod
-    async def _afetch_page(
-            video_id: str, locale: Locale, client: AsyncClient | None
-    ) -> tuple[PlayerPage, PlayerAvailability]:
-        response = await PlayerRequest.aget_page(video_id, locale, client=client)
-        video_page, availability = PlayerPage.from_json(response.json())
-
-        if video_page is not None and not Video._is_unavailable(availability):
-            return video_page, availability
-
-        # the default (web) response is gated or the video is unavailable —
-        # probe the pot-free fallback clients for a truthful verdict
-        availability = await Video._aprobe_availability(video_id, client)
-
-        if Video._is_unavailable(availability):
-            Video._raise_unavailable(availability)
-
-        if video_page is None:
-            # available per the probe but the default response carried no page
-            response = await PlayerRequest.aget_page(video_id, locale, client=client)
-            video_page, _ = PlayerPage.from_json(response.json())
-
-        if video_page is None:
-            raise VideoUnavailableException('The given video is not available')
-
-        return video_page, availability
-
-    @staticmethod
     def _probe_availability(video_id: str, client: Client | None) -> PlayerAvailability:
         response: Response | None = None
         for fallback_client in PLAYER_FALLBACK_CLIENTS:
@@ -207,56 +172,49 @@ class Video:
         return availability
 
     @staticmethod
-    def _is_unavailable(availability: PlayerAvailability) -> bool:
-        # live streams are watchable; unknown states fall back to the page
-        return availability.state not in (PlayerState.OK, PlayerState.LIVE_STREAM, PlayerState.UNKNOWN)
-
-    @staticmethod
-    def _raise_unavailable(availability: PlayerAvailability) -> None:
-        fine_state = Video._classify_unavailability(availability)
-        raise VideoUnavailableException(f'{availability.reason or "The given video is not available"} [{fine_state.value}]')
-
-    @staticmethod
-    def _classify_unavailability(availability: PlayerAvailability) -> VideoUnavailableState:
+    def _get_video_state(availability: PlayerAvailability) -> VideoState:
         # the message comparison follows the pytubefix case table; both
         # members-only wording variants seen in the wild are covered
+        if availability.state in (PlayerState.OK, PlayerState.LIVE_STREAM, PlayerState.UNKNOWN):
+            return VideoState.OK
+
         reason = availability.reason or ''
         state = availability.state
 
         if state == PlayerState.UNPLAYABLE:
             if 'members-only' in reason:
-                return VideoUnavailableState.MEMBERS_ONLY
+                return VideoState.MEMBERS_ONLY
             if reason == 'This live stream recording is not available.':
-                return VideoUnavailableState.RECORDING_UNAVAILABLE
+                return VideoState.RECORDING_UNAVAILABLE
             if 'confirm your age' in reason:
-                return VideoUnavailableState.AGE_RESTRICTED
+                return VideoState.AGE_RESTRICTED
             if 'copyright grounds' in reason:
                 # 'blocked it in your country on copyright grounds' — copyright
                 # claims are checked before plain regional blocks
-                return VideoUnavailableState.COPYRIGHT_BLOCKED
+                return VideoState.COPYRIGHT_BLOCKED
             if 'in your country' in reason:
-                return VideoUnavailableState.REGION_BLOCKED
-            return VideoUnavailableState.UNAVAILABLE
+                return VideoState.REGION_BLOCKED
+            return VideoState.UNAVAILABLE
 
         if state == PlayerState.LOGIN_REQUIRED:
             if 'not a bot' in reason:
-                return VideoUnavailableState.BOT_DETECTION
+                return VideoState.BOT_DETECTION
             if 'confirm your age' in reason:
-                return VideoUnavailableState.AGE_RESTRICTED
-            return VideoUnavailableState.LOGIN_REQUIRED
+                return VideoState.AGE_RESTRICTED
+            return VideoState.LOGIN_REQUIRED
 
         if state == PlayerState.AGE_CHECK_REQUIRED:
-            return VideoUnavailableState.AGE_RESTRICTED
+            return VideoState.AGE_RESTRICTED
 
         if state == PlayerState.ERROR:
             if 'private' in reason:
-                return VideoUnavailableState.PRIVATE
+                return VideoState.PRIVATE
             if 'removed by the uploader' in reason:
-                return VideoUnavailableState.REMOVED_BY_UPLOADER
+                return VideoState.REMOVED_BY_UPLOADER
             if 'terminated' in reason:
-                return VideoUnavailableState.ACCOUNT_TERMINATED
+                return VideoState.ACCOUNT_TERMINATED
             if 'Community Guidelines' in reason:
-                return VideoUnavailableState.REMOVED_FOR_TOS
-            return VideoUnavailableState.UNAVAILABLE
+                return VideoState.REMOVED_FOR_TOS
+            return VideoState.UNAVAILABLE
 
-        return VideoUnavailableState.UNAVAILABLE
+        return VideoState.UNAVAILABLE

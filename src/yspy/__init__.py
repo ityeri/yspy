@@ -12,7 +12,7 @@ from yspy.api import (
     Suggestion,
     Video,
     VideoResultElement,
-    VideoUnavailableState,
+    VideoState,
 )
 
 from yspy import utils
