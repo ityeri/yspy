@@ -1,6 +1,6 @@
 [project]
 name = "yspy"
-version = "0.1.0"
+version = "0.2.0"
 authors = [
     { name = "Hitesh Kumar Saini", email = "saini123hitesh@gmail.com" },
     { name = "ityeri", email = "ityeri9@gmail.com" }
