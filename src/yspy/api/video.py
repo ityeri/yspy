@@ -12,7 +12,7 @@ from yspy.request import PlayerRequest
 from yspy.utils import Locale, NONE_LOCALE
 from .channel import Channel
 from .comments import Comments
-from .exceptions import VideoIdentifierException
+from .exceptions import VideoIdentifierException, VideoUnavailableException
 
 
 @dataclass
@@ -39,7 +39,9 @@ class Video:
         video_id = Video._resolve_video_id(video_id_or_url)
 
         response = PlayerRequest.get_page(video_id, locale, client=client)
-        video_page = PlayerPage.from_json(response.json())
+        video_page, _ = PlayerPage.from_json(response.json())
+        if video_page is None:
+            raise VideoUnavailableException('The given video is not available')
 
         return Video.from_video_page(video_page, locale)
 
@@ -48,7 +50,9 @@ class Video:
         video_id = Video._resolve_video_id(video_id_or_url)
 
         response = await PlayerRequest.aget_page(video_id, locale, client=client)
-        video_page = PlayerPage.from_json(response.json())
+        video_page, _ = PlayerPage.from_json(response.json())
+        if video_page is None:
+            raise VideoUnavailableException('The given video is not available')
 
         return Video.from_video_page(video_page, locale)
 
