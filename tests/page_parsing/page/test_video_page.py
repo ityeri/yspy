@@ -21,6 +21,7 @@ def test_parse_player_page():
 
     assert page is not None
     assert state == PlayerState.UNKNOWN
+    assert state.reason is None
     assert page.id == 'z0GKGpObgPY'
     assert page.title == 'Harry Styles - Sign of the Times (Audio)'
     assert page.url == 'https://www.youtube.com/watch?v=z0GKGpObgPY'
@@ -43,6 +44,7 @@ def test_player_page_of_ok_video_without_microformat():
     assert page is None
     assert state == PlayerState.OK
     assert state.value == 'OK'
+    assert state.reason is None
 
 
 def test_player_page_of_unavailable_video():
@@ -50,6 +52,7 @@ def test_player_page_of_unavailable_video():
 
     assert page is None
     assert state == PlayerState.ERROR
+    assert state.reason == 'This video is unavailable'
 
 
 def test_player_page_of_login_required_video():
@@ -57,6 +60,7 @@ def test_player_page_of_login_required_video():
 
     assert page is None
     assert state == PlayerState.LOGIN_REQUIRED
+    assert 'not a bot' in state.reason
 
 
 def test_player_page_of_live_recording():
@@ -65,6 +69,22 @@ def test_player_page_of_live_recording():
 
     assert page is None
     assert state == PlayerState.UNPLAYABLE
+    assert state.reason == 'This live stream recording is not available.'
+
+
+def test_player_page_of_members_only_video():
+    # members-only: videoDetails present but partial (no view_count) and
+    # microformat present — the page cannot be built but the state+reason stay
+    page, state = PlayerPage.from_json(load_fixture('player_page_members.json'))
+
+    assert page is None
+    assert state == PlayerState.UNPLAYABLE
+    assert state.reason == (
+        'Join this channel from your computer or mobile app to get access '
+        'to members-only content like this video.'
+    )
+    # the reason never pollutes the shared enum members
+    assert PlayerState.UNPLAYABLE.reason is None
 
 
 def test_player_page_of_unrelated_data_raises():
@@ -76,3 +96,4 @@ def test_player_page_state_parsing_from_status_tokens():
     assert PlayerState('OK') is PlayerState.OK
     assert PlayerState('LOGIN_REQUIRED') is PlayerState.LOGIN_REQUIRED
     assert PlayerState('LIVE_STREAM_OFFLINE') is PlayerState.LIVE_STREAM_OFFLINE
+    assert PlayerState.UNKNOWN.reason is None
