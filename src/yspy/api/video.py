@@ -12,7 +12,7 @@ from yspy.data_parsing import ImageComponent
 from yspy.data_parsing.player import PlayerAvailability, PlayerPage, PlayerState
 from yspy.request import PlayerRequest
 from yspy.request.utils import PLAYER_FALLBACK_CLIENTS
-from yspy.utils import Locale, NONE_LOCALE
+from yspy.utils import ENGLISH_LOCALE, Locale, NONE_LOCALE
 from .channel import Channel
 from .comments import Comments
 from .exceptions import VideoIdentifierException, VideoUnavailableException
@@ -74,6 +74,7 @@ class Video:
         for fallback_client in PLAYER_FALLBACK_CLIENTS:
             response = PlayerRequest.get_page(
                 video_id,
+                ENGLISH_LOCALE,
                 client_data=fallback_client.client_data,
                 headers=fallback_client.headers,
                 client=client
@@ -106,6 +107,7 @@ class Video:
         for fallback_client in PLAYER_FALLBACK_CLIENTS:
             response = await PlayerRequest.aget_page(
                 video_id,
+                ENGLISH_LOCALE,
                 client_data=fallback_client.client_data,
                 headers=fallback_client.headers,
                 client=client
